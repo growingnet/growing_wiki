@@ -1,27 +1,18 @@
-Technical Overview
-==================
-
-:Abstract:
-   Choosing correct architectures for neural networks is a complex
-   process; successful architectures often result from great collective
-   efforts, as in vision and language models, or with extensive
-   trial-and-error training. Growing neural network methods propose an
-   alternative: start from a small seed model and expand it during
-   training by *e.g.* adding neurons or layers. Two commonly cited
-   motivations are (i) reducing training cost compared to full-size
-   training, and (ii) performing a form of architecture search that
-   yields a model that is “just large enough” for the task. While many
-   surveys investigate pruning techniques, this survey proposes, for the
-   first time, a unified view of a broad class of growing methods,
-   focusing on the problem of neuron addition (how to best add new
-   neuron parameters). Current methods are evaluated from the
-   perspective of improved training efficiency and striking a balance
-   between performance and architecture size. Finally, we discuss the
-   future work needed to close this gap.
-
-
 Introduction
 ============
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   neuron_addition_problem
+   beyond_neuron_addition
+   sparse_grow_prune
+   non_stationary
+   transformers
+   when_to_stop
+   future
+   exploiting_function_geometry
 
 Neural Networks (NNs) are typically trained by first fixing the
 architecture :math:`A \in \mathcal{A}`, after which the parameters
@@ -138,16 +129,3 @@ target either sparsity and pruning in neural
 networks :cite:p:`sparsitySurvey`, dynamic architectures for
 inference :cite:p:`dynamicSurvey`, or comparative studies
 targeted only to transformers :cite:p:`pandey2024comparative`.
-
-This survey is organized as follows. We formalize the neuron addition
-problem in Sec. `2 <#sec:neuron_addition_problem>`__, before describing
-the main classes of neuron initialisation.
-Sec. `3 <#sec:beyond_neuron_addition>`__ broadens the scope beyond
-neuron addition to adding layers, and more. We then discuss sparse
-growth and grow-prune methods in Sec. `4 <#sec:sparse_prune_methods>`__,
-and applications to continual learning and reinforcement learning in
-Sec. `5 <#sec:non_stationary>`__ and to transformers in
-Sec. `6 <#sec:transformers>`__. Finally, Sec. `7 <#sec:pareto>`__
-addresses stopping criteria and Pareto front tradeoffs, before
-concluding in Sec. `8 <#sec:conclusion>`__ with open questions and
-future directions.
