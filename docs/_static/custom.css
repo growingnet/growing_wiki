@@ -1,4 +1,4 @@
-/* Remove the Farama dropdown icon/link block from the top header. */
-.farama-header__right {
+/* Hide the top titlebar entirely; keep branding in the sidebar only. */
+.farama-header {
   display: none !important;
 }
