@@ -1,12 +1,154 @@
 Technical Overview
 ==================
 
-This section provides high-level context before diving into algorithm details.
+:Abstract:
+   Choosing correct architectures for neural networks is a complex
+   process; successful architectures often result from great collective
+   efforts, as in vision and language models, or with extensive
+   trial-and-error training. Growing neural network methods propose an
+   alternative: start from a small seed model and expand it during
+   training by *e.g.* adding neurons or layers. Two commonly cited
+   motivations are (i) reducing training cost compared to full-size
+   training, and (ii) performing a form of architecture search that
+   yields a model that is “just large enough” for the task. While many
+   surveys investigate pruning techniques, this survey proposes, for the
+   first time, a unified view of a broad class of growing methods,
+   focusing on the problem of neuron addition (how to best add new
+   neuron parameters). Current methods are evaluated from the
+   perspective of improved training efficiency and striking a balance
+   between performance and architecture size. Finally, we discuss the
+   future work needed to close this gap.
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Overview Pages
 
-   problem_definition
-   system_architecture
-   workflow
+Introduction
+============
+
+Neural Networks (NNs) are typically trained by first fixing the
+architecture :math:`A \in \mathcal{A}`, after which the parameters
+:math:`\theta \in \Theta_A` are optimized to minimize a training
+objective. The architectural choice is crucial, as it defines the
+function class explored during training, and is the workhorse of deep
+learning :raw-latex:`\cite{he_deep_2016,vaswani_attention_2017}`.
+Despite this, architecture search is still typically performed manually,
+requiring significant expertise and wasted compute due to retraining.
+
+Ideally, we would like to jointly optimize over the architecture space
+:math:`\mathcal{A}` and its space of parameters :math:`\Theta_A` by
+solving
+
+.. math::
+
+   \begin{aligned}
+   \label{eqn:ideal_obj}
+       A^*, \theta^* = \mathop{\mathrm{\arg\!\min}}_{A\in \mathcal{A},\; \theta \in  \Theta_A} \mathcal{L}(f_{A,\theta})
+   \end{aligned}
+
+where :math:`f_{A,\theta}` denotes the function induced by architecture
+:math:`A` with parameters :math:`\theta`, and :math:`\mathcal{L}` is the
+empirical risk over dataset :math:`\mathcal{D}`. The closest approach to
+this objective is *Neural Architecture Search*
+(NAS) :raw-latex:`\cite{zoph_neural_2017}` [1]_. However, a full NAS
+loop is often prohibitively expensive, requiring multiple retrainings,
+and also ignores a key constraint: we frequently start from a
+pre-trained model that we would like to adapt rather than discard.
+
+This motivates *growing* Neural Network architectures: starting with a
+small “seed” architecture and expanding its capacity during training by
+applying local architecture transformations :math:`\mathcal{T}` (also
+known as network morphisms), such as widening existing layers or adding
+new ones, and appropriately adapting the existing weights. Concretely,
+let :math:`f_{A_t, \theta_t}` denote the model at growth step :math:`t`
+and
+:math:`\mathop{\mathrm{\text{Opt}}}_x (\text{goal}(\theta), \theta_{\text{init}})`
+denotes a few steps of e.g. stochastic gradient descent to optimize
+:math:`\text{goal}(\theta)` over :math:`\theta` starting from
+:math:`\theta_{\text{init}}`. We alternate between applying the growth
+operator :math:`\mathcal{T}` and the optimization step
+
+.. math::
+
+   \label{eqn:grow_decomposition}
+   \begin{aligned}
+       &\theta_t' = \mathop{\mathrm{\text{Opt}}}_{\theta}(\mathcal{L}(f_{A_t, \theta}), \theta_t )\\
+       &A_{t+1}, \theta_{t+1} = \mathcal{T}(A_t, \theta_{t}') 
+   \end{aligned}
+
+in the hope that the final architecture :math:`A_T` and weights
+:math:`\theta_T` are a good approximation to the original
+objective `[eqn:ideal_obj] <#eqn:ideal_obj>`__. The growth operator
+:math:`\mathcal{T}` is typically constrained to a neighbourhood
+:math:`\mathcal{N}(A_t)` of architectures, making local architecture
+modifications (*e.g.*, adding neurons or layers).
+
+In practice, the behaviour of :math:`\mathop{\mathrm{\text{Opt}}}`
+heavily depends on the initialisation :math:`\theta_{t+1}` of the
+transformed architecture, making it key to achieve good performance. The
+lottery ticket phenomenon :raw-latex:`\cite{chen_elastic_2021}`
+highlights that the particular initialization and training path can
+matter as much as the final architecture, suggesting that growth methods
+leveraging a fixed set of initial weights have the potential to
+outperform NAS-like methods, which ignore this.
+
+The abstract formulation of
+Equation `[eqn:grow_decomposition] <#eqn:grow_decomposition>`__ leaves
+much of the growing problem unspecified, which is often summarised as
+*where* to grow, *when* to grow, and *how* to grow. The focus in the
+literature has been overwhelmingly on the last question, which we term
+the *neuron addition problem*: how to best choose the new parameters in
+the case of neuron addition.
+
+Motivations and applications
+----------------------------
+
+Motivations for growing neural networks broadly fall into two settings.
+In the first, the end point is known: growth is a training strategy for
+reaching a predefined target architecture :math:`A_T`, for example, in
+continual
+learning :raw-latex:`\cite{yoon_lifelong_2018,li_learn_2019,yang_grown_2021}`
+are primarily interested in the sequence of models
+:math:`A_t, \theta_t`, or for improved optimisation
+dynamics :raw-latex:`\cite{evci_gradmax_2022,yuan_accelerated_2023}`.
+
+In contrast, we focus on the second setting, where the end point is
+unknown: growth is used as a frugal form of architecture search, where
+we would like to discover an architecture that is “just large enough”
+for the task at hand. Such *frugal learning* is becoming increasingly
+important as achieving state-of-the-art performance increasingly relies
+on scaling model size and compute, with energy consumption and
+:math:`\mathrm{CO_2}` emissions increasing exponentially, outpacing
+improvements in
+hardware :raw-latex:`\cite{thompson_deep_2021,morand_environmental_2025}`.
+Growing neural networks is often compared to other computation-reduction
+methods, such as compression, pruning, and data scaling. However, the
+relative advantages of each from an energy-efficiency perspective are
+not yet well understood :raw-latex:`\cite{boumendil_grow_2023}`.
+Furthermore, we discuss ways in which growing can complement these
+methods.
+
+Overall, this survey is *the first methodological overview of growing
+architectures at training*. Methodological contributions regarding
+growing neural architectures are spread in the literature, proposed in
+different communities, and pursue diverse objectives. This paper shows
+that the diverse methods for neuron addition can be unified via a common
+optimization objective, representing a foundational block of growth.
+Beyond adding neurons, extension to layer addition and computation
+graphs is considered, as well as encompassing non-stationary data
+distributions and transformer architectures. In contrast, prior surveys
+target either sparsity and pruning in neural
+networks :raw-latex:`\cite{sparsitySurvey}`, dynamic architectures for
+inference :raw-latex:`\cite{dynamicSurvey}`, or comparative studies
+targeted only to transformers :raw-latex:`\cite{pandey2024comparative}`.
+
+This survey is organized as follows. We formalize the neuron addition
+problem in Sec. `2 <#sec:neuron_addition_problem>`__, before describing
+the main classes of neuron initialisation.
+Sec. `3 <#sec:beyond_neuron_addition>`__ broadens the scope beyond
+neuron addition to adding layers, and more. We then discuss sparse
+growth and grow-prune methods in Sec. `4 <#sec:sparse_prune_methods>`__,
+and applications to continual learning and reinforcement learning in
+Sec. `5 <#sec:non_stationary>`__ and to transformers in
+Sec. `6 <#sec:transformers>`__. Finally, Sec. `7 <#sec:pareto>`__
+addresses stopping criteria and Pareto front tradeoffs, before
+concluding in Sec. `8 <#sec:conclusion>`__ with open questions and
+future directions.
+
