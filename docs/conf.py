@@ -1,5 +1,5 @@
 project = 'The Growing Library'
-author = 'Alex Davey'
+author = 'Gromo Authors'
 html_title = 'The Growing Library'
 html_short_title = 'The Growing Library'
 
