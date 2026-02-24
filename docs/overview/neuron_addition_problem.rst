@@ -1,19 +1,5 @@
-Problem Definition
-==================
-
-.. _`sec:neuron_addition_problem`:
-
-The neuron addition problem
+Neuron addition problem
 ===========================
-
-.. _fig:neuron-addition:
-
-.. figure:: /_static/neuron_addition.svg
-   :alt: Neuron addition schematic
-   :align: center
-   :width: 85%
-
-   Illustration of neuron addition in a growing network.
 
 We consider a feedforward neural network with layers indexed by
 :math:`l`. The size of layer :math:`l` is :math:`C_l`, and :math:`n`
@@ -38,6 +24,17 @@ similarly stacked:
 :math:`\boldsymbol{G}^{(l)} \in \mathbb{R}^{n \times C_{l}}`. Without
 loss of generality, we omit the index :math:`l` when we consider an
 object associated with a current layer :math:`l`.
+
+
+.. _fig:neuron-addition:
+
+.. figure:: /_static/neuron_addition.svg
+   :alt: Neuron addition schematic
+   :align: center
+   :width: 65%
+
+   Illustration of neuron addition in a growing network.
+
 
 **Neuron addition.** We aim to expand layer :math:`l-1` by adding
 :math:`k` new neurons. This is done by adding fan-in weights

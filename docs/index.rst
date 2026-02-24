@@ -1,6 +1,11 @@
 The Growing Wiki
 ===================
 
+.. image:: /_static/neuron_addition.svg
+   :alt: Neuron addition schematic
+   :align: right
+   :width: 45%
+
 Choosing correct architectures for neural networks is a complex
 process; successful architectures often result from great collective
 efforts, as in vision and language models, or with extensive
@@ -18,11 +23,6 @@ neuron parameters). Current methods are evaluated from the
 perspective of improved training efficiency and striking a balance
 between performance and architecture size. Finally, we discuss the
 future work needed to close this gap.
-
-.. image:: /_static/neuron_addition.svg
-   :alt: Neuron addition schematic
-   :align: center
-   :width: 85%
 
 .. toctree::
    :maxdepth: 2
