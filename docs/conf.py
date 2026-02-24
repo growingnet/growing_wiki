@@ -1,10 +1,19 @@
-project = 'growing_docs'
+project = 'The Growing Library'
 author = 'Alex Davey'
+html_title = 'The Growing Library'
+html_short_title = 'The Growing Library'
 
 extensions = []
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 html_theme = 'furo'
+html_static_path = ['_static']
+html_logo = '_static/logo.png'
+html_js_files = ['sidebar-open.js']
+html_theme_options = {
+    'light_logo': 'logo.png',
+    'dark_logo': 'logo.png',
+}
 
 
 def setup(app):
