@@ -23,20 +23,20 @@ future work needed to close this gap.
    :maxdepth: 2
    :caption: Overview Pages
 
-   Technical Overview <overview/index>
+   Overview <overview/index>
 
 .. toctree::
    :maxdepth: 1
    :caption: Algorithms
 
-   algorithms/autogrow
-   algorithms/firefly
-   algorithms/gradmax
-   algorithms/nest
    algorithms/net2net
    algorithms/network_morphism
    algorithms/north
-   algorithms/senn
+   algorithms/gradmax
    algorithms/splitting
+   algorithms/firefly
    algorithms/tiny
+   algorithms/senn
+   algorithms/autogrow
+   algorithms/nest
    algorithms/variance_transfer

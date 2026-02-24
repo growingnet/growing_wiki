@@ -32,3 +32,8 @@
   white-space: nowrap;
   overflow-wrap: normal;
 }
+
+/* Remove Furo footer (copyright + Sphinx/Furo attribution + prev/next). */
+footer {
+  display: none !important;
+}
