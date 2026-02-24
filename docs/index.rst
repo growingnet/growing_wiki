@@ -1,4 +1,4 @@
-The Growing Library
+The Growing Wiki
 ===================
 
 Choosing correct architectures for neural networks is a complex
@@ -27,6 +27,14 @@ future work needed to close this gap.
 
 .. toctree::
    :maxdepth: 1
+   :caption: Applications
+
+   applications/non_stationary
+   applications/sparse_grow_prune
+   applications/transformers
+
+.. toctree::
+   :maxdepth: 1
    :caption: Algorithms
 
    algorithms/net2net
@@ -40,9 +48,3 @@ future work needed to close this gap.
    algorithms/autogrow
    algorithms/nest
    algorithms/variance_transfer
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Applications
-   applications/sparse_grow_prune
-   applications/transformers

@@ -1,5 +1,5 @@
-When to stop: following the Pareto front
-========================================
+When to stop?
+================
 
 Most growing methods follow a predetermined schedule, providing no
 notion of when to stop, and only a small number have an explicit (or

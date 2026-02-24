@@ -1,4 +1,4 @@
-Application: Non-stationary data distributions
+Non-stationary data distributions
 ==============================================
 
 A natural application of neuron addition is to non-stationary data

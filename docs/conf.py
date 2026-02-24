@@ -5,10 +5,10 @@ import re
 from sphinx.util import logging
 from sphinxcontrib.bibtex.citation_target import parse_citation_targets
 
-project = "The Growing Library"
+project = "The Growing Wiki"
 author = "Gromo Authors"
-html_title = "The Growing Library"
-html_short_title = "The Growing Library"
+html_title = "The Growing Wiki"
+html_short_title = "The Growing Wiki"
 
 extensions = [
     "sphinxcontrib.bibtex",
