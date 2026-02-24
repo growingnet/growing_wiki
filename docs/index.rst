@@ -19,13 +19,6 @@ perspective of improved training efficiency and striking a balance
 between performance and architecture size. Finally, we discuss the
 future work needed to close this gap.
 
-WikiLinks
----------
-
-Internal cross-links can be written explicitly with wiki-style syntax:
-``[[Target]]`` or ``[[Label|Target]]``.
-For example, ``[[Tiny]]`` and ``[[Steepest splitting|splitting]]``.
-
 .. toctree::
    :maxdepth: 2
    :caption: Overview Pages
@@ -47,3 +40,9 @@ For example, ``[[Tiny]]`` and ``[[Steepest splitting|splitting]]``.
    algorithms/autogrow
    algorithms/nest
    algorithms/variance_transfer
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Applications
+   applications/sparse_grow_prune
+   applications/transformers

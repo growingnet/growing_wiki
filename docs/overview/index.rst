@@ -6,13 +6,11 @@ Introduction
    :hidden:
 
    neuron_addition_problem
-   beyond_neuron_addition
-   sparse_grow_prune
-   non_stationary
-   transformers
-   when_to_stop
-   future
    exploiting_function_geometry
+   beyond_neuron_addition
+   when_to_stop
+   when_to_grow
+   future
 
 Neural Networks (NNs) are typically trained by first fixing the
 architecture :math:`A \in \mathcal{A}`, after which the parameters
