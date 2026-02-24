@@ -1,0 +1,4 @@
+/* Remove the Farama dropdown icon/link block from the top header. */
+.farama-header__right {
+  display: none !important;
+}
