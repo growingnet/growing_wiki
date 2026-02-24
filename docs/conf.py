@@ -12,7 +12,7 @@ html_logo = '_static/logo.png'
 html_js_files = ['sidebar-open.js']
 html_theme_options = {
     'light_logo': 'logo.png',
-    'dark_logo': 'logo.png',
+    'dark_logo': 'logo-dark.png',
 }
 
 
