@@ -19,6 +19,11 @@ perspective of improved training efficiency and striking a balance
 between performance and architecture size. Finally, we discuss the
 future work needed to close this gap.
 
+.. image:: /_static/neuron_addition.svg
+   :alt: Neuron addition schematic
+   :align: center
+   :width: 85%
+
 .. toctree::
    :maxdepth: 2
    :caption: Overview Pages

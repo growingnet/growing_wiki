@@ -6,6 +6,15 @@ Problem Definition
 The neuron addition problem
 ===========================
 
+.. _fig:neuron-addition:
+
+.. figure:: /_static/neuron_addition.svg
+   :alt: Neuron addition schematic
+   :align: center
+   :width: 85%
+
+   Illustration of neuron addition in a growing network.
+
 We consider a feedforward neural network with layers indexed by
 :math:`l`. The size of layer :math:`l` is :math:`C_l`, and :math:`n`
 denotes the number of data points. The forward pass through consecutive
