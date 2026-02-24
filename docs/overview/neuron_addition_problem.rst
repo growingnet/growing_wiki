@@ -98,7 +98,7 @@ approximation, reaching the optimal solution may require adding too many
 neurons and may not be necessary. Most practical approaches, therefore,
 rely on various heuristics to add new neurons. However, theoretical
 guarantees for the overall process exist for certain methods:
-TINY :cite:p:`verbockhaven_growing_2024` provides convergence
+[[TINY|tiny]] :cite:p:`verbockhaven_growing_2024` provides convergence
 guarantees, while splitting
 methods :cite:p:`liu_splitting_2019,wu_steepest_2021` achieve
 locally optimal, function-preserving transformations, within the class

@@ -1,4 +1,4 @@
-Application: Growing Transformers
+Growing Transformers
 =================================
 
 Transformers provide the largest-scale empirical validation of growing

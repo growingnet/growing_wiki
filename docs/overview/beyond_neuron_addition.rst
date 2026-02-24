@@ -6,17 +6,17 @@ In this section, we extend this discussion to the addition of new
 layers, growing transformers, or even arbitrary directed acyclic graphs
 (DAGs).
 
-- Net2Net (Net2DeeperNet)
+- [[Net2Net]] (Net2DeeperNet)
 
 
 Adding layers
 -------------
 
-- Net2Net
-- NetworkMorphism
-- AutoGrow
-- FireFly
-- SENN
+- [[Net2Net]]
+- [[NetworkMorphism|network_morphism]]
+- [[AutoGrow]]
+- [[FireFly|firefly]]
+- [[SENN]]
 
 
 DAG growth

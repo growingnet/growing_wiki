@@ -4,12 +4,13 @@ When to stop: following the Pareto front
 Most growing methods follow a predetermined schedule, providing no
 notion of when to stop, and only a small number have an explicit (or
 implicit) notion of stopping.
-AutoGrow :cite:p:`wen_autogrow_2020` proposes an explicit
+[[AutoGrow]] :cite:p:`wen_autogrow_2020` proposes an explicit
 stopping policy, permanently freezing further growth of a block when an
-addition fails to improve performance. Splitting methods also naturally
+addition fails to improve performance. [[Splitting]] methods also
+naturally
 terminate when a local minimum of the loss is
 reached :cite:p:`wu_steepest_2021`, while grow-prune methods
-such as SENN :cite:p:`mitchell_self-expanding_2024` achieve a
+such as [[SENN]] :cite:p:`mitchell_self-expanding_2024` achieve a
 steady-state behaviour by iterative growing and pruning.
 
 **Following the Pareto front.** By considering growth operations
@@ -29,8 +30,9 @@ it difficult to explore the Pareto front directly.
 **Notions of complexity.** What is the most appropriate notion of
 complexity :math:`C(A, \theta)`? The reduction in FLOPs of smaller
 models does not necessarily translate into a significant reduction in
-training time. As a point of comparison, Variance
-Transfer :cite:p:`yuan_accelerated_2023`, whose growing method
+training time. As a point of comparison,
+[[Variance Transfer|variance_transfer]] :cite:p:`yuan_accelerated_2023`,
+whose growing method
 requires negligible additional overhead, observes a mere 1.2x speedup
 when growing a :math:`1/4` channel-width ResNet-18 on CIFAR-100. Due to
 this, they propose adapting the batch size to maximise GPU memory usage

@@ -1,4 +1,3 @@
-
 Sparse growth and grow-prune methods
 ====================================
 

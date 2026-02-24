@@ -1,7 +1,8 @@
 Splitting
 =========
 
-**Splitting methods.** One might wonder whether the Net2Net split of one
+**[[Splitting]] methods.** One might wonder whether the [[Net2Net]]
+split of one
 neuron into two, with equally divided weights, is optimal. In
 S2D :cite:p:`liu_splitting_2019`, it has been shown that, for
 an infinitesimal change in the parameters

@@ -10,7 +10,8 @@ stage implements a downsampling of the spatial resolution, after which
 the spatial resolution is fixed for the remaining blocks in that stage.
 By increasing the number of blocks, one can grow the network to an
 arbitrary depth while respecting shape constraints. They contest the
-Net2Net notion that function-preserving morphisms are the best way to
+[[Net2Net]] notion that function-preserving morphisms are the best way
+to
 initialise new layer weights, and instead prefer random
 initialisation :cite:p:`wen_autogrow_2020`. This has
 corroborated by later layer-growing
