@@ -1,7 +1,7 @@
 Tiny
 ====
 
-**TINY** :raw-latex:`\cite{verbockhaven_growing_2024}` seeks to find new
+**TINY** :cite:p:`verbockhaven_growing_2024` seeks to find new
 neurons whose contribution :math:`\delta_z` most directly reduces the
 loss. Using a first-order Taylor expansion:
 

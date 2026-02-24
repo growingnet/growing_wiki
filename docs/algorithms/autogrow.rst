@@ -1,10 +1,10 @@
 AutoGrow
 ==========
 
-**AutoGrow** :raw-latex:`\cite{wen_autogrow_2020}` considers the problem
+**AutoGrow** :cite:p:`wen_autogrow_2020` considers the problem
 of increasing the number of blocks in
-ResNet :raw-latex:`\cite{he_deep_2016}` and
-VGG :raw-latex:`\cite{simonyan_very_2015}` style architectures, by
+ResNet :cite:p:`he_deep_2016` and
+VGG :cite:p:`simonyan_very_2015` style architectures, by
 organising the network into several “stages”. The first block in each
 stage implements a downsampling of the spatial resolution, after which
 the spatial resolution is fixed for the remaining blocks in that stage.
@@ -12,22 +12,22 @@ By increasing the number of blocks, one can grow the network to an
 arbitrary depth while respecting shape constraints. They contest the
 Net2Net notion that function-preserving morphisms are the best way to
 initialise new layer weights, and instead prefer random
-initialisation :raw-latex:`\cite{wen_autogrow_2020}`. This has
+initialisation :cite:p:`wen_autogrow_2020`. This has
 corroborated by later layer-growing
-studies :raw-latex:`\cite{wu_when_2024}`.
+studies :cite:p:`wu_when_2024`.
 
 **When to grow?** Much of the focus of the depth-growing literature has
 been on *when to grow*. Counter-intuitively, waiting for the current
 network to fully converge harms performance, and rather new layers
 should be grown well before
-convergence :raw-latex:`\cite{wen_autogrow_2020,dong_towards_2020,wu_when_2024}`.
+convergence :cite:p:`wen_autogrow_2020,dong_towards_2020,wu_when_2024`.
 Two explanations are commonly suggested. First, the converged weights of
 the current sub-network :math:`\boldsymbol{W}_t` may provide a poor
 warm-start initialisation for optimizing the larger network. Second, the
 newly-added sub-networks may simply be
-undertrained :raw-latex:`\cite{wu_when_2024}`, giving rise to a
+undertrained :cite:p:`wu_when_2024`, giving rise to a
 regularising effect, possibly finding flatter minima than standard
-training :raw-latex:`\cite{caillon_growing_2024}`. The key growth
+training :cite:p:`caillon_growing_2024`. The key growth
 schedules proposed are:
 
 - *Periodic Growth*: grow every :math:`K` epochs.
@@ -36,12 +36,12 @@ schedules proposed are:
   less than :math:`\tau` in the last :math:`K` epochs.
 
 - *FraGrow*: Arguing that the speed of growth determines the degree of
-  under/overfitting, FRAGrow :raw-latex:`\cite{wu_when_2024}` uses the
+  under/overfitting, FRAGrow :cite:p:`wu_when_2024` uses the
   difference between train and validation acc as a signal to trigger
   growth.
 
 - LipGrow: grow to limit gains in the Lipschitz
-  constant :raw-latex:`\cite{dong_towards_2020}`.
+  constant :cite:p:`dong_towards_2020`.
 
 FraGrow, although heuristic, performs well on a wide range of datasets.
 Nevertheless, periodic growth is a simple and widely used baseline,
@@ -54,6 +54,6 @@ A network with :math:`n` residual connections has :math:`2^n` implicit
 paths through the network, giving rise to ensemble-like behaviour:
 removing any individual layer (apart from downsampling layers) has a
 negligible impact on test
-accuracy :raw-latex:`\cite{veit_residual_2016}`. Working in reverse, we
+accuracy :cite:p:`veit_residual_2016`. Working in reverse, we
 might expect that growing residual layers shares some similarities with
 adding ensemble members.

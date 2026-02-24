@@ -4,10 +4,10 @@ Variance Transfer
 
 **Variance Transfer.** Instead of focusing solely on function
 preservation, Variance
-Transfer :raw-latex:`\cite{yuan_accelerated_2023}` builds upon this last
+Transfer :cite:p:`yuan_accelerated_2023` builds upon this last
 function-preserving initialization with the following modifications.
 Inspired by studies on how to optimally transfer hyperparameters across
-networks of different widths :raw-latex:`\cite{yang_tensor_2021}`, the
+networks of different widths :cite:p:`yang_tensor_2021`, the
 new fan-in weights :math:`V \sim \mathcal{N}(0, 1/(C_{l-2}^2)` and new
 fan-out weights :math:`Z \sim \mathcal{N}(0, 1/(C_{l-1}+k)^2)` rather
 than the usual :math:`1/\textrm{fan\_in}`, and rescaling them when the

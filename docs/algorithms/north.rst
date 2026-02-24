@@ -1,7 +1,7 @@
 NORTH
 =====
 
-**NORTH** :raw-latex:`\cite{maile_when_2022}` takes a geometric
+**NORTH** :cite:p:`maile_when_2022` takes a geometric
 perspective: new neurons should add *new directions* in activation
 space, orthogonal to existing activations. It seeks
 :math:`\boldsymbol{\Psi}` such that new activations

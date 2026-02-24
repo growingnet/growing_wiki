@@ -1,8 +1,8 @@
 GradMax
 =======
 
-**GradMax** :raw-latex:`\cite{evci_gradmax_2022}` and
-SENN :raw-latex:`\cite{mitchell_self-expanding_2024}` aim to maximise
+**GradMax** :cite:p:`evci_gradmax_2022` and
+SENN :cite:p:`mitchell_self-expanding_2024` aim to maximise
 the loss decrease after the next gradient step on the new weights. To
 achieve this, they maximize the norm of the gradient w.r.t. new weights.
 GradMax initializes :math:`\boldsymbol{\Psi}= 0`, ensuring

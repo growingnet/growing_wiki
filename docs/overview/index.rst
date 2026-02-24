@@ -28,7 +28,7 @@ architecture :math:`A \in \mathcal{A}`, after which the parameters
 :math:`\theta \in \Theta_A` are optimized to minimize a training
 objective. The architectural choice is crucial, as it defines the
 function class explored during training, and is the workhorse of deep
-learning :raw-latex:`\cite{he_deep_2016,vaswani_attention_2017}`.
+learning :cite:p:`he_deep_2016,vaswani_attention_2017`.
 Despite this, architecture search is still typically performed manually,
 requiring significant expertise and wasted compute due to retraining.
 
@@ -47,7 +47,7 @@ where :math:`f_{A,\theta}` denotes the function induced by architecture
 :math:`A` with parameters :math:`\theta`, and :math:`\mathcal{L}` is the
 empirical risk over dataset :math:`\mathcal{D}`. The closest approach to
 this objective is *Neural Architecture Search*
-(NAS) :raw-latex:`\cite{zoph_neural_2017}` [1]_. However, a full NAS
+(NAS) :cite:p:`zoph_neural_2017`. However, a full NAS
 loop is often prohibitively expensive, requiring multiple retrainings,
 and also ignores a key constraint: we frequently start from a
 pre-trained model that we would like to adapt rather than discard.
@@ -83,7 +83,7 @@ modifications (*e.g.*, adding neurons or layers).
 In practice, the behaviour of :math:`\mathop{\mathrm{\text{Opt}}}`
 heavily depends on the initialisation :math:`\theta_{t+1}` of the
 transformed architecture, making it key to achieve good performance. The
-lottery ticket phenomenon :raw-latex:`\cite{chen_elastic_2021}`
+lottery ticket phenomenon :cite:p:`chen_elastic_2021`
 highlights that the particular initialization and training path can
 matter as much as the final architecture, suggesting that growth methods
 leveraging a fixed set of initial weights have the potential to
@@ -104,10 +104,10 @@ Motivations for growing neural networks broadly fall into two settings.
 In the first, the end point is known: growth is a training strategy for
 reaching a predefined target architecture :math:`A_T`, for example, in
 continual
-learning :raw-latex:`\cite{yoon_lifelong_2018,li_learn_2019,yang_grown_2021}`
+learning :cite:p:`yoon_lifelong_2018,li_learn_2019,yang_grown_2021`
 are primarily interested in the sequence of models
 :math:`A_t, \theta_t`, or for improved optimisation
-dynamics :raw-latex:`\cite{evci_gradmax_2022,yuan_accelerated_2023}`.
+dynamics :cite:p:`evci_gradmax_2022,yuan_accelerated_2023`.
 
 In contrast, we focus on the second setting, where the end point is
 unknown: growth is used as a frugal form of architecture search, where
@@ -117,11 +117,11 @@ important as achieving state-of-the-art performance increasingly relies
 on scaling model size and compute, with energy consumption and
 :math:`\mathrm{CO_2}` emissions increasing exponentially, outpacing
 improvements in
-hardware :raw-latex:`\cite{thompson_deep_2021,morand_environmental_2025}`.
+hardware :cite:p:`thompson_deep_2021,morand_environmental_2025`.
 Growing neural networks is often compared to other computation-reduction
 methods, such as compression, pruning, and data scaling. However, the
 relative advantages of each from an energy-efficiency perspective are
-not yet well understood :raw-latex:`\cite{boumendil_grow_2023}`.
+not yet well understood :cite:p:`boumendil_grow_2023`.
 Furthermore, we discuss ways in which growing can complement these
 methods.
 
@@ -135,9 +135,9 @@ Beyond adding neurons, extension to layer addition and computation
 graphs is considered, as well as encompassing non-stationary data
 distributions and transformer architectures. In contrast, prior surveys
 target either sparsity and pruning in neural
-networks :raw-latex:`\cite{sparsitySurvey}`, dynamic architectures for
-inference :raw-latex:`\cite{dynamicSurvey}`, or comparative studies
-targeted only to transformers :raw-latex:`\cite{pandey2024comparative}`.
+networks :cite:p:`sparsitySurvey`, dynamic architectures for
+inference :cite:p:`dynamicSurvey`, or comparative studies
+targeted only to transformers :cite:p:`pandey2024comparative`.
 
 This survey is organized as follows. We formalize the neuron addition
 problem in Sec. `2 <#sec:neuron_addition_problem>`__, before describing
@@ -151,4 +151,3 @@ Sec. `6 <#sec:transformers>`__. Finally, Sec. `7 <#sec:pareto>`__
 addresses stopping criteria and Pareto front tradeoffs, before
 concluding in Sec. `8 <#sec:conclusion>`__ with open questions and
 future directions.
-

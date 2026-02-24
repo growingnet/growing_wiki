@@ -1,7 +1,7 @@
 SENN
 ====
 
-**SENN** :raw-latex:`\cite{mitchell_self-expanding_2024}` extends
+**SENN** :cite:p:`mitchell_self-expanding_2024` extends
 GradMax by considering a *natural gradient* descent step instead of
 standard gradient descent and switching from
 :math:`\boldsymbol{\Psi}= 0` to :math:`\boldsymbol{\Omega}= 0`. It

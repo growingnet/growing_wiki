@@ -3,7 +3,7 @@ Splitting
 
 **Splitting methods.** One might wonder whether the Net2Net split of one
 neuron into two, with equally divided weights, is optimal. In
-S2D :raw-latex:`\cite{liu_splitting_2019}`, it has been shown that, for
+S2D :cite:p:`liu_splitting_2019`, it has been shown that, for
 an infinitesimal change in the parameters
 :math:`\|\theta_{t+1} - \theta_t\| \le \epsilon`, this choice of split
 leads to the fastest decrease of the loss. Consider the post-activation
@@ -41,8 +41,8 @@ yielding loss decrease
 Since the contribution to loss appears at
 :math:`\mathcal{O}(\epsilon^2)`, splitting can be thought of as a
 second-order method to escape local minima. In
-:raw-latex:`\cite{wang_energy-aware_2020}`, S2D is improved to include
+:cite:p:`wang_energy-aware_2020`, S2D is improved to include
 energy-aware constraints and a fast gradient-based approximation
-:math:`S(\theta)`, while S3D :raw-latex:`\cite{wu_steepest_2021}`
+:math:`S(\theta)`, while S3D :cite:p:`wu_steepest_2021`
 generalises the types of split considered to non-convex combinations of
 arbitrary sign.

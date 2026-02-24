@@ -2,3 +2,33 @@
 .farama-header {
   display: none !important;
 }
+
+:root {
+  --sidebar-logo-width: 106px;
+  --sidebar-logo-height: 83px;
+}
+
+.sidebar-logo-container {
+  width: var(--sidebar-logo-width);
+  height: var(--sidebar-logo-height);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sidebar-logo {
+  width: var(--sidebar-logo-width);
+  height: var(--sidebar-logo-height);
+  max-width: none;
+  object-fit: contain;
+}
+
+.sidebar-brand {
+  align-items: center;
+  text-align: center;
+}
+
+.sidebar-brand-text {
+  font-size: 1.3rem;
+  white-space: nowrap;
+  overflow-wrap: normal;
+}

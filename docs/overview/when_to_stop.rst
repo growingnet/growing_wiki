@@ -4,12 +4,12 @@ When to stop: following the Pareto front
 Most growing methods follow a predetermined schedule, providing no
 notion of when to stop, and only a small number have an explicit (or
 implicit) notion of stopping.
-AutoGrow :raw-latex:`\cite{wen_autogrow_2020}` proposes an explicit
+AutoGrow :cite:p:`wen_autogrow_2020` proposes an explicit
 stopping policy, permanently freezing further growth of a block when an
 addition fails to improve performance. Splitting methods also naturally
 terminate when a local minimum of the loss is
-reached :raw-latex:`\cite{wu_steepest_2021}`, while grow-prune methods
-such as SENN :raw-latex:`\cite{mitchell_self-expanding_2024}` achieve a
+reached :cite:p:`wu_steepest_2021`, while grow-prune methods
+such as SENN :cite:p:`mitchell_self-expanding_2024` achieve a
 steady-state behaviour by iterative growing and pruning.
 
 **Following the Pareto front.** By considering growth operations
@@ -30,13 +30,13 @@ it difficult to explore the Pareto front directly.
 complexity :math:`C(A, \theta)`? The reduction in FLOPs of smaller
 models does not necessarily translate into a significant reduction in
 training time. As a point of comparison, Variance
-Transfer :raw-latex:`\cite{yuan_accelerated_2023}`, whose growing method
+Transfer :cite:p:`yuan_accelerated_2023`, whose growing method
 requires negligible additional overhead, observes a mere 1.2x speedup
 when growing a :math:`1/4` channel-width ResNet-18 on CIFAR-100. Due to
 this, they propose adapting the batch size to maximise GPU memory usage
 and achieve a 1.7x speedup for a negligible change in final accuracy. In
 general, however, large-batch training often results in poor
-generalisation performance :raw-latex:`\cite{keskar_large-batch_2017}`
+generalisation performance :cite:p:`keskar_large-batch_2017`
 and is itself a topic of research. The largest-scale evidence for
 walltime efficiency comes from transformer growth experiments
 (Sec. `6 <#sec:transformers>`__), which demonstrate significant speedups
@@ -50,13 +50,13 @@ at the cost of a single training procedure (in this case, joint training
 of all sub-models). To train a supernetwork, one can either impose a
 sub-modular structure through joint loss minimization, where each loss
 corresponds to the error of a given
-sub-model :raw-latex:`\cite{matformer,slimmable,universally,branchynet}`,
+sub-model :cite:p:`matformer,slimmable,universally,branchynet`,
 or first train a large neural network and then distill its predictive
-power through fine-tuning smaller sub-modules :raw-latex:`\cite{ofa}`.
+power through fine-tuning smaller sub-modules :cite:p:`ofa`.
 Depending on the method, the nested structure can be obtained by varying
 the width of
-representations :raw-latex:`\cite{slimmable,universally,matformer}`, the
-depth of the neural network :raw-latex:`\cite{branchynet}`, or both
-width and depth :raw-latex:`\cite{ofa}`. In general, increasing the
+representations :cite:p:`slimmable,universally,matformer`, the
+depth of the neural network :cite:p:`branchynet`, or both
+width and depth :cite:p:`ofa`. In general, increasing the
 number of sub-modules provides greater flexibility in selecting a model
 that trades off model size against performance.

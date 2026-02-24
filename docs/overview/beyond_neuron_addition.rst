@@ -25,16 +25,16 @@ DAG growth
 Most generally, one can consider growing an arbitrary Directed Acyclic
 Graph (DAG). The structure of a neural network can be represented by a
 DAG in various ways, depending on the degree of granularity required. In
-classic works such as NEAT :raw-latex:`\cite{stanley_neat_2002}`, each
+classic works such as NEAT :cite:p:`stanley_neat_2002`, each
 vertex represents a single neuron, and the edges represent weights,
 which are then grown using evolutionary methods. Alternatively, each
 vertex (or node) can represent an entire layer, as is commonly used as a
-search space for NAS :raw-latex:`\cite{nasbench101}`.
+search space for NAS :cite:p:`nasbench101`.
 
 The flexibility of a DAG representation does not come without tradeoffs,
 as the number of potential growth operations increases quadratically
 with the vertex and edge count. To improve on the brute-force strategy
-of growing every possible node, :raw-latex:`\cite{douka_growth_2025}`
+of growing every possible node, :cite:p:`douka_growth_2025`
 propose selecting the node :math:`v \in V` which maximises the
 expressivity bottleneck
 :math:`v^*=\mathop{\mathrm{\arg\!\max}}_{v \in V} \left|\left|\boldsymbol{G}^\perp_v\right|\right|_F`,

@@ -1,7 +1,7 @@
 NeST
 ====
 
-**NeST** :raw-latex:`\cite{daiNeSTNeuralNetwork2019}` targets sparse
+**NeST** :cite:p:`daiNeSTNeuralNetwork2019` targets sparse
 networks where connections are added incrementally. Justified by Hebbian
 theory, to choose which neuron to add, NeST looks at which neuron
 :math:`i` in layer :math:`l-2` activation and neuron :math:`j` in layer

@@ -52,7 +52,7 @@ Theoretical Perspectives
 
 Gradient boosting provides a general framework for constructing additive
 models by iteratively adding weak learners to minimize a given loss
-function :raw-latex:`\cite{friedman_greedy_2001}`. The weak learners are
+function :cite:p:`friedman_greedy_2001`. The weak learners are
 chosen from a predefined set of functions :math:`\mathcal{H}`. From an
 optimization perspective, each boosting iteration can be interpreted as
 a greedy descent step in the functional space spanned by
@@ -90,17 +90,17 @@ Finding the optimal weights :math:`\boldsymbol{\Omega}` and
 desired functional variation of the pre-activation at layer :math:`l`
 leads to a non-convex optimization problem that is generally NP-hard
 (see
-:raw-latex:`\cite{manurangsi2018computationalcomplexitytrainingrelus,bach_breaking_2017}`).
+:cite:p:`manurangsi2018computationalcomplexitytrainingrelus,bach_breaking_2017`).
 Exact methods are thus unsuitable for large-scale settings
-:raw-latex:`\cite{liu_splitting_2019}`. Moreover, since the targeted
+:cite:p:`liu_splitting_2019`. Moreover, since the targeted
 functional variation is generally computed using only a first-order
 approximation, reaching the optimal solution may require adding too many
 neurons and may not be necessary. Most practical approaches, therefore,
 rely on various heuristics to add new neurons. However, theoretical
 guarantees for the overall process exist for certain methods:
-TINY :raw-latex:`\cite{verbockhaven_growing_2024}` provides convergence
+TINY :cite:p:`verbockhaven_growing_2024` provides convergence
 guarantees, while splitting
-methods :raw-latex:`\cite{liu_splitting_2019,wu_steepest_2021}` achieve
+methods :cite:p:`liu_splitting_2019,wu_steepest_2021` achieve
 locally optimal, function-preserving transformations, within the class
 of splitting morphisms.
 
