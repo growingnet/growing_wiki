@@ -1,6 +1,8 @@
-# The Growing Wiki
-
-![The Growing Wiki logo](docs/_static/logo.png)
+<p align="center">
+  <img src="docs/_static/logo.png" alt="The Growing Wiki logo" width="260">
+</p>
+<p align="center"><strong>The Growing Wiki</strong></p>
+<p align="center"><a href="https://growingnet.github.io/growing_wiki">https://growingnet.github.io/growing_wiki</a></p>
 
 The Growing Wiki is documents methods for growing neural networks during training.
 
