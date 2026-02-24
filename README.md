@@ -4,7 +4,7 @@
 <p align="center"><strong>The Growing Wiki</strong></p>
 <p align="center"><a href="https://growingnet.github.io/growing_wiki">https://growingnet.github.io/growing_wiki</a></p>
 
-The Growing Wiki is documents methods for growing neural networks during training.
+The Growing Wiki documents algorithms for growing neural networks during training.
 
 ## Repository Layout
 
