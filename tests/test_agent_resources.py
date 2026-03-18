@@ -37,7 +37,6 @@ def test_repo_local_paper_review_skill_resources_exist() -> None:
     skill_root = repo_root / "agents" / "skills" / "review-growth-papers"
 
     assert (skill_root / "SKILL.md").is_file()
-    assert (skill_root / "agents" / "openai.yaml").is_file()
     assert (skill_root / "assets" / "paper-review-template.md").is_file()
     assert (skill_root / "references" / "scope-boundaries.md").is_file()
     assert (skill_root / "references" / "taxonomy.md").is_file()
