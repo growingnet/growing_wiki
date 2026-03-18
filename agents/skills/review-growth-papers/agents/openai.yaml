@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review Growth Papers"
+  short_description: "Screen and extract growth-method papers"
+  default_prompt: "Use $review-growth-papers to review a paper on neural network growth before adding it to the wiki."
