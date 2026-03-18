@@ -1,3 +1,4 @@
+import re
 from pathlib import Path
 
 
@@ -5,11 +6,25 @@ def _get_repo_root() -> Path:
     return Path(__file__).resolve().parents[1]
 
 
+def _assert_no_absolute_paths(text: str) -> None:
+    absolute_path_pattern = re.compile(
+        r"""(?mx)
+        (?:(?<=\()|(?<=`)|(?<=^)|(?<=[\s"']))
+        (?:
+            /(?:[A-Za-z0-9._~-][^)\s`"']*)
+            |~/(?:[A-Za-z0-9._~-][^)\s`"']*)
+            |[A-Za-z]:\\(?:[^)\s`"']+)
+        )
+        """
+    )
+    assert absolute_path_pattern.search(text) is None
+
+
 def test_root_agent_guide_points_to_shared_resources() -> None:
     repo_root = _get_repo_root()
     agents_guide = (repo_root / "AGENTS.md").read_text(encoding="utf-8")
 
-    assert "/Users/" not in agents_guide
+    _assert_no_absolute_paths(agents_guide)
     assert "[docs/AGENTS.md](docs/AGENTS.md)" in agents_guide
     assert "[agents/skills/review-growth-papers](agents/skills/review-growth-papers)" in agents_guide
     assert "[notes/paper-reviews](notes/paper-reviews)" in agents_guide
@@ -36,6 +51,6 @@ def test_docs_agent_guide_uses_portable_links() -> None:
     repo_root = _get_repo_root()
     docs_agents_guide = (repo_root / "docs" / "AGENTS.md").read_text(encoding="utf-8")
 
-    assert "/Users/" not in docs_agents_guide
+    _assert_no_absolute_paths(docs_agents_guide)
     assert "[`agents/skills/review-growth-papers`](../agents/skills/review-growth-papers)" in docs_agents_guide
     assert "[`notes/paper-reviews`](../notes/paper-reviews)" in docs_agents_guide
