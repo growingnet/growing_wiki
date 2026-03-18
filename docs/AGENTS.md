@@ -22,9 +22,9 @@ Use this file for documentation edits and paper additions.
 ## Intake Expectations
 
 Every paper review must separate:
-- theory only
-- implemented
-- evaluated
-- ablated or compared
+- Theory only
+- Implemented
+- Evaluated
+- Ablated / Compared
 
 If the paper is borderline in scope or unclear, record that in the intake note before touching the wiki page.

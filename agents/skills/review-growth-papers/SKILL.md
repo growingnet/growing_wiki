@@ -50,7 +50,7 @@ For every major capability or contribution, mark whether it is:
 - `Theory only`
 - `Implemented`
 - `Evaluated`
-- `Ablated or compared`
+- `Ablated / Compared`
 
 Use [references/evidence-rules.md](references/evidence-rules.md) for the labeling rules.
 
