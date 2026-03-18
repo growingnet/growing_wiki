@@ -9,7 +9,9 @@ Introduction
    exploiting_function_geometry
    beyond_neuron_addition
    when_to_stop
+   where_to_grow
    when_to_grow
+   how_to_grow
    future
 
 Neural Networks (NNs) are typically trained by first fixing the

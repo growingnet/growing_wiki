@@ -32,38 +32,36 @@ FraGrow, although heuristic, performs well on a wide range of datasets.
 Nevertheless, periodic growth is a simple and widely used baseline,
 outperforming convergent growth.
 
-Many papers also implicitly answer *where* growth should happen, even
-when their main focus is *how* to initialize the new parameters. The
-current algorithms in this survey can be summarized as follows:
+The current algorithms in this survey can be summarized as follows:
 
-.. list-table:: Where and when to grow across algorithms
+.. list-table:: When to grow across algorithms
    :header-rows: 1
    :widths: 28 72
 
    * - Algorithm
-     - Where / when to grow
+     - When to grow
    * - [[AutoGrow|autogrow]]
-     - Add blocks within predefined stages, typically before full convergence.
+     - Stage-wise schedule before convergence.
    * - [[Firefly|firefly]]
-     - Try layer splits or neuron additions and keep the changes that improve the loss most.
+     - When a proposed edit improves the loss.
    * - [[GradMax|gradmax]]
-     - Grow the layer whose new weights can yield the largest next-step gradient-norm gain; no standalone schedule is specified.
+     - Predefined schedule.
    * - [[NeST|nest]]
-     - Add sparse neurons or connections where activation-gradient correlations are strongest.
+     - Predefined schedule.
    * - [[Net2Net|net2net]]
-     - Widen or deepen any chosen layer; the method does not prescribe when to trigger growth.
+     - Predefined schedule.
    * - [[Network Morphism|network_morphism]]
-     - Apply a function-preserving morphism to a chosen layer when an external schedule decides to grow.
+     - Predefined schedule.
    * - [[NORTH|north]]
-     - Grow layers when and where the activation rank crosses a preset threshold.
+     - Activation-rank threshold.
    * - [[SENN|senn]]
-     - Extend layers when and where the residual natural-gradient norm exceeds a threshold.
+     - Residual natural-gradient threshold.
    * - [[Splitting|splitting]]
-     - Split neurons where the splitting criterion indicates local instability, that is, a negative minimum eigenvalue.
+     - Negative splitting criterion.
    * - [[Tiny|tiny]]
-     - Add neurons where the residual gradient is best matched by a low-rank update; no explicit timing rule is given.
+     - Predefined schedule.
    * - [[Variance Transfer|variance_transfer]]
-     - Reuse a chosen width-growth schedule and layer choice, while adapting initialization and learning rates across growth stages.
+     - Predefined schedule.
 
 It is currently unclear how many of these observations generalise beyond
 layer-addition, to provide a general answer of *when to grow*. Residual
