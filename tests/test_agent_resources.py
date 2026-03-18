@@ -53,3 +53,57 @@ def test_docs_agent_guide_uses_portable_links() -> None:
     _assert_no_absolute_paths(docs_agents_guide)
     assert "[`agents/skills/review-growth-papers`](../agents/skills/review-growth-papers)" in docs_agents_guide
     assert "[`notes/paper-reviews`](../notes/paper-reviews)" in docs_agents_guide
+
+
+def test_paper_review_template_requires_claim_audit_and_experimental_controls() -> None:
+    repo_root = _get_repo_root()
+    template_path = (
+        repo_root
+        / "agents"
+        / "skills"
+        / "review-growth-papers"
+        / "assets"
+        / "paper-review-template.md"
+    )
+    template_text = template_path.read_text(encoding="utf-8")
+
+    assert "## 4. Scope Fit" in template_text
+    assert "## 5. Claim Audit" in template_text
+    assert "- Authors claim:" in template_text
+    assert "- Paper evidence:" in template_text
+    assert "- Evidence refs:" in template_text
+    assert "- Reviewer assessment:" in template_text
+    assert "## 8. Experimental Evidence" in template_text
+    assert "- Static size-matched baseline:" in template_text
+    assert "- Compute-matched baseline:" in template_text
+    assert "- Optimizer-state handling after growth:" in template_text
+    assert "- Learning-rate or batch-size changes:" in template_text
+    assert "- Wall-clock reporting:" in template_text
+    assert "- FLOPs or token-budget reporting:" in template_text
+
+
+def test_review_growth_paper_skill_defines_orthogonal_axes() -> None:
+    repo_root = _get_repo_root()
+    skill_path = repo_root / "agents" / "skills" / "review-growth-papers" / "SKILL.md"
+    taxonomy_path = (
+        repo_root / "agents" / "skills" / "review-growth-papers" / "references" / "taxonomy.md"
+    )
+    evidence_rules_path = (
+        repo_root
+        / "agents"
+        / "skills"
+        / "review-growth-papers"
+        / "references"
+        / "evidence-rules.md"
+    )
+
+    skill_text = skill_path.read_text(encoding="utf-8")
+    taxonomy_text = taxonomy_path.read_text(encoding="utf-8")
+    evidence_rules_text = evidence_rules_path.read_text(encoding="utf-8")
+
+    assert "Keep mechanism, setting, and objective separate." in skill_text
+    assert "## Mechanism Family" in taxonomy_text
+    assert "## Application Setting" in taxonomy_text
+    assert "## Objective Setting" in taxonomy_text
+    assert "Application-specific growth" not in taxonomy_text
+    assert "Do not infer implementation from results alone." in evidence_rules_text

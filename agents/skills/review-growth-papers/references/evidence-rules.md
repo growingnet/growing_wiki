@@ -1,52 +1,64 @@
 # Evidence Rules
 
-Use these labels consistently in the contribution status matrix.
+Use these labels consistently in the evidence status matrix.
 
 ## Labels
 
-- `Theory only`: the paper defines, motivates, or proves something, but does not implement it
-- `Implemented`: the paper describes or releases an implementation of the idea
-- `Evaluated`: experiments directly test the idea
-- `Ablated / compared`: the paper isolates the idea through ablation or comparison against alternatives
+- `Claimed`: the paper states or motivates the idea
+- `Built`: the paper provides explicit evidence that the mechanism was implemented
+- `Tested`: experiments directly exercise the claimed mechanism
+- `Ablated / compared`: the paper isolates the idea through ablation or a meaningful comparison
 
 ## Interpretation Rules
 
-### Theory only
+### Claimed
 
-Mark `Theory only` when the paper provides:
-- an algorithm description without evidence of code or experiments
-- a theorem or derivation without implementation
-- discussion of a possible extension that is never built
+Mark `Claimed` when the paper:
+- states the idea in prose
+- gives an algorithm sketch without implementation evidence
+- proves or motivates an extension that is not built
 
-### Implemented
+### Built
 
-Mark `Implemented` when the paper provides enough evidence that the mechanism was actually built, for example:
-- pseudocode tied to experiments
+Mark `Built` only when the paper provides explicit evidence that the mechanism was implemented, for example:
 - implementation details in methods or appendix
+- pseudocode tied to the evaluated path
 - released code
-- experimental results that clearly require the mechanism
+- a clear statement that the mechanism was used in experiments
 
-### Evaluated
+Do not infer implementation from results alone.
 
-Mark `Evaluated` only when experiments directly exercise the claimed component. A mention in prose is not enough.
+### Tested
 
-### Ablated / compared
+Mark `Tested` only when experiments directly exercise the claimed component. A passing mention in prose is not enough.
+
+### Ablated / Compared
 
 Mark `Ablated / Compared` only when the paper isolates the contribution through:
 - ablation against a weaker variant
 - comparison to a basic growth strategy
-- comparison to static architectures sized to match the final model or compute budget
+- comparison to static architectures sized to match the final model
+- comparison to compute-matched alternatives when efficiency claims are made
+
+## Evidence Strength
+
+Use:
+- `Strong` when controls are appropriate and the evidence directly supports the claim
+- `Mixed` when some evidence exists but controls or baselines are incomplete
+- `Weak` when evidence is indirect, underspecified, or weakly controlled
+- `Insufficient` when the paper does not support the claim adequately
 
 ## Do Not Conflate
 
 Do not treat these as equivalent:
-- theorem vs implementation
-- implementation vs experimental validation
-- experimental validation vs adequate baseline comparison
+- claim vs implementation
+- implementation vs direct testing
+- direct testing vs adequate comparison
+- final accuracy vs compute efficiency
 
 ## Preferred Wording
 
 Prefer statements like:
-- `Authors propose X in Section 3, but only Y is implemented in Section 5.`
-- `The paper evaluates width growth but not the proposed depth extension.`
-- `Code release supports implementation, but there is no ablation isolating the trigger heuristic.`
+- `The paper claims X in Section 3, but only Y is built in Section 5.`
+- `Table 2 tests width growth, but the depth extension remains untested.`
+- `Code release supports the implementation, but there is no ablation isolating the trigger heuristic.`

@@ -2,13 +2,29 @@
 
 Use these axes to keep reviews comparable across papers.
 
-## Primary Method Family
+## Mechanism Family
 
 - `Width growth`: add neurons, channels, units, or heads within existing layers
 - `Depth growth`: insert or activate additional layers or blocks
 - `Topology growth`: add edges, branches, DAG structure, or non-sequential modules
 - `Compound growth`: combine width, depth, or topology changes
-- `Application-specific growth`: adapt the above to continual learning, transformers, sparse training, or other special settings
+
+## Application Setting
+
+- `General supervised learning`
+- `Continual or lifelong learning`
+- `Transfer or adaptation`
+- `Transformers or language models`
+- `Sparse or grow-prune training`
+- `Other specialized setting`
+
+## Objective Setting
+
+- `Reach a known target architecture`
+- `Frugal architecture discovery`
+- `Optimization aid during training`
+- `Transfer or continual adaptation`
+- `Not stated`
 
 ## Initialization Family
 
@@ -25,6 +41,7 @@ Use these axes to keep reviews comparable across papers.
 - `Convergence-based`: grow when progress slows or a convergence signal appears
 - `Criterion-based`: grow when a metric, bottleneck, or heuristic threshold is met
 - `Sequential program`: grow layers or blocks in a predetermined order
+- `Not stated`
 
 ## Growth Location Family
 
@@ -32,6 +49,7 @@ Use these axes to keep reviews comparable across papers.
 - `Multi-location`: grow several locations together
 - `Sequential location choice`: follow a fixed traversal
 - `Heuristic location choice`: choose based on scores, gradients, bottlenecks, or validation signals
+- `Not stated`
 
 ## Stopping Family
 
@@ -41,4 +59,4 @@ Use these axes to keep reviews comparable across papers.
 - `Task-dependent stop rule`
 - `Not stated`
 
-Assign the closest category even when the paper uses different terminology. If no category fits well, note that explicitly instead of forcing a poor label.
+Assign the closest category on each axis. Do not force a single primary label when a paper spans multiple orthogonal dimensions.

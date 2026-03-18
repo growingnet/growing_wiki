@@ -12,32 +12,46 @@
 ## 2. Scope Decision
 - Decision: In scope / Borderline / Out of scope
 - Why:
-- Primary category:
+- Is growth central to the paper? Yes / No / Unclear
+- Borderline factors:
 
-## 3. Summary
+## 3. Classification Axes
+- Mechanism family:
+- Application setting:
+- Objective setting:
+- Initialization family:
+- Growth trigger family:
+- Growth location family:
+- Stopping family:
+
+## 4. Scope Fit
 - Problem addressed:
 - Main idea:
 - Claimed benefits:
+- In intended survey scope because:
+- Out-of-scope risk:
+- Closest existing wiki bucket:
 
-## 4. Contribution Status Matrix
-| Aspect | Theory only | Implemented | Evaluated | Ablated / Compared | Evidence |
-|---|---|---|---|---|---|
-| Growth operation |  |  |  |  |  |
-| Initialization |  |  |  |  |  |
-| Trigger / schedule |  |  |  |  |  |
-| Location selection |  |  |  |  |  |
-| Stopping criterion |  |  |  |  |  |
-| Other operations |  |  |  |  |  |
+## 5. Claim Audit
+### Claim 1
+- Authors claim:
+- Paper evidence:
+- Evidence refs:
+- Reviewer assessment:
 
-## 5. Motivation
-- Smaller final network?
-- Faster training?
-- Transfer learning?
-- Continual learning?
-- Architecture search / frugal scaling?
-- Other motivation:
+### Claim 2
+- Authors claim:
+- Paper evidence:
+- Evidence refs:
+- Reviewer assessment:
 
-## 6. Method
+### Claim 3
+- Authors claim:
+- Paper evidence:
+- Evidence refs:
+- Reviewer assessment:
+
+## 6. Method Extraction
 ### Growth operations
 - Widening:
 - New layers:
@@ -64,34 +78,51 @@
 ### Other operations
 - Pruning / quantization / sparsification / routing / other:
 
-## 7. Experiments
+## 7. Evidence Status Matrix
+| Aspect | Claimed | Built | Tested | Ablated / Compared | Evidence strength | Evidence refs |
+|---|---|---|---|---|---|---|
+| Growth operation |  |  |  |  |  |  |
+| Initialization |  |  |  |  |  |  |
+| Trigger / schedule |  |  |  |  |  |  |
+| Location selection |  |  |  |  |  |  |
+| Stopping criterion |  |  |  |  |  |  |
+| Other operations |  |  |  |  |  |  |
+
+## 8. Experimental Evidence
 - Datasets:
 - Architectures:
-- Baselines:
 - Metrics:
-- Compute or training-cost reporting:
-- Final-size reporting:
+- Static size-matched baseline:
+- Compute-matched baseline:
+- Closest prior growth baseline:
+- Simpler naive growth baseline:
+- Final parameter-count reporting:
+- Wall-clock reporting:
+- FLOPs or token-budget reporting:
+- Optimizer-state handling after growth:
+- Learning-rate or batch-size changes:
 - Ablations:
-- Missing baselines:
+- Missing baselines or controls:
 
-## 8. Reproducibility
+## 9. Reproducibility
 - Code released?
 - Enough implementation detail?
 - Hyperparameters reported?
+- Seed or initialization details reported?
 - Overhead measurable?
 
-## 9. Relation To Prior Growth Methods
+## 10. Relation To Prior Growth Methods
 - Closest methods:
 - Main novelty:
 - What is reused from prior work:
 - What is actually new versus reframing:
 
-## 10. Wiki Placement
+## 11. Wiki Placement
 - Relevant wiki page(s):
 - Dedicated algorithm page? Yes / No / Maybe
 - One-sentence wiki takeaway:
 
-## 11. Verdict
+## 12. Verdict
 - Include / Exclude / Revisit:
 - Confidence:
 - Main caveats:

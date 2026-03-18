@@ -22,9 +22,13 @@ Use this file for documentation edits and paper additions.
 ## Intake Expectations
 
 Every paper review must separate:
-- Theory only
-- Implemented
-- Evaluated
-- Ablated / Compared
+- Authors claim
+- Paper evidence
+- Reviewer assessment
+
+Every paper review must also record:
+- mechanism, setting, and objective as separate axes
+- experimental controls such as size-matched or compute-matched baselines
+- growth-specific confounders such as optimizer-state handling and schedule changes
 
 If the paper is borderline in scope or unclear, record that in the intake note before touching the wiki page.
