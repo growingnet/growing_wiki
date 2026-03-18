@@ -122,3 +122,35 @@ the goal of their initialization strategy:
 - **Function geometry-based**: Methods optimizing local objectives such
   as gradient norm or loss decrease. They can be function-preserving or
   function-improving.
+
+The main algorithms in this survey can be summarized by the growth
+mechanism they use:
+
+.. list-table:: How to grow across algorithms
+   :header-rows: 1
+   :widths: 28 72
+
+   * - Algorithm
+     - How to grow
+   * - [[AutoGrow|autogrow]]
+     - Add new residual or VGG blocks inside predefined stages, using random initialization rather than an identity morphism.
+   * - [[Firefly|firefly]]
+     - Propose layer splits and neuron additions, optimize the new parameters by gradient descent, and keep the most loss-improving edits.
+   * - [[GradMax|gradmax]]
+     - Initialize the new branch with :math:`\boldsymbol{\Psi}=0` and choose the remaining weights to maximize the next-step gradient norm.
+   * - [[NeST|nest]]
+     - Add sparse neurons or edges with a single non-zero fan-in and fan-out chosen from activation-gradient correlations.
+   * - [[Net2Net|net2net]]
+     - Widen by duplicating neurons and splitting outgoing weights, or deepen by inserting an identity-initialized layer.
+   * - [[Network Morphism|network_morphism]]
+     - Apply a function-preserving transformation such as factorizing a layer or adding canceling neuron pairs.
+   * - [[NORTH|north]]
+     - Add neurons whose activations are orthogonal to the current activation subspace.
+   * - [[SENN|senn]]
+     - Initialize with :math:`\boldsymbol{\Omega}=0` and optimize the new branch to maximize a residual natural-gradient objective using K-FAC.
+   * - [[Splitting|splitting]]
+     - Split an existing neuron along the most unstable direction given by the minimum-eigenvalue eigenspace of the splitting matrix.
+   * - [[Tiny|tiny]]
+     - Add a low-rank neuron block whose contribution best matches the residual gradient, solved with SVD-based approximations.
+   * - [[Variance Transfer|variance_transfer]]
+     - Use a widened function-preserving morphism, then rescale and randomize the new weights to preserve variance and train each growth stage with its own learning rate.
