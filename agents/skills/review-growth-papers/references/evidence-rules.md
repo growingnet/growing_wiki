@@ -32,7 +32,7 @@ Mark `Evaluated` only when experiments directly exercise the claimed component. 
 
 ### Ablated / compared
 
-Mark `Ablated / compared` only when the paper isolates the contribution through:
+Mark `Ablated / Compared` only when the paper isolates the contribution through:
 - ablation against a weaker variant
 - comparison to a basic growth strategy
 - comparison to static architectures sized to match the final model or compute budget
