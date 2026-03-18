@@ -1,3 +1,4 @@
 sphinx>=7.2,<8
 furo
 sphinxcontrib-bibtex
+pytest
