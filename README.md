@@ -39,3 +39,24 @@ Built files will be in:
 ```text
 docs/_build/html
 ```
+
+## Writing Docs
+
+This wiki uses custom prose preprocessing in [`docs/conf.py`](docs/conf.py), so
+contributors should not treat the `.rst` files as plain reStructuredText.
+
+- Use `[[Page]]` to link to another page when the page title or docname resolves
+  uniquely.
+- Use `[[Label|path/to/docname]]` when the target would otherwise be ambiguous or
+  when you want explicit control over the destination page.
+- Use standard citation roles such as:
+
+  ```rst
+  :cite:p:`key`
+  ```
+- Pages with citations receive a local `References` section automatically during
+  the Sphinx build, so you should not add a manual `.. bibliography::` block
+  unless you intend to override that behavior.
+
+If a prose change introduces broken or ambiguous wiki links, the Sphinx build
+will emit warnings from the custom link resolver in `docs/conf.py`.

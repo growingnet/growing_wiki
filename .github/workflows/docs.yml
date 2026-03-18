@@ -36,6 +36,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Run contributor guidance tests
+        run: pytest
+
       - name: Build HTML docs
         run: make -C docs html
 
