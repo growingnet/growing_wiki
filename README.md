@@ -49,17 +49,18 @@ At this stage it provides:
 - normalized evidence schemas
 - deterministic review orchestration
 - artifact writing to `review.json` and `review.md`
+- a Python-callable vertical slice for one real claim-extraction run
 
 ### Environment
 
-For the eventual real model runtime, set:
+For the real claim-extraction runtime, set:
 
 ```bash
 export OPENROUTER_API_KEY=your-key
 ```
 
-The current checked-in scaffolding does not yet call OpenRouter directly; it
-defines the contract that later agent integrations will use.
+The current codebase now includes an OpenRouter-backed client wrapper for claim
+extraction, but tests still run entirely with injected fake backends.
 
 ### Library Entry Examples
 
@@ -67,11 +68,24 @@ For an arXiv-backed run, inject an MCP-compatible client into the adapter:
 
 ```python
 from growing_wiki_council.providers.arxiv import ArxivLatexProvider
-from growing_wiki_council.services.evidence_builder import EvidenceBuilder
+from growing_wiki_council.services.vertical_slice import run_claim_extraction_slice
+from growing_wiki_council.agents import ClaimExtractorAgent
+from growing_wiki_council.config import CouncilConfig
 
 provider = ArxivLatexProvider(client=my_arxiv_client)
-provider_result = provider.load("1511.05641")
-bundle = EvidenceBuilder().build(provider_result)
+claim_extractor = ClaimExtractorAgent(
+    config=CouncilConfig(
+        openrouter_api_key="your-key",
+        openrouter_base_url="https://openrouter.ai/api/v1",
+        claim_extractor_model="openrouter/openai/gpt-4.1-mini",
+    )
+)
+artifact = run_claim_extraction_slice(
+    source="1511.05641",
+    provider=provider,
+    claim_extractor=claim_extractor,
+    output_dir=Path("artifacts"),
+)
 ```
 
 For a PDF-backed run:
@@ -80,10 +94,24 @@ For a PDF-backed run:
 from pathlib import Path
 
 from growing_wiki_council.providers.pdf import GenericPdfProvider
-from growing_wiki_council.services.evidence_builder import EvidenceBuilder
+from growing_wiki_council.services.vertical_slice import run_claim_extraction_slice
+from growing_wiki_council.agents import ClaimExtractorAgent
+from growing_wiki_council.config import CouncilConfig
 
-provider_result = GenericPdfProvider().load(Path("paper.pdf"))
-bundle = EvidenceBuilder().build(provider_result)
+provider = GenericPdfProvider()
+claim_extractor = ClaimExtractorAgent(
+    config=CouncilConfig(
+        openrouter_api_key="your-key",
+        openrouter_base_url="https://openrouter.ai/api/v1",
+        claim_extractor_model="openrouter/openai/gpt-4.1-mini",
+    )
+)
+artifact = run_claim_extraction_slice(
+    source=str(Path("paper.pdf")),
+    provider=provider,
+    claim_extractor=claim_extractor,
+    output_dir=Path("artifacts"),
+)
 ```
 
 ### Artifact Output
@@ -109,11 +137,14 @@ artifacts/review.md
 
 ### Current Limitations
 
-- The CLI entrypoint is still a placeholder; the current integration surface is
-  the Python package API.
+- The CLI entrypoint is still a placeholder; the current supported integration
+  surface is the Python package API.
 - `GenericPdfProvider` validates inputs but does not yet parse PDFs.
 - `ArxivLatexProvider` is an adapter around an injected client and does not
   implement MCP communication itself.
+- Only claim extraction is wired to a real model-client path in this slice.
+- The chair verdict in the vertical slice is synthetic and always marks the run
+  as `needs_human_review`.
 - Extraction confidence in v1 is heuristic:
   - warnings or fallback paths -> `low`
   - raw-text-only clean inputs -> `medium`
