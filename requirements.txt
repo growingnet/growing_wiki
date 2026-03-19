@@ -2,3 +2,6 @@ sphinx>=7.2,<8
 furo
 sphinxcontrib-bibtex
 pytest
+pydantic>=2
+pydantic-ai
+httpx
