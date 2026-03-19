@@ -2,13 +2,18 @@
 
 from typing import Any
 
+from growing_wiki_council.clients.arxiv_client import ArxivPaperClientProtocol
+from growing_wiki_council.models.evidence import (
+    EvidenceBibliographyEntry,
+    EvidenceEquation,
+)
 from growing_wiki_council.providers.base import ProviderResult
 
 
 class ArxivLatexProvider:
     """Adapt MCP-style paper retrieval into the provider contract."""
 
-    def __init__(self, client: Any) -> None:
+    def __init__(self, client: ArxivPaperClientProtocol) -> None:
         """Store the injected MCP-style client."""
         self.client = client
 
@@ -35,18 +40,40 @@ class ArxivLatexProvider:
                 fallback_reason=paper_payload.get("fallback_reason"),
             )
 
-        equations: list[Any] = []
-        bibliography: list[Any] = []
+        equations: list[EvidenceEquation] = []
+        bibliography: list[EvidenceBibliographyEntry] = []
+        default_provenance = "latex" if source_kind == "arxiv_latex" else "pdf"
 
         if hasattr(self.client, "extract_equations"):
             try:
-                equations = self.client.extract_equations(source)
+                equations = [
+                    EvidenceEquation(
+                        equation_id=equation_payload["equation_id"],
+                        latex=equation_payload["latex"],
+                        provenance=default_provenance,
+                        section_name=equation_payload.get("section_context"),
+                    )
+                    for equation_payload in self.client.extract_equations(source)
+                ]
             except Exception as exc:  # pragma: no cover - defensive adapter path
                 warnings.append(f"Equation extraction failed: {exc}")
 
         if hasattr(self.client, "get_bibliography"):
             try:
-                bibliography = self.client.get_bibliography(source)
+                bibliography_payload = self.client.get_bibliography(source)
+                bibliography_entries = (
+                    bibliography_payload.get("entries", [])
+                    if isinstance(bibliography_payload, dict)
+                    else bibliography_payload
+                )
+                bibliography = [
+                    EvidenceBibliographyEntry(
+                        key=entry["key"],
+                        citation=entry["citation"],
+                        provenance=default_provenance,
+                    )
+                    for entry in bibliography_entries
+                ]
             except Exception as exc:  # pragma: no cover - defensive adapter path
                 warnings.append(f"Bibliography extraction failed: {exc}")
 
