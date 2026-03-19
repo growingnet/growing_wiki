@@ -7,6 +7,13 @@ from growing_wiki_council.models.evidence import (
     EvidenceMetadata,
     EvidenceSection,
 )
+from growing_wiki_council.models.review import (
+    ChairVerdict,
+    ClaimRecord,
+    CouncilReviewArtifact,
+    ReviewFinding,
+    ReviewerReport,
+)
 
 __all__ = [
     "EvidenceBibliographyEntry",
@@ -14,4 +21,9 @@ __all__ = [
     "EvidenceEquation",
     "EvidenceMetadata",
     "EvidenceSection",
+    "ChairVerdict",
+    "ClaimRecord",
+    "CouncilReviewArtifact",
+    "ReviewFinding",
+    "ReviewerReport",
 ]
