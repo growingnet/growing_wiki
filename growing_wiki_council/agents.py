@@ -2,6 +2,9 @@
 
 from typing import Any, Protocol
 
+from growing_wiki_council.clients.openrouter_client import (
+    OpenRouterClaimExtractorClient,
+)
 from growing_wiki_council.config import CouncilConfig
 from growing_wiki_council.models.evidence import EvidenceBundle
 from growing_wiki_council.models.review import ReviewerReport
@@ -30,12 +33,18 @@ class ClaimExtractorAgent:
     def run(self, bundle: EvidenceBundle) -> ReviewerReport:
         """Run claim extraction against the provided evidence bundle."""
         prompt = self._build_prompt(bundle)
-        response_payload = self.model_backend.run_prompt(prompt)
+        response_payload = dict(self.model_backend.run_prompt(prompt))
+        response_payload["role"] = "claim_extractor"
         return ReviewerReport.model_validate(response_payload)
 
     def _build_default_backend(self) -> Any:
         """Create the default backend placeholder for the real runtime path."""
-        return _UnconfiguredClaimBackend()
+        return OpenRouterClaimExtractorClient(
+            api_key=self.config.openrouter_api_key.get_secret_value(),
+            base_url=self.config.openrouter_base_url,
+            model=self.config.claim_extractor_model,
+            timeout_seconds=self.config.request_timeout_seconds,
+        )
 
     def _build_prompt(self, bundle: EvidenceBundle) -> str:
         """Build the first simple claim extraction prompt from evidence."""
@@ -48,14 +57,4 @@ class ClaimExtractorAgent:
             f"source_kind: {bundle.source_kind}\n"
             f"extraction_confidence: {bundle.extraction_confidence}\n\n"
             f"{section_blocks}"
-        )
-
-
-class _UnconfiguredClaimBackend:
-    """Placeholder backend until the OpenRouter client is wired in."""
-
-    def run_prompt(self, prompt: str) -> dict[str, Any]:
-        """Fail fast when the real backend has not been configured."""
-        raise RuntimeError(
-            "No claim extraction backend is configured yet."
         )
