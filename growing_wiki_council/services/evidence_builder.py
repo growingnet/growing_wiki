@@ -21,7 +21,9 @@ class EvidenceBuilder:
             )
 
         return EvidenceBundle(
-            paper_id=provider_result.paper_id or provider_result.title or "unknown-paper",
+            paper_id=provider_result.paper_id
+            or provider_result.title
+            or "unknown-paper",
             source_kind=provider_result.source_kind or "generic_pdf",
             title=provider_result.title or "Untitled paper",
             sections=normalized_sections,

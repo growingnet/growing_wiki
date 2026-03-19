@@ -47,15 +47,15 @@ class ReviewRunner:
             chair_verdict=chair_verdict,
         )
 
-    def _coerce_report(self, payload: ReviewerReport | dict[str, Any]) -> ReviewerReport:
+    def _coerce_report(
+        self, payload: ReviewerReport | dict[str, Any]
+    ) -> ReviewerReport:
         """Normalize reviewer outputs into a reviewer report model."""
         if isinstance(payload, ReviewerReport):
             return payload
         return ReviewerReport.model_validate(payload)
 
-    def _coerce_verdict(
-        self, payload: ChairVerdict | dict[str, Any]
-    ) -> ChairVerdict:
+    def _coerce_verdict(self, payload: ChairVerdict | dict[str, Any]) -> ChairVerdict:
         """Normalize the chair output into a verdict model."""
         if isinstance(payload, ChairVerdict):
             return payload
