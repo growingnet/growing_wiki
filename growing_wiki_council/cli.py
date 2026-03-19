@@ -2,23 +2,26 @@
 
 from __future__ import annotations
 
-import json
 from pathlib import Path
 
+from growing_wiki_council.artifacts import write_review_artifacts
+from growing_wiki_council.services.vertical_slice import run_claim_extraction_slice
 
-def write_review_artifacts(
-    output_dir: Path,
+
+def run_vertical_slice(
     *,
-    review_json: dict,
-    review_markdown: str,
-) -> None:
-    """Persist council review artifacts to disk."""
-    output_dir.mkdir(parents=True, exist_ok=True)
-    (output_dir / "review.json").write_text(
-        json.dumps(review_json, indent=2, sort_keys=True) + "\n",
-        encoding="utf-8",
+    source: str,
+    provider,
+    claim_extractor,
+    output_dir: Path,
+):
+    """Delegate a single-paper claim-extraction run to the slice service."""
+    return run_claim_extraction_slice(
+        source=source,
+        provider=provider,
+        claim_extractor=claim_extractor,
+        output_dir=output_dir,
     )
-    (output_dir / "review.md").write_text(review_markdown, encoding="utf-8")
 
 
 def main() -> None:

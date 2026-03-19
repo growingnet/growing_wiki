@@ -3,7 +3,7 @@
 from pathlib import Path
 from typing import Any
 
-from growing_wiki_council.cli import write_review_artifacts
+from growing_wiki_council.artifacts import write_review_artifacts
 from growing_wiki_council.models.review import (
     ChairVerdict,
     CouncilReviewArtifact,
