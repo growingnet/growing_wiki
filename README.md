@@ -40,6 +40,85 @@ Built files will be in:
 docs/_build/html
 ```
 
+## Council Prototype
+
+The repository now includes an early council package under `growing_wiki_council/`.
+At this stage it provides:
+
+- provider contracts for arXiv and generic PDF ingestion
+- normalized evidence schemas
+- deterministic review orchestration
+- artifact writing to `review.json` and `review.md`
+
+### Environment
+
+For the eventual real model runtime, set:
+
+```bash
+export OPENROUTER_API_KEY=your-key
+```
+
+The current checked-in scaffolding does not yet call OpenRouter directly; it
+defines the contract that later agent integrations will use.
+
+### Library Entry Examples
+
+For an arXiv-backed run, inject an MCP-compatible client into the adapter:
+
+```python
+from growing_wiki_council.providers.arxiv import ArxivLatexProvider
+from growing_wiki_council.services.evidence_builder import EvidenceBuilder
+
+provider = ArxivLatexProvider(client=my_arxiv_client)
+provider_result = provider.load("1511.05641")
+bundle = EvidenceBuilder().build(provider_result)
+```
+
+For a PDF-backed run:
+
+```python
+from pathlib import Path
+
+from growing_wiki_council.providers.pdf import GenericPdfProvider
+from growing_wiki_council.services.evidence_builder import EvidenceBuilder
+
+provider_result = GenericPdfProvider().load(Path("paper.pdf"))
+bundle = EvidenceBuilder().build(provider_result)
+```
+
+### Artifact Output
+
+```python
+from pathlib import Path
+
+from growing_wiki_council.cli import write_review_artifacts
+
+write_review_artifacts(
+    Path("artifacts"),
+    review_json={"status": "ok"},
+    review_markdown="# Review",
+)
+```
+
+This writes:
+
+```text
+artifacts/review.json
+artifacts/review.md
+```
+
+### Current Limitations
+
+- The CLI entrypoint is still a placeholder; the current integration surface is
+  the Python package API.
+- `GenericPdfProvider` validates inputs but does not yet parse PDFs.
+- `ArxivLatexProvider` is an adapter around an injected client and does not
+  implement MCP communication itself.
+- Extraction confidence in v1 is heuristic:
+  - warnings or fallback paths -> `low`
+  - raw-text-only clean inputs -> `medium`
+  - structured sections without warnings -> `high`
+
 ## Writing Docs
 
 This wiki uses custom prose preprocessing in [`docs/conf.py`](docs/conf.py), so
