@@ -1,4 +1,6 @@
-from growing_wiki_council.clients.openrouter_client import OpenRouterClaimExtractorClient
+from growing_wiki_council.clients.openrouter_client import (
+    OpenRouterClaimExtractorClient,
+)
 
 
 class FakeBackend:

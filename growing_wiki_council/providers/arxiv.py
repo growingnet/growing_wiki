@@ -1,7 +1,5 @@
 """Thin adapter for arXiv MCP-style clients."""
 
-from typing import Any
-
 from growing_wiki_council.clients.arxiv_client import ArxivPaperClientProtocol
 from growing_wiki_council.models.evidence import (
     EvidenceBibliographyEntry,

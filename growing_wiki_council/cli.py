@@ -7,6 +7,8 @@ from pathlib import Path
 from growing_wiki_council.artifacts import write_review_artifacts
 from growing_wiki_council.services.vertical_slice import run_claim_extraction_slice
 
+__all__ = ["main", "run_vertical_slice", "write_review_artifacts"]
+
 
 def run_vertical_slice(
     *,
