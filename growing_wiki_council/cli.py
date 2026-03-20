@@ -4,10 +4,19 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from growing_wiki_council.artifacts import write_review_artifacts
+from growing_wiki_council.artifacts import (
+    write_review_artifacts,
+    write_schema_calibration_artifacts,
+)
+from growing_wiki_council.services.schema_calibration import run_schema_calibration
 from growing_wiki_council.services.vertical_slice import run_claim_extraction_slice
 
-__all__ = ["main", "run_vertical_slice", "write_review_artifacts"]
+__all__ = [
+    "main",
+    "run_schema_calibration_once",
+    "run_vertical_slice",
+    "write_review_artifacts",
+]
 
 
 def run_vertical_slice(
@@ -24,6 +33,21 @@ def run_vertical_slice(
         claim_extractor=claim_extractor,
         output_dir=output_dir,
     )
+
+
+def run_schema_calibration_once(
+    *,
+    claim_extractor,
+    output_dir: Path,
+    run_label: str,
+):
+    """Execute one schema-calibration run and persist its artifacts."""
+    result = run_schema_calibration(
+        claim_extractor=claim_extractor,
+        run_label=run_label,
+    )
+    write_schema_calibration_artifacts(output_dir, result)
+    return result
 
 
 def main() -> None:
