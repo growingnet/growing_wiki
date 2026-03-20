@@ -15,3 +15,18 @@ class SchemaCalibrationResult(BaseModel):
     validation_error: str | None = None
     raw_response: dict[str, Any] | list[Any] | str | None = None
     validated_report: ReviewerReport | None = None
+
+
+class ModelCalibrationRun(BaseModel):
+    """Capture one schema-calibration run for a specific model."""
+
+    model_id: str
+    output_dir: str
+    result: SchemaCalibrationResult
+
+
+class MultiModelCalibrationResult(BaseModel):
+    """Track the outcomes of a calibration batch across multiple models."""
+
+    run_label: str
+    model_runs: list[ModelCalibrationRun]
