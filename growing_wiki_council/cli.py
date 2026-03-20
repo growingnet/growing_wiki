@@ -11,11 +11,15 @@ from growing_wiki_council.artifacts import (
 from growing_wiki_council.services.multi_model_schema_calibration import (
     run_multi_model_schema_calibration,
 )
+from growing_wiki_council.services.claim_extraction_benchmark import (
+    run_claim_extraction_benchmark,
+)
 from growing_wiki_council.services.schema_calibration import run_schema_calibration
 from growing_wiki_council.services.vertical_slice import run_claim_extraction_slice
 
 __all__ = [
     "main",
+    "run_claim_extraction_benchmark_once",
     "run_multi_model_schema_calibration_once",
     "run_schema_calibration_once",
     "run_vertical_slice",
@@ -67,6 +71,28 @@ def run_multi_model_schema_calibration_once(
         output_dir=output_dir,
         run_label=run_label,
         agent_factory=agent_factory,
+    )
+
+
+def run_claim_extraction_benchmark_once(
+    *,
+    config,
+    dataset_path: Path,
+    output_dir: Path,
+    run_label: str,
+    provider_factory=None,
+    claim_extractor_factory=None,
+    model_ids=None,
+):
+    """Execute the real-paper claim benchmark and persist its artifacts."""
+    return run_claim_extraction_benchmark(
+        config=config,
+        dataset_path=dataset_path,
+        output_dir=output_dir,
+        run_label=run_label,
+        provider_factory=provider_factory,
+        claim_extractor_factory=claim_extractor_factory,
+        model_ids=model_ids,
     )
 
 
