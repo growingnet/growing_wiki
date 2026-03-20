@@ -49,6 +49,8 @@ class ClaimExtractorAgent:
             base_url=self.config.openrouter_base_url,
             model=self.config.claim_extractor_model,
             timeout_seconds=self.config.request_timeout_seconds,
+            max_retries=self.config.openrouter_max_retries,
+            retry_backoff_seconds=self.config.openrouter_retry_backoff_seconds,
         )
 
     def _build_prompt(self, bundle: EvidenceBundle) -> str:

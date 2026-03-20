@@ -52,3 +52,14 @@ def test_council_config_exposes_multi_model_calibration_defaults() -> None:
         "nvidia/nemotron-3-super-120b-a12b:free",
         "stepfun/step-3.5-flash:free",
     ]
+
+
+def test_council_config_exposes_openrouter_retry_defaults() -> None:
+    """Live OpenRouter config exposes retry and backoff defaults."""
+    config = CouncilConfig(
+        openrouter_api_key="test-key",
+        claim_extractor_model="openrouter/openai/gpt-4.1-mini",
+    )
+
+    assert config.openrouter_max_retries == 2
+    assert config.openrouter_retry_backoff_seconds == 1.0

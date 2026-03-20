@@ -14,6 +14,8 @@ class CouncilConfig(BaseModel):
     openrouter_base_url: str = "https://openrouter.ai/api/v1"
     claim_extractor_model: str
     request_timeout_seconds: float = Field(default=60.0, gt=0)
+    openrouter_max_retries: int = Field(default=2, ge=0)
+    openrouter_retry_backoff_seconds: float = Field(default=1.0, gt=0)
     calibration_run_label: str = "schema-calibration"
     calibration_output_dir: str = "artifacts/calibration"
     calibration_model_ids: list[str] = Field(
