@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 
 from growing_wiki_council.models.calibration import SchemaCalibrationResult
+from growing_wiki_council.models.human_eval import HumanEvaluationTemplate
 
 
 def write_review_artifacts(
@@ -47,3 +48,15 @@ def write_schema_calibration_artifacts(
             + "\n",
             encoding="utf-8",
         )
+
+
+def write_human_eval_template(
+    output_path: Path,
+    template: HumanEvaluationTemplate,
+) -> None:
+    """Persist a human-evaluation template as deterministic JSON."""
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(
+        json.dumps(template.model_dump(mode="json"), indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
