@@ -83,6 +83,7 @@ def run_claim_extraction_benchmark_once(
     provider_factory=None,
     claim_extractor_factory=None,
     model_ids=None,
+    profile_ids=None,
 ):
     """Execute the real-paper claim benchmark and persist its artifacts."""
     return run_claim_extraction_benchmark(
@@ -93,6 +94,7 @@ def run_claim_extraction_benchmark_once(
         provider_factory=provider_factory,
         claim_extractor_factory=claim_extractor_factory,
         model_ids=model_ids,
+        profile_ids=profile_ids,
     )
 
 

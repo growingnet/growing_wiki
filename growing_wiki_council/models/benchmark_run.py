@@ -12,6 +12,7 @@ class BenchmarkPaperRun(BaseModel):
 
     paper_id: str
     run_label: str
+    profile_label: str
     model_id: str
     status: str
     benchmark_entry: dict[str, Any]
@@ -28,6 +29,7 @@ class BenchmarkRunSummary(BaseModel):
     """Capture the aggregate state of a benchmark run for one model."""
 
     run_label: str
+    profile_label: str
     model_id: str
     dataset_name: str
     paper_runs: list[BenchmarkPaperRun] = Field(default_factory=list)

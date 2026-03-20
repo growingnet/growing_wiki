@@ -25,15 +25,16 @@ class FakeProvider:
 class FakeClaimExtractor:
     """Return a schema-valid raw reviewer payload."""
 
-    def __init__(self, model_id: str) -> None:
-        """Store the model identifier used for this extractor."""
+    def __init__(self, model_id: str, profile_id: str) -> None:
+        """Store the model identifier and profile used for this extractor."""
         self.model_id = model_id
+        self.profile_id = profile_id
 
     def run_raw(self, bundle) -> dict:
         """Return a deterministic raw reviewer output."""
         return {
             "role": "claim_extractor",
-            "summary": f"Claims extracted with {self.model_id}.",
+            "summary": f"Claims extracted with {self.model_id} for {self.profile_id}.",
             "findings": [],
             "claims": [
                 {
@@ -90,15 +91,21 @@ def test_run_claim_extraction_benchmark_once_writes_outputs(tmp_path: Path) -> N
         output_dir=output_dir,
         run_label="benchmark-run",
         provider_factory=build_provider_resolution,
-        claim_extractor_factory=lambda model_id: FakeClaimExtractor(model_id),
+        claim_extractor_factory=lambda model_id, profile_id: FakeClaimExtractor(
+            model_id,
+            profile_id,
+        ),
         model_ids=None,
+        profile_ids=["baseline_prompt_variant"],
     )
 
     assert result.model_runs[0].model_id == "nvidia/nemotron-3-super-120b-a12b:free"
+    assert result.model_runs[0].profile_label == "baseline_prompt_variant"
     assert (
         output_dir
         / "claim-extraction-benchmark"
         / "benchmark-run"
+        / "baseline_prompt_variant"
         / "nvidia-nemotron-3-super-120b-a12b-free"
         / "run-summary.json"
     ).exists()

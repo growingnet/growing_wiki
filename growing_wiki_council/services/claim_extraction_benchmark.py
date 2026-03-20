@@ -18,6 +18,7 @@ from growing_wiki_council.models.benchmark_run import (
     BenchmarkPaperRun,
     BenchmarkRunSummary,
 )
+from growing_wiki_council.models.review_profiles import WebsiteAlignedReviewerReport
 from growing_wiki_council.models.review import ReviewerReport
 from growing_wiki_council.providers.pdf import GenericPdfProvider
 from growing_wiki_council.services.benchmark_paths import (
@@ -55,66 +56,74 @@ def run_claim_extraction_benchmark(
     output_dir: Path,
     run_label: str,
     provider_factory: Callable[[BenchmarkEntry], ResolvedBenchmarkSource] | None = None,
-    claim_extractor_factory: Callable[[str], Any] | None = None,
+    claim_extractor_factory: Callable[[str, str], Any] | None = None,
     model_ids: list[str] | None = None,
+    profile_ids: list[str] | None = None,
 ) -> ClaimExtractionBenchmarkResult:
     """Run the claim-extraction benchmark for the selected models."""
     dataset = BenchmarkDataset.load(dataset_path)
     selected_model_ids = model_ids or [config.benchmark_default_model_id]
+    selected_profile_ids = profile_ids or ["baseline"]
     build_provider = provider_factory or _build_default_provider_factory()
     build_claim_extractor = claim_extractor_factory or (
-        lambda model_id: _build_default_claim_extractor(
+        lambda model_id, profile_id: _build_default_claim_extractor(
             config=config,
             model_id=model_id,
+            profile_id=profile_id,
         )
     )
     model_runs: list[BenchmarkRunSummary] = []
 
     for model_id in selected_model_ids:
-        paper_runs: list[BenchmarkPaperRun] = []
-        claim_extractor = build_claim_extractor(model_id)
+        for profile_id in selected_profile_ids:
+            paper_runs: list[BenchmarkPaperRun] = []
+            claim_extractor = build_claim_extractor(model_id, profile_id)
 
-        for entry in dataset.entries:
-            paper_run = _run_benchmark_entry(
-                entry=entry,
-                model_id=model_id,
+            for entry in dataset.entries:
+                paper_run = _run_benchmark_entry(
+                    entry=entry,
+                    model_id=model_id,
+                    profile_id=profile_id,
+                    run_label=run_label,
+                    build_provider=build_provider,
+                    claim_extractor=claim_extractor,
+                )
+                write_benchmark_run_artifacts(
+                    output_dir=benchmark_paper_output_dir(
+                        output_root=output_dir,
+                        run_label=run_label,
+                        profile_label=profile_id,
+                        model_id=model_id,
+                        paper_id=entry.paper_id,
+                    ),
+                    paper_run=paper_run,
+                )
+                paper_runs.append(paper_run)
+
+            run_summary = BenchmarkRunSummary(
                 run_label=run_label,
-                build_provider=build_provider,
-                claim_extractor=claim_extractor,
+                profile_label=profile_id,
+                model_id=model_id,
+                dataset_name=dataset.dataset_name,
+                paper_runs=paper_runs,
+                manifest_snapshot=dataset.model_dump(mode="json"),
+                completed_paper_count=sum(
+                    paper_run.status == "completed" for paper_run in paper_runs
+                ),
+                failed_paper_count=sum(
+                    paper_run.status == "failed" for paper_run in paper_runs
+                ),
             )
-            write_benchmark_run_artifacts(
-                output_dir=benchmark_paper_output_dir(
+            write_benchmark_run_summary(
+                output_dir=benchmark_run_output_dir(
                     output_root=output_dir,
                     run_label=run_label,
+                    profile_label=profile_id,
                     model_id=model_id,
-                    paper_id=entry.paper_id,
                 ),
-                paper_run=paper_run,
+                run_summary=run_summary,
             )
-            paper_runs.append(paper_run)
-
-        run_summary = BenchmarkRunSummary(
-            run_label=run_label,
-            model_id=model_id,
-            dataset_name=dataset.dataset_name,
-            paper_runs=paper_runs,
-            manifest_snapshot=dataset.model_dump(mode="json"),
-            completed_paper_count=sum(
-                paper_run.status == "completed" for paper_run in paper_runs
-            ),
-            failed_paper_count=sum(
-                paper_run.status == "failed" for paper_run in paper_runs
-            ),
-        )
-        write_benchmark_run_summary(
-            output_dir=benchmark_run_output_dir(
-                output_root=output_dir,
-                run_label=run_label,
-                model_id=model_id,
-            ),
-            run_summary=run_summary,
-        )
-        model_runs.append(run_summary)
+            model_runs.append(run_summary)
 
     return ClaimExtractionBenchmarkResult(
         run_label=run_label,
@@ -144,10 +153,12 @@ def _build_default_claim_extractor(
     *,
     config: CouncilConfig,
     model_id: str,
+    profile_id: str,
 ) -> ClaimExtractorAgent:
     """Build the default claim extractor for one benchmark model."""
     return ClaimExtractorAgent(
         config=config.model_copy(update={"claim_extractor_model": model_id}),
+        benchmark_profile_id=profile_id,
     )
 
 
@@ -170,6 +181,7 @@ def _run_benchmark_entry(
     *,
     entry: BenchmarkEntry,
     model_id: str,
+    profile_id: str,
     run_label: str,
     build_provider: Callable[[BenchmarkEntry], ResolvedBenchmarkSource],
     claim_extractor: Any,
@@ -187,10 +199,13 @@ def _run_benchmark_entry(
         loaded_evidence_bundle = EvidenceBuilder().build(loaded_provider_result)
         evidence_bundle = loaded_evidence_bundle.model_dump(mode="json")
         raw_review_output = claim_extractor.run_raw(loaded_evidence_bundle)
-        validated_report = ReviewerReport.model_validate(raw_review_output)
+        validated_report = _reviewer_report_model_for_profile(
+            profile_id
+        ).model_validate(raw_review_output)
         return BenchmarkPaperRun(
             paper_id=entry.paper_id,
             run_label=run_label,
+            profile_label=profile_id,
             model_id=model_id,
             status="completed",
             benchmark_entry=benchmark_entry,
@@ -208,6 +223,7 @@ def _run_benchmark_entry(
         return BenchmarkPaperRun(
             paper_id=entry.paper_id,
             run_label=run_label,
+            profile_label=profile_id,
             model_id=model_id,
             status="failed",
             benchmark_entry=benchmark_entry,
@@ -242,3 +258,10 @@ def _build_failure_summary_markdown(
         f"- error_type: {error_type}\n"
         f"- error_message: {error_message}\n"
     )
+
+
+def _reviewer_report_model_for_profile(profile_id: str) -> type[ReviewerReport]:
+    """Return the validation schema for one benchmark profile."""
+    if profile_id == "website_aligned":
+        return WebsiteAlignedReviewerReport
+    return ReviewerReport

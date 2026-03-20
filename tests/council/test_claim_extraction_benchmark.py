@@ -27,15 +27,18 @@ class FakeProvider:
 class FakeClaimExtractor:
     """Return a schema-valid reviewer payload for benchmark tests."""
 
-    def __init__(self, model_id: str) -> None:
-        """Store the model identifier used to build this extractor."""
+    def __init__(self, model_id: str, profile_id: str) -> None:
+        """Store the model identifier and profile used to build this extractor."""
         self.model_id = model_id
+        self.profile_id = profile_id
 
     def run_raw(self, bundle) -> dict:
         """Return a raw claim-extraction payload for the evidence bundle."""
-        return {
+        reviewer_payload = {
             "role": "claim_extractor",
-            "summary": f"Claims extracted with {self.model_id}.",
+            "summary": (
+                f"Claims extracted with {self.model_id} for {self.profile_id}."
+            ),
             "findings": [],
             "claims": [
                 {
@@ -46,6 +49,19 @@ class FakeClaimExtractor:
             ],
             "open_questions": [],
         }
+        if self.profile_id == "website_aligned":
+            reviewer_payload.update(
+                {
+                    "schema_variant": "website_aligned",
+                    "method_family": "layer_growth",
+                    "growth_operator": "add_neurons",
+                    "initialization_strategy": "svd",
+                    "selection_criterion": "gradient_alignment",
+                    "mechanistic_notes": ["Adds units where gradients bottleneck."],
+                    "website_alignment_notes": "Aligned to website taxonomy.",
+                }
+            )
+        return reviewer_payload
 
 
 class FailingProvider:
@@ -59,15 +75,18 @@ class FailingProvider:
 class InvalidClaimExtractor:
     """Return a schema-invalid reviewer payload for benchmark tests."""
 
-    def __init__(self, model_id: str) -> None:
-        """Store the model identifier used to build this extractor."""
+    def __init__(self, model_id: str, profile_id: str) -> None:
+        """Store the model identifier and profile used to build this extractor."""
         self.model_id = model_id
+        self.profile_id = profile_id
 
     def run_raw(self, bundle) -> dict:
         """Return a payload that fails `ReviewerReport` validation."""
         return {
             "role": "claim_extractor",
-            "summary": f"Claims extracted with {self.model_id}.",
+            "summary": (
+                f"Claims extracted with {self.model_id} for {self.profile_id}."
+            ),
             "findings": [],
             "claims": [{"claim": "Missing evidence refs"}],
             "open_questions": [],
@@ -139,9 +158,9 @@ def test_claim_extraction_benchmark_defaults_to_frozen_baseline(
         claim_extractor_model="some-other-model",
     )
 
-    def build_claim_extractor(model_id: str) -> FakeClaimExtractor:
-        selected_model_ids.append(model_id)
-        return FakeClaimExtractor(model_id=model_id)
+    def build_claim_extractor(model_id: str, profile_id: str) -> FakeClaimExtractor:
+        selected_model_ids.append(f"{model_id}|{profile_id}")
+        return FakeClaimExtractor(model_id=model_id, profile_id=profile_id)
 
     result = run_claim_extraction_benchmark(
         config=config,
@@ -153,12 +172,15 @@ def test_claim_extraction_benchmark_defaults_to_frozen_baseline(
         model_ids=None,
     )
 
-    assert selected_model_ids == ["nvidia/nemotron-3-super-120b-a12b:free"]
+    assert selected_model_ids == ["nvidia/nemotron-3-super-120b-a12b:free|baseline"]
+    assert result.model_runs[0].profile_label == "baseline"
+    assert result.model_runs[0].paper_runs[0].profile_label == "baseline"
     assert result.model_runs[0].model_id == "nvidia/nemotron-3-super-120b-a12b:free"
     assert (
         output_dir
         / "claim-extraction-benchmark"
         / "benchmark-run"
+        / "baseline"
         / "nvidia-nemotron-3-super-120b-a12b-free"
         / "paper-1"
         / "validated-reviewer-report.json"
@@ -178,9 +200,9 @@ def test_claim_extraction_benchmark_respects_explicit_model_override(
         claim_extractor_model="some-other-model",
     )
 
-    def build_claim_extractor(model_id: str) -> FakeClaimExtractor:
-        selected_model_ids.append(model_id)
-        return FakeClaimExtractor(model_id=model_id)
+    def build_claim_extractor(model_id: str, profile_id: str) -> FakeClaimExtractor:
+        selected_model_ids.append(f"{model_id}|{profile_id}")
+        return FakeClaimExtractor(model_id=model_id, profile_id=profile_id)
 
     result = run_claim_extraction_benchmark(
         config=config,
@@ -192,8 +214,77 @@ def test_claim_extraction_benchmark_respects_explicit_model_override(
         model_ids=["example/model"],
     )
 
-    assert selected_model_ids == ["example/model"]
+    assert selected_model_ids == ["example/model|baseline"]
+    assert result.model_runs[0].profile_label == "baseline"
     assert result.model_runs[0].model_id == "example/model"
+
+
+def test_claim_extraction_benchmark_supports_multiple_profiles(
+    tmp_path: Path,
+) -> None:
+    """The benchmark runs profile-specific variants and keeps their schemas separate."""
+    manifest_path = tmp_path / "benchmark.json"
+    output_dir = tmp_path / "artifacts"
+    selected_profiles: list[str] = []
+    write_manifest(manifest_path)
+    config = CouncilConfig(
+        openrouter_api_key="test-key",
+        claim_extractor_model="some-other-model",
+    )
+
+    def build_claim_extractor(model_id: str, profile_id: str) -> FakeClaimExtractor:
+        selected_profiles.append(profile_id)
+        return FakeClaimExtractor(model_id=model_id, profile_id=profile_id)
+
+    result = run_claim_extraction_benchmark(
+        config=config,
+        dataset_path=manifest_path,
+        output_dir=output_dir,
+        run_label="benchmark-run",
+        provider_factory=build_provider_resolution,
+        claim_extractor_factory=build_claim_extractor,
+        profile_ids=["baseline_prompt_variant", "website_aligned"],
+    )
+
+    assert selected_profiles == ["baseline_prompt_variant", "website_aligned"]
+    assert [model_run.profile_label for model_run in result.model_runs] == [
+        "baseline_prompt_variant",
+        "website_aligned",
+    ]
+    assert result.model_runs[0].paper_runs[0].validated_reviewer_report == {
+        "role": "claim_extractor",
+        "summary": (
+            "Claims extracted with nvidia/nemotron-3-super-120b-a12b:free "
+            "for baseline_prompt_variant."
+        ),
+        "findings": [],
+        "claims": [
+            {
+                "claim": "Networks can grow during training.",
+                "evidence_refs": ["section:full_text"],
+                "confidence": "medium",
+                "notes": None,
+            }
+        ],
+        "open_questions": [],
+    }
+    assert (
+        result.model_runs[1].paper_runs[0].validated_reviewer_report["method_family"]
+        == "layer_growth"
+    )
+    assert (
+        result.model_runs[1].paper_runs[0].validated_reviewer_report["schema_variant"]
+        == "website_aligned"
+    )
+    assert (
+        output_dir
+        / "claim-extraction-benchmark"
+        / "benchmark-run"
+        / "website_aligned"
+        / "nvidia-nemotron-3-super-120b-a12b-free"
+        / "paper-1"
+        / "validated-reviewer-report.json"
+    ).exists()
 
 
 def test_claim_extraction_benchmark_records_provider_failures_and_continues(
@@ -222,7 +313,10 @@ def test_claim_extraction_benchmark_records_provider_failures_and_continues(
         output_dir=output_dir,
         run_label="benchmark-run",
         provider_factory=build_provider,
-        claim_extractor_factory=lambda model_id: FakeClaimExtractor(model_id),
+        claim_extractor_factory=lambda model_id, profile_id: FakeClaimExtractor(
+            model_id,
+            profile_id,
+        ),
     )
 
     assert len(result.model_runs[0].paper_runs) == 2
@@ -233,6 +327,7 @@ def test_claim_extraction_benchmark_records_provider_failures_and_continues(
         output_dir
         / "claim-extraction-benchmark"
         / "benchmark-run"
+        / "baseline"
         / "nvidia-nemotron-3-super-120b-a12b-free"
         / "paper-1"
         / "validated-reviewer-report.json"
@@ -241,6 +336,7 @@ def test_claim_extraction_benchmark_records_provider_failures_and_continues(
         output_dir
         / "claim-extraction-benchmark"
         / "benchmark-run"
+        / "baseline"
         / "nvidia-nemotron-3-super-120b-a12b-free"
         / "paper-2"
         / "validated-reviewer-report.json"
@@ -260,15 +356,15 @@ def test_claim_extraction_benchmark_records_validation_failures_and_continues(
     )
     extractor_calls = {"count": 0}
 
-    def build_claim_extractor(model_id: str):
+    def build_claim_extractor(model_id: str, profile_id: str):
         class MixedClaimExtractor:
             """Return one invalid payload before returning valid ones."""
 
             def run_raw(self, bundle) -> dict:
                 extractor_calls["count"] += 1
                 if extractor_calls["count"] == 1:
-                    return InvalidClaimExtractor(model_id).run_raw(bundle)
-                return FakeClaimExtractor(model_id).run_raw(bundle)
+                    return InvalidClaimExtractor(model_id, profile_id).run_raw(bundle)
+                return FakeClaimExtractor(model_id, profile_id).run_raw(bundle)
 
         return MixedClaimExtractor()
 
