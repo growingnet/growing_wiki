@@ -30,7 +30,9 @@ class FakeClaimExtractor:
         }
 
 
-def test_claim_extraction_benchmark_smoke_writes_outputs(tmp_path: Path) -> None:
+def test_claim_extraction_benchmark_smoke_writes_profile_outputs(
+    tmp_path: Path,
+) -> None:
     """The benchmark runner writes per-paper outputs for the committed dataset."""
     config = CouncilConfig(
         openrouter_api_key="test-key",
@@ -42,16 +44,34 @@ def test_claim_extraction_benchmark_smoke_writes_outputs(tmp_path: Path) -> None
         dataset_path=Path("growing_wiki_council/benchmarks/real_paper_benchmark.json"),
         output_dir=tmp_path / "artifacts",
         run_label="benchmark-smoke",
-        claim_extractor_factory=lambda model_id: FakeClaimExtractor(model_id),
+        profile_ids=["baseline", "website_aligned"],
+        claim_extractor_factory=lambda model_id, profile_id: FakeClaimExtractor(
+            model_id
+        ),
     )
 
-    assert len(result.model_runs) == 1
-    assert len(result.model_runs[0].paper_runs) == 5
+    assert len(result.model_runs) == 2
+    assert {model_run.profile_label for model_run in result.model_runs} == {
+        "baseline",
+        "website_aligned",
+    }
+    assert all(len(model_run.paper_runs) == 5 for model_run in result.model_runs)
     assert (
         tmp_path
         / "artifacts"
         / "claim-extraction-benchmark"
         / "benchmark-smoke"
+        / "baseline"
+        / "nvidia-nemotron-3-super-120b-a12b-free"
+        / "gradmax-2022"
+        / "validated-reviewer-report.json"
+    ).exists()
+    assert (
+        tmp_path
+        / "artifacts"
+        / "claim-extraction-benchmark"
+        / "benchmark-smoke"
+        / "website_aligned"
         / "nvidia-nemotron-3-super-120b-a12b-free"
         / "gradmax-2022"
         / "validated-reviewer-report.json"
