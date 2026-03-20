@@ -56,5 +56,8 @@ class OpenRouterClaimExtractorClient:
         payload = response.json()
         content = payload["choices"][0]["message"]["content"]
         if isinstance(content, dict):
-            return content
-        return httpx.Response(200, text=content).json()
+            parsed_content = content
+        else:
+            parsed_content = httpx.Response(200, text=content).json()
+        parsed_content.setdefault("raw_response", payload)
+        return parsed_content
