@@ -135,6 +135,56 @@ artifacts/review.json
 artifacts/review.md
 ```
 
+### Schema Calibration
+
+The schema calibration path is a narrower live-integration check for the
+OpenRouter-backed claim extractor. Its purpose is to test schema reliability:
+can the model return a payload that validates into `ReviewerReport`? It is not
+intended to evaluate claim quality yet.
+
+For a live calibration run, set:
+
+```bash
+export OPENROUTER_API_KEY=your-key
+```
+
+The current supported entrypoint is the Python API:
+
+```python
+from pathlib import Path
+
+from growing_wiki_council.agents import ClaimExtractorAgent
+from growing_wiki_council.cli import run_schema_calibration_once
+from growing_wiki_council.config import CouncilConfig
+
+claim_extractor = ClaimExtractorAgent(
+    config=CouncilConfig(
+        openrouter_api_key="your-key",
+        openrouter_base_url="https://openrouter.ai/api/v1",
+        claim_extractor_model="openrouter/openai/gpt-4.1-mini",
+        calibration_run_label="schema-calibration",
+        calibration_output_dir="artifacts/calibration",
+    )
+)
+result = run_schema_calibration_once(
+    claim_extractor=claim_extractor,
+    output_dir=Path("artifacts/calibration"),
+    run_label="schema-calibration",
+)
+```
+
+Success means:
+
+- `result.success` is `True`
+- `artifacts/calibration/calibration.json` exists
+- `artifacts/calibration/raw-response.json` exists
+
+On failure, inspect:
+
+- `artifacts/calibration/calibration.json` for `validation_error`
+- `artifacts/calibration/raw-response.json` for the provider payload
+- `artifacts/calibration/validated-report.json` when validation succeeds
+
 ### Current Limitations
 
 - The CLI entrypoint is still a placeholder; the current supported integration
