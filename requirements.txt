@@ -6,3 +6,4 @@ pydantic>=2
 pydantic-ai
 httpx
 python-dotenv
+pypdf
