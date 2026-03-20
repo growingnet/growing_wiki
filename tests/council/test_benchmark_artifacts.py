@@ -42,6 +42,7 @@ def test_benchmark_artifact_writers_persist_expected_files(tmp_path: Path) -> No
         paper_id="paper-1",
         run_label="benchmark-run",
         model_id="nvidia/nemotron-3-super-120b-a12b:free",
+        status="completed",
         benchmark_entry={"paper_id": "paper-1"},
         provider_result={"success": True},
         evidence_bundle={"paper_id": "paper-1"},
@@ -60,6 +61,7 @@ def test_benchmark_artifact_writers_persist_expected_files(tmp_path: Path) -> No
         model_id="nvidia/nemotron-3-super-120b-a12b:free",
         dataset_name="real-paper-benchmark",
         paper_runs=[paper_run],
+        completed_paper_count=1,
     )
 
     write_benchmark_run_artifacts(output_dir=paper_output_dir, paper_run=paper_run)

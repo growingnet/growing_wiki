@@ -254,6 +254,25 @@ The current benchmark dataset lives at:
 growing_wiki_council/benchmarks/real_paper_benchmark.json
 ```
 
+The current supported entrypoint is:
+
+```python
+from pathlib import Path
+
+from growing_wiki_council.cli import run_claim_extraction_benchmark_once
+from growing_wiki_council.config import CouncilConfig
+
+config = CouncilConfig.from_env(
+    claim_extractor_model="nvidia/nemotron-3-super-120b-a12b:free",
+)
+result = run_claim_extraction_benchmark_once(
+    config=config,
+    dataset_path=Path("growing_wiki_council/benchmarks/real_paper_benchmark.json"),
+    output_dir=Path("artifacts"),
+    run_label="claim-benchmark-live",
+)
+```
+
 The benchmark runner writes deterministic per-paper artifacts under:
 
 ```text
@@ -279,6 +298,10 @@ manifest.snapshot.json
 run-summary.json
 ```
 
+The runner now isolates failures per paper. If one provider call or one model
+output fails validation, that paper still gets an artifact directory with a
+failure summary and the remaining papers continue.
+
 This benchmark is meant for inspection and manual scoring. It does not patch
 the wiki automatically.
 
@@ -286,9 +309,12 @@ the wiki automatically.
 
 - The CLI entrypoint is still a placeholder; the current supported integration
   surface is the Python package API.
-- `GenericPdfProvider` validates inputs but does not yet parse PDFs.
+- `GenericPdfProvider` extracts plain text from local PDFs, but it does not yet
+  do layout-aware parsing or OCR.
 - `ArxivLatexProvider` is an adapter around an injected client and does not
   implement MCP communication itself.
+- arXiv benchmark entries still require an injected provider; the default
+  benchmark runner only supports local PDF entries out of the box.
 - Only claim extraction is wired to a real model-client path in this slice.
 - The chair verdict in the vertical slice is synthetic and always marks the run
   as `needs_human_review`.

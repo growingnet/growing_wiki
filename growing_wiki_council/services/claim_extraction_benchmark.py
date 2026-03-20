@@ -75,25 +75,12 @@ def run_claim_extraction_benchmark(
         claim_extractor = build_claim_extractor(model_id)
 
         for entry in dataset.entries:
-            resolved_source = build_provider(entry)
-            provider_result = resolved_source.provider.load(resolved_source.source)
-            evidence_bundle = EvidenceBuilder().build(provider_result)
-            raw_review_output = claim_extractor.run_raw(evidence_bundle)
-            validated_report = ReviewerReport.model_validate(raw_review_output)
-            paper_run = BenchmarkPaperRun(
-                paper_id=entry.paper_id,
-                run_label=run_label,
+            paper_run = _run_benchmark_entry(
+                entry=entry,
                 model_id=model_id,
-                benchmark_entry=entry.model_dump(mode="json"),
-                provider_result=provider_result.model_dump(mode="json"),
-                evidence_bundle=evidence_bundle.model_dump(mode="json"),
-                raw_review_output=raw_review_output,
-                validated_reviewer_report=validated_report.model_dump(mode="json"),
-                summary_markdown=_build_summary_markdown(
-                    paper_id=entry.paper_id,
-                    model_id=model_id,
-                    validated_report=validated_report,
-                ),
+                run_label=run_label,
+                build_provider=build_provider,
+                claim_extractor=claim_extractor,
             )
             write_benchmark_run_artifacts(
                 output_dir=benchmark_paper_output_dir(
@@ -112,6 +99,12 @@ def run_claim_extraction_benchmark(
             dataset_name=dataset.dataset_name,
             paper_runs=paper_runs,
             manifest_snapshot=dataset.model_dump(mode="json"),
+            completed_paper_count=sum(
+                paper_run.status == "completed" for paper_run in paper_runs
+            ),
+            failed_paper_count=sum(
+                paper_run.status == "failed" for paper_run in paper_runs
+            ),
         )
         write_benchmark_run_summary(
             output_dir=benchmark_run_output_dir(
@@ -170,4 +163,82 @@ def _build_summary_markdown(
         f"- paper_id: {paper_id}\n"
         f"- model_id: {model_id}\n"
         f"- summary: {validated_report.summary}\n"
+    )
+
+
+def _run_benchmark_entry(
+    *,
+    entry: BenchmarkEntry,
+    model_id: str,
+    run_label: str,
+    build_provider: Callable[[BenchmarkEntry], ResolvedBenchmarkSource],
+    claim_extractor: Any,
+) -> BenchmarkPaperRun:
+    """Run one benchmark entry and capture either success or failure artifacts."""
+    benchmark_entry = entry.model_dump(mode="json")
+    provider_result: dict[str, Any] = {}
+    evidence_bundle: dict[str, Any] = {}
+    raw_review_output: dict[str, Any] = {}
+
+    try:
+        resolved_source = build_provider(entry)
+        loaded_provider_result = resolved_source.provider.load(resolved_source.source)
+        provider_result = loaded_provider_result.model_dump(mode="json")
+        loaded_evidence_bundle = EvidenceBuilder().build(loaded_provider_result)
+        evidence_bundle = loaded_evidence_bundle.model_dump(mode="json")
+        raw_review_output = claim_extractor.run_raw(loaded_evidence_bundle)
+        validated_report = ReviewerReport.model_validate(raw_review_output)
+        return BenchmarkPaperRun(
+            paper_id=entry.paper_id,
+            run_label=run_label,
+            model_id=model_id,
+            status="completed",
+            benchmark_entry=benchmark_entry,
+            provider_result=provider_result,
+            evidence_bundle=evidence_bundle,
+            raw_review_output=raw_review_output,
+            validated_reviewer_report=validated_report.model_dump(mode="json"),
+            summary_markdown=_build_summary_markdown(
+                paper_id=entry.paper_id,
+                model_id=model_id,
+                validated_report=validated_report,
+            ),
+        )
+    except Exception as exc:
+        return BenchmarkPaperRun(
+            paper_id=entry.paper_id,
+            run_label=run_label,
+            model_id=model_id,
+            status="failed",
+            benchmark_entry=benchmark_entry,
+            provider_result=provider_result,
+            evidence_bundle=evidence_bundle,
+            raw_review_output=raw_review_output,
+            validated_reviewer_report={},
+            summary_markdown=_build_failure_summary_markdown(
+                paper_id=entry.paper_id,
+                model_id=model_id,
+                error_type=type(exc).__name__,
+                error_message=str(exc),
+            ),
+            error_type=type(exc).__name__,
+            error_message=str(exc),
+        )
+
+
+def _build_failure_summary_markdown(
+    *,
+    paper_id: str,
+    model_id: str,
+    error_type: str,
+    error_message: str,
+) -> str:
+    """Build a short markdown summary for one failed paper benchmark run."""
+    return (
+        f"# Claim Extraction Benchmark\n\n"
+        f"- paper_id: {paper_id}\n"
+        f"- model_id: {model_id}\n"
+        f"- status: failed\n"
+        f"- error_type: {error_type}\n"
+        f"- error_message: {error_message}\n"
     )

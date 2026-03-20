@@ -13,12 +13,15 @@ class BenchmarkPaperRun(BaseModel):
     paper_id: str
     run_label: str
     model_id: str
+    status: str
     benchmark_entry: dict[str, Any]
-    provider_result: dict[str, Any]
-    evidence_bundle: dict[str, Any]
-    raw_review_output: dict[str, Any]
-    validated_reviewer_report: dict[str, Any]
+    provider_result: dict[str, Any] = Field(default_factory=dict)
+    evidence_bundle: dict[str, Any] = Field(default_factory=dict)
+    raw_review_output: dict[str, Any] = Field(default_factory=dict)
+    validated_reviewer_report: dict[str, Any] = Field(default_factory=dict)
     summary_markdown: str
+    error_type: str | None = None
+    error_message: str | None = None
 
 
 class BenchmarkRunSummary(BaseModel):
@@ -29,3 +32,5 @@ class BenchmarkRunSummary(BaseModel):
     dataset_name: str
     paper_runs: list[BenchmarkPaperRun] = Field(default_factory=list)
     manifest_snapshot: dict[str, Any] = Field(default_factory=dict)
+    completed_paper_count: int = 0
+    failed_paper_count: int = 0
