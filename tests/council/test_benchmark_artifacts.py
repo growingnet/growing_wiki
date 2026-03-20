@@ -43,6 +43,7 @@ def test_benchmark_artifact_writers_persist_expected_files(tmp_path: Path) -> No
     paper_run = BenchmarkPaperRun(
         paper_id="paper-1",
         run_label="benchmark-run",
+        profile_label="baseline",
         model_id="nvidia/nemotron-3-super-120b-a12b:free",
         status="completed",
         benchmark_entry={"paper_id": "paper-1"},
@@ -60,6 +61,7 @@ def test_benchmark_artifact_writers_persist_expected_files(tmp_path: Path) -> No
     )
     run_summary = BenchmarkRunSummary(
         run_label="benchmark-run",
+        profile_label="baseline",
         model_id="nvidia/nemotron-3-super-120b-a12b:free",
         dataset_name="real-paper-benchmark",
         paper_runs=[paper_run],
