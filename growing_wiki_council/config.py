@@ -16,6 +16,12 @@ class CouncilConfig(BaseModel):
     request_timeout_seconds: float = Field(default=60.0, gt=0)
     calibration_run_label: str = "schema-calibration"
     calibration_output_dir: str = "artifacts/calibration"
+    calibration_model_ids: list[str] = Field(
+        default_factory=lambda: [
+            "nvidia/nemotron-3-super-120b-a12b:free",
+            "stepfun/step-3.5-flash:free",
+        ]
+    )
 
     @classmethod
     def from_env(cls, **kwargs: object) -> "CouncilConfig":

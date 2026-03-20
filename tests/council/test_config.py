@@ -39,3 +39,16 @@ def test_council_config_can_load_openrouter_key_from_dotenv(
     )
 
     assert config.openrouter_api_key.get_secret_value() == "dotenv-test-key"
+
+
+def test_council_config_exposes_multi_model_calibration_defaults() -> None:
+    """Calibration defaults pin the first two comparison models."""
+    config = CouncilConfig(
+        openrouter_api_key="test-key",
+        claim_extractor_model="openrouter/openai/gpt-4.1-mini",
+    )
+
+    assert config.calibration_model_ids == [
+        "nvidia/nemotron-3-super-120b-a12b:free",
+        "stepfun/step-3.5-flash:free",
+    ]
