@@ -11,6 +11,7 @@ def benchmark_run_output_dir(
     *,
     output_root: Path,
     run_label: str,
+    profile_label: str,
     model_id: str,
 ) -> Path:
     """Return the directory for a benchmark run and model combination."""
@@ -18,6 +19,7 @@ def benchmark_run_output_dir(
         output_root
         / "claim-extraction-benchmark"
         / run_label
+        / profile_label
         / model_id_to_slug(model_id)
     )
 
@@ -26,6 +28,7 @@ def benchmark_paper_output_dir(
     *,
     output_root: Path,
     run_label: str,
+    profile_label: str,
     model_id: str,
     paper_id: str,
 ) -> Path:
@@ -34,6 +37,7 @@ def benchmark_paper_output_dir(
         benchmark_run_output_dir(
             output_root=output_root,
             run_label=run_label,
+            profile_label=profile_label,
             model_id=model_id,
         )
         / paper_id

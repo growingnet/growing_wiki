@@ -19,18 +19,20 @@ def test_benchmark_paths_are_deterministic() -> None:
     run_output_dir = benchmark_run_output_dir(
         output_root=Path("artifacts"),
         run_label="benchmark-run",
+        profile_label="baseline",
         model_id="nvidia/nemotron-3-super-120b-a12b:free",
     )
 
     paper_output_dir = benchmark_paper_output_dir(
         output_root=Path("artifacts"),
         run_label="benchmark-run",
+        profile_label="baseline",
         model_id="nvidia/nemotron-3-super-120b-a12b:free",
         paper_id="paper-1",
     )
 
     assert run_output_dir == Path(
-        "artifacts/claim-extraction-benchmark/benchmark-run/nvidia-nemotron-3-super-120b-a12b-free"
+        "artifacts/claim-extraction-benchmark/benchmark-run/baseline/nvidia-nemotron-3-super-120b-a12b-free"
     )
     assert paper_output_dir == run_output_dir / "paper-1"
 
