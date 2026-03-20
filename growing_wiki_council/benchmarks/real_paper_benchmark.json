@@ -1,4 +1,45 @@
 {
   "dataset_name": "real-paper-benchmark",
-  "entries": []
+  "entries": [
+    {
+      "paper_id": "gradmax-2022",
+      "source_type": "pdf_path",
+      "source": "tests/fixtures/pdfs/gradmax-2022.pdf",
+      "title": "GradMax: Growing Neural Networks using Gradient Information",
+      "notes": "ICLR 2022 paper fixture for benchmark smoke runs.",
+      "tags": ["growing-networks", "neurons", "iclr-2022"]
+    },
+    {
+      "paper_id": "growing-tiny-networks-2024",
+      "source_type": "pdf_path",
+      "source": "tests/fixtures/pdfs/growing-tiny-networks-2024.pdf",
+      "title": "Growing Tiny Networks: Spotting Expressivity Bottlenecks and Fixing Them Optimally",
+      "notes": "TMLR 2024 paper fixture for benchmark smoke runs.",
+      "tags": ["growing-networks", "expressivity", "tmlr-2024"]
+    },
+    {
+      "paper_id": "firefly-2020",
+      "source_type": "pdf_path",
+      "source": "tests/fixtures/pdfs/firefly-2020.pdf",
+      "title": "Firefly Neural Architecture Descent: a General Approach for Growing Neural Networks",
+      "notes": "NeurIPS 2020 paper fixture for benchmark smoke runs.",
+      "tags": ["growing-networks", "architecture-search", "neurips-2020"]
+    },
+    {
+      "paper_id": "autogrow-2020",
+      "source_type": "pdf_path",
+      "source": "tests/fixtures/pdfs/autogrow-2020.pdf",
+      "title": "AutoGrow: Automatic Layer Growing in Deep Convolutional Networks",
+      "notes": "KDD 2020 paper fixture for benchmark smoke runs.",
+      "tags": ["growing-networks", "layers", "kdd-2020"]
+    },
+    {
+      "paper_id": "flatter-minima-2021",
+      "source_type": "pdf_path",
+      "source": "tests/fixtures/pdfs/flatter-minima-2021.pdf",
+      "title": "Growing Neural Networks Achieve Flatter Minima",
+      "notes": "ICANN 2021 paper fixture for benchmark smoke runs.",
+      "tags": ["growing-networks", "generalization", "icann-2021"]
+    }
+  ]
 }
