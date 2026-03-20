@@ -33,6 +33,9 @@ def test_readme_documents_claim_extraction_benchmark() -> None:
 
     assert "## Claim Extraction Benchmark" in readme_text
     assert "nvidia/nemotron-3-super-120b-a12b:free" in readme_text
+    assert "baseline_prompt_variant" in readme_text
+    assert "website_aligned" in readme_text
+    assert "<run_label>/<profile_label>/<model_slug>/<paper_id>/" in readme_text
     assert "human-eval.template.json" in readme_text
     assert "manifest.snapshot.json" in readme_text
     assert "run-summary.json" in readme_text

@@ -276,8 +276,14 @@ result = run_claim_extraction_benchmark_once(
 The benchmark runner writes deterministic per-paper artifacts under:
 
 ```text
-artifacts/claim-extraction-benchmark/<run_label>/<model_slug>/<paper_id>/
+artifacts/claim-extraction-benchmark/<run_label>/<profile_label>/<model_slug>/<paper_id>/
 ```
+
+Supported benchmark profiles are:
+
+- `baseline`
+- `baseline_prompt_variant`
+- `website_aligned`
 
 Per paper, expect these files:
 
