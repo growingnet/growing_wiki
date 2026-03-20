@@ -39,7 +39,9 @@ def test_openrouter_client_preserves_raw_live_response(
         return httpx.Response(
             200,
             json=response_payload,
-            request=httpx.Request("POST", "https://openrouter.ai/api/v1/chat/completions"),
+            request=httpx.Request(
+                "POST", "https://openrouter.ai/api/v1/chat/completions"
+            ),
         )
 
     monkeypatch.setattr(httpx, "post", fake_post)
