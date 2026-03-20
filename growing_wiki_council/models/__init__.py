@@ -10,6 +10,10 @@ from growing_wiki_council.models.benchmark import (
     BenchmarkEntry,
     BenchmarkSourceType,
 )
+from growing_wiki_council.models.benchmark_run import (
+    BenchmarkPaperRun,
+    BenchmarkRunSummary,
+)
 from growing_wiki_council.models.human_eval import (
     HumanEvaluationTemplate,
     ReviewStatus,
@@ -36,6 +40,8 @@ __all__ = [
     "BenchmarkDataset",
     "BenchmarkEntry",
     "BenchmarkSourceType",
+    "BenchmarkPaperRun",
+    "BenchmarkRunSummary",
     "HumanEvaluationTemplate",
     "ReviewStatus",
     "EvidenceBibliographyEntry",
