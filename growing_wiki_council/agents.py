@@ -32,10 +32,15 @@ class ClaimExtractorAgent:
 
     def run(self, bundle: EvidenceBundle) -> ReviewerReport:
         """Run claim extraction against the provided evidence bundle."""
+        response_payload = self.run_raw(bundle)
+        return ReviewerReport.model_validate(response_payload)
+
+    def run_raw(self, bundle: EvidenceBundle) -> dict[str, Any]:
+        """Run claim extraction and return the raw structured payload."""
         prompt = self._build_prompt(bundle)
         response_payload = dict(self.model_backend.run_prompt(prompt))
         response_payload["role"] = "claim_extractor"
-        return ReviewerReport.model_validate(response_payload)
+        return response_payload
 
     def _build_default_backend(self) -> Any:
         """Create the default backend placeholder for the real runtime path."""
