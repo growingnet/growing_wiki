@@ -1,7 +1,9 @@
 """Configuration models for the Growing Wiki council."""
 
 import os
+from pathlib import Path
 
+from dotenv import load_dotenv
 from pydantic import BaseModel, Field, SecretStr
 
 
@@ -18,6 +20,7 @@ class CouncilConfig(BaseModel):
     @classmethod
     def from_env(cls, **kwargs: object) -> "CouncilConfig":
         """Build a config from explicit arguments plus `OPENROUTER_API_KEY`."""
+        load_dotenv(dotenv_path=Path(".env"), override=False)
         openrouter_api_key = os.environ.get("OPENROUTER_API_KEY")
         if not openrouter_api_key:
             raise RuntimeError(

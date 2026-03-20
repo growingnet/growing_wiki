@@ -23,3 +23,19 @@ def test_council_config_can_load_openrouter_key_from_environment(
     )
 
     assert config.openrouter_api_key.get_secret_value() == "env-test-key"
+
+
+def test_council_config_can_load_openrouter_key_from_dotenv(
+    monkeypatch,
+    tmp_path,
+) -> None:
+    """Live config construction can load the OpenRouter key from `.env`."""
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.delenv("OPENROUTER_API_KEY", raising=False)
+    (tmp_path / ".env").write_text("OPENROUTER_API_KEY=dotenv-test-key\n")
+
+    config = CouncilConfig.from_env(
+        claim_extractor_model="openrouter/openai/gpt-4.1-mini",
+    )
+
+    assert config.openrouter_api_key.get_secret_value() == "dotenv-test-key"

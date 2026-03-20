@@ -63,6 +63,14 @@ The current codebase now includes an OpenRouter-backed client wrapper for claim
 extraction, but tests still run entirely with injected fake backends.
 Keep the key out of tracked files and source code. For live runs, inject it
 through the environment and build config with `CouncilConfig.from_env(...)`.
+For a portable local setup, you can also create an untracked `.env` file with:
+
+```text
+OPENROUTER_API_KEY=your-key
+```
+
+The repo includes `.env.example` as a template. `.env` must stay local and must
+not be committed.
 
 ### Library Entry Examples
 
