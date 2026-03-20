@@ -5,6 +5,11 @@ from growing_wiki_council.models.calibration import (
     MultiModelCalibrationResult,
     SchemaCalibrationResult,
 )
+from growing_wiki_council.models.benchmark import (
+    BenchmarkDataset,
+    BenchmarkEntry,
+    BenchmarkSourceType,
+)
 from growing_wiki_council.models.evidence import (
     EvidenceBibliographyEntry,
     EvidenceBundle,
@@ -24,6 +29,9 @@ __all__ = [
     "ModelCalibrationRun",
     "MultiModelCalibrationResult",
     "SchemaCalibrationResult",
+    "BenchmarkDataset",
+    "BenchmarkEntry",
+    "BenchmarkSourceType",
     "EvidenceBibliographyEntry",
     "EvidenceBundle",
     "EvidenceEquation",
