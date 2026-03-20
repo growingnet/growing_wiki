@@ -192,6 +192,52 @@ On failure, inspect:
 - `artifacts/calibration/raw-response.json` for the provider payload
 - `artifacts/calibration/validated-report.json` when validation succeeds
 
+### Multi-Model Schema Calibration
+
+The calibration path can also run the same deterministic fake evidence bundle
+through two pinned free OpenRouter models so you can compare schema reliability
+without changing the main claim-extraction path.
+
+The current default comparison pair is:
+
+- `nvidia/nemotron-3-super-120b-a12b:free`
+- `stepfun/step-3.5-flash:free`
+
+The current supported entrypoint is:
+
+```python
+from pathlib import Path
+
+from growing_wiki_council.cli import run_multi_model_schema_calibration_once
+from growing_wiki_council.config import CouncilConfig
+
+config = CouncilConfig.from_env(
+    claim_extractor_model="nvidia/nemotron-3-super-120b-a12b:free",
+)
+result = run_multi_model_schema_calibration_once(
+    config=config,
+    output_dir=Path("artifacts/calibration"),
+    run_label="schema-calibration",
+)
+```
+
+This writes one subdirectory per model, for example:
+
+```text
+artifacts/calibration/
+  nvidia-nemotron-3-super-120b-a12b-free/
+    calibration.json
+    raw-response.json
+    validated-report.json
+  stepfun-step-3-5-flash-free/
+    calibration.json
+    raw-response.json
+    validated-report.json
+```
+
+This path is meant for side-by-side schema comparison only. It does not merge
+or vote on the two model outputs.
+
 ### Current Limitations
 
 - The CLI entrypoint is still a placeholder; the current supported integration
