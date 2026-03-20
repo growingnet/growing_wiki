@@ -36,6 +36,7 @@ from growing_wiki_council.models.review import (
     ReviewFinding,
     ReviewerReport,
 )
+from growing_wiki_council.models.review_profiles import WebsiteAlignedReviewerReport
 
 __all__ = [
     "ModelCalibrationRun",
@@ -60,4 +61,5 @@ __all__ = [
     "CouncilReviewArtifact",
     "ReviewFinding",
     "ReviewerReport",
+    "WebsiteAlignedReviewerReport",
 ]
