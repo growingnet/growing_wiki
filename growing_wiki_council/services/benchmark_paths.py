@@ -30,8 +30,11 @@ def benchmark_paper_output_dir(
     paper_id: str,
 ) -> Path:
     """Return the directory for one paper inside a benchmark run."""
-    return benchmark_run_output_dir(
-        output_root=output_root,
-        run_label=run_label,
-        model_id=model_id,
-    ) / paper_id
+    return (
+        benchmark_run_output_dir(
+            output_root=output_root,
+            run_label=run_label,
+            model_id=model_id,
+        )
+        / paper_id
+    )

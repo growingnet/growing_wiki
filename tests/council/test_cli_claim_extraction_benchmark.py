@@ -53,7 +53,7 @@ def write_manifest(manifest_path: Path) -> None:
             "{\n"
             '  "dataset_name": "real-paper-benchmark",\n'
             '  "entries": [\n'
-            '    {\n'
+            "    {\n"
             '      "paper_id": "paper-1",\n'
             '      "source_type": "pdf_path",\n'
             '      "source": "tests/fixtures/pdfs/minimal-paper.pdf"\n'

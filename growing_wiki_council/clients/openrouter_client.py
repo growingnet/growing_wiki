@@ -60,9 +60,8 @@ class OpenRouterClaimExtractorClient:
             try:
                 response.raise_for_status()
             except httpx.HTTPStatusError:
-                if (
-                    attempt_index < self.max_retries
-                    and self._should_retry_status(response.status_code)
+                if attempt_index < self.max_retries and self._should_retry_status(
+                    response.status_code
                 ):
                     time.sleep(self.retry_backoff_seconds * (2**attempt_index))
                     continue

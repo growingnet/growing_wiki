@@ -65,28 +65,28 @@ class ClaimExtractorAgent:
             "Do not return prose outside the JSON object.\n"
             "Do not return any top-level fields other than role, summary, findings, claims, and open_questions.\n"
             "The JSON object must follow this schema exactly:\n"
-            '{\n'
+            "{\n"
             '  "role": "claim_extractor",\n'
             '  "summary": "Short summary here.",\n'
             '  "findings": [\n'
-            '    {\n'
+            "    {\n"
             '      "severity": "low",\n'
             '      "claim": "Finding tied to evidence.",\n'
             '      "evidence_refs": ["section:full_text"],\n'
             '      "rationale": "Why this matters.",\n'
             '      "recommendation": "Optional recommendation."\n'
-            '    }\n'
-            '  ],\n'
+            "    }\n"
+            "  ],\n"
             '  "claims": [\n'
-            '    {\n'
+            "    {\n"
             '      "claim": "Atomic claim from the paper.",\n'
             '      "evidence_refs": ["section:full_text"],\n'
             '      "confidence": "medium",\n'
             '      "notes": "Optional note."\n'
-            '    }\n'
-            '  ],\n'
+            "    }\n"
+            "  ],\n"
             '  "open_questions": ["Optional open question."]\n'
-            '}\n'
+            "}\n"
             "If the evidence is weak, still return the same schema. Use empty lists when needed.\n"
             "The summary field is mandatory.\n\n"
             "Paper evidence follows.\n"
