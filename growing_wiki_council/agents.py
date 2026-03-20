@@ -57,6 +57,37 @@ class ClaimExtractorAgent:
             f"[{section.name}]\n{section.content}" for section in bundle.sections
         )
         return (
+            "You are the claim_extractor reviewer in a scientific review council.\n"
+            "Return JSON only.\n"
+            "Do not return markdown.\n"
+            "Do not return prose outside the JSON object.\n"
+            "Do not return any top-level fields other than role, summary, findings, claims, and open_questions.\n"
+            "The JSON object must follow this schema exactly:\n"
+            '{\n'
+            '  "role": "claim_extractor",\n'
+            '  "summary": "Short summary here.",\n'
+            '  "findings": [\n'
+            '    {\n'
+            '      "severity": "low",\n'
+            '      "claim": "Finding tied to evidence.",\n'
+            '      "evidence_refs": ["section:full_text"],\n'
+            '      "rationale": "Why this matters.",\n'
+            '      "recommendation": "Optional recommendation."\n'
+            '    }\n'
+            '  ],\n'
+            '  "claims": [\n'
+            '    {\n'
+            '      "claim": "Atomic claim from the paper.",\n'
+            '      "evidence_refs": ["section:full_text"],\n'
+            '      "confidence": "medium",\n'
+            '      "notes": "Optional note."\n'
+            '    }\n'
+            '  ],\n'
+            '  "open_questions": ["Optional open question."]\n'
+            '}\n'
+            "If the evidence is weak, still return the same schema. Use empty lists when needed.\n"
+            "The summary field is mandatory.\n\n"
+            "Paper evidence follows.\n"
             f"paper_id: {bundle.paper_id}\n"
             f"title: {bundle.title}\n"
             f"source_kind: {bundle.source_kind}\n"
