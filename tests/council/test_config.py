@@ -42,7 +42,7 @@ def test_council_config_can_load_openrouter_key_from_dotenv(
 
 
 def test_council_config_exposes_multi_model_calibration_defaults() -> None:
-    """Calibration defaults pin the first two comparison models."""
+    """Calibration defaults pin the current recommended free-model shortlist."""
     config = CouncilConfig(
         openrouter_api_key="test-key",
         claim_extractor_model="openrouter/openai/gpt-4.1-mini",
@@ -51,6 +51,9 @@ def test_council_config_exposes_multi_model_calibration_defaults() -> None:
     assert config.calibration_model_ids == [
         "nvidia/nemotron-3-super-120b-a12b:free",
         "stepfun/step-3.5-flash:free",
+        "nvidia/nemotron-3-nano-30b-a3b:free",
+        "nvidia/nemotron-nano-9b-v2:free",
+        "arcee-ai/trinity-large-preview:free",
     ]
 
 

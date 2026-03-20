@@ -22,6 +22,9 @@ class CouncilConfig(BaseModel):
         default_factory=lambda: [
             "nvidia/nemotron-3-super-120b-a12b:free",
             "stepfun/step-3.5-flash:free",
+            "nvidia/nemotron-3-nano-30b-a3b:free",
+            "nvidia/nemotron-nano-9b-v2:free",
+            "arcee-ai/trinity-large-preview:free",
         ]
     )
 
