@@ -61,6 +61,8 @@ export OPENROUTER_API_KEY=your-key
 
 The current codebase now includes an OpenRouter-backed client wrapper for claim
 extraction, but tests still run entirely with injected fake backends.
+Keep the key out of tracked files and source code. For live runs, inject it
+through the environment and build config with `CouncilConfig.from_env(...)`.
 
 ### Library Entry Examples
 
@@ -74,8 +76,7 @@ from growing_wiki_council.config import CouncilConfig
 
 provider = ArxivLatexProvider(client=my_arxiv_client)
 claim_extractor = ClaimExtractorAgent(
-    config=CouncilConfig(
-        openrouter_api_key="your-key",
+    config=CouncilConfig.from_env(
         openrouter_base_url="https://openrouter.ai/api/v1",
         claim_extractor_model="openrouter/openai/gpt-4.1-mini",
     )
@@ -100,8 +101,7 @@ from growing_wiki_council.config import CouncilConfig
 
 provider = GenericPdfProvider()
 claim_extractor = ClaimExtractorAgent(
-    config=CouncilConfig(
-        openrouter_api_key="your-key",
+    config=CouncilConfig.from_env(
         openrouter_base_url="https://openrouter.ai/api/v1",
         claim_extractor_model="openrouter/openai/gpt-4.1-mini",
     )
@@ -158,8 +158,7 @@ from growing_wiki_council.cli import run_schema_calibration_once
 from growing_wiki_council.config import CouncilConfig
 
 claim_extractor = ClaimExtractorAgent(
-    config=CouncilConfig(
-        openrouter_api_key="your-key",
+    config=CouncilConfig.from_env(
         openrouter_base_url="https://openrouter.ai/api/v1",
         claim_extractor_model="openrouter/openai/gpt-4.1-mini",
         calibration_run_label="schema-calibration",
