@@ -25,10 +25,12 @@ class ClaimExtractorAgent:
         *,
         config: CouncilConfig,
         model_backend: Any | None = None,
+        benchmark_profile_id: str = "baseline",
     ) -> None:
         """Store runtime config and an optionally injected model backend."""
         self.config = config
         self.model_backend = model_backend or self._build_default_backend()
+        self.benchmark_profile_id = benchmark_profile_id
 
     def run(self, bundle: EvidenceBundle) -> ReviewerReport:
         """Run claim extraction against the provided evidence bundle."""
@@ -55,44 +57,11 @@ class ClaimExtractorAgent:
 
     def _build_prompt(self, bundle: EvidenceBundle) -> str:
         """Build the first simple claim extraction prompt from evidence."""
-        section_blocks = "\n\n".join(
-            f"[{section.name}]\n{section.content}" for section in bundle.sections
+        from growing_wiki_council.services.claim_extractor_profiles import (
+            build_prompt_for_profile,
         )
-        return (
-            "You are the claim_extractor reviewer in a scientific review council.\n"
-            "Return JSON only.\n"
-            "Do not return markdown.\n"
-            "Do not return prose outside the JSON object.\n"
-            "Do not return any top-level fields other than role, summary, findings, claims, and open_questions.\n"
-            "The JSON object must follow this schema exactly:\n"
-            "{\n"
-            '  "role": "claim_extractor",\n'
-            '  "summary": "Short summary here.",\n'
-            '  "findings": [\n'
-            "    {\n"
-            '      "severity": "low",\n'
-            '      "claim": "Finding tied to evidence.",\n'
-            '      "evidence_refs": ["section:full_text"],\n'
-            '      "rationale": "Why this matters.",\n'
-            '      "recommendation": "Optional recommendation."\n'
-            "    }\n"
-            "  ],\n"
-            '  "claims": [\n'
-            "    {\n"
-            '      "claim": "Atomic claim from the paper.",\n'
-            '      "evidence_refs": ["section:full_text"],\n'
-            '      "confidence": "medium",\n'
-            '      "notes": "Optional note."\n'
-            "    }\n"
-            "  ],\n"
-            '  "open_questions": ["Optional open question."]\n'
-            "}\n"
-            "If the evidence is weak, still return the same schema. Use empty lists when needed.\n"
-            "The summary field is mandatory.\n\n"
-            "Paper evidence follows.\n"
-            f"paper_id: {bundle.paper_id}\n"
-            f"title: {bundle.title}\n"
-            f"source_kind: {bundle.source_kind}\n"
-            f"extraction_confidence: {bundle.extraction_confidence}\n\n"
-            f"{section_blocks}"
+
+        return build_prompt_for_profile(
+            profile_id=self.benchmark_profile_id,
+            bundle=bundle,
         )
