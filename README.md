@@ -241,6 +241,47 @@ artifacts/calibration/
 This path is meant for side-by-side schema comparison only. It does not merge
 or vote on the two model outputs.
 
+### Claim Extraction Benchmark
+
+The next benchmark stage runs real-paper claim extraction on a small committed
+paper set. The frozen default baseline is:
+
+- `nvidia/nemotron-3-super-120b-a12b:free`
+
+The current benchmark dataset lives at:
+
+```text
+growing_wiki_council/benchmarks/real_paper_benchmark.json
+```
+
+The benchmark runner writes deterministic per-paper artifacts under:
+
+```text
+artifacts/claim-extraction-benchmark/<run_label>/<model_slug>/<paper_id>/
+```
+
+Per paper, expect these files:
+
+```text
+benchmark-entry.json
+provider-result.json
+evidence-bundle.json
+raw-reviewer-output.json
+validated-reviewer-report.json
+summary.md
+human-eval.template.json
+```
+
+At the run level, expect:
+
+```text
+manifest.snapshot.json
+run-summary.json
+```
+
+This benchmark is meant for inspection and manual scoring. It does not patch
+the wiki automatically.
+
 ### Current Limitations
 
 - The CLI entrypoint is still a placeholder; the current supported integration
