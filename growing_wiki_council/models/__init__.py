@@ -1,5 +1,6 @@
 """Council data models."""
 
+from growing_wiki_council.models.calibration import SchemaCalibrationResult
 from growing_wiki_council.models.evidence import (
     EvidenceBibliographyEntry,
     EvidenceBundle,
@@ -16,6 +17,7 @@ from growing_wiki_council.models.review import (
 )
 
 __all__ = [
+    "SchemaCalibrationResult",
     "EvidenceBibliographyEntry",
     "EvidenceBundle",
     "EvidenceEquation",
