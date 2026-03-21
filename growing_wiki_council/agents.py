@@ -8,6 +8,7 @@ from growing_wiki_council.clients.openrouter_client import (
 from growing_wiki_council.config import CouncilConfig
 from growing_wiki_council.models.evidence import EvidenceBundle
 from growing_wiki_council.models.review import ReviewerReport
+from growing_wiki_council.models.review_profiles import WebsiteAlignedReviewerReport
 
 
 class ReviewerAgent(Protocol):
@@ -35,7 +36,7 @@ class ClaimExtractorAgent:
     def run(self, bundle: EvidenceBundle) -> ReviewerReport:
         """Run claim extraction against the provided evidence bundle."""
         response_payload = self.run_raw(bundle)
-        return ReviewerReport.model_validate(response_payload)
+        return self._reviewer_report_model().model_validate(response_payload)
 
     def run_raw(self, bundle: EvidenceBundle) -> dict[str, Any]:
         """Run claim extraction and return the raw structured payload."""
@@ -65,3 +66,9 @@ class ClaimExtractorAgent:
             profile_id=self.benchmark_profile_id,
             bundle=bundle,
         )
+
+    def _reviewer_report_model(self) -> type[ReviewerReport]:
+        """Return the validation model for the selected benchmark profile."""
+        if self.benchmark_profile_id == "website_aligned":
+            return WebsiteAlignedReviewerReport
+        return ReviewerReport

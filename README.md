@@ -77,6 +77,8 @@ not be committed.
 For an arXiv-backed run, inject an MCP-compatible client into the adapter:
 
 ```python
+from pathlib import Path
+
 from growing_wiki_council.providers.arxiv import ArxivLatexProvider
 from growing_wiki_council.services.vertical_slice import run_claim_extraction_slice
 from growing_wiki_council.agents import ClaimExtractorAgent

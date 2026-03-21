@@ -181,7 +181,7 @@ Write deterministic artifacts under a benchmark-specific root.
 Example:
 
 ```text
-artifacts/claim-extraction-benchmark/<run_label>/<model_slug>/<paper_id>/
+artifacts/claim-extraction-benchmark/<run_label>/<profile_label>/<model_slug>/<paper_id>/
   benchmark-entry.json
   provider-result.json
   evidence-bundle.json

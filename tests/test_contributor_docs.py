@@ -31,7 +31,7 @@ def test_readme_documents_claim_extraction_benchmark() -> None:
     """Ensure contributors can find the benchmark's baseline and artifact layout."""
     readme_text = (_get_repo_root() / "README.md").read_text(encoding="utf-8")
 
-    assert "## Claim Extraction Benchmark" in readme_text
+    assert "### Claim Extraction Benchmark" in readme_text
     assert "nvidia/nemotron-3-super-120b-a12b:free" in readme_text
     assert "baseline_prompt_variant" in readme_text
     assert "website_aligned" in readme_text
