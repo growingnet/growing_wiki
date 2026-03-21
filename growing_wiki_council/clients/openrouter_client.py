@@ -83,7 +83,15 @@ class OpenRouterClaimExtractorClient:
             if isinstance(content, dict):
                 parsed_content = content
             else:
-                parsed_content = httpx.Response(200, text=content).json()
+                import json
+                try:
+                    parsed_content = json.loads(content)
+                except ValueError as exc:
+                    return {
+                        "raw_response": payload,
+                        "raw_content": content,
+                        "parse_error": str(exc),
+                    }
             parsed_content.setdefault("raw_response", payload)
             return parsed_content
 
