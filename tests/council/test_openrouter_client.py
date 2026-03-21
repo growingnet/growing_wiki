@@ -81,6 +81,61 @@ def test_openrouter_client_retries_on_rate_limit(
     assert sleep_calls == [0.25]
 
 
+def test_openrouter_client_uses_retry_after_header_when_rate_limited(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Live client respects Retry-After when a 429 response provides it."""
+    calls: list[int] = []
+
+    def fake_post(*args: object, **kwargs: object) -> httpx.Response:
+        calls.append(1)
+        if len(calls) == 1:
+            return httpx.Response(
+                429,
+                headers={"Retry-After": "2"},
+                json={"error": {"message": "rate limited"}},
+                request=httpx.Request(
+                    "POST", "https://openrouter.ai/api/v1/chat/completions"
+                ),
+            )
+        return httpx.Response(
+            200,
+            json={
+                "choices": [
+                    {
+                        "message": {
+                            "content": '{"summary":"Claims extracted.","findings":[],"claims":[]}'
+                        }
+                    }
+                ]
+            },
+            request=httpx.Request(
+                "POST", "https://openrouter.ai/api/v1/chat/completions"
+            ),
+        )
+
+    sleep_calls: list[float] = []
+
+    monkeypatch.setattr(httpx, "post", fake_post)
+    monkeypatch.setattr(
+        openrouter_client_module.time,
+        "sleep",
+        lambda seconds: sleep_calls.append(seconds),
+    )
+    client = OpenRouterClaimExtractorClient(
+        api_key="test-key",
+        model="openrouter/openai/gpt-4.1-mini",
+        max_retries=1,
+        retry_backoff_seconds=0.25,
+    )
+
+    payload = client.run_prompt("prompt")
+
+    assert payload["summary"] == "Claims extracted."
+    assert len(calls) == 2
+    assert sleep_calls == [2.0]
+
+
 def test_openrouter_client_does_not_retry_not_found(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:

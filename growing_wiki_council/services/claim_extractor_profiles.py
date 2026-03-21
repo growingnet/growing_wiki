@@ -101,6 +101,8 @@ def _build_website_aligned_prompt(paper_context: str) -> str:
         "You are the claim_extractor reviewer in a scientific review council.\n"
         "Return JSON only.\n"
         "Use a website-aligned, mechanistic analysis style rather than an abstract-only summary style.\n"
+        "The website-aligned fields are additive only and do not replace the base schema.\n"
+        "claims must remain structured objects, not plain strings or shorthand lists.\n"
         "Do not return markdown.\n"
         "Do not return prose outside the JSON object.\n"
         "The JSON object must follow this schema exactly:\n"
@@ -108,7 +110,14 @@ def _build_website_aligned_prompt(paper_context: str) -> str:
         '  "role": "claim_extractor",\n'
         '  "summary": "Short summary here.",\n'
         '  "findings": [],\n'
-        '  "claims": [],\n'
+        '  "claims": [\n'
+        "    {\n"
+        '      "claim": "Atomic claim from the paper.",\n'
+        '      "evidence_refs": ["section:full_text"],\n'
+        '      "confidence": "medium",\n'
+        '      "notes": "Optional note."\n'
+        "    }\n"
+        "  ],\n"
         '  "open_questions": [],\n'
         '  "schema_variant": "website_aligned",\n'
         '  "method_family": "Optional method family.",\n'

@@ -63,7 +63,12 @@ class OpenRouterClaimExtractorClient:
                 if attempt_index < self.max_retries and self._should_retry_status(
                     response.status_code
                 ):
-                    time.sleep(self.retry_backoff_seconds * (2**attempt_index))
+                    time.sleep(
+                        self._retry_delay_seconds(
+                            response=response,
+                            attempt_index=attempt_index,
+                        )
+                    )
                     continue
                 raise
 
@@ -81,3 +86,18 @@ class OpenRouterClaimExtractorClient:
     def _should_retry_status(self, status_code: int) -> bool:
         """Return whether the HTTP status is transient enough to retry."""
         return status_code == 429 or 500 <= status_code < 600
+
+    def _retry_delay_seconds(
+        self,
+        *,
+        response: httpx.Response,
+        attempt_index: int,
+    ) -> float:
+        """Return the retry delay for a transient HTTP failure."""
+        retry_after_value = response.headers.get("Retry-After")
+        if retry_after_value is not None:
+            try:
+                return float(retry_after_value)
+            except ValueError:
+                pass
+        return self.retry_backoff_seconds * (2**attempt_index)
