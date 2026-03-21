@@ -21,6 +21,26 @@ def run_claim_extraction_slice(
 ) -> CouncilReviewArtifact:
     """Run the first real council slice with one provider and one reviewer."""
     provider_result = provider.load(source)
+    if not provider_result.success:
+        artifact = CouncilReviewArtifact(
+            paper_id=provider_result.paper_id or "unknown",
+            source_kind=provider_result.source_kind or "unknown",
+            reviewer_reports=[],
+            chair_verdict=ChairVerdict(
+                verdict="needs_human_review",
+                summary="Provider failed to load source evidence.",
+                blocking_issues=provider_result.warnings,
+                confidence="low",
+                recommended_actions=["Check the source provider logs and inputs."],
+            ),
+        )
+        write_review_artifacts(
+            output_dir,
+            review_json=artifact.model_dump(mode="json"),
+            review_markdown=f"# Review\n\n{artifact.chair_verdict.summary}\n\n" + "\n".join(f"- {w}" for w in provider_result.warnings),
+        )
+        return artifact
+
     bundle = EvidenceBuilder().build(provider_result)
     reviewer_report = ReviewerReport.model_validate(claim_extractor.run(bundle))
     artifact = CouncilReviewArtifact(

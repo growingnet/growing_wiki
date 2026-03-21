@@ -20,11 +20,11 @@ def run_schema_calibration(
     evidence_bundle = build_schema_calibration_bundle()
     try:
         raw_response = _run_claim_extractor_raw(claim_extractor, evidence_bundle)
-    except ValidationError as validation_error:
+    except Exception as error:
         return SchemaCalibrationResult(
             success=False,
             run_label=run_label,
-            validation_error=str(validation_error),
+            validation_error=str(error),
             raw_response=None,
             validated_report=None,
         )
