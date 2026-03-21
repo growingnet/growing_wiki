@@ -405,7 +405,7 @@ def test_claim_extraction_benchmark_records_provider_failures_and_continues(
     assert result.model_runs[0].paper_runs[0].status == "failed"
     assert result.model_runs[0].paper_runs[0].error_type == "RuntimeError"
     assert result.model_runs[0].paper_runs[1].status == "completed"
-    assert (
+    assert not (
         output_dir
         / "claim-extraction-benchmark"
         / "benchmark-run"

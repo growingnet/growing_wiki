@@ -196,6 +196,8 @@ def _run_benchmark_entry(
         resolved_source = build_provider(entry)
         loaded_provider_result = resolved_source.provider.load(resolved_source.source)
         provider_result = loaded_provider_result.model_dump(mode="json")
+        if not provider_result.get("paper_id"):
+            provider_result["paper_id"] = entry.paper_id
         if not loaded_provider_result.success:
             return BenchmarkPaperRun(
                 paper_id=entry.paper_id,

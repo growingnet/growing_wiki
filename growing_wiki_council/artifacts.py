@@ -85,19 +85,21 @@ def write_benchmark_run_artifacts(
         json.dumps(paper_run.evidence_bundle, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
     )
-    (output_dir / "raw-reviewer-output.json").write_text(
-        json.dumps(paper_run.raw_review_output, indent=2, sort_keys=True) + "\n",
-        encoding="utf-8",
-    )
-    (output_dir / "validated-reviewer-report.json").write_text(
-        json.dumps(
-            paper_run.validated_reviewer_report,
-            indent=2,
-            sort_keys=True,
+    if paper_run.raw_review_output:
+        (output_dir / "raw-reviewer-output.json").write_text(
+            json.dumps(paper_run.raw_review_output, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
         )
-        + "\n",
-        encoding="utf-8",
-    )
+    if paper_run.validated_reviewer_report:
+        (output_dir / "validated-reviewer-report.json").write_text(
+            json.dumps(
+                paper_run.validated_reviewer_report,
+                indent=2,
+                sort_keys=True,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
     (output_dir / "summary.md").write_text(
         paper_run.summary_markdown,
         encoding="utf-8",
