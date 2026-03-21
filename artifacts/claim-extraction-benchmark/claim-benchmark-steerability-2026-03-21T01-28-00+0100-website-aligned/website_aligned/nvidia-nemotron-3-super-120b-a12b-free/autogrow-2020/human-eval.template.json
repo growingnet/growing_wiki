@@ -1,0 +1,14 @@
+{
+  "claim_faithfulness": 4,
+  "evidence_grounding": 4,
+  "hallucination_flags": [
+    "learned policy wording inflation"
+  ],
+  "model_id": "nvidia/nemotron-3-super-120b-a12b:free",
+  "omission_rate": 5,
+  "paper_id": "autogrow-2020",
+  "review_status": "completed",
+  "reviewer_notes": "Core claims are good, but the additive fields introduce stronger learned-policy and layer-typing language than the fixture supports.",
+  "run_label": "claim-benchmark-steerability-2026-03-21T01-28-00+0100-website-aligned",
+  "scored_at": "2026-03-21T01:45:00+01:00"
+}

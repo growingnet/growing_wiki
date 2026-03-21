@@ -1,0 +1,46 @@
+{
+  "claims": [
+    {
+      "claim": "AutoGrow begins with a shallow seed network.",
+      "confidence": "high",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Explicitly stated in the paper description."
+    },
+    {
+      "claim": "The method achieves strong accuracy\u2011computation trade\u2011offs across multiple datasets.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Reported in the results section."
+    }
+  ],
+  "findings": [
+    {
+      "claim": "AutoGrow dynamically grows network depth based on validation accuracy improvements.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "Shows adaptive depth selection can improve efficiency.",
+      "recommendation": "Evaluate on more diverse architectures and tasks.",
+      "severity": "medium"
+    },
+    {
+      "claim": "Training stops when added depth no longer yields accuracy gains under the learned policy.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "Provides a principled stopping criterion to prevent overgrowth.",
+      "recommendation": null,
+      "severity": "low"
+    }
+  ],
+  "open_questions": [
+    "How does the computational overhead of the growing policy compare to traditional neural architecture search?",
+    "What is the sensitivity of AutoGrow\u2019s performance to the choice of seed architecture?"
+  ],
+  "role": "claim_extractor",
+  "summary": "AutoGrow proposes an automatic depth\u2011growing scheme that starts from a shallow seed, adds layers when accuracy improves, and stops when further depth does not improve performance, demonstrating strong accuracy\u2011computation trade\u2011offs on several datasets."
+}

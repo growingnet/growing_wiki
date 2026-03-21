@@ -1,0 +1,17 @@
+{
+  "bibliography": [],
+  "equations": [],
+  "extraction_confidence": "medium",
+  "metadata": null,
+  "paper_id": "flatter-minima-2021",
+  "sections": [
+    {
+      "content": "Growing Neural Networks Achieve Flatter Minima\nCaillon and Cerisara | ICANN 2021\nThis fixture summarizes a real paper on optimization and generalization.\nThe paper studies networks that add neurons incrementally during training and\ncompares the minima they reach against fixed-size models trained from scratch.\nThe reported result is that the grown models converge to flatter minima and generalize better.",
+      "name": "full_text",
+      "provenance": "pdf"
+    }
+  ],
+  "source_kind": "generic_pdf",
+  "title": "flatter-minima-2021",
+  "warnings": []
+}

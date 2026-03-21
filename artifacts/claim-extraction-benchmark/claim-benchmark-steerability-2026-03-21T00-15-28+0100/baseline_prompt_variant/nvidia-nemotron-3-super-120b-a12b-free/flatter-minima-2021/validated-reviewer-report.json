@@ -1,0 +1,16 @@
+{
+  "claims": [
+    {
+      "claim": "Growing neural networks achieve flatter minima and better generalization than fixed-size networks trained from scratch.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    }
+  ],
+  "findings": [],
+  "open_questions": [],
+  "role": "claim_extractor",
+  "summary": "The paper shows that incrementally growing neural networks during training converge to flatter minima and generalize better than fixed-size models trained from scratch."
+}

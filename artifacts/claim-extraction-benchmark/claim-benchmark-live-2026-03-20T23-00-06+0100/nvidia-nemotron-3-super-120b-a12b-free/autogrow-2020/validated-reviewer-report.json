@@ -1,0 +1,45 @@
+{
+  "claims": [
+    {
+      "claim": "AutoGrow starts from a shallow seed network and grows layers only when validation accuracy improves.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Describes the core growth mechanism."
+    },
+    {
+      "claim": "Growth stops when additional depth no longer improves accuracy under the learned policy.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Defines the termination condition."
+    },
+    {
+      "claim": "The method yields strong accuracy\u2011computation trade\u2011offs across multiple datasets.",
+      "confidence": "low",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Based on the paper's reported results; exact numbers not provided in the excerpt."
+    }
+  ],
+  "findings": [
+    {
+      "claim": "AutoGrow achieves better accuracy\u2011computation trade\u2011offs than baseline fixed\u2011depth networks on several datasets.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "Shows the practical benefit of the proposed growing policy.",
+      "recommendation": "Validate with additional ablation studies on more diverse architectures.",
+      "severity": "medium"
+    }
+  ],
+  "open_questions": [
+    "How does AutoGrow's computational overhead compare to neural architecture search methods?",
+    "Does the learned policy generalize to other tasks such as object detection or segmentation?"
+  ],
+  "role": "claim_extractor",
+  "summary": "AutoGrow proposes an automatic layer\u2011growing method for deep CNNs that starts shallow, adds layers when accuracy improves, and stops when further depth yields no benefit, reporting strong accuracy\u2011computation trade\u2011offs on multiple datasets."
+}

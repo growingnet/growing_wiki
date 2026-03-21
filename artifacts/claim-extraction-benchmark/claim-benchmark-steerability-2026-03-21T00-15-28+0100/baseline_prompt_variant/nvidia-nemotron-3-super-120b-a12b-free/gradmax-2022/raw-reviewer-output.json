@@ -1,0 +1,77 @@
+{
+  "claims": [
+    {
+      "claim": "GradMax grows a network without disturbing learned behavior by initializing new weights through an SVD-based procedure that maximizes useful gradients.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "GradMax leads to improved training dynamics across several vision settings.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    }
+  ],
+  "findings": [],
+  "open_questions": [],
+  "raw_response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"GradMax proposes a method to grow neural networks during training by adding neurons initialized via an SVD-based procedure to maximize useful gradients, preserving learned behavior and improving training dynamics on vision tasks.\",\n  \"findings\": [],\n  \"claims\": [\n    {\n      \"claim\": \"GradMax grows a network without disturbing learned behavior by initializing new weights through an SVD-based procedure that maximizes useful gradients.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"GradMax leads to improved training dynamics across several vision settings.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    }\n  ],\n  \"open_questions\": []\n}",
+          "reasoning": "We need to produce JSON only with fields role, summary, findings (empty list?), claims list, open_questions (empty). Provide summary short. Claims: atomic claim(s) from paper.\n\nFrom text: \"GradMax grows a network without disturbing learned behavior and initializes new weights to maximize useful gradients through an SVD-based procedure.\" Also: \"The paper reports improved training dynamics across several vision settings.\"\n\nWe need to anchor evidence: sections: full_text is the only location? The evidence_refs should be [\"section:full_text\"] maybe.\n\nWe need confidence: likely medium as extraction_confidence is medium. Could assign medium.\n\nMake two claims.\n\nClaim1: GradMax grows a network without disturbing learned behavior by initializing new weights via an SVD-based procedure to maximize useful gradients.\n\nEvidence: section:full_text.\n\nClaim2: GradMax improves training dynamics across several vision settings.\n\nBut need to anchor evidence: same section.\n\nWe must avoid unsupported specificity; keep generic.\n\nFindings: maybe empty list? Could include findings as empty list (since not required but schema expects list). We'll give empty.\n\nOpen_questions: empty list.\n\nReturn JSON.\n\nCheck formatting: no markdown, just raw JSON.\n\nLet's craft.\n\n",
+          "reasoning_details": [
+            {
+              "format": "unknown",
+              "index": 0,
+              "text": "We need to produce JSON only with fields role, summary, findings (empty list?), claims list, open_questions (empty). Provide summary short. Claims: atomic claim(s) from paper.\n\nFrom text: \"GradMax grows a network without disturbing learned behavior and initializes new weights to maximize useful gradients through an SVD-based procedure.\" Also: \"The paper reports improved training dynamics across several vision settings.\"\n\nWe need to anchor evidence: sections: full_text is the only location? The evidence_refs should be [\"section:full_text\"] maybe.\n\nWe need confidence: likely medium as extraction_confidence is medium. Could assign medium.\n\nMake two claims.\n\nClaim1: GradMax grows a network without disturbing learned behavior by initializing new weights via an SVD-based procedure to maximize useful gradients.\n\nEvidence: section:full_text.\n\nClaim2: GradMax improves training dynamics across several vision settings.\n\nBut need to anchor evidence: same section.\n\nWe must avoid unsupported specificity; keep generic.\n\nFindings: maybe empty list? Could include findings as empty list (since not required but schema expects list). We'll give empty.\n\nOpen_questions: empty list.\n\nReturn JSON.\n\nCheck formatting: no markdown, just raw JSON.\n\nLet's craft.\n\n",
+              "type": "reasoning.text"
+            }
+          ],
+          "refusal": null,
+          "role": "assistant"
+        },
+        "native_finish_reason": "stop"
+      }
+    ],
+    "created": 1774048797,
+    "id": "gen-1774048797-7IhEBJFmBKGtMs16tVvX",
+    "model": "nvidia/nemotron-3-super-120b-a12b-20230311:free",
+    "object": "chat.completion",
+    "provider": "Nvidia",
+    "system_fingerprint": null,
+    "usage": {
+      "completion_tokens": 433,
+      "completion_tokens_details": {
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 337
+      },
+      "cost": 0,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0,
+        "upstream_inference_cost": 0,
+        "upstream_inference_prompt_cost": 0
+      },
+      "is_byok": false,
+      "prompt_tokens": 320,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "video_tokens": 0
+      },
+      "total_tokens": 753
+    }
+  },
+  "role": "claim_extractor",
+  "summary": "GradMax proposes a method to grow neural networks during training by adding neurons initialized via an SVD-based procedure to maximize useful gradients, preserving learned behavior and improving training dynamics on vision tasks."
+}

@@ -1,0 +1,12 @@
+{
+  "notes": "TMLR 2024 paper fixture for benchmark smoke runs.",
+  "paper_id": "growing-tiny-networks-2024",
+  "source": "tests/fixtures/pdfs/growing-tiny-networks-2024.pdf",
+  "source_type": "pdf_path",
+  "tags": [
+    "growing-networks",
+    "expressivity",
+    "tmlr-2024"
+  ],
+  "title": "Growing Tiny Networks: Spotting Expressivity Bottlenecks and Fixing Them Optimally"
+}

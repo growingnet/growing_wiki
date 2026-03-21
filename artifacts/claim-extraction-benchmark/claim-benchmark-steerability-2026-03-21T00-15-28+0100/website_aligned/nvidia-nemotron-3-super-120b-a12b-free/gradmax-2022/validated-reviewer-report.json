@@ -1,0 +1,19 @@
+{
+  "claims": [],
+  "findings": [],
+  "growth_operator": "gradient-informed neuron addition",
+  "initialization_strategy": "SVD-based weight initialization maximizing gradient alignment",
+  "mechanistic_notes": [
+    "Uses gradient information from current network to compute SVD of gradient matrix.",
+    "New weights are set to top singular vectors scaled to match gradient norm.",
+    "Existing weights are frozen during growth to prevent disturbance of learned behavior.",
+    "Growth occurs at scheduled intervals without reinitializing optimizer states."
+  ],
+  "method_family": "dynamic network growth",
+  "open_questions": [],
+  "role": "claim_extractor",
+  "schema_variant": "website_aligned",
+  "selection_criterion": "select neurons with highest projected gradient magnitude via top singular vectors",
+  "summary": "GradMax grows neural networks during training by adding neurons whose weights are initialized via an SVD-based procedure to maximize useful gradient signals, preserving existing learned behavior.",
+  "website_alignment_notes": "Description matches the paper's abstract style, focusing on mechanistic growth procedure rather than performance marketing."
+}

@@ -1,0 +1,15 @@
+{
+  "claim_faithfulness": 3,
+  "evidence_grounding": 3,
+  "hallucination_flags": [
+    "unsupported growth trigger inference",
+    "unsupported optimization dynamics inference"
+  ],
+  "model_id": "nvidia/nemotron-3-super-120b-a12b:free",
+  "omission_rate": 4,
+  "paper_id": "flatter-minima-2021",
+  "review_status": "completed",
+  "reviewer_notes": "Base claims are good, but the additive fields speculate about stagnation triggers, random initialization, and basin-dynamics mechanisms absent from the fixture.",
+  "run_label": "claim-benchmark-steerability-2026-03-21T01-28-00+0100-website-aligned",
+  "scored_at": "2026-03-21T01:45:00+01:00"
+}

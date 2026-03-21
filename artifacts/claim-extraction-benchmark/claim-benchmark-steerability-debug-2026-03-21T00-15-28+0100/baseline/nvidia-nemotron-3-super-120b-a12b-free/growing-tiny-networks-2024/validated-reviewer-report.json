@@ -1,0 +1,55 @@
+{
+  "claims": [
+    {
+      "claim": "The method detects expressivity bottlenecks from backpropagation signals.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Based on description of bottleneck detection."
+    },
+    {
+      "claim": "Neurons are added where the current architecture cannot follow the functional gradient.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Describes the growth mechanism."
+    },
+    {
+      "claim": "On CIFAR, the grown tiny networks achieve performance matching larger models while requiring less manual architecture search.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Empirical result reported."
+    }
+  ],
+  "findings": [
+    {
+      "claim": "The evaluation is limited to CIFAR datasets, lacking broader validation.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "Results may not generalize to more complex vision tasks or other domains.",
+      "recommendation": "Include experiments on ImageNet or other benchmarks to assess scalability.",
+      "severity": "medium"
+    },
+    {
+      "claim": "The paper does not provide an ablation study on the threshold for adding neurons.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "Understanding sensitivity to hyperparameters is important for reproducibility.",
+      "recommendation": "Add ablation analysis on neuron addition criteria.",
+      "severity": "low"
+    }
+  ],
+  "open_questions": [
+    "How does the method perform on large-scale datasets such as ImageNet?",
+    "What is the computational overhead of detecting bottlenecks and growing networks during training?",
+    "Can the approach be combined with other efficient training techniques like pruning or quantization?"
+  ],
+  "role": "claim_extractor",
+  "summary": "The paper proposes a method to grow tiny neural networks during training by detecting expressivity bottlenecks via backpropagation signals and adding neurons where the architecture cannot follow the functional gradient, achieving CIFAR performance comparable to larger models with reduced manual search."
+}

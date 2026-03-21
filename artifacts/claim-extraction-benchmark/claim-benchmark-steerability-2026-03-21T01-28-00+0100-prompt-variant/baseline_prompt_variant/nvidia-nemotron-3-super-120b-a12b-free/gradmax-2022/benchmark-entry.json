@@ -1,0 +1,12 @@
+{
+  "notes": "ICLR 2022 paper fixture for benchmark smoke runs.",
+  "paper_id": "gradmax-2022",
+  "source": "tests/fixtures/pdfs/gradmax-2022.pdf",
+  "source_type": "pdf_path",
+  "tags": [
+    "growing-networks",
+    "neurons",
+    "iclr-2022"
+  ],
+  "title": "GradMax: Growing Neural Networks using Gradient Information"
+}

@@ -196,6 +196,27 @@ def _run_benchmark_entry(
         resolved_source = build_provider(entry)
         loaded_provider_result = resolved_source.provider.load(resolved_source.source)
         provider_result = loaded_provider_result.model_dump(mode="json")
+        if not loaded_provider_result.success:
+            return BenchmarkPaperRun(
+                paper_id=entry.paper_id,
+                run_label=run_label,
+                profile_label=profile_id,
+                model_id=model_id,
+                status="failed",
+                benchmark_entry=benchmark_entry,
+                provider_result=provider_result,
+                evidence_bundle=evidence_bundle,
+                raw_review_output=raw_review_output,
+                validated_reviewer_report={},
+                summary_markdown=_build_failure_summary_markdown(
+                    paper_id=entry.paper_id,
+                    model_id=model_id,
+                    error_type="ProviderWarning",
+                    error_message=f"Provider failed to load source: {loaded_provider_result.warnings}",
+                ),
+                error_type="ProviderWarning",
+                error_message=f"Provider failed to load source: {loaded_provider_result.warnings}",
+            )
         loaded_evidence_bundle = (
             EvidenceBuilder()
             .build(loaded_provider_result)

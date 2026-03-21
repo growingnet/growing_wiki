@@ -1,0 +1,13 @@
+{
+  "bibliography": [],
+  "equations": [],
+  "fallback_reason": null,
+  "fallback_used": false,
+  "paper_id": null,
+  "raw_text": "AutoGrow: Automatic Layer Growing in Deep Convolutional Networks\nWen et al. | KDD 2020\nThis fixture summarizes a real paper on automatic depth discovery.\nAutoGrow starts from a shallow seed network, grows layers when accuracy improves,\nand stops when additional depth no longer helps under the learned policy.\nThe paper reports strong accuracy-computation trade-offs across several datasets.",
+  "sections": [],
+  "source_kind": "generic_pdf",
+  "success": true,
+  "title": "autogrow-2020",
+  "warnings": []
+}

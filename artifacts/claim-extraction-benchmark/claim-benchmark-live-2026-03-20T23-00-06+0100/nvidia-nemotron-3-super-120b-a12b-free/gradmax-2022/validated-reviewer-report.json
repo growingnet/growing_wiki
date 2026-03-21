@@ -1,0 +1,32 @@
+{
+  "claims": [
+    {
+      "claim": "GradMax grows a network without disturbing learned behavior.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "GradMax initializes new weights to maximize useful gradients through an SVD-based procedure.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "GradMax reports improved training dynamics across several vision settings.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    }
+  ],
+  "findings": [],
+  "open_questions": [],
+  "role": "claim_extractor",
+  "summary": "The paper introduces GradMax, a method that grows neural networks during training by adding neurons without disturbing learned behavior and initializing new weights via SVD to maximize useful gradients, reporting improved training dynamics in vision tasks."
+}

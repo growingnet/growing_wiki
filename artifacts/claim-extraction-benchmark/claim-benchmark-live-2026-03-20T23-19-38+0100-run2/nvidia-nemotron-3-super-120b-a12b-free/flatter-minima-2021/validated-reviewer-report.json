@@ -1,0 +1,46 @@
+{
+  "claims": [
+    {
+      "claim": "Incremental neuron growth during training leads to convergence at flatter minima.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Based on reported results comparing grown vs fixed-size models."
+    },
+    {
+      "claim": "Networks grown via incremental addition achieve better generalization performance.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Generalization improvement is linked to flatter minima."
+    }
+  ],
+  "findings": [
+    {
+      "claim": "Grown models converge to flatter minima than fixed-size models trained from scratch.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "Flatter minima are associated with better generalization, so this finding links network growth to improved optimization properties.",
+      "recommendation": null,
+      "severity": "low"
+    },
+    {
+      "claim": "Grown models generalize better than fixed-size models trained from scratch.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "Improved generalization is a key outcome of flatter minima, supporting the practical relevance of the growing approach.",
+      "recommendation": null,
+      "severity": "low"
+    }
+  ],
+  "open_questions": [
+    "How does the rate of neuron addition affect the flatness of minima?",
+    "Are the observed benefits robust across different architectures and datasets?"
+  ],
+  "role": "claim_extractor",
+  "summary": "The paper shows that incrementally growing neural networks during training leads to flatter minima and better generalization compared to training fixed-size networks from scratch."
+}

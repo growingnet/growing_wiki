@@ -1,0 +1,16 @@
+{
+  "claim_faithfulness": 3,
+  "evidence_grounding": 3,
+  "hallucination_flags": [
+    "unsupported neuron splitting detail",
+    "unsupported initialization detail",
+    "unsupported threshold criterion detail"
+  ],
+  "model_id": "nvidia/nemotron-3-super-120b-a12b:free",
+  "omission_rate": 5,
+  "paper_id": "growing-tiny-networks-2024",
+  "review_status": "completed",
+  "reviewer_notes": "The main claims are right, but the additive mechanistic fields invent splitting, weight-copying, perturbation, and threshold details not supported by the fixture.",
+  "run_label": "claim-benchmark-steerability-2026-03-21T01-28-00+0100-website-aligned",
+  "scored_at": "2026-03-21T01:45:00+01:00"
+}

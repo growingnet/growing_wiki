@@ -1,0 +1,26 @@
+{
+  "claims": [
+    {
+      "claim": "Firefly descent expands width or depth by searching a functional neighborhood around the current network with a Taylor-based greedy selection rule.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Directly stated in the abstract/summary."
+    }
+  ],
+  "findings": [
+    {
+      "claim": "Firefly descent expands width or depth by searching a functional neighborhood around the current network with a Taylor-based greedy selection rule.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "Highlights the core algorithmic contribution of the paper.",
+      "recommendation": "",
+      "severity": "low"
+    }
+  ],
+  "open_questions": [],
+  "role": "claim_extractor",
+  "summary": "The paper introduces Firefly descent, a method for growing neural networks by expanding width or depth via a Taylor-based greedy search in a functional neighborhood, aiming for accurate and resource-efficient models including continual learning."
+}

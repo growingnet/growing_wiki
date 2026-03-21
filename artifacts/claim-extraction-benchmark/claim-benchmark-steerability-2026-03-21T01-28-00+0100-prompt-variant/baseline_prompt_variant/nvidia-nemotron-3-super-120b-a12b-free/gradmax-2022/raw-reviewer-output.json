@@ -1,0 +1,85 @@
+{
+  "claims": [
+    {
+      "claim": "GradMax grows a network during training without disturbing learned behavior.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "GradMax initializes new weights using an SVD-based procedure to maximize useful gradients.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "GradMax reports improved training dynamics across several vision settings.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    }
+  ],
+  "findings": [],
+  "open_questions": [],
+  "raw_response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"GradMax introduces a method to grow neural networks during training by adding neurons initialized via SVD to maximize useful gradients, preserving learned behavior and improving training dynamics on vision tasks.\",\n  \"findings\": [],\n  \"claims\": [\n    {\n      \"claim\": \"GradMax grows a network during training without disturbing learned behavior.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"GradMax initializes new weights using an SVD-based procedure to maximize useful gradients.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"GradMax reports improved training dynamics across several vision settings.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    }\n  ],\n  \"open_questions\": []\n}",
+          "reasoning": "We need to output JSON only, with role, summary, findings array, claims array, open_questions array.\n\nWe need to extract claims from the provided evidence. Evidence: short description of GradMax.\n\nWe need to prioritize strict evidence anchoring; avoid unsupported specificity.\n\nClaims: The paper reports that GradMax grows a network without disturbing learned behavior, initializes new weights to maximize useful gradients through an SVD-based procedure, reports improved training dynamics across several vision settings.\n\nWe need to map each claim to evidence reference: we have only one evidence block, presumably the full_text. The schema expects evidence_refs as an array of strings like \"section:full_text\". The text shows [full_text] then content. So we can set evidence_refs: [\"section:full_text\"].\n\nConfidence: Since extraction confidence is medium, we can set medium.\n\nNotes optional.\n\nFindings: Usually findings could be list of findings like \"GradMax improves training dynamics\". But we can leave empty if not needed? The schema expects findings array, can be empty.\n\nOpen_questions: empty.\n\nWe need summary short summary.\n\nLet's produce:\n\n{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"GradMax introduces a method to grow neural networks during training by adding neurons initialized via SVD to maximize useful gradients, preserving learned behavior and improving training dynamics on vision tasks.\",\n  \"findings\": [],\n  \"claims\": [\n    {\n      \"claim\": \"GradMax grows a network during training without disturbing learned behavior.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"GradMax initializes new weights using an SVD-based procedure to maximize useful gradients.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"GradMax reports improved training dynamics across several vision settings.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    }\n  ],\n  \"open_questions\": []\n}\n\nMake sure no extra fields, no markdown, no prose outside JSON.\n\nLet's output.\n\n",
+          "reasoning_details": [
+            {
+              "format": "unknown",
+              "index": 0,
+              "text": "We need to output JSON only, with role, summary, findings array, claims array, open_questions array.\n\nWe need to extract claims from the provided evidence. Evidence: short description of GradMax.\n\nWe need to prioritize strict evidence anchoring; avoid unsupported specificity.\n\nClaims: The paper reports that GradMax grows a network without disturbing learned behavior, initializes new weights to maximize useful gradients through an SVD-based procedure, reports improved training dynamics across several vision settings.\n\nWe need to map each claim to evidence reference: we have only one evidence block, presumably the full_text. The schema expects evidence_refs as an array of strings like \"section:full_text\". The text shows [full_text] then content. So we can set evidence_refs: [\"section:full_text\"].\n\nConfidence: Since extraction confidence is medium, we can set medium.\n\nNotes optional.\n\nFindings: Usually findings could be list of findings like \"GradMax improves training dynamics\". But we can leave empty if not needed? The schema expects findings array, can be empty.\n\nOpen_questions: empty.\n\nWe need summary short summary.\n\nLet's produce:\n\n{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"GradMax introduces a method to grow neural networks during training by adding neurons initialized via SVD to maximize useful gradients, preserving learned behavior and improving training dynamics on vision tasks.\",\n  \"findings\": [],\n  \"claims\": [\n    {\n      \"claim\": \"GradMax grows a network during training without disturbing learned behavior.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"GradMax initializes new weights using an SVD-based procedure to maximize useful gradients.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"GradMax reports improved training dynamics across several vision settings.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    }\n  ],\n  \"open_questions\": []\n}\n\nMake sure no extra fields, no markdown, no prose outside JSON.\n\nLet's output.\n\n",
+              "type": "reasoning.text"
+            }
+          ],
+          "refusal": null,
+          "role": "assistant"
+        },
+        "native_finish_reason": "stop"
+      }
+    ],
+    "created": 1774110944,
+    "id": "gen-1774110944-BkhVgFRpC6LUKTgoYtCe",
+    "model": "nvidia/nemotron-3-super-120b-a12b-20230311:free",
+    "object": "chat.completion",
+    "provider": "Nvidia",
+    "system_fingerprint": null,
+    "usage": {
+      "completion_tokens": 682,
+      "completion_tokens_details": {
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 583
+      },
+      "cost": 0,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0,
+        "upstream_inference_cost": 0,
+        "upstream_inference_prompt_cost": 0
+      },
+      "is_byok": false,
+      "prompt_tokens": 320,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "video_tokens": 0
+      },
+      "total_tokens": 1002
+    }
+  },
+  "role": "claim_extractor",
+  "summary": "GradMax introduces a method to grow neural networks during training by adding neurons initialized via SVD to maximize useful gradients, preserving learned behavior and improving training dynamics on vision tasks."
+}

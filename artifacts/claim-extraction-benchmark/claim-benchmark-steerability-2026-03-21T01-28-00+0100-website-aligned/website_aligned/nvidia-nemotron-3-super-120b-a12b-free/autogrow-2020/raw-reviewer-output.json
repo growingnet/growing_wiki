@@ -1,0 +1,103 @@
+{
+  "claims": [
+    {
+      "claim": "AutoGrow starts from a shallow seed network.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "AutoGrow grows layers when validation accuracy improves.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "AutoGrow stops growing when additional depth no longer improves accuracy under the learned policy.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "AutoGrow achieves strong accuracy-computation trade-offs across multiple datasets.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    }
+  ],
+  "findings": [],
+  "growth_operator": "Addition of convolutional layers",
+  "initialization_strategy": "Shallow seed network initialization",
+  "mechanistic_notes": [
+    "Growth is driven by a learned policy that evaluates accuracy gain versus computational cost.",
+    "The process is iterative: after each layer addition, the network is fine-tuned before evaluating the criterion."
+  ],
+  "method_family": "Neural Architecture Search (layer-wise growth)",
+  "open_questions": [],
+  "raw_response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"AutoGrow automatically discovers network depth by iteratively adding layers based on validation accuracy gains, stopping when further depth yields no improvement under a learned policy, demonstrating strong accuracy-computation trade-offs.\",\n  \"findings\": [],\n  \"claims\": [\n    {\n      \"claim\": \"AutoGrow starts from a shallow seed network.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"AutoGrow grows layers when validation accuracy improves.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"AutoGrow stops growing when additional depth no longer improves accuracy under the learned policy.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"AutoGrow achieves strong accuracy-computation trade-offs across multiple datasets.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    }\n  ],\n  \"open_questions\": [],\n  \"schema_variant\": \"website_aligned\",\n  \"method_family\": \"Neural Architecture Search (layer-wise growth)\",\n  \"growth_operator\": \"Addition of convolutional layers\",\n  \"initialization_strategy\": \"Shallow seed network initialization\",\n  \"selection_criterion\": \"Validation accuracy improvement; stop when no further gain under learned policy\",\n  \"mechanistic_notes\": [\n    \"Growth is driven by a learned policy that evaluates accuracy gain versus computational cost.\",\n    \"The process is iterative: after each layer addition, the network is fine-tuned before evaluating the criterion.\"\n  ],\n  \"website_alignment_notes\": \"Matches the website description of automatic depth discovery via layer growth.\"\n}",
+          "reasoning": "We need to output JSON only, with the given schema. Must include role: \"claim_extractor\". Summary: short summary. Findings: array (maybe empty). Claims: list of claim objects with claim string, evidence_refs (array of strings like \"section:full_text\"), confidence (maybe \"medium\", \"high\", \"low\"), notes optional.\n\nOpen_questions: array.\n\nschema_variant: \"website_aligned\". method_family, growth_operator, initialization_strategy, selection_criterion: optional strings; we should try to fill based on evidence.\n\nmechanistic_notes: array of strings.\n\nwebsite_alignment_notes: optional string.\n\nWe need mechanistic analysis style, not abstract-only. Identify method family: likely \"neural architecture search\" or \"automatic layer growing\". Growth operator: maybe \"layer addition\" or \"depth increment\". Initialization strategy: \"shallow seed network\". Selection criterion: \"accuracy improvement under learned policy\" or \"stops when additional depth no longer helps under the learned policy\". So fill.\n\nClaims: extract atomic claims from the paper text. The provided evidence: The paper says: AutoGrow starts from a shallow seed network, grows layers when accuracy improves, and stops when additional depth no longer helps under the learned policy. The paper reports strong accuracy-computation trade-offs across several datasets.\n\nThus we can have multiple claims:\n\n1. AutoGrow starts from a shallow seed network.\n2. AutoGrow grows layers when accuracy improves.\n3. AutoGrow stops when additional depth no longer helps under the learned policy.\n4. AutoGrow reports strong accuracy-computation trade-offs across several datasets.\n\nEach claim: claim string, evidence_refs: [\"section:full_text\"] (since only full_text given). Confidence: medium (given extraction_confidence medium). Notes optional maybe.\n\nOpen_questions: maybe none; but we could list open questions like \"What is the computational cost of the growing process?\" but not required.\n\nMechanistic_notes: could note that growth is policy-driven, etc.\n\nwebsite_alignment_notes: maybe \"Aligns with website description of automatic depth discovery.\"\n\nMethod_family: \"Neural Architecture Search (NAS) - layer-wise growth\". Growth_operator: \"Addition of convolutional layers\". Initialization_strategy: \"Shallow seed network (e.g., few layers)\". Selection_criterion: \"Accuracy improvement measured on validation set; stop when no further improvement under learned policy.\"\n\nNow produce JSON exactly as schema. Ensure no markdown, no extra text. All fields present.\n\nLet's craft.\n\n{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"AutoGrow automatically discovers network depth by iteratively adding layers based on validation accuracy gains, stopping when further depth yields no improvement under a learned policy, demonstrating strong accuracy-computation trade-offs.\",\n  \"findings\": [],\n  \"claims\": [\n    {\n      \"claim\": \"AutoGrow starts from a shallow seed network.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"AutoGrow grows layers when validation accuracy improves.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"AutoGrow stops growing when additional depth no longer improves accuracy under the learned policy.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"AutoGrow achieves strong accuracy-computation trade-offs across multiple datasets.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    }\n  ],\n  \"open_questions\": [],\n  \"schema_variant\": \"website_aligned\",\n  \"method_family\": \"Neural Architecture Search (layer-wise growth)\",\n  \"growth_operator\": \"Addition of convolutional layers\",\n  \"initialization_strategy\": \"Shallow seed network initialization\",\n  \"selection_criterion\": \"Validation accuracy improvement; stop when no further gain under learned policy\",\n  \"mechanistic_notes\": [\n    \"Growth is driven by a learned policy that evaluates accuracy gain versus computational cost.\",\n    \"The process is iterative: after each layer addition, the network is fine-tuned before evaluating the criterion.\"\n  ],\n  \"website_alignment_notes\": \"Matches the website description of automatic depth discovery via layer growth.\"\n}\n\nMake sure JSON is valid, no trailing commas. All fields present. Ensure no extra text outside JSON.\n\n",
+          "reasoning_details": [
+            {
+              "format": "unknown",
+              "index": 0,
+              "text": "We need to output JSON only, with the given schema. Must include role: \"claim_extractor\". Summary: short summary. Findings: array (maybe empty). Claims: list of claim objects with claim string, evidence_refs (array of strings like \"section:full_text\"), confidence (maybe \"medium\", \"high\", \"low\"), notes optional.\n\nOpen_questions: array.\n\nschema_variant: \"website_aligned\". method_family, growth_operator, initialization_strategy, selection_criterion: optional strings; we should try to fill based on evidence.\n\nmechanistic_notes: array of strings.\n\nwebsite_alignment_notes: optional string.\n\nWe need mechanistic analysis style, not abstract-only. Identify method family: likely \"neural architecture search\" or \"automatic layer growing\". Growth operator: maybe \"layer addition\" or \"depth increment\". Initialization strategy: \"shallow seed network\". Selection criterion: \"accuracy improvement under learned policy\" or \"stops when additional depth no longer helps under the learned policy\". So fill.\n\nClaims: extract atomic claims from the paper text. The provided evidence: The paper says: AutoGrow starts from a shallow seed network, grows layers when accuracy improves, and stops when additional depth no longer helps under the learned policy. The paper reports strong accuracy-computation trade-offs across several datasets.\n\nThus we can have multiple claims:\n\n1. AutoGrow starts from a shallow seed network.\n2. AutoGrow grows layers when accuracy improves.\n3. AutoGrow stops when additional depth no longer helps under the learned policy.\n4. AutoGrow reports strong accuracy-computation trade-offs across several datasets.\n\nEach claim: claim string, evidence_refs: [\"section:full_text\"] (since only full_text given). Confidence: medium (given extraction_confidence medium). Notes optional maybe.\n\nOpen_questions: maybe none; but we could list open questions like \"What is the computational cost of the growing process?\" but not required.\n\nMechanistic_notes: could note that growth is policy-driven, etc.\n\nwebsite_alignment_notes: maybe \"Aligns with website description of automatic depth discovery.\"\n\nMethod_family: \"Neural Architecture Search (NAS) - layer-wise growth\". Growth_operator: \"Addition of convolutional layers\". Initialization_strategy: \"Shallow seed network (e.g., few layers)\". Selection_criterion: \"Accuracy improvement measured on validation set; stop when no further improvement under learned policy.\"\n\nNow produce JSON exactly as schema. Ensure no markdown, no extra text. All fields present.\n\nLet's craft.\n\n{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"AutoGrow automatically discovers network depth by iteratively adding layers based on validation accuracy gains, stopping when further depth yields no improvement under a learned policy, demonstrating strong accuracy-computation trade-offs.\",\n  \"findings\": [],\n  \"claims\": [\n    {\n      \"claim\": \"AutoGrow starts from a shallow seed network.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"AutoGrow grows layers when validation accuracy improves.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"AutoGrow stops growing when additional depth no longer improves accuracy under the learned policy.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"AutoGrow achieves strong accuracy-computation trade-offs across multiple datasets.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    }\n  ],\n  \"open_questions\": [],\n  \"schema_variant\": \"website_aligned\",\n  \"method_family\": \"Neural Architecture Search (layer-wise growth)\",\n  \"growth_operator\": \"Addition of convolutional layers\",\n  \"initialization_strategy\": \"Shallow seed network initialization\",\n  \"selection_criterion\": \"Validation accuracy improvement; stop when no further gain under learned policy\",\n  \"mechanistic_notes\": [\n    \"Growth is driven by a learned policy that evaluates accuracy gain versus computational cost.\",\n    \"The process is iterative: after each layer addition, the network is fine-tuned before evaluating the criterion.\"\n  ],\n  \"website_alignment_notes\": \"Matches the website description of automatic depth discovery via layer growth.\"\n}\n\nMake sure JSON is valid, no trailing commas. All fields present. Ensure no extra text outside JSON.\n\n",
+              "type": "reasoning.text"
+            }
+          ],
+          "refusal": null,
+          "role": "assistant"
+        },
+        "native_finish_reason": "stop"
+      }
+    ],
+    "created": 1774111126,
+    "id": "gen-1774111126-kms7mAMa2RUka6YbjTLr",
+    "model": "nvidia/nemotron-3-super-120b-a12b-20230311:free",
+    "object": "chat.completion",
+    "provider": "Nvidia",
+    "system_fingerprint": null,
+    "usage": {
+      "completion_tokens": 1377,
+      "completion_tokens_details": {
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 1176
+      },
+      "cost": 0,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0,
+        "upstream_inference_cost": 0,
+        "upstream_inference_prompt_cost": 0
+      },
+      "is_byok": false,
+      "prompt_tokens": 433,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "video_tokens": 0
+      },
+      "total_tokens": 1810
+    }
+  },
+  "role": "claim_extractor",
+  "schema_variant": "website_aligned",
+  "selection_criterion": "Validation accuracy improvement; stop when no further gain under learned policy",
+  "summary": "AutoGrow automatically discovers network depth by iteratively adding layers based on validation accuracy gains, stopping when further depth yields no improvement under a learned policy, demonstrating strong accuracy-computation trade-offs.",
+  "website_alignment_notes": "Matches the website description of automatic depth discovery via layer growth."
+}

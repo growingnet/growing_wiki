@@ -1,0 +1,44 @@
+{
+  "claims": [
+    {
+      "claim": "GradMax grows a network without disturbing learned behavior.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "GradMax initializes new weights to maximize useful gradients through an SVD-based procedure.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "The paper reports improved training dynamics across several vision settings.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    }
+  ],
+  "findings": [
+    {
+      "claim": "GradMax grows networks without disturbing learned behavior and improves training dynamics.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "Shows that network expansion can be done while preserving performance, suggesting a viable path for continual model growth.",
+      "recommendation": "Consider applying GradMax to other domains such as NLP or reinforcement learning to test generality.",
+      "severity": "low"
+    }
+  ],
+  "open_questions": [
+    "How does GradMax scale to very large models (e.g., hundreds of millions of parameters) in terms of memory and compute overhead?"
+  ],
+  "role": "claim_extractor",
+  "summary": "GradMax introduces a method to grow neural networks during training by adding neurons without disturbing learned behavior, initializing new weights via SVD to maximize useful gradients, and reports improved training dynamics on vision tasks."
+}

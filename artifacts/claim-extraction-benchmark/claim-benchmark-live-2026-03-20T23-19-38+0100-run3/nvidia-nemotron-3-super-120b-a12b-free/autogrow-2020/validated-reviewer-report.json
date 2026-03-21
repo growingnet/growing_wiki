@@ -1,0 +1,40 @@
+{
+  "claims": [
+    {
+      "claim": "AutoGrow starts from a shallow seed network.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "AutoGrow grows layers when accuracy improves.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "AutoGrow stops growing when additional depth no longer helps under the learned policy.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "AutoGrow achieves strong accuracy-computation trade-offs across several datasets.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    }
+  ],
+  "findings": [],
+  "open_questions": [],
+  "role": "claim_extractor",
+  "summary": "AutoGrow automatically grows network depth based on accuracy improvements, stopping when further depth does not help, achieving strong accuracy-computation trade-offs."
+}

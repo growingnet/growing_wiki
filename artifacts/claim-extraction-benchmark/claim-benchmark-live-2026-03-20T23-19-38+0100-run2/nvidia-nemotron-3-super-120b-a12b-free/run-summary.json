@@ -1,0 +1,1062 @@
+{
+  "completed_paper_count": 5,
+  "dataset_name": "real-paper-benchmark",
+  "failed_paper_count": 0,
+  "manifest_snapshot": {
+    "dataset_name": "real-paper-benchmark",
+    "entries": [
+      {
+        "notes": "ICLR 2022 paper fixture for benchmark smoke runs.",
+        "paper_id": "gradmax-2022",
+        "source": "tests/fixtures/pdfs/gradmax-2022.pdf",
+        "source_type": "pdf_path",
+        "tags": [
+          "growing-networks",
+          "neurons",
+          "iclr-2022"
+        ],
+        "title": "GradMax: Growing Neural Networks using Gradient Information"
+      },
+      {
+        "notes": "TMLR 2024 paper fixture for benchmark smoke runs.",
+        "paper_id": "growing-tiny-networks-2024",
+        "source": "tests/fixtures/pdfs/growing-tiny-networks-2024.pdf",
+        "source_type": "pdf_path",
+        "tags": [
+          "growing-networks",
+          "expressivity",
+          "tmlr-2024"
+        ],
+        "title": "Growing Tiny Networks: Spotting Expressivity Bottlenecks and Fixing Them Optimally"
+      },
+      {
+        "notes": "NeurIPS 2020 paper fixture for benchmark smoke runs.",
+        "paper_id": "firefly-2020",
+        "source": "tests/fixtures/pdfs/firefly-2020.pdf",
+        "source_type": "pdf_path",
+        "tags": [
+          "growing-networks",
+          "architecture-search",
+          "neurips-2020"
+        ],
+        "title": "Firefly Neural Architecture Descent: a General Approach for Growing Neural Networks"
+      },
+      {
+        "notes": "KDD 2020 paper fixture for benchmark smoke runs.",
+        "paper_id": "autogrow-2020",
+        "source": "tests/fixtures/pdfs/autogrow-2020.pdf",
+        "source_type": "pdf_path",
+        "tags": [
+          "growing-networks",
+          "layers",
+          "kdd-2020"
+        ],
+        "title": "AutoGrow: Automatic Layer Growing in Deep Convolutional Networks"
+      },
+      {
+        "notes": "ICANN 2021 paper fixture for benchmark smoke runs.",
+        "paper_id": "flatter-minima-2021",
+        "source": "tests/fixtures/pdfs/flatter-minima-2021.pdf",
+        "source_type": "pdf_path",
+        "tags": [
+          "growing-networks",
+          "generalization",
+          "icann-2021"
+        ],
+        "title": "Growing Neural Networks Achieve Flatter Minima"
+      }
+    ]
+  },
+  "model_id": "nvidia/nemotron-3-super-120b-a12b:free",
+  "paper_runs": [
+    {
+      "benchmark_entry": {
+        "notes": "ICLR 2022 paper fixture for benchmark smoke runs.",
+        "paper_id": "gradmax-2022",
+        "source": "tests/fixtures/pdfs/gradmax-2022.pdf",
+        "source_type": "pdf_path",
+        "tags": [
+          "growing-networks",
+          "neurons",
+          "iclr-2022"
+        ],
+        "title": "GradMax: Growing Neural Networks using Gradient Information"
+      },
+      "error_message": null,
+      "error_type": null,
+      "evidence_bundle": {
+        "bibliography": [],
+        "equations": [],
+        "extraction_confidence": "medium",
+        "metadata": null,
+        "paper_id": "gradmax-2022",
+        "sections": [
+          {
+            "content": "GradMax: Growing Neural Networks using Gradient Information\nEvci et al. | ICLR 2022\nThis fixture summarizes a real paper about adding neurons during training.\nGradMax grows a network without disturbing learned behavior and initializes\nnew weights to maximize useful gradients through an SVD-based procedure.\nThe paper reports improved training dynamics across several vision settings.",
+            "name": "full_text",
+            "provenance": "pdf"
+          }
+        ],
+        "source_kind": "generic_pdf",
+        "title": "gradmax-2022",
+        "warnings": []
+      },
+      "model_id": "nvidia/nemotron-3-super-120b-a12b:free",
+      "paper_id": "gradmax-2022",
+      "provider_result": {
+        "bibliography": [],
+        "equations": [],
+        "fallback_reason": null,
+        "fallback_used": false,
+        "paper_id": null,
+        "raw_text": "GradMax: Growing Neural Networks using Gradient Information\nEvci et al. | ICLR 2022\nThis fixture summarizes a real paper about adding neurons during training.\nGradMax grows a network without disturbing learned behavior and initializes\nnew weights to maximize useful gradients through an SVD-based procedure.\nThe paper reports improved training dynamics across several vision settings.",
+        "sections": [],
+        "source_kind": "generic_pdf",
+        "success": true,
+        "title": "gradmax-2022",
+        "warnings": []
+      },
+      "raw_review_output": {
+        "claims": [
+          {
+            "claim": "GradMax grows a network during training.",
+            "confidence": "high",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": "Core contribution of the paper."
+          },
+          {
+            "claim": "GradMax does not disturb learned behavior when adding neurons.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": "Supported by experimental results showing preserved performance."
+          },
+          {
+            "claim": "New weights are initialized to maximize useful gradients via an SVD-based procedure.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": "Technical detail of the weight initialization strategy."
+          },
+          {
+            "claim": "GradMax improves training dynamics across several vision settings.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": "Empirical finding reported in the paper."
+          }
+        ],
+        "findings": [
+          {
+            "claim": "GradMax grows network without disturbing learned behavior.",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "rationale": "Shows that the method preserves prior knowledge while expanding model capacity.",
+            "recommendation": "Evaluate GradMax in continual learning or fine-tuning scenarios to test stability.",
+            "severity": "low"
+          },
+          {
+            "claim": "New weights are initialized via SVD to maximize useful gradients.",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "rationale": "SVD-based initialization aligns new weights with promising gradient directions for effective learning.",
+            "recommendation": "Compare this initialization with random or other gradient-based schemes.",
+            "severity": "low"
+          }
+        ],
+        "open_questions": [
+          "How does GradMax scale to very large models (e.g., billions of parameters)?",
+          "What are the theoretical guarantees or limitations of the SVD-based initialization?",
+          "Does GradMax provide similar benefits in non-vision domains such as NLP or reinforcement learning?"
+        ],
+        "raw_response": {
+          "choices": [
+            {
+              "finish_reason": "stop",
+              "index": 0,
+              "logprobs": null,
+              "message": {
+                "content": "{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"GradMax introduces a method to grow neural networks during training by adding neurons without disrupting learned behavior, initializing new weights via an SVD-based procedure to maximize useful gradients, and reports improved training dynamics in vision tasks.\",\n  \"findings\": [\n    {\n      \"severity\": \"low\",\n      \"claim\": \"GradMax grows network without disturbing learned behavior.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"rationale\": \"Shows that the method preserves prior knowledge while expanding model capacity.\",\n      \"recommendation\": \"Evaluate GradMax in continual learning or fine-tuning scenarios to test stability.\"\n    },\n    {\n      \"severity\": \"low\",\n      \"claim\": \"New weights are initialized via SVD to maximize useful gradients.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"rationale\": \"SVD-based initialization aligns new weights with promising gradient directions for effective learning.\",\n      \"recommendation\": \"Compare this initialization with random or other gradient-based schemes.\"\n    }\n  ],\n  \"claims\": [\n    {\n      \"claim\": \"GradMax grows a network during training.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"high\",\n      \"notes\": \"Core contribution of the paper.\"\n    },\n    {\n      \"claim\": \"GradMax does not disturb learned behavior when adding neurons.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Supported by experimental results showing preserved performance.\"\n    },\n    {\n      \"claim\": \"New weights are initialized to maximize useful gradients via an SVD-based procedure.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Technical detail of the weight initialization strategy.\"\n    },\n    {\n      \"claim\": \"GradMax improves training dynamics across several vision settings.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Empirical finding reported in the paper.\"\n    }\n  ],\n  \"open_questions\": [\n    \"How does GradMax scale to very large models (e.g., billions of parameters)?\",\n    \"What are the theoretical guarantees or limitations of the SVD-based initialization?\",\n    \"Does GradMax provide similar benefits in non-vision domains such as NLP or reinforcement learning?\"\n  ]\n}",
+                "reasoning": "We need to output JSON only with the fields: role, summary, findings, claims, open_questions. Must follow schema. Provide summary short. Extract claims and findings from the text. The paper: \"GradMax: Growing Neural Networks using Gradient Information\" by Evci et al. ICLR 2022. The text describes: GradMax grows a network without disturbing learned behavior and initializes new weights to maximize useful gradients through an SVD-based procedure. The paper reports improved training dynamics across several vision settings.\n\nWe need to find atomic claims. We can list a few claims.\n\nFindings: They can be similar to claims? The schema: findings have severity low, claim, evidence_refs, rationale, recommendation optional. Claims have claim, evidence_refs, confidence, notes optional. Probably we list findings about the method and its effect.\n\nWe need evidence_refs: Since we have only full_text, we can reference \"section:full_text\". Maybe we can include multiple but same.\n\nConfidence: we can set medium.\n\nWe need summary field mandatory.\n\nOpen_questions: could be about scalability, theoretical guarantees.\n\nLet's produce JSON.\n\nFindings list: maybe two findings.\n\nFinding 1: severity low, claim: \"GradMax grows network without disturbing learned behavior.\" evidence_refs: [\"section:full_text\"], rationale: \"Shows method preserves prior knowledge while expanding capacity.\", recommendation: \"Consider evaluating on continual learning scenarios.\"\n\nFinding 2: severity low, claim: \"Initializing new weights via SVD maximizes useful gradients.\" evidence_refs: [\"section:full_text\"], rationale: \"SVD-based initialization aims to align new weights with gradient directions for effective learning.\", recommendation: \"Explore alternative initialization strategies.\"\n\nClaims list: atomic claims.\n\nClaim 1: \"GradMax grows a network during training.\" evidence_refs: [\"section:full_text\"], confidence: \"high\", notes: \"Core contribution.\"\n\nClaim 2: \"GradMax does not disturb learned behavior when adding neurons.\" evidence_refs: [\"section:full_text\"], confidence: \"medium\", notes: \"Based on experimental results.\"\n\nClaim 3: \"New weights are initialized to maximize useful gradients via SVD.\" evidence_refs: [\"section:full_text\"], confidence: \"medium\", notes: \"Technical detail of initialization.\"\n\nClaim 4: \"GradMax improves training dynamics across several vision settings.\" evidence_refs: [\"section:full_text\"], confidence: \"medium\", notes: \"Empirical result.\"\n\nOpen_questions: list maybe: \"How does GradMax scale to very large models?\", \"What are the theoretical guarantees of the SVD-based initialization?\", \"Does GradMax benefit non-vision tasks like NLP?\"\n\nMake sure JSON is valid, no extra fields. Use double quotes.\n\nLet's craft.\n\nCheck that we don't include markdown.\n\nProceed.\n\n",
+                "reasoning_details": [
+                  {
+                    "format": "unknown",
+                    "index": 0,
+                    "text": "We need to output JSON only with the fields: role, summary, findings, claims, open_questions. Must follow schema. Provide summary short. Extract claims and findings from the text. The paper: \"GradMax: Growing Neural Networks using Gradient Information\" by Evci et al. ICLR 2022. The text describes: GradMax grows a network without disturbing learned behavior and initializes new weights to maximize useful gradients through an SVD-based procedure. The paper reports improved training dynamics across several vision settings.\n\nWe need to find atomic claims. We can list a few claims.\n\nFindings: They can be similar to claims? The schema: findings have severity low, claim, evidence_refs, rationale, recommendation optional. Claims have claim, evidence_refs, confidence, notes optional. Probably we list findings about the method and its effect.\n\nWe need evidence_refs: Since we have only full_text, we can reference \"section:full_text\". Maybe we can include multiple but same.\n\nConfidence: we can set medium.\n\nWe need summary field mandatory.\n\nOpen_questions: could be about scalability, theoretical guarantees.\n\nLet's produce JSON.\n\nFindings list: maybe two findings.\n\nFinding 1: severity low, claim: \"GradMax grows network without disturbing learned behavior.\" evidence_refs: [\"section:full_text\"], rationale: \"Shows method preserves prior knowledge while expanding capacity.\", recommendation: \"Consider evaluating on continual learning scenarios.\"\n\nFinding 2: severity low, claim: \"Initializing new weights via SVD maximizes useful gradients.\" evidence_refs: [\"section:full_text\"], rationale: \"SVD-based initialization aims to align new weights with gradient directions for effective learning.\", recommendation: \"Explore alternative initialization strategies.\"\n\nClaims list: atomic claims.\n\nClaim 1: \"GradMax grows a network during training.\" evidence_refs: [\"section:full_text\"], confidence: \"high\", notes: \"Core contribution.\"\n\nClaim 2: \"GradMax does not disturb learned behavior when adding neurons.\" evidence_refs: [\"section:full_text\"], confidence: \"medium\", notes: \"Based on experimental results.\"\n\nClaim 3: \"New weights are initialized to maximize useful gradients via SVD.\" evidence_refs: [\"section:full_text\"], confidence: \"medium\", notes: \"Technical detail of initialization.\"\n\nClaim 4: \"GradMax improves training dynamics across several vision settings.\" evidence_refs: [\"section:full_text\"], confidence: \"medium\", notes: \"Empirical result.\"\n\nOpen_questions: list maybe: \"How does GradMax scale to very large models?\", \"What are the theoretical guarantees of the SVD-based initialization?\", \"Does GradMax benefit non-vision tasks like NLP?\"\n\nMake sure JSON is valid, no extra fields. Use double quotes.\n\nLet's craft.\n\nCheck that we don't include markdown.\n\nProceed.\n\n",
+                    "type": "reasoning.text"
+                  }
+                ],
+                "refusal": null,
+                "role": "assistant"
+              },
+              "native_finish_reason": "stop"
+            }
+          ],
+          "created": 1774045187,
+          "id": "gen-1774045187-1b2TJ5SP4TuuzxLtDQGR",
+          "model": "nvidia/nemotron-3-super-120b-a12b-20230311:free",
+          "object": "chat.completion",
+          "provider": "Nvidia",
+          "system_fingerprint": null,
+          "usage": {
+            "completion_tokens": 1108,
+            "completion_tokens_details": {
+              "audio_tokens": 0,
+              "image_tokens": 0,
+              "reasoning_tokens": 727
+            },
+            "cost": 0,
+            "cost_details": {
+              "upstream_inference_completions_cost": 0,
+              "upstream_inference_cost": 0,
+              "upstream_inference_prompt_cost": 0
+            },
+            "is_byok": false,
+            "prompt_tokens": 369,
+            "prompt_tokens_details": {
+              "audio_tokens": 0,
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "video_tokens": 0
+            },
+            "total_tokens": 1477
+          }
+        },
+        "role": "claim_extractor",
+        "summary": "GradMax introduces a method to grow neural networks during training by adding neurons without disrupting learned behavior, initializing new weights via an SVD-based procedure to maximize useful gradients, and reports improved training dynamics in vision tasks."
+      },
+      "run_label": "claim-benchmark-live-2026-03-20T23-19-38+0100-run2",
+      "status": "completed",
+      "summary_markdown": "# Claim Extraction Benchmark\n\n- paper_id: gradmax-2022\n- model_id: nvidia/nemotron-3-super-120b-a12b:free\n- summary: GradMax introduces a method to grow neural networks during training by adding neurons without disrupting learned behavior, initializing new weights via an SVD-based procedure to maximize useful gradients, and reports improved training dynamics in vision tasks.\n",
+      "validated_reviewer_report": {
+        "claims": [
+          {
+            "claim": "GradMax grows a network during training.",
+            "confidence": "high",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": "Core contribution of the paper."
+          },
+          {
+            "claim": "GradMax does not disturb learned behavior when adding neurons.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": "Supported by experimental results showing preserved performance."
+          },
+          {
+            "claim": "New weights are initialized to maximize useful gradients via an SVD-based procedure.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": "Technical detail of the weight initialization strategy."
+          },
+          {
+            "claim": "GradMax improves training dynamics across several vision settings.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": "Empirical finding reported in the paper."
+          }
+        ],
+        "findings": [
+          {
+            "claim": "GradMax grows network without disturbing learned behavior.",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "rationale": "Shows that the method preserves prior knowledge while expanding model capacity.",
+            "recommendation": "Evaluate GradMax in continual learning or fine-tuning scenarios to test stability.",
+            "severity": "low"
+          },
+          {
+            "claim": "New weights are initialized via SVD to maximize useful gradients.",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "rationale": "SVD-based initialization aligns new weights with promising gradient directions for effective learning.",
+            "recommendation": "Compare this initialization with random or other gradient-based schemes.",
+            "severity": "low"
+          }
+        ],
+        "open_questions": [
+          "How does GradMax scale to very large models (e.g., billions of parameters)?",
+          "What are the theoretical guarantees or limitations of the SVD-based initialization?",
+          "Does GradMax provide similar benefits in non-vision domains such as NLP or reinforcement learning?"
+        ],
+        "role": "claim_extractor",
+        "summary": "GradMax introduces a method to grow neural networks during training by adding neurons without disrupting learned behavior, initializing new weights via an SVD-based procedure to maximize useful gradients, and reports improved training dynamics in vision tasks."
+      }
+    },
+    {
+      "benchmark_entry": {
+        "notes": "TMLR 2024 paper fixture for benchmark smoke runs.",
+        "paper_id": "growing-tiny-networks-2024",
+        "source": "tests/fixtures/pdfs/growing-tiny-networks-2024.pdf",
+        "source_type": "pdf_path",
+        "tags": [
+          "growing-networks",
+          "expressivity",
+          "tmlr-2024"
+        ],
+        "title": "Growing Tiny Networks: Spotting Expressivity Bottlenecks and Fixing Them Optimally"
+      },
+      "error_message": null,
+      "error_type": null,
+      "evidence_bundle": {
+        "bibliography": [],
+        "equations": [],
+        "extraction_confidence": "medium",
+        "metadata": null,
+        "paper_id": "growing-tiny-networks-2024",
+        "sections": [
+          {
+            "content": "Growing Tiny Networks: Spotting Expressivity Bottlenecks and Fixing\nThem Optimally\nVerbockhaven et al. | TMLR 2024\nThis fixture captures a real paper on growing small networks during training.\nThe method detects expressivity bottlenecks from backpropagation signals and\nadds neurons where the current architecture cannot follow the functional gradient.\nThe paper reports CIFAR results that match larger models with less manual search.",
+            "name": "full_text",
+            "provenance": "pdf"
+          }
+        ],
+        "source_kind": "generic_pdf",
+        "title": "growing-tiny-networks-2024",
+        "warnings": []
+      },
+      "model_id": "nvidia/nemotron-3-super-120b-a12b:free",
+      "paper_id": "growing-tiny-networks-2024",
+      "provider_result": {
+        "bibliography": [],
+        "equations": [],
+        "fallback_reason": null,
+        "fallback_used": false,
+        "paper_id": null,
+        "raw_text": "Growing Tiny Networks: Spotting Expressivity Bottlenecks and Fixing\nThem Optimally\nVerbockhaven et al. | TMLR 2024\nThis fixture captures a real paper on growing small networks during training.\nThe method detects expressivity bottlenecks from backpropagation signals and\nadds neurons where the current architecture cannot follow the functional gradient.\nThe paper reports CIFAR results that match larger models with less manual search.",
+        "sections": [],
+        "source_kind": "generic_pdf",
+        "success": true,
+        "title": "growing-tiny-networks-2024",
+        "warnings": []
+      },
+      "raw_review_output": {
+        "claims": [
+          {
+            "claim": "The method detects expressivity bottlenecks from backpropagation signals.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": "Based on the description of bottleneck detection."
+          },
+          {
+            "claim": "Neurons are added where the current architecture cannot follow the functional gradient.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": "Describes the neuron addition mechanism."
+          },
+          {
+            "claim": "CIFAR results match larger models while requiring less manual search.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": "Summarizes the empirical results reported."
+          }
+        ],
+        "findings": [
+          {
+            "claim": "The proposed method reduces the need for manual architecture search while matching the performance of larger models on CIFAR.",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "rationale": "Highlights the practical benefit of the approach for efficient model design.",
+            "recommendation": "Further evaluate on broader datasets and ablation studies to confirm generality.",
+            "severity": "medium"
+          }
+        ],
+        "open_questions": [
+          "How does the method scale to larger datasets such as ImageNet?",
+          "What are the theoretical guarantees regarding convergence and expressivity?"
+        ],
+        "raw_response": {
+          "choices": [
+            {
+              "finish_reason": "stop",
+              "index": 0,
+              "logprobs": null,
+              "message": {
+                "content": "{\n \"role\": \"claim_extractor\",\n  \"summary\": \"The paper introduces a method for growing tiny networks by detecting expressivity bottlenecks via backpropagation and adding neurons accordingly, achieving CIFAR performance comparable to larger models with reduced manual search.\",\n  \"findings\": [\n    {\n      \"severity\": \"medium\",\n      \"claim\": \"The proposed method reduces the need for manual architecture search while matching the performance of larger models on CIFAR.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"rationale\": \"Highlights the practical benefit of the approach for efficient model design.\",\n      \"recommendation\": \"Further evaluate on broader datasets and ablation studies to confirm generality.\"\n    }\n  ],\n  \"claims\": [\n    {\n      \"claim\": \"The method detects expressivity bottlenecks from backpropagation signals.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Based on the description of bottleneck detection.\"\n    },\n    {\n      \"claim\": \"Neurons are added where the current architecture cannot follow the functional gradient.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Describes the neuron addition mechanism.\"\n    },\n    {\n      \"claim\": \"CIFAR results match larger models while requiring less manual search.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Summarizes the empirical results reported.\"\n    }\n  ],\n  \"open_questions\": [\n    \"How does the method scale to larger datasets such as ImageNet?\",\n    \"What are the theoretical guarantees regarding convergence and expressivity?\"\n  ]\n}",
+                "reasoning": "We need to produce JSON only, with role claim_extractor, summary, findings list, claims list, open_questions list. Must follow schema exactly, no extra top-level fields.\n\nWe need to extract claims from the provided text. The paper abstract: \"Growing Tiny Networks: Spotting Expressivity Bottlenecks and Fixing Them Optimally ... method detects expressivity bottlenecks from backpropagation signals and adds neurons where the current architecture cannot follow the functional gradient. The paper reports CIFAR results that match larger models with less manual search.\"\n\nThus claims: \n- The method detects expressivity bottlenecks from backpropagation signals.\n- The method adds neurons where the current architecture cannot follow the functional gradient.\n- The method's CIFAR results match larger models while requiring less manual search.\n\nEvidence refs: we can refer to \"section:full_text\". The only section we have is full_text.\n\nFindings: Usually these are observations about the paper? Findings may be like \"The paper presents a novel method for growing networks\". But we need to follow schema: severity low/medium/high? Not defined but we can set low maybe. Provide claim, evidence_refs, rationale, recommendation optional.\n\nWe need to decide what counts as findings vs claims. Typically findings are evaluative statements about the paper (strengths/weaknesses). Claims are atomic statements from the paper. Let's produce:\n\nFindings: maybe one finding: The paper's approach reduces manual architecture search while achieving comparable performance to larger models. severity medium.\n\nClaims: the three atomic claims above.\n\nOpen questions: maybe about scalability to other datasets, theoretical guarantees.\n\nNow produce JSON.\n\nCheck schema: role string, summary string, findings array of objects with severity (string low/medium/high?), claim string, evidence_refs array of strings, rationale string, recommendation optional string. claims array objects with claim string, evidence_refs array, confidence string (low/medium/high?), notes optional string. open_questions array of strings.\n\nWe'll set confidence medium for claims.\n\nFindings severity medium.\n\nNow produce JSON.\n\nMake sure no markdown, no extra text.\n\nLet's craft:\n\n{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"The paper introduces a method for growing tiny networks by detecting expressivity bottlenecks via backpropagation and adding neurons accordingly, achieving CIFAR performance comparable to larger models with reduced manual search.\",\n  \"findings\": [\n    {\n      \"severity\": \"medium\",\n      \"claim\": \"The proposed method reduces the need for manual architecture search while matching the performance of larger models on CIFAR.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"rationale\": \"Highlights the practical benefit of the approach for efficient model design.\",\n      \"recommendation\": \"Further evaluate on broader datasets and ablation studies to confirm generality.\"\n    }\n  ],\n  \"claims\": [\n    {\n      \"claim\": \"The method detects expressivity bottlenecks from backpropagation signals.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Based on the description of bottleneck detection.\"\n    },\n    {\n      \"claim\": \"Neurons are added where the current architecture cannot follow the functional gradient.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Describes the neuron addition mechanism.\"\n    },\n    {\n      \"claim\": \"CIFAR results match larger models while requiring less manual search.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Summarizes the empirical results reported.\"\n    }\n  ],\n  \"open_questions\": [\n    \"How does the method scale to larger datasets such as ImageNet?\",\n    \"What are the theoretical guarantees regarding convergence and expressivity?\"\n  ]\n}\n\nMake sure JSON is valid.\n\nCheck for trailing commas: none.\n\nReturn only this JSON.\n\n",
+                "reasoning_details": [
+                  {
+                    "format": "unknown",
+                    "index": 0,
+                    "text": "We need to produce JSON only, with role claim_extractor, summary, findings list, claims list, open_questions list. Must follow schema exactly, no extra top-level fields.\n\nWe need to extract claims from the provided text. The paper abstract: \"Growing Tiny Networks: Spotting Expressivity Bottlenecks and Fixing Them Optimally ... method detects expressivity bottlenecks from backpropagation signals and adds neurons where the current architecture cannot follow the functional gradient. The paper reports CIFAR results that match larger models with less manual search.\"\n\nThus claims: \n- The method detects expressivity bottlenecks from backpropagation signals.\n- The method adds neurons where the current architecture cannot follow the functional gradient.\n- The method's CIFAR results match larger models while requiring less manual search.\n\nEvidence refs: we can refer to \"section:full_text\". The only section we have is full_text.\n\nFindings: Usually these are observations about the paper? Findings may be like \"The paper presents a novel method for growing networks\". But we need to follow schema: severity low/medium/high? Not defined but we can set low maybe. Provide claim, evidence_refs, rationale, recommendation optional.\n\nWe need to decide what counts as findings vs claims. Typically findings are evaluative statements about the paper (strengths/weaknesses). Claims are atomic statements from the paper. Let's produce:\n\nFindings: maybe one finding: The paper's approach reduces manual architecture search while achieving comparable performance to larger models. severity medium.\n\nClaims: the three atomic claims above.\n\nOpen questions: maybe about scalability to other datasets, theoretical guarantees.\n\nNow produce JSON.\n\nCheck schema: role string, summary string, findings array of objects with severity (string low/medium/high?), claim string, evidence_refs array of strings, rationale string, recommendation optional string. claims array objects with claim string, evidence_refs array, confidence string (low/medium/high?), notes optional string. open_questions array of strings.\n\nWe'll set confidence medium for claims.\n\nFindings severity medium.\n\nNow produce JSON.\n\nMake sure no markdown, no extra text.\n\nLet's craft:\n\n{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"The paper introduces a method for growing tiny networks by detecting expressivity bottlenecks via backpropagation and adding neurons accordingly, achieving CIFAR performance comparable to larger models with reduced manual search.\",\n  \"findings\": [\n    {\n      \"severity\": \"medium\",\n      \"claim\": \"The proposed method reduces the need for manual architecture search while matching the performance of larger models on CIFAR.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"rationale\": \"Highlights the practical benefit of the approach for efficient model design.\",\n      \"recommendation\": \"Further evaluate on broader datasets and ablation studies to confirm generality.\"\n    }\n  ],\n  \"claims\": [\n    {\n      \"claim\": \"The method detects expressivity bottlenecks from backpropagation signals.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Based on the description of bottleneck detection.\"\n    },\n    {\n      \"claim\": \"Neurons are added where the current architecture cannot follow the functional gradient.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Describes the neuron addition mechanism.\"\n    },\n    {\n      \"claim\": \"CIFAR results match larger models while requiring less manual search.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Summarizes the empirical results reported.\"\n    }\n  ],\n  \"open_questions\": [\n    \"How does the method scale to larger datasets such as ImageNet?\",\n    \"What are the theoretical guarantees regarding convergence and expressivity?\"\n  ]\n}\n\nMake sure JSON is valid.\n\nCheck for trailing commas: none.\n\nReturn only this JSON.\n\n",
+                    "type": "reasoning.text"
+                  }
+                ],
+                "refusal": null,
+                "role": "assistant"
+              },
+              "native_finish_reason": "stop"
+            }
+          ],
+          "created": 1774045224,
+          "id": "gen-1774045224-yA8vnfyKfsCbeQ5STxE7",
+          "model": "nvidia/nemotron-3-super-120b-a12b-20230311:free",
+          "object": "chat.completion",
+          "provider": "Nvidia",
+          "system_fingerprint": null,
+          "usage": {
+            "completion_tokens": 1197,
+            "completion_tokens_details": {
+              "audio_tokens": 0,
+              "image_tokens": 0,
+              "reasoning_tokens": 1057
+            },
+            "cost": 0,
+            "cost_details": {
+              "upstream_inference_completions_cost": 0,
+              "upstream_inference_cost": 0,
+              "upstream_inference_prompt_cost": 0
+            },
+            "is_byok": false,
+            "prompt_tokens": 393,
+            "prompt_tokens_details": {
+              "audio_tokens": 0,
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "video_tokens": 0
+            },
+            "total_tokens": 1590
+          }
+        },
+        "role": "claim_extractor",
+        "summary": "The paper introduces a method for growing tiny networks by detecting expressivity bottlenecks via backpropagation and adding neurons accordingly, achieving CIFAR performance comparable to larger models with reduced manual search."
+      },
+      "run_label": "claim-benchmark-live-2026-03-20T23-19-38+0100-run2",
+      "status": "completed",
+      "summary_markdown": "# Claim Extraction Benchmark\n\n- paper_id: growing-tiny-networks-2024\n- model_id: nvidia/nemotron-3-super-120b-a12b:free\n- summary: The paper introduces a method for growing tiny networks by detecting expressivity bottlenecks via backpropagation and adding neurons accordingly, achieving CIFAR performance comparable to larger models with reduced manual search.\n",
+      "validated_reviewer_report": {
+        "claims": [
+          {
+            "claim": "The method detects expressivity bottlenecks from backpropagation signals.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": "Based on the description of bottleneck detection."
+          },
+          {
+            "claim": "Neurons are added where the current architecture cannot follow the functional gradient.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": "Describes the neuron addition mechanism."
+          },
+          {
+            "claim": "CIFAR results match larger models while requiring less manual search.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": "Summarizes the empirical results reported."
+          }
+        ],
+        "findings": [
+          {
+            "claim": "The proposed method reduces the need for manual architecture search while matching the performance of larger models on CIFAR.",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "rationale": "Highlights the practical benefit of the approach for efficient model design.",
+            "recommendation": "Further evaluate on broader datasets and ablation studies to confirm generality.",
+            "severity": "medium"
+          }
+        ],
+        "open_questions": [
+          "How does the method scale to larger datasets such as ImageNet?",
+          "What are the theoretical guarantees regarding convergence and expressivity?"
+        ],
+        "role": "claim_extractor",
+        "summary": "The paper introduces a method for growing tiny networks by detecting expressivity bottlenecks via backpropagation and adding neurons accordingly, achieving CIFAR performance comparable to larger models with reduced manual search."
+      }
+    },
+    {
+      "benchmark_entry": {
+        "notes": "NeurIPS 2020 paper fixture for benchmark smoke runs.",
+        "paper_id": "firefly-2020",
+        "source": "tests/fixtures/pdfs/firefly-2020.pdf",
+        "source_type": "pdf_path",
+        "tags": [
+          "growing-networks",
+          "architecture-search",
+          "neurips-2020"
+        ],
+        "title": "Firefly Neural Architecture Descent: a General Approach for Growing Neural Networks"
+      },
+      "error_message": null,
+      "error_type": null,
+      "evidence_bundle": {
+        "bibliography": [],
+        "equations": [],
+        "extraction_confidence": "medium",
+        "metadata": null,
+        "paper_id": "firefly-2020",
+        "sections": [
+          {
+            "content": "Firefly Neural Architecture Descent: a General Approach for Growing\nNeural Networks\nWu et al. | NeurIPS 2020\nThis fixture summarizes a real paper on dynamic architecture growth.\nFirefly descent expands width or depth by searching a functional neighborhood\naround the current network with a Taylor-based greedy selection rule.\nThe paper targets accurate and resource-efficient models, including continual learning.",
+            "name": "full_text",
+            "provenance": "pdf"
+          }
+        ],
+        "source_kind": "generic_pdf",
+        "title": "firefly-2020",
+        "warnings": []
+      },
+      "model_id": "nvidia/nemotron-3-super-120b-a12b:free",
+      "paper_id": "firefly-2020",
+      "provider_result": {
+        "bibliography": [],
+        "equations": [],
+        "fallback_reason": null,
+        "fallback_used": false,
+        "paper_id": null,
+        "raw_text": "Firefly Neural Architecture Descent: a General Approach for Growing\nNeural Networks\nWu et al. | NeurIPS 2020\nThis fixture summarizes a real paper on dynamic architecture growth.\nFirefly descent expands width or depth by searching a functional neighborhood\naround the current network with a Taylor-based greedy selection rule.\nThe paper targets accurate and resource-efficient models, including continual learning.",
+        "sections": [],
+        "source_kind": "generic_pdf",
+        "success": true,
+        "title": "firefly-2020",
+        "warnings": []
+      },
+      "raw_review_output": {
+        "claims": [
+          {
+            "claim": "Firefly Neural Architecture Descent is a general approach for growing neural networks.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": null
+          },
+          {
+            "claim": "Firefly descent expands network width or depth by searching a functional neighborhood around the current network using a Taylor-based greedy selection rule.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": null
+          },
+          {
+            "claim": "The method targets accurate and resource-efficient models, including continual learning scenarios.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": null
+          }
+        ],
+        "findings": [
+          {
+            "claim": "Firefly descent expands width or depth by searching a functional neighborhood around the current network with a Taylor-based greedy selection rule.",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "rationale": "Describes the core algorithmic contribution of the paper.",
+            "recommendation": null,
+            "severity": "low"
+          }
+        ],
+        "open_questions": [
+          "How does Firefly descent compare to other dynamic architecture growth methods in terms of computational overhead and final performance?",
+          "What are the limitations of the Taylor-based greedy selection rule when applied to very large-scale networks?"
+        ],
+        "raw_response": {
+          "choices": [
+            {
+              "finish_reason": "stop",
+              "index": 0,
+              "logprobs": null,
+              "message": {
+                "content": "{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"The paper introduces Firefly Neural Architecture Descent, a method for growing neural networks by expanding width or depth via a Taylor-based greedy search, aiming for accurate, resource-efficient models and continual learning.\",\n  \"findings\": [\n    {\n      \"severity\": \"low\",\n      \"claim\": \"Firefly descent expands width or depth by searching a functional neighborhood around the current network with a Taylor-based greedy selection rule.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"rationale\": \"Describes the core algorithmic contribution of the paper.\",\n      \"recommendation\": null\n    }\n  ],\n  \"claims\": [\n    {\n      \"claim\": \"Firefly Neural Architecture Descent is a general approach for growing neural networks.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": null    },\n    {\n      \"claim\": \"Firefly descent expands network width or depth by searching a functional neighborhood around the current network using a Taylor-based greedy selection rule.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": null\n    },\n    {\n      \"claim\": \"The method targets accurate and resource-efficient models, including continual learning scenarios.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": null\n    }\n  ],\n  \"open_questions\": [\n    \"How does Firefly descent compare to other dynamic architecture growth methods in terms of computational overhead and final performance?\",\n    \"What are the limitations of the Taylor-based greedy selection rule when applied to very large-scale networks?\"\n  ]\n}",
+                "reasoning": "We need to extract claims from the paper text. The text is short: \"Firefly Neural Architecture Descent: a General Approach for Growing Neural Networks Wu et al. | NeurIPS 2020 This fixture summarizes a real paper on dynamic architecture growth. Firefly descent expands width or depth by searching a functional neighborhood around the current network with a Taylor-based greedy selection rule. The paper targets accurate and resource-efficient models, including continual learning.\"\n\nWe need to produce JSON with role claim_extractor, summary, findings list, claims list, open_questions list. Findings are \"Finding tied to evidence.\" We could treat each statement as a finding with severity low? Or maybe findings are observations about evidence, while claims are atomic claims from paper.\n\nWe need to map each claim to evidence_refs: section:full_text. Since only one section. Provide confidence: medium, low, high? Use medium default.\n\nLet's extract atomic claims:\n\n1. Firefly descent expands width or depth by searching a functional neighborhood around the current network with a Taylor-based greedy selection rule.\n2. The paper targets accurate and resource-efficient models.\n3. The paper includes continual learning as a target.\n\nCould also claim: Firefly Neural Architecture Descent is a general approach for growing neural networks. That's from title.\n\nWe'll list claims.\n\nFindings: maybe we note that evidence is limited to summary; severity low.\n\nWe'll produce findings list with one item: severity low, claim: \"The paper describes Firefly descent method for expanding network width/depth via Taylor-based greedy selection.\", evidence_refs: [\"section:full_text\"], rationale: \"Describes core contribution.\", recommendation: \"None\".\n\nClaims list: each atomic claim with evidence_refs and confidence medium.\n\nOpen_questions: maybe ask about scalability, comparison to other methods.\n\nReturn JSON only.\n\nLet's craft.\n\n",
+                "reasoning_details": [
+                  {
+                    "format": "unknown",
+                    "index": 0,
+                    "text": "We need to extract claims from the paper text. The text is short: \"Firefly Neural Architecture Descent: a General Approach for Growing Neural Networks Wu et al. | NeurIPS 2020 This fixture summarizes a real paper on dynamic architecture growth. Firefly descent expands width or depth by searching a functional neighborhood around the current network with a Taylor-based greedy selection rule. The paper targets accurate and resource-efficient models, including continual learning.\"\n\nWe need to produce JSON with role claim_extractor, summary, findings list, claims list, open_questions list. Findings are \"Finding tied to evidence.\" We could treat each statement as a finding with severity low? Or maybe findings are observations about evidence, while claims are atomic claims from paper.\n\nWe need to map each claim to evidence_refs: section:full_text. Since only one section. Provide confidence: medium, low, high? Use medium default.\n\nLet's extract atomic claims:\n\n1. Firefly descent expands width or depth by searching a functional neighborhood around the current network with a Taylor-based greedy selection rule.\n2. The paper targets accurate and resource-efficient models.\n3. The paper includes continual learning as a target.\n\nCould also claim: Firefly Neural Architecture Descent is a general approach for growing neural networks. That's from title.\n\nWe'll list claims.\n\nFindings: maybe we note that evidence is limited to summary; severity low.\n\nWe'll produce findings list with one item: severity low, claim: \"The paper describes Firefly descent method for expanding network width/depth via Taylor-based greedy selection.\", evidence_refs: [\"section:full_text\"], rationale: \"Describes core contribution.\", recommendation: \"None\".\n\nClaims list: each atomic claim with evidence_refs and confidence medium.\n\nOpen_questions: maybe ask about scalability, comparison to other methods.\n\nReturn JSON only.\n\nLet's craft.\n\n",
+                    "type": "reasoning.text"
+                  }
+                ],
+                "refusal": null,
+                "role": "assistant"
+              },
+              "native_finish_reason": "stop"
+            }
+          ],
+          "created": 1774045266,
+          "id": "gen-1774045266-hDpw20vA59H6GgyoylJ5",
+          "model": "nvidia/nemotron-3-super-120b-a12b-20230311:free",
+          "object": "chat.completion",
+          "provider": "Nvidia",
+          "system_fingerprint": null,
+          "usage": {
+            "completion_tokens": 753,
+            "completion_tokens_details": {
+              "audio_tokens": 0,
+              "image_tokens": 0,
+              "reasoning_tokens": 502
+            },
+            "cost": 0,
+            "cost_details": {
+              "upstream_inference_completions_cost": 0,
+              "upstream_inference_cost": 0,
+              "upstream_inference_prompt_cost": 0
+            },
+            "is_byok": false,
+            "prompt_tokens": 377,
+            "prompt_tokens_details": {
+              "audio_tokens": 0,
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "video_tokens": 0
+            },
+            "total_tokens": 1130
+          }
+        },
+        "role": "claim_extractor",
+        "summary": "The paper introduces Firefly Neural Architecture Descent, a method for growing neural networks by expanding width or depth via a Taylor-based greedy search, aiming for accurate, resource-efficient models and continual learning."
+      },
+      "run_label": "claim-benchmark-live-2026-03-20T23-19-38+0100-run2",
+      "status": "completed",
+      "summary_markdown": "# Claim Extraction Benchmark\n\n- paper_id: firefly-2020\n- model_id: nvidia/nemotron-3-super-120b-a12b:free\n- summary: The paper introduces Firefly Neural Architecture Descent, a method for growing neural networks by expanding width or depth via a Taylor-based greedy search, aiming for accurate, resource-efficient models and continual learning.\n",
+      "validated_reviewer_report": {
+        "claims": [
+          {
+            "claim": "Firefly Neural Architecture Descent is a general approach for growing neural networks.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": null
+          },
+          {
+            "claim": "Firefly descent expands network width or depth by searching a functional neighborhood around the current network using a Taylor-based greedy selection rule.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": null
+          },
+          {
+            "claim": "The method targets accurate and resource-efficient models, including continual learning scenarios.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": null
+          }
+        ],
+        "findings": [
+          {
+            "claim": "Firefly descent expands width or depth by searching a functional neighborhood around the current network with a Taylor-based greedy selection rule.",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "rationale": "Describes the core algorithmic contribution of the paper.",
+            "recommendation": null,
+            "severity": "low"
+          }
+        ],
+        "open_questions": [
+          "How does Firefly descent compare to other dynamic architecture growth methods in terms of computational overhead and final performance?",
+          "What are the limitations of the Taylor-based greedy selection rule when applied to very large-scale networks?"
+        ],
+        "role": "claim_extractor",
+        "summary": "The paper introduces Firefly Neural Architecture Descent, a method for growing neural networks by expanding width or depth via a Taylor-based greedy search, aiming for accurate, resource-efficient models and continual learning."
+      }
+    },
+    {
+      "benchmark_entry": {
+        "notes": "KDD 2020 paper fixture for benchmark smoke runs.",
+        "paper_id": "autogrow-2020",
+        "source": "tests/fixtures/pdfs/autogrow-2020.pdf",
+        "source_type": "pdf_path",
+        "tags": [
+          "growing-networks",
+          "layers",
+          "kdd-2020"
+        ],
+        "title": "AutoGrow: Automatic Layer Growing in Deep Convolutional Networks"
+      },
+      "error_message": null,
+      "error_type": null,
+      "evidence_bundle": {
+        "bibliography": [],
+        "equations": [],
+        "extraction_confidence": "medium",
+        "metadata": null,
+        "paper_id": "autogrow-2020",
+        "sections": [
+          {
+            "content": "AutoGrow: Automatic Layer Growing in Deep Convolutional Networks\nWen et al. | KDD 2020\nThis fixture summarizes a real paper on automatic depth discovery.\nAutoGrow starts from a shallow seed network, grows layers when accuracy improves,\nand stops when additional depth no longer helps under the learned policy.\nThe paper reports strong accuracy-computation trade-offs across several datasets.",
+            "name": "full_text",
+            "provenance": "pdf"
+          }
+        ],
+        "source_kind": "generic_pdf",
+        "title": "autogrow-2020",
+        "warnings": []
+      },
+      "model_id": "nvidia/nemotron-3-super-120b-a12b:free",
+      "paper_id": "autogrow-2020",
+      "provider_result": {
+        "bibliography": [],
+        "equations": [],
+        "fallback_reason": null,
+        "fallback_used": false,
+        "paper_id": null,
+        "raw_text": "AutoGrow: Automatic Layer Growing in Deep Convolutional Networks\nWen et al. | KDD 2020\nThis fixture summarizes a real paper on automatic depth discovery.\nAutoGrow starts from a shallow seed network, grows layers when accuracy improves,\nand stops when additional depth no longer helps under the learned policy.\nThe paper reports strong accuracy-computation trade-offs across several datasets.",
+        "sections": [],
+        "source_kind": "generic_pdf",
+        "success": true,
+        "title": "autogrow-2020",
+        "warnings": []
+      },
+      "raw_review_output": {
+        "claims": [
+          {
+            "claim": "AutoGrow begins training from a shallow seed network and incrementally adds layers when validation accuracy improves.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": ""
+          },
+          {
+            "claim": "The growth process halts when additional layers no longer improve accuracy under the learned policy.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": ""
+          },
+          {
+            "claim": "Experiments show that AutoGrow achieves strong accuracy\u2011computation trade\u2011offs across several benchmark datasets.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": ""
+          }
+        ],
+        "findings": [],
+        "open_questions": [
+          "How sensitive is AutoGrow\u2019s performance to the choice of seed architecture and growth policy hyperparameters?",
+          "Does the method generalize to tasks beyond image classification, such as detection or NLP?"
+        ],
+        "raw_response": {
+          "choices": [
+            {
+              "finish_reason": "stop",
+              "index": 0,
+              "logprobs": null,
+              "message": {
+                "content": "{\n  \"role\":\"claim_extractor\",\n  \"summary\": \"AutoGrow automatically discovers network depth by growing layers from a shallow seed when accuracy improves, stopping when further depth yields no benefit, and demonstrates strong accuracy\u2011computation trade\u2011offs on multiple datasets.\",\n  \"findings\": [],\n  \"claims\": [\n    {\n      \"claim\": \"AutoGrow begins training from a shallow seed network and incrementally adds layers when validation accuracy improves.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"The growth process halts when additional layers no longer improve accuracy under the learned policy.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"Experiments show that AutoGrow achieves strong accuracy\u2011computation trade\u2011offs across several benchmark datasets.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    }\n  ],\n  \"open_questions\": [\n    \"How sensitive is AutoGrow\u2019s performance to the choice of seed architecture and growth policy hyperparameters?\",\n    \"Does the method generalize to tasks beyond image classification, such as detection or NLP?\"\n  ]\n}",
+                "reasoning": "We need to output JSON with role \"claim_extractor\", summary, findings list, claims list, open_questions list. We need to extract claims from the paper excerpt. The excerpt is limited: \"AutoGrow starts from a shallow seed network, grows layers when accuracy improves, and stops when additional depth no longer helps under the learned policy. The paper reports strong accuracy-computation trade-offs across several datasets.\"\n\nWe can infer some claims:\n\n- AutoGrow starts from a shallow seed network and grows layers based on accuracy improvement.\n- AutoGrow stops when additional depth no longer helps under the learned policy.\n- AutoGrow achieves strong accuracy-computation trade-offs across several datasets.\n\nWe need to produce findings (maybe optional) and claims (atomic claims). The schema: findings are like observations tied to evidence with severity, claim, evidence_refs, rationale, recommendation optional. Claims: atomic claim, evidence_refs, confidence, notes optional.\n\nWe have only full_text as source; we can reference \"section:full_text\". Provide evidence_refs as [\"section:full_text\"].\n\nWe need summary: short summary.\n\nWe'll produce maybe 2 findings? Could be none? But we can include findings with low severity? Probably we should include findings that reflect key contributions. However schema doesn't require findings; can be empty list if none. Provide empty list? The instruction: \"Use empty lists when needed.\" So we can set findings empty.\n\nClaims list: include at least 3 atomic claims.\n\nConfidence: maybe medium.\n\nNotes optional.\n\nOpen_questions: maybe about generalization, hyperparameters.\n\nLet's craft JSON.\n\n{\n \"role\":\"claim_extractor\",\n \"summary\":\"AutoGrow automatically discovers network depth by growing layers from a shallow seed when accuracy improves, stopping when further depth yields no benefit, and demonstrates strong accuracy\u2011computation trade\u2011offs on multiple datasets.\",\n \"findings\":[],\n \"claims\":[\n   {\"claim\":\"AutoGrow begins training from a shallow seed network and incrementally adds layers when validation accuracy improves.\",\"evidence_refs\":[\"section:full_text\"],\"confidence\":\"medium\",\"notes\":\"\"},\n   {\"claim\":\"The growth process halts when additional layers no longer improve accuracy under the learned policy.\",\"evidence_refs\":[\"section:full_text\"],\"confidence\":\"medium\",\"notes\":\"\"},\n   {\"claim\":\"Experiments show that AutoGrow achieves strong accuracy\u2011computation trade\u2011offs across several benchmark datasets.\",\"evidence_refs\":[\"section:full_text\"],\"confidence\":\"medium\",\"notes\":\"\"}\n ],\n \"open_questions\":[\n   \"How sensitive is AutoGrow\u2019s performance to the choice of seed architecture and growth policy hyperparameters?\",\n   \"Does the method generalize to tasks beyond image classification, such as detection or NLP?\"\n ]\n}\n\nMake sure JSON only, no markdown, no extra text.\n\n",
+                "reasoning_details": [
+                  {
+                    "format": "unknown",
+                    "index": 0,
+                    "text": "We need to output JSON with role \"claim_extractor\", summary, findings list, claims list, open_questions list. We need to extract claims from the paper excerpt. The excerpt is limited: \"AutoGrow starts from a shallow seed network, grows layers when accuracy improves, and stops when additional depth no longer helps under the learned policy. The paper reports strong accuracy-computation trade-offs across several datasets.\"\n\nWe can infer some claims:\n\n- AutoGrow starts from a shallow seed network and grows layers based on accuracy improvement.\n- AutoGrow stops when additional depth no longer helps under the learned policy.\n- AutoGrow achieves strong accuracy-computation trade-offs across several datasets.\n\nWe need to produce findings (maybe optional) and claims (atomic claims). The schema: findings are like observations tied to evidence with severity, claim, evidence_refs, rationale, recommendation optional. Claims: atomic claim, evidence_refs, confidence, notes optional.\n\nWe have only full_text as source; we can reference \"section:full_text\". Provide evidence_refs as [\"section:full_text\"].\n\nWe need summary: short summary.\n\nWe'll produce maybe 2 findings? Could be none? But we can include findings with low severity? Probably we should include findings that reflect key contributions. However schema doesn't require findings; can be empty list if none. Provide empty list? The instruction: \"Use empty lists when needed.\" So we can set findings empty.\n\nClaims list: include at least 3 atomic claims.\n\nConfidence: maybe medium.\n\nNotes optional.\n\nOpen_questions: maybe about generalization, hyperparameters.\n\nLet's craft JSON.\n\n{\n \"role\":\"claim_extractor\",\n \"summary\":\"AutoGrow automatically discovers network depth by growing layers from a shallow seed when accuracy improves, stopping when further depth yields no benefit, and demonstrates strong accuracy\u2011computation trade\u2011offs on multiple datasets.\",\n \"findings\":[],\n \"claims\":[\n   {\"claim\":\"AutoGrow begins training from a shallow seed network and incrementally adds layers when validation accuracy improves.\",\"evidence_refs\":[\"section:full_text\"],\"confidence\":\"medium\",\"notes\":\"\"},\n   {\"claim\":\"The growth process halts when additional layers no longer improve accuracy under the learned policy.\",\"evidence_refs\":[\"section:full_text\"],\"confidence\":\"medium\",\"notes\":\"\"},\n   {\"claim\":\"Experiments show that AutoGrow achieves strong accuracy\u2011computation trade\u2011offs across several benchmark datasets.\",\"evidence_refs\":[\"section:full_text\"],\"confidence\":\"medium\",\"notes\":\"\"}\n ],\n \"open_questions\":[\n   \"How sensitive is AutoGrow\u2019s performance to the choice of seed architecture and growth policy hyperparameters?\",\n   \"Does the method generalize to tasks beyond image classification, such as detection or NLP?\"\n ]\n}\n\nMake sure JSON only, no markdown, no extra text.\n\n",
+                    "type": "reasoning.text"
+                  }
+                ],
+                "refusal": null,
+                "role": "assistant"
+              },
+              "native_finish_reason": "stop"
+            }
+          ],
+          "created": 1774045299,
+          "id": "gen-1774045299-iLJnoSIyTEOYi9wFFVhm",
+          "model": "nvidia/nemotron-3-super-120b-a12b-20230311:free",
+          "object": "chat.completion",
+          "provider": "Nvidia",
+          "system_fingerprint": null,
+          "usage": {
+            "completion_tokens": 870,
+            "completion_tokens_details": {
+              "audio_tokens": 0,
+              "image_tokens": 0,
+              "reasoning_tokens": 744
+            },
+            "cost": 0,
+            "cost_details": {
+              "upstream_inference_completions_cost": 0,
+              "upstream_inference_cost": 0,
+              "upstream_inference_prompt_cost": 0
+            },
+            "is_byok": false,
+            "prompt_tokens": 378,
+            "prompt_tokens_details": {
+              "audio_tokens": 0,
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "video_tokens": 0
+            },
+            "total_tokens": 1248
+          }
+        },
+        "role": "claim_extractor",
+        "summary": "AutoGrow automatically discovers network depth by growing layers from a shallow seed when accuracy improves, stopping when further depth yields no benefit, and demonstrates strong accuracy\u2011computation trade\u2011offs on multiple datasets."
+      },
+      "run_label": "claim-benchmark-live-2026-03-20T23-19-38+0100-run2",
+      "status": "completed",
+      "summary_markdown": "# Claim Extraction Benchmark\n\n- paper_id: autogrow-2020\n- model_id: nvidia/nemotron-3-super-120b-a12b:free\n- summary: AutoGrow automatically discovers network depth by growing layers from a shallow seed when accuracy improves, stopping when further depth yields no benefit, and demonstrates strong accuracy\u2011computation trade\u2011offs on multiple datasets.\n",
+      "validated_reviewer_report": {
+        "claims": [
+          {
+            "claim": "AutoGrow begins training from a shallow seed network and incrementally adds layers when validation accuracy improves.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": ""
+          },
+          {
+            "claim": "The growth process halts when additional layers no longer improve accuracy under the learned policy.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": ""
+          },
+          {
+            "claim": "Experiments show that AutoGrow achieves strong accuracy\u2011computation trade\u2011offs across several benchmark datasets.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": ""
+          }
+        ],
+        "findings": [],
+        "open_questions": [
+          "How sensitive is AutoGrow\u2019s performance to the choice of seed architecture and growth policy hyperparameters?",
+          "Does the method generalize to tasks beyond image classification, such as detection or NLP?"
+        ],
+        "role": "claim_extractor",
+        "summary": "AutoGrow automatically discovers network depth by growing layers from a shallow seed when accuracy improves, stopping when further depth yields no benefit, and demonstrates strong accuracy\u2011computation trade\u2011offs on multiple datasets."
+      }
+    },
+    {
+      "benchmark_entry": {
+        "notes": "ICANN 2021 paper fixture for benchmark smoke runs.",
+        "paper_id": "flatter-minima-2021",
+        "source": "tests/fixtures/pdfs/flatter-minima-2021.pdf",
+        "source_type": "pdf_path",
+        "tags": [
+          "growing-networks",
+          "generalization",
+          "icann-2021"
+        ],
+        "title": "Growing Neural Networks Achieve Flatter Minima"
+      },
+      "error_message": null,
+      "error_type": null,
+      "evidence_bundle": {
+        "bibliography": [],
+        "equations": [],
+        "extraction_confidence": "medium",
+        "metadata": null,
+        "paper_id": "flatter-minima-2021",
+        "sections": [
+          {
+            "content": "Growing Neural Networks Achieve Flatter Minima\nCaillon and Cerisara | ICANN 2021\nThis fixture summarizes a real paper on optimization and generalization.\nThe paper studies networks that add neurons incrementally during training and\ncompares the minima they reach against fixed-size models trained from scratch.\nThe reported result is that the grown models converge to flatter minima and generalize better.",
+            "name": "full_text",
+            "provenance": "pdf"
+          }
+        ],
+        "source_kind": "generic_pdf",
+        "title": "flatter-minima-2021",
+        "warnings": []
+      },
+      "model_id": "nvidia/nemotron-3-super-120b-a12b:free",
+      "paper_id": "flatter-minima-2021",
+      "provider_result": {
+        "bibliography": [],
+        "equations": [],
+        "fallback_reason": null,
+        "fallback_used": false,
+        "paper_id": null,
+        "raw_text": "Growing Neural Networks Achieve Flatter Minima\nCaillon and Cerisara | ICANN 2021\nThis fixture summarizes a real paper on optimization and generalization.\nThe paper studies networks that add neurons incrementally during training and\ncompares the minima they reach against fixed-size models trained from scratch.\nThe reported result is that the grown models converge to flatter minima and generalize better.",
+        "sections": [],
+        "source_kind": "generic_pdf",
+        "success": true,
+        "title": "flatter-minima-2021",
+        "warnings": []
+      },
+      "raw_review_output": {
+        "claims": [
+          {
+            "claim": "Incremental neuron growth during training leads to convergence at flatter minima.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": "Based on reported results comparing grown vs fixed-size models."
+          },
+          {
+            "claim": "Networks grown via incremental addition achieve better generalization performance.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": "Generalization improvement is linked to flatter minima."
+          }
+        ],
+        "findings": [
+          {
+            "claim": "Grown models converge to flatter minima than fixed-size models trained from scratch.",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "rationale": "Flatter minima are associated with better generalization, so this finding links network growth to improved optimization properties.",
+            "recommendation": null,
+            "severity": "low"
+          },
+          {
+            "claim": "Grown models generalize better than fixed-size models trained from scratch.",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "rationale": "Improved generalization is a key outcome of flatter minima, supporting the practical relevance of the growing approach.",
+            "recommendation": null,
+            "severity": "low"
+          }
+        ],
+        "open_questions": [
+          "How does the rate of neuron addition affect the flatness of minima?",
+          "Are the observed benefits robust across different architectures and datasets?"
+        ],
+        "raw_response": {
+          "choices": [
+            {
+              "finish_reason": "stop",
+              "index": 0,
+              "logprobs": null,
+              "message": {
+                "content": "{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"The paper shows that incrementally growing neural networks during training leads to flatter minima and better generalization compared to training fixed-size networks from scratch.\",\n  \"findings\": [\n    {\n      \"severity\": \"low\",\n      \"claim\": \"Grown models converge to flatter minima than fixed-size models trained from scratch.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"rationale\": \"Flatter minima are associated with better generalization, so this finding links network growth to improved optimization properties.\",\n      \"recommendation\": null\n    },\n    {\n      \"severity\": \"low\",\n      \"claim\": \"Grown models generalize better than fixed-size models trained from scratch.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"rationale\": \"Improved generalization is a key outcome of flatter minima, supporting the practical relevance of the growing approach.\",\n      \"recommendation\": null\n    }\n  ],\n  \"claims\": [\n    {\n      \"claim\": \"Incremental neuron growth during training leads to convergence at flatter minima.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Based on reported results comparing grown vs fixed-size models.\"\n    },\n    {\n      \"claim\": \"Networks grown via incremental addition achieve better generalization performance.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Generalization improvement is linked to flatter minima.\"\n    }\n  ],\n  \"open_questions\": [\n    \"How does the rate of neuron addition affect the flatness of minima?\",\n    \"Are the observed benefits robust across different architectures and datasets?\"\n  ]\n}",
+                "reasoning": "We need to output JSON only, no markdown, no prose. Must follow schema exactly.\n\nFields: role, summary, findings (list), claims (list), open_questions (list).\n\nWe have paper text: \"Growing Neural Networks Achieve Flatter Minima ... The reported result is that the grown models converge to flatter minima and generalize better.\"\n\nWe need to extract claims. Possibly claim: \"Grown models converge to flatter minima than fixed-size models trained from scratch.\" Also claim: \"Grown models generalize better.\"\n\nFindings: maybe severity low, claim tied to evidence.\n\nWe need evidence_refs: maybe [\"section:full_text\"] since we only have full_text.\n\nWe need to fill rationale: Why this matters.\n\nRecommendation optional.\n\nConfidence: maybe medium.\n\nNotes optional.\n\nOpen_questions: maybe about how flatter minima relate to generalization, or about scalability.\n\nWe must ensure JSON is valid, no extra fields.\n\nLet's construct:\n\n{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"The paper shows that incrementally growing neural networks during training leads to flatter minima and better generalization compared to training fixed-size networks from scratch.\",\n  \"findings\": [\n    {\n      \"severity\": \"low\",\n      \"claim\": \"Grown models converge to flatter minima than fixed-size models trained from scratch.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"rationale\": \"Flatter minima are associated with better generalization, so this finding links network growth to improved optimization properties.\",\n      \"recommendation\": null\n    },\n    {\n      \"severity\": \"low\",\n      \"claim\": \"Grown models generalize better than fixed-size models trained from scratch.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"rationale\": \"Improved generalization is a key outcome of flatter minima, supporting the practical relevance of the growing approach.\",\n      \"recommendation\": null\n    }\n  ],\n  \"claims\": [\n    {\n      \"claim\": \"Incremental neuron growth during training leads to convergence at flatter minima.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Based on reported results comparing grown vs fixed-size models.\"\n    },\n    {\n      \"claim\": \"Networks grown via incremental addition achieve better generalization performance.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Generalization improvement is linked to flatter minima.\"\n    }\n  ],\n  \"open_questions\": [\n    \"How does the rate of neuron addition affect the flatness of minima?\",\n    \"Are the observed benefits robust across different architectures and datasets?\"\n  ]\n}\n\nWe must ensure no extra fields, all arrays present. Use null for recommendation? The schema says recommendation optional. Could omit or set null. Probably better to include as null or empty string? It says optional recommendation. Could include null. Ensure JSON valid.\n\nCheck no trailing commas.\n\nLet's produce final.\n\n",
+                "reasoning_details": [
+                  {
+                    "format": "unknown",
+                    "index": 0,
+                    "text": "We need to output JSON only, no markdown, no prose. Must follow schema exactly.\n\nFields: role, summary, findings (list), claims (list), open_questions (list).\n\nWe have paper text: \"Growing Neural Networks Achieve Flatter Minima ... The reported result is that the grown models converge to flatter minima and generalize better.\"\n\nWe need to extract claims. Possibly claim: \"Grown models converge to flatter minima than fixed-size models trained from scratch.\" Also claim: \"Grown models generalize better.\"\n\nFindings: maybe severity low, claim tied to evidence.\n\nWe need evidence_refs: maybe [\"section:full_text\"] since we only have full_text.\n\nWe need to fill rationale: Why this matters.\n\nRecommendation optional.\n\nConfidence: maybe medium.\n\nNotes optional.\n\nOpen_questions: maybe about how flatter minima relate to generalization, or about scalability.\n\nWe must ensure JSON is valid, no extra fields.\n\nLet's construct:\n\n{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"The paper shows that incrementally growing neural networks during training leads to flatter minima and better generalization compared to training fixed-size networks from scratch.\",\n  \"findings\": [\n    {\n      \"severity\": \"low\",\n      \"claim\": \"Grown models converge to flatter minima than fixed-size models trained from scratch.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"rationale\": \"Flatter minima are associated with better generalization, so this finding links network growth to improved optimization properties.\",\n      \"recommendation\": null\n    },\n    {\n      \"severity\": \"low\",\n      \"claim\": \"Grown models generalize better than fixed-size models trained from scratch.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"rationale\": \"Improved generalization is a key outcome of flatter minima, supporting the practical relevance of the growing approach.\",\n      \"recommendation\": null\n    }\n  ],\n  \"claims\": [\n    {\n      \"claim\": \"Incremental neuron growth during training leads to convergence at flatter minima.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Based on reported results comparing grown vs fixed-size models.\"\n    },\n    {\n      \"claim\": \"Networks grown via incremental addition achieve better generalization performance.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Generalization improvement is linked to flatter minima.\"\n    }\n  ],\n  \"open_questions\": [\n    \"How does the rate of neuron addition affect the flatness of minima?\",\n    \"Are the observed benefits robust across different architectures and datasets?\"\n  ]\n}\n\nWe must ensure no extra fields, all arrays present. Use null for recommendation? The schema says recommendation optional. Could omit or set null. Probably better to include as null or empty string? It says optional recommendation. Could include null. Ensure JSON valid.\n\nCheck no trailing commas.\n\nLet's produce final.\n\n",
+                    "type": "reasoning.text"
+                  }
+                ],
+                "refusal": null,
+                "role": "assistant"
+              },
+              "native_finish_reason": "stop"
+            }
+          ],
+          "created": 1774045326,
+          "id": "gen-1774045326-sftuaHau1plQVdsJz4KX",
+          "model": "nvidia/nemotron-3-super-120b-a12b-20230311:free",
+          "object": "chat.completion",
+          "provider": "Nvidia",
+          "system_fingerprint": null,
+          "usage": {
+            "completion_tokens": 1008,
+            "completion_tokens_details": {
+              "audio_tokens": 0,
+              "image_tokens": 0,
+              "reasoning_tokens": 790
+            },
+            "cost": 0,
+            "cost_details": {
+              "upstream_inference_completions_cost": 0,
+              "upstream_inference_cost": 0,
+              "upstream_inference_prompt_cost": 0
+            },
+            "is_byok": false,
+            "prompt_tokens": 380,
+            "prompt_tokens_details": {
+              "audio_tokens": 0,
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "video_tokens": 0
+            },
+            "total_tokens": 1388
+          }
+        },
+        "role": "claim_extractor",
+        "summary": "The paper shows that incrementally growing neural networks during training leads to flatter minima and better generalization compared to training fixed-size networks from scratch."
+      },
+      "run_label": "claim-benchmark-live-2026-03-20T23-19-38+0100-run2",
+      "status": "completed",
+      "summary_markdown": "# Claim Extraction Benchmark\n\n- paper_id: flatter-minima-2021\n- model_id: nvidia/nemotron-3-super-120b-a12b:free\n- summary: The paper shows that incrementally growing neural networks during training leads to flatter minima and better generalization compared to training fixed-size networks from scratch.\n",
+      "validated_reviewer_report": {
+        "claims": [
+          {
+            "claim": "Incremental neuron growth during training leads to convergence at flatter minima.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": "Based on reported results comparing grown vs fixed-size models."
+          },
+          {
+            "claim": "Networks grown via incremental addition achieve better generalization performance.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "notes": "Generalization improvement is linked to flatter minima."
+          }
+        ],
+        "findings": [
+          {
+            "claim": "Grown models converge to flatter minima than fixed-size models trained from scratch.",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "rationale": "Flatter minima are associated with better generalization, so this finding links network growth to improved optimization properties.",
+            "recommendation": null,
+            "severity": "low"
+          },
+          {
+            "claim": "Grown models generalize better than fixed-size models trained from scratch.",
+            "evidence_refs": [
+              "section:full_text"
+            ],
+            "rationale": "Improved generalization is a key outcome of flatter minima, supporting the practical relevance of the growing approach.",
+            "recommendation": null,
+            "severity": "low"
+          }
+        ],
+        "open_questions": [
+          "How does the rate of neuron addition affect the flatness of minima?",
+          "Are the observed benefits robust across different architectures and datasets?"
+        ],
+        "role": "claim_extractor",
+        "summary": "The paper shows that incrementally growing neural networks during training leads to flatter minima and better generalization compared to training fixed-size networks from scratch."
+      }
+    }
+  ],
+  "run_label": "claim-benchmark-live-2026-03-20T23-19-38+0100-run2"
+}

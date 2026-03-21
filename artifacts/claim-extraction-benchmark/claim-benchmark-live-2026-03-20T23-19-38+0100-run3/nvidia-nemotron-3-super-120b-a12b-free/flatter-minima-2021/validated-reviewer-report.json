@@ -1,0 +1,29 @@
+{
+  "claims": [
+    {
+      "claim": "Incrementally growing neural networks during training achieve flatter minima and better generalization than fixed-size networks trained from scratch.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Based on empirical comparison reported in the paper."
+    }
+  ],
+  "findings": [
+    {
+      "claim": "Grown networks converge to flatter minima than fixed-size models.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "Flatter minima are associated with better generalization, linking training dynamics to performance.",
+      "recommendation": "Further study could quantify flatness across datasets and architectures.",
+      "severity": "medium"
+    }
+  ],
+  "open_questions": [
+    "Does the flatness benefit persist for very deep networks or alternative growth strategies?",
+    "How does the computational overhead of growing affect overall training efficiency?"
+  ],
+  "role": "claim_extractor",
+  "summary": "The paper shows that incrementally growing neural networks during training leads to flatter loss minima and improved generalization compared to training fixed-size networks from scratch."
+}

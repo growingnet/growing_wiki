@@ -1,0 +1,7 @@
+{
+  "model_id": "nvidia/nemotron-nano-9b-v2:free",
+  "status": "runtime_failed",
+  "error_type": "JSONDecodeError",
+  "error_message": "Expecting ',' delimiter: line 17124 column 3 (char 48786)",
+  "output_dir": "artifacts/schema-calibration-free-followup-2026-03-20/nvidia-nemotron-nano-9b-v2-free"
+}

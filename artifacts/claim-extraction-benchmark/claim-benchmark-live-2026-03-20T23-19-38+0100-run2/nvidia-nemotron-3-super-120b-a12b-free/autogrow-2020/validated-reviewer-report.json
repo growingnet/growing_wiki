@@ -1,0 +1,35 @@
+{
+  "claims": [
+    {
+      "claim": "AutoGrow begins training from a shallow seed network and incrementally adds layers when validation accuracy improves.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "The growth process halts when additional layers no longer improve accuracy under the learned policy.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "Experiments show that AutoGrow achieves strong accuracy\u2011computation trade\u2011offs across several benchmark datasets.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    }
+  ],
+  "findings": [],
+  "open_questions": [
+    "How sensitive is AutoGrow\u2019s performance to the choice of seed architecture and growth policy hyperparameters?",
+    "Does the method generalize to tasks beyond image classification, such as detection or NLP?"
+  ],
+  "role": "claim_extractor",
+  "summary": "AutoGrow automatically discovers network depth by growing layers from a shallow seed when accuracy improves, stopping when further depth yields no benefit, and demonstrates strong accuracy\u2011computation trade\u2011offs on multiple datasets."
+}

@@ -1,0 +1,17 @@
+{
+  "bibliography": [],
+  "equations": [],
+  "extraction_confidence": "medium",
+  "metadata": null,
+  "paper_id": "gradmax-2022",
+  "sections": [
+    {
+      "content": "GradMax: Growing Neural Networks using Gradient Information\nEvci et al. | ICLR 2022\nThis fixture summarizes a real paper about adding neurons during training.\nGradMax grows a network without disturbing learned behavior and initializes\nnew weights to maximize useful gradients through an SVD-based procedure.\nThe paper reports improved training dynamics across several vision settings.",
+      "name": "full_text",
+      "provenance": "pdf"
+    }
+  ],
+  "source_kind": "generic_pdf",
+  "title": "gradmax-2022",
+  "warnings": []
+}

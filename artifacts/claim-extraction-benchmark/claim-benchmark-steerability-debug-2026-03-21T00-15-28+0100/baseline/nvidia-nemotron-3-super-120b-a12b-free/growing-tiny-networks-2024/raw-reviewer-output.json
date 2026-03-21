@@ -1,0 +1,108 @@
+{
+  "claims": [
+    {
+      "claim": "The method detects expressivity bottlenecks from backpropagation signals.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Based on description of bottleneck detection."
+    },
+    {
+      "claim": "Neurons are added where the current architecture cannot follow the functional gradient.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Describes the growth mechanism."
+    },
+    {
+      "claim": "On CIFAR, the grown tiny networks achieve performance matching larger models while requiring less manual architecture search.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Empirical result reported."
+    }
+  ],
+  "findings": [
+    {
+      "claim": "The evaluation is limited to CIFAR datasets, lacking broader validation.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "Results may not generalize to more complex vision tasks or other domains.",
+      "recommendation": "Include experiments on ImageNet or other benchmarks to assess scalability.",
+      "severity": "medium"
+    },
+    {
+      "claim": "The paper does not provide an ablation study on the threshold for adding neurons.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "Understanding sensitivity to hyperparameters is important for reproducibility.",
+      "recommendation": "Add ablation analysis on neuron addition criteria.",
+      "severity": "low"
+    }
+  ],
+  "open_questions": [
+    "How does the method perform on large-scale datasets such as ImageNet?",
+    "What is the computational overhead of detecting bottlenecks and growing networks during training?",
+    "Can the approach be combined with other efficient training techniques like pruning or quantization?"
+  ],
+  "raw_response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"The paper proposes a method to grow tiny neural networks during training by detecting expressivity bottlenecks via backpropagation signals and adding neurons where the architecture cannot follow the functional gradient, achieving CIFAR performance comparable to larger models with reduced manual search.\",\n  \"findings\": [\n    {\n      \"severity\": \"medium\",\n      \"claim\": \"The evaluation is limited to CIFAR datasets, lacking broader validation.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"rationale\": \"Results may not generalize to more complex vision tasks or other domains.\",\n      \"recommendation\": \"Include experiments on ImageNet or other benchmarks to assess scalability.\"\n    },\n    {\n      \"severity\": \"low\",\n      \"claim\": \"The paper does not provide an ablation study on the threshold for adding neurons.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"rationale\": \"Understanding sensitivity to hyperparameters is important for reproducibility.\",\n      \"recommendation\": \"Add ablation analysis on neuron addition criteria.\"\n    }\n  ],\n  \"claims\": [\n    {\n      \"claim\": \"The method detects expressivity bottlenecks from backpropagation signals.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Based on description of bottleneck detection.\"\n    },\n    {\n      \"claim\": \"Neurons are added where the current architecture cannot follow the functional gradient.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Describes the growth mechanism.\"\n    },\n    {\n      \"claim\": \"On CIFAR, the grown tiny networks achieve performance matching larger models while requiring less manual architecture search.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Empirical result reported.\"\n    }\n  ],\n  \"open_questions\": [\n    \"How does the method perform on large-scale datasets such as ImageNet?\",\n    \"What is the computational overhead of detecting bottlenecks and growing networks during training?\",\n    \"Can the approach be combined with other efficient training techniques like pruning or quantization?\"\n  ]\n}",
+          "reasoning": "We need to output JSON with role claim_extractor, summary, findings list, claims list, open_questions list. No markdown, just JSON object. Ensure proper JSON format. Must have summary mandatory. Fill based on paper: It's about growing tiny networks, detecting expressivity bottlenecks, adding neurons where functional gradient not followed, results on CIFAR match larger models with less manual search.\n\nWe need claims: atomic claims from the paper. Possibly: \"The method detects expressivity bottlenecks from backpropagation signals.\" \"It adds neurons where the current architecture cannot follow the functional gradient.\" \"The approach achieves CIFAR performance matching larger models while requiring less manual architecture search.\" Provide evidence_refs: maybe \"section:full_text\". Use list. Confidence: medium or high? Use medium.\n\nFindings: maybe we evaluate strengths/weaknesses. Severities: low, medium, high. Provide findings tied to evidence: e.g., \"The paper lacks ablation studies on different datasets.\" Severity medium. Provide rationale. Provide recommendation.\n\nOpen_questions: maybe \"How does the method scale to larger datasets like ImageNet?\" etc.\n\nReturn JSON only.\n\nLet's craft:\n\n{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"The paper proposes a method to grow tiny neural networks during training by detecting expressivity bottlenecks via backpropagation signals and adding neurons where the architecture cannot follow the functional gradient, achieving CIFAR performance comparable to larger models with reduced manual search.\",\n  \"findings\": [\n    {\n      \"severity\": \"medium\",\n      \"claim\": \"The evaluation is limited to CIFAR datasets, lacking broader validation.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"rationale\": \"Results may not generalize to more complex vision tasks or other domains.\",\n      \"recommendation\": \"Include experiments on ImageNet or other benchmarks to assess scalability.\"\n    },\n    {\n      \"severity\": \"low\",\n      \"claim\": \"The paper does not provide an ablation study on the threshold for adding neurons.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"rationale\": \"Understanding sensitivity to hyperparameters is important for reproducibility.\",\n      \"recommendation\": \"Add ablation analysis on neuron addition criteria.\"\n    }\n  ],\n  \"claims\": [\n    {\n      \"claim\": \"The method detects expressivity bottlenecks from backpropagation signals.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Based on description of bottleneck detection.\"\n    },\n    {\n      \"claim\": \"Neurons are added where the current architecture cannot follow the functional gradient.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Describes the growth mechanism.\"\n    },\n    {\n      \"claim\": \"On CIFAR, the grown tiny networks achieve performance matching larger models while requiring less manual architecture search.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Empirical result reported.\"\n    }\n  ],\n  \"open_questions\": [\n    \"How does the method perform on large-scale datasets such as ImageNet?\",\n    \"What is the computational overhead of detecting bottlenecks and growing networks during training?\",\n    \"Can the approach be combined with other efficient training techniques like pruning or quantization?\"\n  ]\n}\n\nMake sure no extra text. Return JSON only.\n\n",
+          "reasoning_details": [
+            {
+              "format": "unknown",
+              "index": 0,
+              "text": "We need to output JSON with role claim_extractor, summary, findings list, claims list, open_questions list. No markdown, just JSON object. Ensure proper JSON format. Must have summary mandatory. Fill based on paper: It's about growing tiny networks, detecting expressivity bottlenecks, adding neurons where functional gradient not followed, results on CIFAR match larger models with less manual search.\n\nWe need claims: atomic claims from the paper. Possibly: \"The method detects expressivity bottlenecks from backpropagation signals.\" \"It adds neurons where the current architecture cannot follow the functional gradient.\" \"The approach achieves CIFAR performance matching larger models while requiring less manual architecture search.\" Provide evidence_refs: maybe \"section:full_text\". Use list. Confidence: medium or high? Use medium.\n\nFindings: maybe we evaluate strengths/weaknesses. Severities: low, medium, high. Provide findings tied to evidence: e.g., \"The paper lacks ablation studies on different datasets.\" Severity medium. Provide rationale. Provide recommendation.\n\nOpen_questions: maybe \"How does the method scale to larger datasets like ImageNet?\" etc.\n\nReturn JSON only.\n\nLet's craft:\n\n{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"The paper proposes a method to grow tiny neural networks during training by detecting expressivity bottlenecks via backpropagation signals and adding neurons where the architecture cannot follow the functional gradient, achieving CIFAR performance comparable to larger models with reduced manual search.\",\n  \"findings\": [\n    {\n      \"severity\": \"medium\",\n      \"claim\": \"The evaluation is limited to CIFAR datasets, lacking broader validation.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"rationale\": \"Results may not generalize to more complex vision tasks or other domains.\",\n      \"recommendation\": \"Include experiments on ImageNet or other benchmarks to assess scalability.\"\n    },\n    {\n      \"severity\": \"low\",\n      \"claim\": \"The paper does not provide an ablation study on the threshold for adding neurons.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"rationale\": \"Understanding sensitivity to hyperparameters is important for reproducibility.\",\n      \"recommendation\": \"Add ablation analysis on neuron addition criteria.\"\n    }\n  ],\n  \"claims\": [\n    {\n      \"claim\": \"The method detects expressivity bottlenecks from backpropagation signals.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Based on description of bottleneck detection.\"\n    },\n    {\n      \"claim\": \"Neurons are added where the current architecture cannot follow the functional gradient.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Describes the growth mechanism.\"\n    },\n    {\n      \"claim\": \"On CIFAR, the grown tiny networks achieve performance matching larger models while requiring less manual architecture search.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Empirical result reported.\"\n    }\n  ],\n  \"open_questions\": [\n    \"How does the method perform on large-scale datasets such as ImageNet?\",\n    \"What is the computational overhead of detecting bottlenecks and growing networks during training?\",\n    \"Can the approach be combined with other efficient training techniques like pruning or quantization?\"\n  ]\n}\n\nMake sure no extra text. Return JSON only.\n\n",
+              "type": "reasoning.text"
+            }
+          ],
+          "refusal": null,
+          "role": "assistant"
+        },
+        "native_finish_reason": "stop"
+      }
+    ],
+    "created": 1774048909,
+    "id": "gen-1774048909-3ZqsrBmKHBsMFHHY7HMq",
+    "model": "nvidia/nemotron-3-super-120b-a12b-20230311:free",
+    "object": "chat.completion",
+    "provider": "Nvidia",
+    "system_fingerprint": null,
+    "usage": {
+      "completion_tokens": 1204,
+      "completion_tokens_details": {
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 909
+      },
+      "cost": 0,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0,
+        "upstream_inference_cost": 0,
+        "upstream_inference_prompt_cost": 0
+      },
+      "is_byok": false,
+      "prompt_tokens": 393,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "video_tokens": 0
+      },
+      "total_tokens": 1597
+    }
+  },
+  "role": "claim_extractor",
+  "summary": "The paper proposes a method to grow tiny neural networks during training by detecting expressivity bottlenecks via backpropagation signals and adding neurons where the architecture cannot follow the functional gradient, achieving CIFAR performance comparable to larger models with reduced manual search."
+}

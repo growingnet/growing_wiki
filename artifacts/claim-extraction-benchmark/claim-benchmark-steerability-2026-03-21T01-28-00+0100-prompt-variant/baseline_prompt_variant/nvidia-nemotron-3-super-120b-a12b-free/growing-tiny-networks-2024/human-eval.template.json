@@ -1,0 +1,12 @@
+{
+  "claim_faithfulness": 5,
+  "evidence_grounding": 5,
+  "hallucination_flags": [],
+  "model_id": "nvidia/nemotron-3-super-120b-a12b:free",
+  "omission_rate": 4,
+  "paper_id": "growing-tiny-networks-2024",
+  "review_status": "completed",
+  "reviewer_notes": "Faithful and grounded; slightly compressed because bottleneck detection and neuron addition are merged together.",
+  "run_label": "claim-benchmark-steerability-2026-03-21T01-28-00+0100-prompt-variant",
+  "scored_at": "2026-03-21T01:45:00+01:00"
+}

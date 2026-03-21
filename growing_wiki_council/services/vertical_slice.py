@@ -24,7 +24,7 @@ def run_claim_extraction_slice(
     if not provider_result.success:
         artifact = CouncilReviewArtifact(
             paper_id=provider_result.paper_id or "unknown",
-            source_kind=provider_result.source_kind or "unknown",
+            source_kind=provider_result.source_kind or "generic_pdf",
             reviewer_reports=[],
             chair_verdict=ChairVerdict(
                 verdict="needs_human_review",
@@ -34,15 +34,21 @@ def run_claim_extraction_slice(
                 recommended_actions=["Check the source provider logs and inputs."],
             ),
         )
+        warnings_bullets = "\n".join(f"- {w}" for w in provider_result.warnings)
+        review_markdown = f"# Review\n\n{artifact.chair_verdict.summary}\n\n{warnings_bullets}"
         write_review_artifacts(
             output_dir,
             review_json=artifact.model_dump(mode="json"),
-            review_markdown=f"# Review\n\n{artifact.chair_verdict.summary}\n\n" + "\n".join(f"- {w}" for w in provider_result.warnings),
+            review_markdown=review_markdown,
         )
         return artifact
 
     bundle = EvidenceBuilder().build(provider_result)
-    reviewer_report = ReviewerReport.model_validate(claim_extractor.run(bundle))
+    raw_payload = claim_extractor.run(bundle)
+    if isinstance(raw_payload, ReviewerReport):
+        reviewer_report = raw_payload
+    else:
+        reviewer_report = ReviewerReport.model_validate(raw_payload)
     artifact = CouncilReviewArtifact(
         paper_id=bundle.paper_id,
         source_kind=bundle.source_kind,

@@ -1,0 +1,51 @@
+[
+  {
+    "model_id": "nvidia/nemotron-nano-9b-v2:free",
+    "status": "runtime_failed",
+    "error_type": "JSONDecodeError",
+    "error_message": "Expecting ',' delimiter: line 17124 column 3 (char 48786)",
+    "output_dir": "artifacts/schema-calibration-free-followup-2026-03-20/nvidia-nemotron-nano-9b-v2-free"
+  },
+  {
+    "model_id": "arcee-ai/trinity-large-preview:free",
+    "status": "validated",
+    "output_dir": "artifacts/schema-calibration-free-followup-2026-03-20/arcee-ai-trinity-large-preview-free",
+    "validation_error": null,
+    "summary": "The paper reports modest improvements using a compact training strategy on a synthetic benchmark, but the evaluation setup is deliberately simple for schema-calibration testing."
+  },
+  {
+    "model_id": "arcee-ai/trinity-mini:free",
+    "status": "validated",
+    "output_dir": "artifacts/schema-calibration-free-followup-2026-03-20/arcee-ai-trinity-mini-free",
+    "validation_error": null,
+    "summary": "Evaluation of compact training strategy shows modest improvements over baseline."
+  },
+  {
+    "model_id": "meta-llama/llama-3.3-70b-instruct:free",
+    "status": "runtime_failed",
+    "error_type": "HTTPStatusError",
+    "error_message": "Client error '429 Too Many Requests' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+    "output_dir": "artifacts/schema-calibration-free-followup-2026-03-20/meta-llama-llama-3-3-70b-instruct-free"
+  },
+  {
+    "model_id": "qwen/qwen3-next-80b-a3b-instruct:free",
+    "status": "runtime_failed",
+    "error_type": "HTTPStatusError",
+    "error_message": "Client error '429 Too Many Requests' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+    "output_dir": "artifacts/schema-calibration-free-followup-2026-03-20/qwen-qwen3-next-80b-a3b-instruct-free"
+  },
+  {
+    "model_id": "openai/gpt-oss-120b:free",
+    "status": "runtime_failed",
+    "error_type": "HTTPStatusError",
+    "error_message": "Client error '404 Not Found' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
+    "output_dir": "artifacts/schema-calibration-free-followup-2026-03-20/openai-gpt-oss-120b-free"
+  },
+  {
+    "model_id": "openai/gpt-oss-20b:free",
+    "status": "runtime_failed",
+    "error_type": "HTTPStatusError",
+    "error_message": "Client error '404 Not Found' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
+    "output_dir": "artifacts/schema-calibration-free-followup-2026-03-20/openai-gpt-oss-20b-free"
+  }
+]

@@ -1,0 +1,34 @@
+{
+  "claims": [
+    {
+      "claim": "Grown neural networks converge to flatter minima compared to fixed-size models trained from scratch.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "Grown neural networks achieve better generalization performance than fixed-size models trained from scratch.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    }
+  ],
+  "findings": [],
+  "growth_operator": "incremental neuron addition (width growth)",
+  "initialization_strategy": "random initialization of newly added neurons",
+  "mechanistic_notes": [
+    "Adding neurons modifies the loss landscape, increasing basin width and flattening minima.",
+    "Dynamic architecture changes affect gradient flow, promoting exploration of flatter regions."
+  ],
+  "method_family": "constructive neural network training",
+  "open_questions": [],
+  "role": "claim_extractor",
+  "schema_variant": "website_aligned",
+  "selection_criterion": "growth triggered when training progress stagnates (inferred)",
+  "summary": "The paper shows that neural networks grown by incrementally adding neurons during training reach flatter minima and generalize better than static networks trained from scratch.",
+  "website_alignment_notes": "Mechanistic decomposition focuses on how growth operator alters optimization dynamics rather than performance marketing."
+}
