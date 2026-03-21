@@ -44,19 +44,25 @@ class OpenRouterClaimExtractorClient:
         if not self.model:
             raise RuntimeError("OpenRouter model is required for live requests.")
         for attempt_index in range(self.max_retries + 1):
-            response = httpx.post(
-                f"{self.base_url}/chat/completions",
-                headers={
-                    "Authorization": f"Bearer {self.api_key}",
-                    "Content-Type": "application/json",
-                },
-                json={
-                    "model": self.model,
-                    "messages": [{"role": "user", "content": prompt}],
-                    "response_format": {"type": "json_object"},
-                },
-                timeout=self.timeout_seconds,
-            )
+            try:
+                response = httpx.post(
+                    f"{self.base_url}/chat/completions",
+                    headers={
+                        "Authorization": f"Bearer {self.api_key}",
+                        "Content-Type": "application/json",
+                    },
+                    json={
+                        "model": self.model,
+                        "messages": [{"role": "user", "content": prompt}],
+                        "response_format": {"type": "json_object"},
+                    },
+                    timeout=self.timeout_seconds,
+                )
+            except httpx.TimeoutException:
+                if attempt_index < self.max_retries:
+                    time.sleep(self.retry_backoff_seconds * (2**attempt_index))
+                    continue
+                raise
             try:
                 response.raise_for_status()
             except httpx.HTTPStatusError:

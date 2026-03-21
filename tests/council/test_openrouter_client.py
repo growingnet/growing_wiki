@@ -136,6 +136,86 @@ def test_openrouter_client_uses_retry_after_header_when_rate_limited(
     assert sleep_calls == [2.0]
 
 
+def test_openrouter_client_retries_on_read_timeout(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Live client retries transient read timeouts before succeeding."""
+    calls: list[int] = []
+
+    def fake_post(*args: object, **kwargs: object) -> httpx.Response:
+        calls.append(1)
+        if len(calls) == 1:
+            raise httpx.ReadTimeout("timed out")
+        return httpx.Response(
+            200,
+            json={
+                "choices": [
+                    {
+                        "message": {
+                            "content": '{"summary":"Claims extracted.","findings":[],"claims":[]}'
+                        }
+                    }
+                ]
+            },
+            request=httpx.Request(
+                "POST", "https://openrouter.ai/api/v1/chat/completions"
+            ),
+        )
+
+    sleep_calls: list[float] = []
+
+    monkeypatch.setattr(httpx, "post", fake_post)
+    monkeypatch.setattr(
+        openrouter_client_module.time,
+        "sleep",
+        lambda seconds: sleep_calls.append(seconds),
+    )
+    client = OpenRouterClaimExtractorClient(
+        api_key="test-key",
+        model="openrouter/openai/gpt-4.1-mini",
+        max_retries=1,
+        retry_backoff_seconds=0.25,
+    )
+
+    payload = client.run_prompt("prompt")
+
+    assert payload["summary"] == "Claims extracted."
+    assert len(calls) == 2
+    assert sleep_calls == [0.25]
+
+
+def test_openrouter_client_raises_read_timeout_after_retry_exhaustion(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Live client surfaces read timeouts after exhausting retries."""
+    calls: list[int] = []
+
+    def fake_post(*args: object, **kwargs: object) -> httpx.Response:
+        calls.append(1)
+        raise httpx.ReadTimeout("timed out")
+
+    sleep_calls: list[float] = []
+
+    monkeypatch.setattr(httpx, "post", fake_post)
+    monkeypatch.setattr(
+        openrouter_client_module.time,
+        "sleep",
+        lambda seconds: sleep_calls.append(seconds),
+    )
+    client = OpenRouterClaimExtractorClient(
+        api_key="test-key",
+        model="openrouter/openai/gpt-4.1-mini",
+        max_retries=2,
+        retry_backoff_seconds=0.25,
+    )
+
+    with pytest.raises(httpx.ReadTimeout):
+        client.run_prompt("prompt")
+
+    assert len(calls) == 3
+    assert sleep_calls == [0.25, 0.5]
+
+
 def test_openrouter_client_does_not_retry_not_found(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
