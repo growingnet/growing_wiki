@@ -64,6 +64,48 @@ class FakeClaimExtractor:
         return reviewer_payload
 
 
+class CapturingClaimExtractor:
+    """Capture the paper_id seen by the benchmark claim extractor."""
+
+    def __init__(self, model_id: str, profile_id: str) -> None:
+        """Store constructor inputs and benchmark bundle observations."""
+        self.model_id = model_id
+        self.profile_id = profile_id
+        self.seen_paper_ids: list[str] = []
+
+    def run_raw(self, bundle) -> dict:
+        """Record the bundle paper_id and return a valid reviewer payload."""
+        self.seen_paper_ids.append(bundle.paper_id)
+        return {
+            "role": "claim_extractor",
+            "summary": "Captured bundle paper_id.",
+            "findings": [],
+            "claims": [
+                {
+                    "claim": "Networks can grow during training.",
+                    "evidence_refs": ["section:full_text"],
+                    "confidence": "medium",
+                }
+            ],
+            "open_questions": [],
+        }
+
+
+class DivergingPaperIdProvider:
+    """Return a provider result whose paper_id differs from the manifest entry."""
+
+    def load(self, source: str) -> ProviderResult:
+        """Return a stable provider result with a canonical-but-different paper id."""
+        return ProviderResult(
+            success=True,
+            source_kind="generic_pdf",
+            paper_id="provider-paper-id",
+            title="Paper 1",
+            raw_text=f"Growing networks benchmark text from {source}.",
+            warnings=[],
+        )
+
+
 class FailingProvider:
     """Raise a deterministic provider failure for benchmark tests."""
 
@@ -145,6 +187,17 @@ def build_provider_resolution(entry: BenchmarkEntry) -> ResolvedBenchmarkSource:
     )
 
 
+def build_diverging_provider_resolution(
+    entry: BenchmarkEntry,
+) -> ResolvedBenchmarkSource:
+    """Resolve test entries to a provider whose canonical id differs from the manifest."""
+    return ResolvedBenchmarkSource(
+        provider_kind="generic_pdf",
+        provider=DivergingPaperIdProvider(),
+        source=entry.source,
+    )
+
+
 def test_claim_extraction_benchmark_defaults_to_frozen_baseline(
     tmp_path: Path,
 ) -> None:
@@ -217,6 +270,35 @@ def test_claim_extraction_benchmark_respects_explicit_model_override(
     assert selected_model_ids == ["example/model|baseline"]
     assert result.model_runs[0].profile_label == "baseline"
     assert result.model_runs[0].model_id == "example/model"
+
+
+def test_claim_extraction_benchmark_uses_manifest_paper_id_in_evidence_bundle(
+    tmp_path: Path,
+) -> None:
+    """Benchmark prompts should use the manifest paper_id for stable correlation."""
+    manifest_path = tmp_path / "benchmark.json"
+    output_dir = tmp_path / "artifacts"
+    write_manifest(manifest_path)
+    config = CouncilConfig(
+        openrouter_api_key="test-key",
+        claim_extractor_model="some-other-model",
+    )
+    claim_extractor = CapturingClaimExtractor(
+        model_id="nvidia/nemotron-3-super-120b-a12b:free",
+        profile_id="baseline",
+    )
+
+    result = run_claim_extraction_benchmark(
+        config=config,
+        dataset_path=manifest_path,
+        output_dir=output_dir,
+        run_label="benchmark-run",
+        provider_factory=build_diverging_provider_resolution,
+        claim_extractor_factory=lambda model_id, profile_id: claim_extractor,
+    )
+
+    assert claim_extractor.seen_paper_ids == ["paper-1"]
+    assert result.model_runs[0].paper_runs[0].paper_id == "paper-1"
 
 
 def test_claim_extraction_benchmark_supports_multiple_profiles(

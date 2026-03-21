@@ -196,7 +196,11 @@ def _run_benchmark_entry(
         resolved_source = build_provider(entry)
         loaded_provider_result = resolved_source.provider.load(resolved_source.source)
         provider_result = loaded_provider_result.model_dump(mode="json")
-        loaded_evidence_bundle = EvidenceBuilder().build(loaded_provider_result)
+        loaded_evidence_bundle = (
+            EvidenceBuilder()
+            .build(loaded_provider_result)
+            .model_copy(update={"paper_id": entry.paper_id})
+        )
         evidence_bundle = loaded_evidence_bundle.model_dump(mode="json")
         raw_review_output = claim_extractor.run_raw(loaded_evidence_bundle)
         validated_report = _reviewer_report_model_for_profile(

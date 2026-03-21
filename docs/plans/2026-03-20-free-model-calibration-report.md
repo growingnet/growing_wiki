@@ -22,11 +22,11 @@ By the end of the session, the calibration path included:
 Relevant artifact roots:
 
 - broad completed sweep:
-  [`artifacts/schema-calibration-broad-free-2026-03-20`](/Users/strivaud/Projects/web/growing_wiki/artifacts/schema-calibration-broad-free-2026-03-20)
+  `artifacts/schema-calibration-broad-free-2026-03-20`
 - initial two-model run before prompt hardening:
-  [`artifacts/calibration-live-2026-03-20`](/Users/strivaud/Projects/web/growing_wiki/artifacts/calibration-live-2026-03-20)
+  `artifacts/calibration-live-2026-03-20`
 - two-model run after prompt hardening:
-  [`artifacts/calibration-live-2026-03-20-hardened`](/Users/strivaud/Projects/web/growing_wiki/artifacts/calibration-live-2026-03-20-hardened)
+  `artifacts/calibration-live-2026-03-20-hardened`
 
 ## Successful Models
 
