@@ -213,7 +213,7 @@ def _run_benchmark_entry(
                 summary_markdown=_build_failure_summary_markdown(
                     paper_id=entry.paper_id,
                     model_id=model_id,
-                    error_type="ProviderWarning",
+                    error_kind="ProviderWarning",
                     error_message=f"Provider failed to load source: {loaded_provider_result.warnings}",
                 ),
                 error_type="ProviderWarning",
@@ -247,6 +247,10 @@ def _run_benchmark_entry(
             ),
         )
     except Exception as exc:
+        error_kind, error_message = _normalize_error(exc)
+        if provider_result:
+            provider_result["success"] = False
+            provider_result["warnings"] = provider_result.get("warnings", []) + [error_message]
         return BenchmarkPaperRun(
             paper_id=entry.paper_id,
             run_label=run_label,
@@ -261,11 +265,11 @@ def _run_benchmark_entry(
             summary_markdown=_build_failure_summary_markdown(
                 paper_id=entry.paper_id,
                 model_id=model_id,
-                error_type=type(exc).__name__,
-                error_message=str(exc),
+                error_kind=error_kind,
+                error_message=error_message,
             ),
-            error_type=type(exc).__name__,
-            error_message=str(exc),
+            error_type=error_kind,
+            error_message=error_message,
         )
 
 
@@ -273,7 +277,7 @@ def _build_failure_summary_markdown(
     *,
     paper_id: str,
     model_id: str,
-    error_type: str,
+    error_kind: str,
     error_message: str,
 ) -> str:
     """Build a short markdown summary for one failed paper benchmark run."""
@@ -282,9 +286,23 @@ def _build_failure_summary_markdown(
         f"- paper_id: {paper_id}\n"
         f"- model_id: {model_id}\n"
         f"- status: failed\n"
-        f"- error_type: {error_type}\n"
+        f"- error_kind: {error_kind}\n"
         f"- error_message: {error_message}\n"
     )
+
+def _normalize_error(exc: Exception) -> tuple[str, str]:
+    """Map raw exceptions to deterministic error_kind and error_message strings."""
+    msg = str(exc)
+    error_kind = type(exc).__name__
+    
+    if "nodename nor servname" in msg or "Name or service not known" in msg or "getaddrinfo" in msg:
+        return "dns_resolution_failure", "DNS resolution failed (normalized)"
+    if "timeout" in msg.lower():
+        return "network_timeout", "Network timeout (normalized)"
+    if "Connection refused" in msg or "connect_tcp" in msg:
+        return "connection_refused", "Connection refused (normalized)"
+        
+    return error_kind, msg
 
 
 def _reviewer_report_model_for_profile(profile_id: str) -> type[ReviewerReport]:

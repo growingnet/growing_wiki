@@ -3,7 +3,7 @@
 - paper_id: gradmax-2022
 - model_id: nvidia/nemotron-3-super-120b-a12b:free
 - status: failed
-- error_type: ValidationError
+- error_kind: ValidationError
 - error_message: 3 validation errors for WebsiteAlignedReviewerReport
 claims.0
   Input should be a valid dictionary or instance of ClaimRecord [type=model_type, input_value='GradMax grows networks w...urbing learned behavior', input_type=str]

@@ -3,7 +3,7 @@
 - paper_id: growing-tiny-networks-2024
 - model_id: nvidia/nemotron-3-super-120b-a12b:free
 - status: failed
-- error_type: ValidationError
+- error_kind: ValidationError
 - error_message: 4 validation errors for WebsiteAlignedReviewerReport
 findings.0
   Input should be a valid dictionary or instance of ReviewFinding [type=model_type, input_value='CIFAR‑10/100 results m... manual design choices.', input_type=str]

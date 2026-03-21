@@ -7,7 +7,9 @@
   "raw_text": "GradMax: Growing Neural Networks using Gradient Information\nEvci et al. | ICLR 2022\nThis fixture summarizes a real paper about adding neurons during training.\nGradMax grows a network without disturbing learned behavior and initializes\nnew weights to maximize useful gradients through an SVD-based procedure.\nThe paper reports improved training dynamics across several vision settings.",
   "sections": [],
   "source_kind": "generic_pdf",
-  "success": true,
+  "success": false,
   "title": "gradmax-2022",
-  "warnings": []
+  "warnings": [
+    "Client error '429 Too Many Requests' for url 'https://openrouter.ai/api/v1/chat/completions'"
+  ]
 }
