@@ -3,7 +3,7 @@
   "equations": [],
   "fallback_reason": null,
   "fallback_used": false,
-  "paper_id": null,
+  "paper_id": "growing-tiny-networks-2024",
   "raw_text": "Growing Tiny Networks: Spotting Expressivity Bottlenecks and Fixing\nThem Optimally\nVerbockhaven et al. | TMLR 2024\nThis fixture captures a real paper on growing small networks during training.\nThe method detects expressivity bottlenecks from backpropagation signals and\nadds neurons where the current architecture cannot follow the functional gradient.\nThe paper reports CIFAR results that match larger models with less manual search.",
   "sections": [],
   "source_kind": "generic_pdf",

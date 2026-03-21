@@ -3,7 +3,7 @@
   "equations": [],
   "fallback_reason": null,
   "fallback_used": false,
-  "paper_id": null,
+  "paper_id": "firefly-2020",
   "raw_text": "Firefly Neural Architecture Descent: a General Approach for Growing\nNeural Networks\nWu et al. | NeurIPS 2020\nThis fixture summarizes a real paper on dynamic architecture growth.\nFirefly descent expands width or depth by searching a functional neighborhood\naround the current network with a Taylor-based greedy selection rule.\nThe paper targets accurate and resource-efficient models, including continual learning.",
   "sections": [],
   "source_kind": "generic_pdf",
