@@ -1,0 +1,37 @@
+{
+  "claims": [
+    {
+      "claim": "Modest improvements over baseline.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Evaluation on synthetic benchmark."
+    }
+  ],
+  "findings": [
+    {
+      "claim": "Modest improvements over baseline.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "Evaluation on synthetic benchmark shows small gains.",
+      "recommendation": "Consider more complex benchmarks for validation.",
+      "severity": "low"
+    },
+    {
+      "claim": "Improved efficiency.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "Evaluation setup is simple for schema-calibration testing.",
+      "recommendation": "Expand evaluation to real-world scenarios.",
+      "severity": "low"
+    }
+  ],
+  "open_questions": [
+    "How do these modest improvements translate to real-world applications?"
+  ],
+  "role": "claim_extractor",
+  "summary": "Evaluation of compact training strategy shows modest improvements over baseline."
+}

@@ -1,0 +1,12 @@
+{
+  "notes": "KDD 2020 paper fixture for benchmark smoke runs.",
+  "paper_id": "autogrow-2020",
+  "source": "tests/fixtures/pdfs/autogrow-2020.pdf",
+  "source_type": "pdf_path",
+  "tags": [
+    "growing-networks",
+    "layers",
+    "kdd-2020"
+  ],
+  "title": "AutoGrow: Automatic Layer Growing in Deep Convolutional Networks"
+}

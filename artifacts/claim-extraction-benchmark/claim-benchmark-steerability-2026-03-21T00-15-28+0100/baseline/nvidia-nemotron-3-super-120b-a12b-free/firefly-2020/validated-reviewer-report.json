@@ -1,0 +1,63 @@
+{
+  "claims": [
+    {
+      "claim": "Firefly descent expands width or depth by searching a functional neighborhood around the current network.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Directly from the abstract description."
+    },
+    {
+      "claim": "The selection rule used is Taylor-based and greedy.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Describes the optimization strategy."
+    },
+    {
+      "claim": "Firefly descent aims to produce accurate and resource-efficient models.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "States the objective of the method."
+    },
+    {
+      "claim": "The method is applicable to continual learning scenarios.",
+      "confidence": "low",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Mentioned as a target application but without detailed evidence in the excerpt."
+    }
+  ],
+  "findings": [
+    {
+      "claim": "Firefly descent expands network width or depth by searching a functional neighborhood using a Taylor-based greedy selection rule.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "Highlights the core mechanism of the proposed method.",
+      "recommendation": "Validate the effectiveness of the Taylor-based rule across diverse tasks.",
+      "severity": "low"
+    },
+    {
+      "claim": "The approach targets both accuracy and resource efficiency, and is applicable to continual learning.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "Indicates the intended benefits and use cases of Firefly descent.",
+      "recommendation": "Empirically evaluate trade-offs between accuracy and resource usage in continual learning benchmarks.",
+      "severity": "low"
+    }
+  ],
+  "open_questions": [
+    "How does Firefly descent compare to existing neural architecture search methods in terms of search cost and final performance?",
+    "What theoretical guarantees, if any, does the Taylor-based greedy selection provide?",
+    "Does the method scale effectively to very large networks or complex tasks beyond those evaluated?"
+  ],
+  "role": "claim_extractor",
+  "summary": "The paper introduces Firefly Neural Architecture Descent, a method that grows neural networks by expanding width or depth via a Taylor-based greedy search in a functional neighborhood, aiming for accurate and resource-efficient models, including continual learning scenarios."
+}

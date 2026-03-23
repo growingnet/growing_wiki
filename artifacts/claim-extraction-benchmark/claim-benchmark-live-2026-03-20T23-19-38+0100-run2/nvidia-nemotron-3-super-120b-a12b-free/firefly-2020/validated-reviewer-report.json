@@ -1,0 +1,45 @@
+{
+  "claims": [
+    {
+      "claim": "Firefly Neural Architecture Descent is a general approach for growing neural networks.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": null
+    },
+    {
+      "claim": "Firefly descent expands network width or depth by searching a functional neighborhood around the current network using a Taylor-based greedy selection rule.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": null
+    },
+    {
+      "claim": "The method targets accurate and resource-efficient models, including continual learning scenarios.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": null
+    }
+  ],
+  "findings": [
+    {
+      "claim": "Firefly descent expands width or depth by searching a functional neighborhood around the current network with a Taylor-based greedy selection rule.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "Describes the core algorithmic contribution of the paper.",
+      "recommendation": null,
+      "severity": "low"
+    }
+  ],
+  "open_questions": [
+    "How does Firefly descent compare to other dynamic architecture growth methods in terms of computational overhead and final performance?",
+    "What are the limitations of the Taylor-based greedy selection rule when applied to very large-scale networks?"
+  ],
+  "role": "claim_extractor",
+  "summary": "The paper introduces Firefly Neural Architecture Descent, a method for growing neural networks by expanding width or depth via a Taylor-based greedy search, aiming for accurate, resource-efficient models and continual learning."
+}

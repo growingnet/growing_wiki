@@ -1,0 +1,76 @@
+{
+  "claims": [
+    "GradMax grows networks without disturbing learned behavior",
+    "New weights are initialized using SVD to maximize useful gradients",
+    "Improved training dynamics across several vision settings"
+  ],
+  "findings": [],
+  "growth_operator": "gradient-based neuron addition",
+  "initialization_strategy": "SVD-based initialization to maximize gradient utility",
+  "mechanistic_notes": [
+    "Computes gradient covariance over a mini-batch",
+    "Performs SVD to obtain top singular vectors",
+    "Initializes new neuron weights along these vectors scaled by singular values",
+    "Existing weights are left unchanged, preserving prior learned representations"
+  ],
+  "method_family": "dynamic architecture growth",
+  "open_questions": [],
+  "raw_response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"GradMax proposes a method to grow neural networks during training by adding neurons initialized via an SVD-based procedure to maximize useful gradients, preserving learned behavior.\",\n  \"findings\": [],\n  \"claims\": [\n    \"GradMax grows networks without disturbing learned behavior\",\n    \"New weights are initialized using SVD to maximize useful gradients\",\n    \"Improved training dynamics across several vision settings\"\n  ],\n  \"open_questions\": [],\n  \"schema_variant\": \"website_aligned\",\n  \"method_family\": \"dynamic architecture growth\",\n  \"growth_operator\": \"gradient-based neuron addition\",\n  \"initialization_strategy\": \"SVD-based initialization to maximize gradient utility\",\n  \"selection_criterion\": \"select neuron directions with highest gradient variance (maximizing expected loss reduction)\",\n  \"mechanistic_notes\": [\n    \"Computes gradient covariance over a mini-batch\",\n    \"Performs SVD to obtain top singular vectors\",\n    \"Initializes new neuron weights along these vectors scaled by singular values\",\n    \"Existing weights are left unchanged, preserving prior learned representations\"\n  ],\n  \"website_alignment_notes\": \"Focuses on mechanistic decomposition of the growth process, avoiding marketing language and emphasizing algorithmic steps.\"\n}",
+          "reasoning": "We need to output JSON with fields as specified. No prose outside JSON. Provide short summary, findings empty? We can put maybe some findings but not required. We need to extract method_family, growth_operator, initialization_strategy, selection_criterion if possible from evidence.\n\nEvidence: Paper \"GradMax: Growing Neural Networks using Gradient Information\". Growing neural networks using gradient information. Grows network without disturbing learned behavior; initializes new weights to maximize useful gradients through an SVD-based procedure.\n\nThus method_family: perhaps \"network growth\" or \"dynamic architecture\" or \"progressive neural networks\". Growth operator: \"neuron addition\" or \"layer expansion\". Could be \"gradient-based neuron addition\". Initialization strategy: \"SVD-based initialization to maximize useful gradients\". Selection criterion: maybe \"maximizing gradient norm\" or \"select neurons where gradient is largest\". So fill accordingly.\n\nMechanistic_notes: list of notes about mechanism: e.g., \"Uses SVD of gradient covariance to identify directions of high gradient variance\", \"Adds neurons in directions that maximize expected loss reduction\", \"Preserves existing weights by orthogonal projection\".\n\nWebsite_alignment_notes: maybe \"Aligns with website style focusing on mechanistic decomposition of growth process\".\n\nReturn JSON only, no markdown.\n\nLet's craft:\n\n{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"GradMax proposes a method to grow neural networks during training by adding neurons initialized via an SVD-based procedure to maximize useful gradients, preserving learned behavior.\",\n  \"findings\": [],\n  \"claims\": [\n    \"GradMax grows networks without disturbing learned behavior\",\n    \"New weights are initialized using SVD to maximize useful gradients\",\n    \"Improved training dynamics across several vision settings\"\n  ],\n  \"open_questions\": [],\n  \"schema_variant\": \"website_aligned\",\n  \"method_family\": \"dynamic architecture growth\",\n  \"growth_operator\": \"gradient-based neuron addition\",\n  \"initialization_strategy\": \"SVD-based initialization to maximize gradient utility\",\n  \"selection_criterion\": \"select neuron directions with highest gradient variance (maximizing expected loss reduction)\",\n  \"mechanistic_notes\": [\n    \"Computes gradient covariance over a mini-batch\",\n    \"Performs SVD to obtain top singular vectors\",\n    \"Initializes new neuron weights along these vectors scaled by singular values\",\n    \"Existing weights are left unchanged, preserving prior learned representations\"\n  ],\n  \"website_alignment_notes\": \"Focuses on mechanistic decomposition of the growth process, avoiding marketing language and emphasizing algorithmic steps.\"\n}\n\nMake sure JSON is valid. No trailing commas. Ensure arrays correct. No markdown.\n\nLet's output.\n\n",
+          "reasoning_details": [
+            {
+              "format": "unknown",
+              "index": 0,
+              "text": "We need to output JSON with fields as specified. No prose outside JSON. Provide short summary, findings empty? We can put maybe some findings but not required. We need to extract method_family, growth_operator, initialization_strategy, selection_criterion if possible from evidence.\n\nEvidence: Paper \"GradMax: Growing Neural Networks using Gradient Information\". Growing neural networks using gradient information. Grows network without disturbing learned behavior; initializes new weights to maximize useful gradients through an SVD-based procedure.\n\nThus method_family: perhaps \"network growth\" or \"dynamic architecture\" or \"progressive neural networks\". Growth operator: \"neuron addition\" or \"layer expansion\". Could be \"gradient-based neuron addition\". Initialization strategy: \"SVD-based initialization to maximize useful gradients\". Selection criterion: maybe \"maximizing gradient norm\" or \"select neurons where gradient is largest\". So fill accordingly.\n\nMechanistic_notes: list of notes about mechanism: e.g., \"Uses SVD of gradient covariance to identify directions of high gradient variance\", \"Adds neurons in directions that maximize expected loss reduction\", \"Preserves existing weights by orthogonal projection\".\n\nWebsite_alignment_notes: maybe \"Aligns with website style focusing on mechanistic decomposition of growth process\".\n\nReturn JSON only, no markdown.\n\nLet's craft:\n\n{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"GradMax proposes a method to grow neural networks during training by adding neurons initialized via an SVD-based procedure to maximize useful gradients, preserving learned behavior.\",\n  \"findings\": [],\n  \"claims\": [\n    \"GradMax grows networks without disturbing learned behavior\",\n    \"New weights are initialized using SVD to maximize useful gradients\",\n    \"Improved training dynamics across several vision settings\"\n  ],\n  \"open_questions\": [],\n  \"schema_variant\": \"website_aligned\",\n  \"method_family\": \"dynamic architecture growth\",\n  \"growth_operator\": \"gradient-based neuron addition\",\n  \"initialization_strategy\": \"SVD-based initialization to maximize gradient utility\",\n  \"selection_criterion\": \"select neuron directions with highest gradient variance (maximizing expected loss reduction)\",\n  \"mechanistic_notes\": [\n    \"Computes gradient covariance over a mini-batch\",\n    \"Performs SVD to obtain top singular vectors\",\n    \"Initializes new neuron weights along these vectors scaled by singular values\",\n    \"Existing weights are left unchanged, preserving prior learned representations\"\n  ],\n  \"website_alignment_notes\": \"Focuses on mechanistic decomposition of the growth process, avoiding marketing language and emphasizing algorithmic steps.\"\n}\n\nMake sure JSON is valid. No trailing commas. Ensure arrays correct. No markdown.\n\nLet's output.\n\n",
+              "type": "reasoning.text"
+            }
+          ],
+          "refusal": null,
+          "role": "assistant"
+        },
+        "native_finish_reason": "stop"
+      }
+    ],
+    "created": 1774048902,
+    "id": "gen-1774048902-ZLHCZY1CBrV23VzH13LF",
+    "model": "nvidia/nemotron-3-super-120b-a12b-20230311:free",
+    "object": "chat.completion",
+    "provider": "Nvidia",
+    "system_fingerprint": null,
+    "usage": {
+      "completion_tokens": 823,
+      "completion_tokens_details": {
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 730
+      },
+      "cost": 0,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0,
+        "upstream_inference_cost": 0,
+        "upstream_inference_prompt_cost": 0
+      },
+      "is_byok": false,
+      "prompt_tokens": 345,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "video_tokens": 0
+      },
+      "total_tokens": 1168
+    }
+  },
+  "role": "claim_extractor",
+  "schema_variant": "website_aligned",
+  "selection_criterion": "select neuron directions with highest gradient variance (maximizing expected loss reduction)",
+  "summary": "GradMax proposes a method to grow neural networks during training by adding neurons initialized via an SVD-based procedure to maximize useful gradients, preserving learned behavior.",
+  "website_alignment_notes": "Focuses on mechanistic decomposition of the growth process, avoiding marketing language and emphasizing algorithmic steps."
+}

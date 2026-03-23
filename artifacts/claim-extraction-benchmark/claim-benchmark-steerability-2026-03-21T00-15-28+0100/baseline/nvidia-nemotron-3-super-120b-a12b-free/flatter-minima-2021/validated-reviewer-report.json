@@ -1,0 +1,46 @@
+{
+  "claims": [
+    {
+      "claim": "Grown models converge to flatter minima than fixed-size models trained from scratch.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Based on comparative loss landscape analysis reported in the paper."
+    },
+    {
+      "claim": "Grown models generalize better than fixed-size models trained from scratch.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Generalization measured via test accuracy on benchmark tasks."
+    }
+  ],
+  "findings": [
+    {
+      "claim": "Grown models converge to flatter minima than fixed-size models trained from scratch.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "Flatter minima are associated with better generalization; this finding supports the hypothesis that growing networks improve optimization landscape.",
+      "recommendation": "Further empirical validation across architectures and datasets is recommended.",
+      "severity": "low"
+    },
+    {
+      "claim": "Grown models generalize better than fixed-size models trained from scratch.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "Improved generalization is a key outcome of flatter minima, suggesting practical benefits of the growing approach.",
+      "recommendation": "Investigate whether the generalization gain holds under different training schedules.",
+      "severity": "low"
+    }
+  ],
+  "open_questions": [
+    "Does the flatter minima effect persist when growing networks are applied to very deep architectures?",
+    "What is the computational overhead of the growing procedure compared to training fixed-size models?"
+  ],
+  "role": "claim_extractor",
+  "summary": "The paper shows that incrementally growing neural networks during training leads to flatter minima and better generalization compared to fixed-size models trained from scratch."
+}

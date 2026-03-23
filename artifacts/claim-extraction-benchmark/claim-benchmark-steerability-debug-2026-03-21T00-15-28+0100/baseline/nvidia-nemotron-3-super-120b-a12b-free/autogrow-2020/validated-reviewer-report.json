@@ -1,0 +1,43 @@
+{
+  "claims": [
+    {
+      "claim": "AutoGrow starts from a shallow seed network.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "AutoGrow grows layers when accuracy improves.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "AutoGrow stops growing when additional depth no longer helps under the learned policy.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "AutoGrow reports strong accuracy-computation trade-offs across several datasets.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    }
+  ],
+  "findings": [],
+  "open_questions": [
+    "How does AutoGrow's performance compare to manual depth tuning on large-scale datasets?",
+    "What is the computational overhead of the layer-growing policy during training?"
+  ],
+  "role": "claim_extractor",
+  "summary": "AutoGrow proposes a method for automatically growing network depth during training, starting from a shallow seed, adding layers when accuracy improves, and stopping when further depth does not improve accuracy under a learned policy, demonstrating strong accuracy-computation trade-offs on multiple datasets."
+}

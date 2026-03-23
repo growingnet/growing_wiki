@@ -1,0 +1,63 @@
+{
+  "claims": [
+    {
+      "claim": "GradMax grows a network during training.",
+      "confidence": "high",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Core contribution of the paper."
+    },
+    {
+      "claim": "GradMax does not disturb learned behavior when adding neurons.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Supported by experimental results showing preserved performance."
+    },
+    {
+      "claim": "New weights are initialized to maximize useful gradients via an SVD-based procedure.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Technical detail of the weight initialization strategy."
+    },
+    {
+      "claim": "GradMax improves training dynamics across several vision settings.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Empirical finding reported in the paper."
+    }
+  ],
+  "findings": [
+    {
+      "claim": "GradMax grows network without disturbing learned behavior.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "Shows that the method preserves prior knowledge while expanding model capacity.",
+      "recommendation": "Evaluate GradMax in continual learning or fine-tuning scenarios to test stability.",
+      "severity": "low"
+    },
+    {
+      "claim": "New weights are initialized via SVD to maximize useful gradients.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "SVD-based initialization aligns new weights with promising gradient directions for effective learning.",
+      "recommendation": "Compare this initialization with random or other gradient-based schemes.",
+      "severity": "low"
+    }
+  ],
+  "open_questions": [
+    "How does GradMax scale to very large models (e.g., billions of parameters)?",
+    "What are the theoretical guarantees or limitations of the SVD-based initialization?",
+    "Does GradMax provide similar benefits in non-vision domains such as NLP or reinforcement learning?"
+  ],
+  "role": "claim_extractor",
+  "summary": "GradMax introduces a method to grow neural networks during training by adding neurons without disrupting learned behavior, initializing new weights via an SVD-based procedure to maximize useful gradients, and reports improved training dynamics in vision tasks."
+}

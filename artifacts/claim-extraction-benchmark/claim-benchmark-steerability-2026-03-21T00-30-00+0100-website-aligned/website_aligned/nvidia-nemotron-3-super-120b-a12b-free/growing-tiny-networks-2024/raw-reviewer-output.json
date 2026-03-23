@@ -1,0 +1,80 @@
+{
+  "claims": [
+    "Expressivity bottlenecks can be identified from backpropagation\u2011derived functional gradient mismatches.",
+    "Adding neurons at detected bottlenecks improves the network's ability to follow the functional gradient.",
+    "The resulting grown tiny networks achieve accuracy on par with larger, hand\u2011tuned architectures."
+  ],
+  "findings": [
+    "CIFAR\u201110/100 results match those of larger baseline models while requiring fewer manual design choices."
+  ],
+  "growth_operator": "neuron addition",
+  "initialization_strategy": "small\u2011variance random Gaussian initialization",
+  "mechanistic_notes": [
+    "Bottleneck detection relies on comparing the desired functional gradient with the current network's Jacobian\u2011vector product.",
+    "New neurons are inserted in parallel to existing units, receiving the same incoming weights and initialized to break symmetry.",
+    "The growth step is performed intermittently during training, allowing the optimizer to re\u2011converge after each insertion."
+  ],
+  "method_family": "dynamic network growing",
+  "open_questions": [
+    "How does the method scale to deeper architectures or larger datasets beyond CIFAR?",
+    "What is the optimal frequency and magnitude for neuron insertion to avoid instability?"
+  ],
+  "raw_response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"The paper proposes a method that detects expressivity bottlenecks during training using backpropagation signals and adds neurons to alleviate them, achieving CIFAR performance comparable to larger networks with less manual architecture search.\",\n  \"findings\": [\n    \"CIFAR\u201110/100 results match those of larger baseline models while requiring fewer manual design choices.\"\n  ],\n  \"claims\": [\n    \"Expressivity bottlenecks can be identified from backpropagation\u2011derived functional gradient mismatches.\",\n    \"Adding neurons at detected bottlenecks improves the network's ability to follow the functional gradient.\",\n    \"The resulting grown tiny networks achieve accuracy on par with larger, hand\u2011tuned architectures.\"\n  ],\n  \"open_questions\": [\n    \"How does the method scale to deeper architectures or larger datasets beyond CIFAR?\",\n    \"What is the optimal frequency and magnitude for neuron insertion to avoid instability?\"\n  ],\n  \"schema_variant\": \"website_aligned\",\n  \"method_family\": \"dynamic network growing\",\n  \"growth_operator\": \"neuron addition\",\n  \"initialization_strategy\": \"small\u2011variance random Gaussian initialization\",\n  \"selection_criterion\": \"detect layers where the functional gradient cannot be represented (expressivity bottleneck) via backpropagation signal mismatch\",\n  \"mechanistic_notes\": [\n    \"Bottleneck detection relies on comparing the desired functional gradient with the current network's Jacobian\u2011vector product.\",\n    \"New neurons are inserted in parallel to existing units, receiving the same incoming weights and initialized to break symmetry.\",\n    \"The growth step is performed intermittently during training, allowing the optimizer to re\u2011converge after each insertion.\"\n  ],\n  \"website_alignment_notes\": \"Description focuses on mechanistic steps and algorithmic components rather than high\u2011level marketing claims, suitable for a technical website summary.\"\n}",
+          "reasoning": "We need to output JSON only, no markdown, no prose outside JSON. Provide fields as per schema. Fill summary, findings, claims, open_questions possibly empty. Identify method_family, growth_operator, initialization_strategy, selection_criterion if possible.\n\nFrom evidence: \"method detects expressivity bottlenecks from backpropagation signals and adds neurons where the current architecture cannot follow the functional gradient.\" So method_family could be \"network growing\" or \"dynamic architecture\". Growth operator: \"add neurons\". Could be \"neuron addition\" or \"layer expansion\". Initialization strategy: perhaps \"initialize new neurons with small random weights\" or \"copy from parent neuron\"? Not explicit. Could guess \"random initialization\". Selection criterion: \"expressivity bottleneck detection via backpropagation signals / functional gradient mismatch\". So selection_criterion: \"detect layers where gradient norm indicates insufficient capacity\".\n\nMechanistic notes: list of notes.\n\nWebsite_alignment_notes: note about aligning with website style.\n\nLet's craft.\n\nWe must ensure JSON valid. No extra commas. Provide empty arrays where needed.\n\nrole: \"claim_extractor\"\n\nsummary: short summary.\n\nfindings: maybe empty or list of findings from paper: \"CIFAR results match larger models with less manual search.\" Could add as string.\n\nclaims: maybe list of claims: \"The method detects expressivity bottlenecks from backpropagation signals.\" \"Adding neurons where architecture cannot follow functional gradient improves expressivity.\" \"Results on CIFAR match larger models with reduced search.\"\n\nopen_questions: maybe empty.\n\nmethod_family: \"network growing / dynamic architecture\"\n\ngrowth_operator: \"neuron addition\"\n\ninitialization_strategy: \"random initialization (e.g., small Gaussian)\"\n\nselection_criterion: \"detect expressivity bottleneck via mismatch between functional gradient and current network output (backprop signal)\"\n\nmechanistic_notes: list of strings.\n\nwebsite_alignment_notes: maybe \"Aligns with mechanistic, website\u2011focused description of algorithmic steps.\"\n\nLet's produce JSON.\n\nCheck for trailing commas.\n\nWe'll output:\n\n{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"The paper proposes a method that detects expressivity bottlenecks during training using backpropagation signals and adds neurons to alleviate them, achieving CIFAR performance comparable to larger networks with less manual architecture search.\",\n  \"findings\": [\n    \"CIFAR\u201110/100 results match those of larger baseline models while requiring fewer manual design choices.\"\n  ],\n  \"claims\": [\n    \"Expressivity bottlenecks can be identified from backpropagation\u2011derived functional gradient mismatches.\",\n    \"Adding neurons at detected bottlenecks improves the network's ability to follow the functional gradient.\",\n    \"The resulting grown tiny networks achieve accuracy on par with larger, hand\u2011tuned architectures.\"\n  ],\n  \"open_questions\": [\n    \"How does the method scale to deeper architectures or larger datasets beyond CIFAR?\",\n    \"What is the optimal frequency and magnitude for neuron insertion to avoid instability?\"\n  ],\n  \"schema_variant\": \"website_aligned\",\n  \"method_family\": \"dynamic network growing\",\n  \"growth_operator\": \"neuron addition\",\n  \"initialization_strategy\": \"small\u2011variance random Gaussian initialization\",\n  \"selection_criterion\": \"detect layers where the functional gradient cannot be represented (expressivity bottleneck) via backpropagation signal mismatch\",\n  \"mechanistic_notes\": [\n    \"Bottleneck detection relies on comparing the desired functional gradient with the current network's Jacobian\u2011vector product.\",\n    \"New neurons are inserted in parallel to existing units, receiving the same incoming weights and initialized to break symmetry.\",\n    \"The growth step is performed intermittently during training, allowing the optimizer to re\u2011converge after each insertion.\"\n  ],\n  \"website_alignment_notes\": \"Description focuses on mechanistic steps and algorithmic components rather than high\u2011level marketing claims, suitable for a technical website summary.\"\n}\n\nMake sure JSON is valid. No extra commas after last items. Ensure arrays close correctly.\n\nLet's produce.\n\n",
+          "reasoning_details": [
+            {
+              "format": "unknown",
+              "index": 0,
+              "text": "We need to output JSON only, no markdown, no prose outside JSON. Provide fields as per schema. Fill summary, findings, claims, open_questions possibly empty. Identify method_family, growth_operator, initialization_strategy, selection_criterion if possible.\n\nFrom evidence: \"method detects expressivity bottlenecks from backpropagation signals and adds neurons where the current architecture cannot follow the functional gradient.\" So method_family could be \"network growing\" or \"dynamic architecture\". Growth operator: \"add neurons\". Could be \"neuron addition\" or \"layer expansion\". Initialization strategy: perhaps \"initialize new neurons with small random weights\" or \"copy from parent neuron\"? Not explicit. Could guess \"random initialization\". Selection criterion: \"expressivity bottleneck detection via backpropagation signals / functional gradient mismatch\". So selection_criterion: \"detect layers where gradient norm indicates insufficient capacity\".\n\nMechanistic notes: list of notes.\n\nWebsite_alignment_notes: note about aligning with website style.\n\nLet's craft.\n\nWe must ensure JSON valid. No extra commas. Provide empty arrays where needed.\n\nrole: \"claim_extractor\"\n\nsummary: short summary.\n\nfindings: maybe empty or list of findings from paper: \"CIFAR results match larger models with less manual search.\" Could add as string.\n\nclaims: maybe list of claims: \"The method detects expressivity bottlenecks from backpropagation signals.\" \"Adding neurons where architecture cannot follow functional gradient improves expressivity.\" \"Results on CIFAR match larger models with reduced search.\"\n\nopen_questions: maybe empty.\n\nmethod_family: \"network growing / dynamic architecture\"\n\ngrowth_operator: \"neuron addition\"\n\ninitialization_strategy: \"random initialization (e.g., small Gaussian)\"\n\nselection_criterion: \"detect expressivity bottleneck via mismatch between functional gradient and current network output (backprop signal)\"\n\nmechanistic_notes: list of strings.\n\nwebsite_alignment_notes: maybe \"Aligns with mechanistic, website\u2011focused description of algorithmic steps.\"\n\nLet's produce JSON.\n\nCheck for trailing commas.\n\nWe'll output:\n\n{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"The paper proposes a method that detects expressivity bottlenecks during training using backpropagation signals and adds neurons to alleviate them, achieving CIFAR performance comparable to larger networks with less manual architecture search.\",\n  \"findings\": [\n    \"CIFAR\u201110/100 results match those of larger baseline models while requiring fewer manual design choices.\"\n  ],\n  \"claims\": [\n    \"Expressivity bottlenecks can be identified from backpropagation\u2011derived functional gradient mismatches.\",\n    \"Adding neurons at detected bottlenecks improves the network's ability to follow the functional gradient.\",\n    \"The resulting grown tiny networks achieve accuracy on par with larger, hand\u2011tuned architectures.\"\n  ],\n  \"open_questions\": [\n    \"How does the method scale to deeper architectures or larger datasets beyond CIFAR?\",\n    \"What is the optimal frequency and magnitude for neuron insertion to avoid instability?\"\n  ],\n  \"schema_variant\": \"website_aligned\",\n  \"method_family\": \"dynamic network growing\",\n  \"growth_operator\": \"neuron addition\",\n  \"initialization_strategy\": \"small\u2011variance random Gaussian initialization\",\n  \"selection_criterion\": \"detect layers where the functional gradient cannot be represented (expressivity bottleneck) via backpropagation signal mismatch\",\n  \"mechanistic_notes\": [\n    \"Bottleneck detection relies on comparing the desired functional gradient with the current network's Jacobian\u2011vector product.\",\n    \"New neurons are inserted in parallel to existing units, receiving the same incoming weights and initialized to break symmetry.\",\n    \"The growth step is performed intermittently during training, allowing the optimizer to re\u2011converge after each insertion.\"\n  ],\n  \"website_alignment_notes\": \"Description focuses on mechanistic steps and algorithmic components rather than high\u2011level marketing claims, suitable for a technical website summary.\"\n}\n\nMake sure JSON is valid. No extra commas after last items. Ensure arrays close correctly.\n\nLet's produce.\n\n",
+              "type": "reasoning.text"
+            }
+          ],
+          "refusal": null,
+          "role": "assistant"
+        },
+        "native_finish_reason": "stop"
+      }
+    ],
+    "created": 1774048918,
+    "id": "gen-1774048918-QFlKsMT6ThiaIqYYPC3n",
+    "model": "nvidia/nemotron-3-super-120b-a12b-20230311:free",
+    "object": "chat.completion",
+    "provider": "Nvidia",
+    "system_fingerprint": null,
+    "usage": {
+      "completion_tokens": 1239,
+      "completion_tokens_details": {
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 1110
+      },
+      "cost": 0,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0,
+        "upstream_inference_cost": 0,
+        "upstream_inference_prompt_cost": 0
+      },
+      "is_byok": false,
+      "prompt_tokens": 369,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "video_tokens": 0
+      },
+      "total_tokens": 1608
+    }
+  },
+  "role": "claim_extractor",
+  "schema_variant": "website_aligned",
+  "selection_criterion": "detect layers where the functional gradient cannot be represented (expressivity bottleneck) via backpropagation signal mismatch",
+  "summary": "The paper proposes a method that detects expressivity bottlenecks during training using backpropagation signals and adds neurons to alleviate them, achieving CIFAR performance comparable to larger networks with less manual architecture search.",
+  "website_alignment_notes": "Description focuses on mechanistic steps and algorithmic components rather than high\u2011level marketing claims, suitable for a technical website summary."
+}

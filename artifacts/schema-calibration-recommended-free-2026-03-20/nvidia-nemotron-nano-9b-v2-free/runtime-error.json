@@ -1,0 +1,7 @@
+{
+  "model_id": "nvidia/nemotron-nano-9b-v2:free",
+  "status": "runtime_failed",
+  "error_type": "RemoteProtocolError",
+  "error_message": "peer closed connection without sending complete message body (incomplete chunked read)",
+  "output_dir": "artifacts/schema-calibration-recommended-free-2026-03-20/nvidia-nemotron-nano-9b-v2-free"
+}

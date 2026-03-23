@@ -1,0 +1,7 @@
+{
+  "model_id": "openai/gpt-oss-20b:free",
+  "status": "runtime_failed",
+  "error_type": "HTTPStatusError",
+  "error_message": "Client error '404 Not Found' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
+  "output_dir": "artifacts/schema-calibration-broad-free-2026-03-20-retry/openai-gpt-oss-20b-free"
+}

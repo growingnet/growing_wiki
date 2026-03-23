@@ -1,0 +1,96 @@
+{
+  "claims": [
+    {
+      "claim": "AutoGrow starts from a shallow seed network.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "AutoGrow grows layers when accuracy improves.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "AutoGrow stops growing when additional depth no longer helps under the learned policy.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "AutoGrow reports strong accuracy-computation trade-offs across several datasets.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    }
+  ],
+  "findings": [],
+  "open_questions": [
+    "How does AutoGrow's performance compare to manual depth tuning on large-scale datasets?",
+    "What is the computational overhead of the layer-growing policy during training?"
+  ],
+  "raw_response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"AutoGrow proposes a method for automatically growing network depth during training, starting from a shallow seed, adding layers when accuracy improves, and stopping when further depth does not improve accuracy under a learned policy, demonstrating strong accuracy-computation trade-offs on multiple datasets.\",\n  \"findings\": [],\n  \"claims\": [\n    {\n      \"claim\": \"AutoGrow starts from a shallow seed network.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"AutoGrow grows layers when accuracy improves.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"AutoGrow stops growing when additional depth no longer helps under the learned policy.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"AutoGrow reports strong accuracy-computation trade-offs across several datasets.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    }\n  ],\n  \"open_questions\": [\n    \"How does AutoGrow's performance compare to manual depth tuning on large-scale datasets?\",\n    \"What is the computational overhead of the layer-growing policy during training?\"\n  ]\n}",
+          "reasoning": "We need to output JSON with role: claim_extractor, summary, findings list, claims list, open_questions list. Need to extract claims from the provided paper text. The text is short summary: \"AutoGrow: Automatic Layer Growing in Deep Convolutional Networks\", Wen et al. KDD 2020. This fixture summarizes a real paper on automatic depth discovery. AutoGrow starts from a shallow seed network, grows layers when accuracy improves, and stops when additional depth no longer helps under the learned policy. The paper reports strong accuracy-computation trade-offs across several datasets.\n\nWe need to produce claims (atomic claims). Likely claims like: \"AutoGrow starts from a shallow seed network\", \"AutoGrow grows layers when accuracy improves\", \"AutoGrow stops when additional depth no longer helps under the learned policy\", \"AutoGrow reports strong accuracy-computation trade-offs across several datasets\". Provide evidence_refs: maybe section:full_text. Use confidence medium. Findings: perhaps we note any weaknesses? But findings are like evaluated claims? The schema includes findings with severity low, claim, evidence_refs, rationale, recommendation. Could be used to note issues? Since we have weak evidence? Not needed. Could leave findings empty list.\n\nOpen_questions: maybe ask about scalability, generalization, etc.\n\nWe must ensure JSON only, no markdown, no extra text.\n\nLet's craft:\n\n{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"AutoGrow proposes a method for automatically growing network depth during training, starting from a shallow seed, adding layers when accuracy improves, and stopping when further depth does not improve accuracy under a learned policy, demonstrating strong accuracy-computation trade-offs on multiple datasets.\",\n  \"findings\": [],\n  \"claims\": [\n    {\n      \"claim\": \"AutoGrow starts from a shallow seed network.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"AutoGrow grows layers when accuracy improves.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"AutoGrow stops growing when additional depth no longer helps under the learned policy.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"AutoGrow reports strong accuracy-computation trade-offs across several datasets.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    }\n  ],\n  \"open_questions\": [\n    \"How does AutoGrow's performance compare to manual depth tuning on large-scale datasets?\",\n    \"What is the computational overhead of the layer-growing policy during training?\"\n  ]\n}\n\nMake sure JSON is valid, no trailing commas.\n\nLet's output.\n\n",
+          "reasoning_details": [
+            {
+              "format": "unknown",
+              "index": 0,
+              "text": "We need to output JSON with role: claim_extractor, summary, findings list, claims list, open_questions list. Need to extract claims from the provided paper text. The text is short summary: \"AutoGrow: Automatic Layer Growing in Deep Convolutional Networks\", Wen et al. KDD 2020. This fixture summarizes a real paper on automatic depth discovery. AutoGrow starts from a shallow seed network, grows layers when accuracy improves, and stops when additional depth no longer helps under the learned policy. The paper reports strong accuracy-computation trade-offs across several datasets.\n\nWe need to produce claims (atomic claims). Likely claims like: \"AutoGrow starts from a shallow seed network\", \"AutoGrow grows layers when accuracy improves\", \"AutoGrow stops when additional depth no longer helps under the learned policy\", \"AutoGrow reports strong accuracy-computation trade-offs across several datasets\". Provide evidence_refs: maybe section:full_text. Use confidence medium. Findings: perhaps we note any weaknesses? But findings are like evaluated claims? The schema includes findings with severity low, claim, evidence_refs, rationale, recommendation. Could be used to note issues? Since we have weak evidence? Not needed. Could leave findings empty list.\n\nOpen_questions: maybe ask about scalability, generalization, etc.\n\nWe must ensure JSON only, no markdown, no extra text.\n\nLet's craft:\n\n{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"AutoGrow proposes a method for automatically growing network depth during training, starting from a shallow seed, adding layers when accuracy improves, and stopping when further depth does not improve accuracy under a learned policy, demonstrating strong accuracy-computation trade-offs on multiple datasets.\",\n  \"findings\": [],\n  \"claims\": [\n    {\n      \"claim\": \"AutoGrow starts from a shallow seed network.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"AutoGrow grows layers when accuracy improves.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"AutoGrow stops growing when additional depth no longer helps under the learned policy.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"AutoGrow reports strong accuracy-computation trade-offs across several datasets.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    }\n  ],\n  \"open_questions\": [\n    \"How does AutoGrow's performance compare to manual depth tuning on large-scale datasets?\",\n    \"What is the computational overhead of the layer-growing policy during training?\"\n  ]\n}\n\nMake sure JSON is valid, no trailing commas.\n\nLet's output.\n\n",
+              "type": "reasoning.text"
+            }
+          ],
+          "refusal": null,
+          "role": "assistant"
+        },
+        "native_finish_reason": "stop"
+      }
+    ],
+    "created": 1774048981,
+    "id": "gen-1774048981-afpKAmLNW6tGQBL1OtII",
+    "model": "nvidia/nemotron-3-super-120b-a12b-20230311:free",
+    "object": "chat.completion",
+    "provider": "Nvidia",
+    "system_fingerprint": null,
+    "usage": {
+      "completion_tokens": 932,
+      "completion_tokens_details": {
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 743
+      },
+      "cost": 0,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0,
+        "upstream_inference_cost": 0,
+        "upstream_inference_prompt_cost": 0
+      },
+      "is_byok": false,
+      "prompt_tokens": 378,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "video_tokens": 0
+      },
+      "total_tokens": 1310
+    }
+  },
+  "role": "claim_extractor",
+  "summary": "AutoGrow proposes a method for automatically growing network depth during training, starting from a shallow seed, adding layers when accuracy improves, and stopping when further depth does not improve accuracy under a learned policy, demonstrating strong accuracy-computation trade-offs on multiple datasets."
+}

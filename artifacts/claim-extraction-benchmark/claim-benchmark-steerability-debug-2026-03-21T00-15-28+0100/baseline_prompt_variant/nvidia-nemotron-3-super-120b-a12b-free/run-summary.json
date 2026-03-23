@@ -1,0 +1,345 @@
+{
+  "completed_paper_count": 0,
+  "dataset_name": "real-paper-benchmark",
+  "failed_paper_count": 5,
+  "manifest_snapshot": {
+    "dataset_name": "real-paper-benchmark",
+    "entries": [
+      {
+        "notes": "ICLR 2022 paper fixture for benchmark smoke runs.",
+        "paper_id": "gradmax-2022",
+        "source": "tests/fixtures/pdfs/gradmax-2022.pdf",
+        "source_type": "pdf_path",
+        "tags": [
+          "growing-networks",
+          "neurons",
+          "iclr-2022"
+        ],
+        "title": "GradMax: Growing Neural Networks using Gradient Information"
+      },
+      {
+        "notes": "TMLR 2024 paper fixture for benchmark smoke runs.",
+        "paper_id": "growing-tiny-networks-2024",
+        "source": "tests/fixtures/pdfs/growing-tiny-networks-2024.pdf",
+        "source_type": "pdf_path",
+        "tags": [
+          "growing-networks",
+          "expressivity",
+          "tmlr-2024"
+        ],
+        "title": "Growing Tiny Networks: Spotting Expressivity Bottlenecks and Fixing Them Optimally"
+      },
+      {
+        "notes": "NeurIPS 2020 paper fixture for benchmark smoke runs.",
+        "paper_id": "firefly-2020",
+        "source": "tests/fixtures/pdfs/firefly-2020.pdf",
+        "source_type": "pdf_path",
+        "tags": [
+          "growing-networks",
+          "architecture-search",
+          "neurips-2020"
+        ],
+        "title": "Firefly Neural Architecture Descent: a General Approach for Growing Neural Networks"
+      },
+      {
+        "notes": "KDD 2020 paper fixture for benchmark smoke runs.",
+        "paper_id": "autogrow-2020",
+        "source": "tests/fixtures/pdfs/autogrow-2020.pdf",
+        "source_type": "pdf_path",
+        "tags": [
+          "growing-networks",
+          "layers",
+          "kdd-2020"
+        ],
+        "title": "AutoGrow: Automatic Layer Growing in Deep Convolutional Networks"
+      },
+      {
+        "notes": "ICANN 2021 paper fixture for benchmark smoke runs.",
+        "paper_id": "flatter-minima-2021",
+        "source": "tests/fixtures/pdfs/flatter-minima-2021.pdf",
+        "source_type": "pdf_path",
+        "tags": [
+          "growing-networks",
+          "generalization",
+          "icann-2021"
+        ],
+        "title": "Growing Neural Networks Achieve Flatter Minima"
+      }
+    ]
+  },
+  "model_id": "nvidia/nemotron-3-super-120b-a12b:free",
+  "paper_runs": [
+    {
+      "benchmark_entry": {
+        "notes": "ICLR 2022 paper fixture for benchmark smoke runs.",
+        "paper_id": "gradmax-2022",
+        "source": "tests/fixtures/pdfs/gradmax-2022.pdf",
+        "source_type": "pdf_path",
+        "tags": [
+          "growing-networks",
+          "neurons",
+          "iclr-2022"
+        ],
+        "title": "GradMax: Growing Neural Networks using Gradient Information"
+      },
+      "error_message": "Client error '429 Too Many Requests' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+      "error_type": "HTTPStatusError",
+      "evidence_bundle": {
+        "bibliography": [],
+        "equations": [],
+        "extraction_confidence": "medium",
+        "metadata": null,
+        "paper_id": "gradmax-2022",
+        "sections": [
+          {
+            "content": "GradMax: Growing Neural Networks using Gradient Information\nEvci et al. | ICLR 2022\nThis fixture summarizes a real paper about adding neurons during training.\nGradMax grows a network without disturbing learned behavior and initializes\nnew weights to maximize useful gradients through an SVD-based procedure.\nThe paper reports improved training dynamics across several vision settings.",
+            "name": "full_text",
+            "provenance": "pdf"
+          }
+        ],
+        "source_kind": "generic_pdf",
+        "title": "gradmax-2022",
+        "warnings": []
+      },
+      "model_id": "nvidia/nemotron-3-super-120b-a12b:free",
+      "paper_id": "gradmax-2022",
+      "profile_label": "baseline_prompt_variant",
+      "provider_result": {
+        "bibliography": [],
+        "equations": [],
+        "fallback_reason": null,
+        "fallback_used": false,
+        "paper_id": null,
+        "raw_text": "GradMax: Growing Neural Networks using Gradient Information\nEvci et al. | ICLR 2022\nThis fixture summarizes a real paper about adding neurons during training.\nGradMax grows a network without disturbing learned behavior and initializes\nnew weights to maximize useful gradients through an SVD-based procedure.\nThe paper reports improved training dynamics across several vision settings.",
+        "sections": [],
+        "source_kind": "generic_pdf",
+        "success": true,
+        "title": "gradmax-2022",
+        "warnings": []
+      },
+      "raw_review_output": {},
+      "run_label": "claim-benchmark-steerability-debug-2026-03-21T00-15-28+0100",
+      "status": "failed",
+      "summary_markdown": "# Claim Extraction Benchmark\n\n- paper_id: gradmax-2022\n- model_id: nvidia/nemotron-3-super-120b-a12b:free\n- status: failed\n- error_type: HTTPStatusError\n- error_message: Client error '429 Too Many Requests' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429\n",
+      "validated_reviewer_report": {}
+    },
+    {
+      "benchmark_entry": {
+        "notes": "TMLR 2024 paper fixture for benchmark smoke runs.",
+        "paper_id": "growing-tiny-networks-2024",
+        "source": "tests/fixtures/pdfs/growing-tiny-networks-2024.pdf",
+        "source_type": "pdf_path",
+        "tags": [
+          "growing-networks",
+          "expressivity",
+          "tmlr-2024"
+        ],
+        "title": "Growing Tiny Networks: Spotting Expressivity Bottlenecks and Fixing Them Optimally"
+      },
+      "error_message": "Client error '429 Too Many Requests' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+      "error_type": "HTTPStatusError",
+      "evidence_bundle": {
+        "bibliography": [],
+        "equations": [],
+        "extraction_confidence": "medium",
+        "metadata": null,
+        "paper_id": "growing-tiny-networks-2024",
+        "sections": [
+          {
+            "content": "Growing Tiny Networks: Spotting Expressivity Bottlenecks and Fixing\nThem Optimally\nVerbockhaven et al. | TMLR 2024\nThis fixture captures a real paper on growing small networks during training.\nThe method detects expressivity bottlenecks from backpropagation signals and\nadds neurons where the current architecture cannot follow the functional gradient.\nThe paper reports CIFAR results that match larger models with less manual search.",
+            "name": "full_text",
+            "provenance": "pdf"
+          }
+        ],
+        "source_kind": "generic_pdf",
+        "title": "growing-tiny-networks-2024",
+        "warnings": []
+      },
+      "model_id": "nvidia/nemotron-3-super-120b-a12b:free",
+      "paper_id": "growing-tiny-networks-2024",
+      "profile_label": "baseline_prompt_variant",
+      "provider_result": {
+        "bibliography": [],
+        "equations": [],
+        "fallback_reason": null,
+        "fallback_used": false,
+        "paper_id": null,
+        "raw_text": "Growing Tiny Networks: Spotting Expressivity Bottlenecks and Fixing\nThem Optimally\nVerbockhaven et al. | TMLR 2024\nThis fixture captures a real paper on growing small networks during training.\nThe method detects expressivity bottlenecks from backpropagation signals and\nadds neurons where the current architecture cannot follow the functional gradient.\nThe paper reports CIFAR results that match larger models with less manual search.",
+        "sections": [],
+        "source_kind": "generic_pdf",
+        "success": true,
+        "title": "growing-tiny-networks-2024",
+        "warnings": []
+      },
+      "raw_review_output": {},
+      "run_label": "claim-benchmark-steerability-debug-2026-03-21T00-15-28+0100",
+      "status": "failed",
+      "summary_markdown": "# Claim Extraction Benchmark\n\n- paper_id: growing-tiny-networks-2024\n- model_id: nvidia/nemotron-3-super-120b-a12b:free\n- status: failed\n- error_type: HTTPStatusError\n- error_message: Client error '429 Too Many Requests' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429\n",
+      "validated_reviewer_report": {}
+    },
+    {
+      "benchmark_entry": {
+        "notes": "NeurIPS 2020 paper fixture for benchmark smoke runs.",
+        "paper_id": "firefly-2020",
+        "source": "tests/fixtures/pdfs/firefly-2020.pdf",
+        "source_type": "pdf_path",
+        "tags": [
+          "growing-networks",
+          "architecture-search",
+          "neurips-2020"
+        ],
+        "title": "Firefly Neural Architecture Descent: a General Approach for Growing Neural Networks"
+      },
+      "error_message": "Client error '429 Too Many Requests' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+      "error_type": "HTTPStatusError",
+      "evidence_bundle": {
+        "bibliography": [],
+        "equations": [],
+        "extraction_confidence": "medium",
+        "metadata": null,
+        "paper_id": "firefly-2020",
+        "sections": [
+          {
+            "content": "Firefly Neural Architecture Descent: a General Approach for Growing\nNeural Networks\nWu et al. | NeurIPS 2020\nThis fixture summarizes a real paper on dynamic architecture growth.\nFirefly descent expands width or depth by searching a functional neighborhood\naround the current network with a Taylor-based greedy selection rule.\nThe paper targets accurate and resource-efficient models, including continual learning.",
+            "name": "full_text",
+            "provenance": "pdf"
+          }
+        ],
+        "source_kind": "generic_pdf",
+        "title": "firefly-2020",
+        "warnings": []
+      },
+      "model_id": "nvidia/nemotron-3-super-120b-a12b:free",
+      "paper_id": "firefly-2020",
+      "profile_label": "baseline_prompt_variant",
+      "provider_result": {
+        "bibliography": [],
+        "equations": [],
+        "fallback_reason": null,
+        "fallback_used": false,
+        "paper_id": null,
+        "raw_text": "Firefly Neural Architecture Descent: a General Approach for Growing\nNeural Networks\nWu et al. | NeurIPS 2020\nThis fixture summarizes a real paper on dynamic architecture growth.\nFirefly descent expands width or depth by searching a functional neighborhood\naround the current network with a Taylor-based greedy selection rule.\nThe paper targets accurate and resource-efficient models, including continual learning.",
+        "sections": [],
+        "source_kind": "generic_pdf",
+        "success": true,
+        "title": "firefly-2020",
+        "warnings": []
+      },
+      "raw_review_output": {},
+      "run_label": "claim-benchmark-steerability-debug-2026-03-21T00-15-28+0100",
+      "status": "failed",
+      "summary_markdown": "# Claim Extraction Benchmark\n\n- paper_id: firefly-2020\n- model_id: nvidia/nemotron-3-super-120b-a12b:free\n- status: failed\n- error_type: HTTPStatusError\n- error_message: Client error '429 Too Many Requests' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429\n",
+      "validated_reviewer_report": {}
+    },
+    {
+      "benchmark_entry": {
+        "notes": "KDD 2020 paper fixture for benchmark smoke runs.",
+        "paper_id": "autogrow-2020",
+        "source": "tests/fixtures/pdfs/autogrow-2020.pdf",
+        "source_type": "pdf_path",
+        "tags": [
+          "growing-networks",
+          "layers",
+          "kdd-2020"
+        ],
+        "title": "AutoGrow: Automatic Layer Growing in Deep Convolutional Networks"
+      },
+      "error_message": "Client error '429 Too Many Requests' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+      "error_type": "HTTPStatusError",
+      "evidence_bundle": {
+        "bibliography": [],
+        "equations": [],
+        "extraction_confidence": "medium",
+        "metadata": null,
+        "paper_id": "autogrow-2020",
+        "sections": [
+          {
+            "content": "AutoGrow: Automatic Layer Growing in Deep Convolutional Networks\nWen et al. | KDD 2020\nThis fixture summarizes a real paper on automatic depth discovery.\nAutoGrow starts from a shallow seed network, grows layers when accuracy improves,\nand stops when additional depth no longer helps under the learned policy.\nThe paper reports strong accuracy-computation trade-offs across several datasets.",
+            "name": "full_text",
+            "provenance": "pdf"
+          }
+        ],
+        "source_kind": "generic_pdf",
+        "title": "autogrow-2020",
+        "warnings": []
+      },
+      "model_id": "nvidia/nemotron-3-super-120b-a12b:free",
+      "paper_id": "autogrow-2020",
+      "profile_label": "baseline_prompt_variant",
+      "provider_result": {
+        "bibliography": [],
+        "equations": [],
+        "fallback_reason": null,
+        "fallback_used": false,
+        "paper_id": null,
+        "raw_text": "AutoGrow: Automatic Layer Growing in Deep Convolutional Networks\nWen et al. | KDD 2020\nThis fixture summarizes a real paper on automatic depth discovery.\nAutoGrow starts from a shallow seed network, grows layers when accuracy improves,\nand stops when additional depth no longer helps under the learned policy.\nThe paper reports strong accuracy-computation trade-offs across several datasets.",
+        "sections": [],
+        "source_kind": "generic_pdf",
+        "success": true,
+        "title": "autogrow-2020",
+        "warnings": []
+      },
+      "raw_review_output": {},
+      "run_label": "claim-benchmark-steerability-debug-2026-03-21T00-15-28+0100",
+      "status": "failed",
+      "summary_markdown": "# Claim Extraction Benchmark\n\n- paper_id: autogrow-2020\n- model_id: nvidia/nemotron-3-super-120b-a12b:free\n- status: failed\n- error_type: HTTPStatusError\n- error_message: Client error '429 Too Many Requests' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429\n",
+      "validated_reviewer_report": {}
+    },
+    {
+      "benchmark_entry": {
+        "notes": "ICANN 2021 paper fixture for benchmark smoke runs.",
+        "paper_id": "flatter-minima-2021",
+        "source": "tests/fixtures/pdfs/flatter-minima-2021.pdf",
+        "source_type": "pdf_path",
+        "tags": [
+          "growing-networks",
+          "generalization",
+          "icann-2021"
+        ],
+        "title": "Growing Neural Networks Achieve Flatter Minima"
+      },
+      "error_message": "Client error '429 Too Many Requests' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+      "error_type": "HTTPStatusError",
+      "evidence_bundle": {
+        "bibliography": [],
+        "equations": [],
+        "extraction_confidence": "medium",
+        "metadata": null,
+        "paper_id": "flatter-minima-2021",
+        "sections": [
+          {
+            "content": "Growing Neural Networks Achieve Flatter Minima\nCaillon and Cerisara | ICANN 2021\nThis fixture summarizes a real paper on optimization and generalization.\nThe paper studies networks that add neurons incrementally during training and\ncompares the minima they reach against fixed-size models trained from scratch.\nThe reported result is that the grown models converge to flatter minima and generalize better.",
+            "name": "full_text",
+            "provenance": "pdf"
+          }
+        ],
+        "source_kind": "generic_pdf",
+        "title": "flatter-minima-2021",
+        "warnings": []
+      },
+      "model_id": "nvidia/nemotron-3-super-120b-a12b:free",
+      "paper_id": "flatter-minima-2021",
+      "profile_label": "baseline_prompt_variant",
+      "provider_result": {
+        "bibliography": [],
+        "equations": [],
+        "fallback_reason": null,
+        "fallback_used": false,
+        "paper_id": null,
+        "raw_text": "Growing Neural Networks Achieve Flatter Minima\nCaillon and Cerisara | ICANN 2021\nThis fixture summarizes a real paper on optimization and generalization.\nThe paper studies networks that add neurons incrementally during training and\ncompares the minima they reach against fixed-size models trained from scratch.\nThe reported result is that the grown models converge to flatter minima and generalize better.",
+        "sections": [],
+        "source_kind": "generic_pdf",
+        "success": true,
+        "title": "flatter-minima-2021",
+        "warnings": []
+      },
+      "raw_review_output": {},
+      "run_label": "claim-benchmark-steerability-debug-2026-03-21T00-15-28+0100",
+      "status": "failed",
+      "summary_markdown": "# Claim Extraction Benchmark\n\n- paper_id: flatter-minima-2021\n- model_id: nvidia/nemotron-3-super-120b-a12b:free\n- status: failed\n- error_type: HTTPStatusError\n- error_message: Client error '429 Too Many Requests' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429\n",
+      "validated_reviewer_report": {}
+    }
+  ],
+  "profile_label": "baseline_prompt_variant",
+  "run_label": "claim-benchmark-steerability-debug-2026-03-21T00-15-28+0100"
+}

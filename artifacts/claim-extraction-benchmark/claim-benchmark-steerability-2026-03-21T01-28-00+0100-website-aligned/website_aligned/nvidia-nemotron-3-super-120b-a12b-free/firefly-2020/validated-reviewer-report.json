@@ -1,0 +1,25 @@
+{
+  "claims": [
+    {
+      "claim": "Firefly descent expands network width or depth by searching a functional neighborhood around the current network using a Taylor-based greedy selection rule.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Derived from the paper's description of the Firefly descent mechanism."
+    }
+  ],
+  "findings": [],
+  "growth_operator": "Width or depth expansion",
+  "initialization_strategy": "Start from an initial base network",
+  "mechanistic_notes": [
+    "The method approximates the loss change in a functional neighborhood using a first-order Taylor expansion to guide growth decisions."
+  ],
+  "method_family": "Neural Architecture Search (NAS) - dynamic growth",
+  "open_questions": [],
+  "role": "claim_extractor",
+  "schema_variant": "website_aligned",
+  "selection_criterion": "Taylor-based greedy selection rule",
+  "summary": "Firefly Neural Architecture Descent grows networks by expanding width or depth via a Taylor-based greedy search of the functional neighborhood.",
+  "website_alignment_notes": "Mechanistic decomposition focuses on the operational rule (Taylor-based greedy search) rather than high-level marketing claims."
+}

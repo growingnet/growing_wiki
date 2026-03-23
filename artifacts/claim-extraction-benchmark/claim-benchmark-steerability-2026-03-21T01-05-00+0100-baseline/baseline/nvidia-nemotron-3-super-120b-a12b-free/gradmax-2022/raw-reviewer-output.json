@@ -1,0 +1,104 @@
+{
+  "claims": [
+    {
+      "claim": "GradMax grows a network during training by adding neurons.",
+      "confidence": "high",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "GradMax does not disturb the learned behavior of the existing network when adding new neurons.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "New weights in GradMax are initialized to maximize useful gradients through an SVD-based procedure.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "GradMax improves training dynamics across several vision settings.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "GradMax was presented at ICLR 2022 by Evci et al.",
+      "confidence": "high",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    }
+  ],
+  "findings": [],
+  "open_questions": [
+    "How does GradMax compare to other dynamic network expansion methods in terms of final accuracy and computational cost?",
+    "What are the limitations of the SVD-based initialization when applied to very large models or non-vision tasks?"
+  ],
+  "raw_response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"GradMax introduces a method to grow neural networks during training by adding neurons initialized via SVD to maximize useful gradients, preserving learned behavior and improving training dynamics on vision tasks.\",\n  \"findings\": [],\n  \"claims\": [\n    {\n      \"claim\": \"GradMax grows a network during training by adding neurons.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"high\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"GradMax does not disturb the learned behavior of the existing network when adding new neurons.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"New weights in GradMax are initialized to maximize useful gradients through an SVD-based procedure.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"GradMax improves training dynamics across several vision settings.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"GradMax was presented at ICLR 2022 by Evci et al.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"high\",\n      \"notes\": \"\"\n    }\n  ],\n  \"open_questions\": [\n    \"How does GradMax compare to other dynamic network expansion methods in terms of final accuracy and computational cost?\",\n    \"What are the limitations of the SVD-based initialization when applied to very large models or non-vision tasks?\"\n  ]\n}",
+          "reasoning": "We need to produce JSON with role: claim_extractor, summary, findings (list), claims (list), open_questions (list). We need to extract claims from the paper text. The text: \"GradMax: Growing Neural Networks using Gradient Information Evci et al. | ICLR 2022 This fixture summarizes a real paper about adding neurons during training. GradMax grows a network without disturbing learned behavior and initializes new weights to maximize useful gradients through an SVD-based procedure. The paper reports improved training dynamics across several vision settings.\"\n\nWe need to create claims: atomic claim statements tied to evidence. Provide evidence_refs like \"section:full_text\". Since only full_text provided, we can use that.\n\nPotential claims:\n\n- GradMax grows a network during training by adding neurons.\n- GradMax does not disturb learned behavior when adding neurons.\n- New weights are initialized to maximize useful gradients via an SVD-based procedure.\n- The method improves training dynamics across several vision settings.\n- GradMax was presented at ICLR 2022 by Evci et al.\n\nAlso maybe: The method is called GradMax.\n\nFindings: Could be observations about strengths/weaknesses. Might be low severity findings: e.g., \"The paper lacks ablation studies.\" But we don't have that info. We could keep findings empty list. But we need to follow schema; can be empty.\n\nOpen_questions: maybe open questions like \"How does GradMax compare to other dynamic network growth methods?\" etc.\n\nWe need to ensure JSON only, no markdown, no extra text.\n\nLet's craft:\n\n{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"GradMax introduces a method to grow neural networks during training by adding neurons initialized via SVD to maximize useful gradients, preserving learned behavior and improving training dynamics on vision tasks.\",\n  \"findings\": [],\n  \"claims\": [\n    {\n      \"claim\": \"GradMax grows a network during training by adding neurons.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"high\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"GradMax does not disturb the learned behavior of the existing network when adding new neurons.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"New weights in GradMax are initialized to maximize useful gradients through an SVD-based procedure.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"GradMax improves training dynamics across several vision settings.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"GradMax was presented at ICLR 2022 by Evci et al.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"high\",\n      \"notes\": \"\"\n    }\n  ],\n  \"open_questions\": [\n    \"How does GradMax compare to other dynamic network expansion methods in terms of final accuracy and computational cost?\",\n    \"What are the limitations of the SVD-based initialization when applied to very large models or non-vision tasks?\"\n  ]\n}\n\nMake sure no trailing commas? JSON allows trailing commas? Actually JSON does not allow trailing commas. Ensure none.\n\nCheck each object: need to include \"notes\": \"\" optional but can be empty string. Provide.\n\nMake sure fields exactly as required: role, summary, findings, claims, open_questions.\n\nFindings is an array; we can leave empty.\n\nReturn only JSON.\n\nLet's produce.\n\n",
+          "reasoning_details": [
+            {
+              "format": "unknown",
+              "index": 0,
+              "text": "We need to produce JSON with role: claim_extractor, summary, findings (list), claims (list), open_questions (list). We need to extract claims from the paper text. The text: \"GradMax: Growing Neural Networks using Gradient Information Evci et al. | ICLR 2022 This fixture summarizes a real paper about adding neurons during training. GradMax grows a network without disturbing learned behavior and initializes new weights to maximize useful gradients through an SVD-based procedure. The paper reports improved training dynamics across several vision settings.\"\n\nWe need to create claims: atomic claim statements tied to evidence. Provide evidence_refs like \"section:full_text\". Since only full_text provided, we can use that.\n\nPotential claims:\n\n- GradMax grows a network during training by adding neurons.\n- GradMax does not disturb learned behavior when adding neurons.\n- New weights are initialized to maximize useful gradients via an SVD-based procedure.\n- The method improves training dynamics across several vision settings.\n- GradMax was presented at ICLR 2022 by Evci et al.\n\nAlso maybe: The method is called GradMax.\n\nFindings: Could be observations about strengths/weaknesses. Might be low severity findings: e.g., \"The paper lacks ablation studies.\" But we don't have that info. We could keep findings empty list. But we need to follow schema; can be empty.\n\nOpen_questions: maybe open questions like \"How does GradMax compare to other dynamic network growth methods?\" etc.\n\nWe need to ensure JSON only, no markdown, no extra text.\n\nLet's craft:\n\n{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"GradMax introduces a method to grow neural networks during training by adding neurons initialized via SVD to maximize useful gradients, preserving learned behavior and improving training dynamics on vision tasks.\",\n  \"findings\": [],\n  \"claims\": [\n    {\n      \"claim\": \"GradMax grows a network during training by adding neurons.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"high\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"GradMax does not disturb the learned behavior of the existing network when adding new neurons.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"New weights in GradMax are initialized to maximize useful gradients through an SVD-based procedure.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"GradMax improves training dynamics across several vision settings.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"GradMax was presented at ICLR 2022 by Evci et al.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"high\",\n      \"notes\": \"\"\n    }\n  ],\n  \"open_questions\": [\n    \"How does GradMax compare to other dynamic network expansion methods in terms of final accuracy and computational cost?\",\n    \"What are the limitations of the SVD-based initialization when applied to very large models or non-vision tasks?\"\n  ]\n}\n\nMake sure no trailing commas? JSON allows trailing commas? Actually JSON does not allow trailing commas. Ensure none.\n\nCheck each object: need to include \"notes\": \"\" optional but can be empty string. Provide.\n\nMake sure fields exactly as required: role, summary, findings, claims, open_questions.\n\nFindings is an array; we can leave empty.\n\nReturn only JSON.\n\nLet's produce.\n\n",
+              "type": "reasoning.text"
+            }
+          ],
+          "refusal": null,
+          "role": "assistant"
+        },
+        "native_finish_reason": "stop"
+      }
+    ],
+    "created": 1774101366,
+    "id": "gen-1774101366-KPdbbAfYvatn420VTBBL",
+    "model": "nvidia/nemotron-3-super-120b-a12b-20230311:free",
+    "object": "chat.completion",
+    "provider": "Nvidia",
+    "system_fingerprint": null,
+    "usage": {
+      "completion_tokens": 1153,
+      "completion_tokens_details": {
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 931
+      },
+      "cost": 0,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0,
+        "upstream_inference_cost": 0,
+        "upstream_inference_prompt_cost": 0
+      },
+      "is_byok": false,
+      "prompt_tokens": 369,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "video_tokens": 0
+      },
+      "total_tokens": 1522
+    }
+  },
+  "role": "claim_extractor",
+  "summary": "GradMax introduces a method to grow neural networks during training by adding neurons initialized via SVD to maximize useful gradients, preserving learned behavior and improving training dynamics on vision tasks."
+}

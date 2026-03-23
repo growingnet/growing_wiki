@@ -1,0 +1,37 @@
+[
+  {
+    "model_id": "nvidia/nemotron-3-super-120b-a12b:free",
+    "status": "validated",
+    "output_dir": "artifacts/schema-calibration-recommended-free-2026-03-20/nvidia-nemotron-3-super-120b-a12b-free",
+    "validation_error": null,
+    "summary": "The paper evaluates a compact training strategy on a synthetic benchmark, reporting modest improvements over a small baseline and claiming improved efficiency, though the evaluation is deliberately simple."
+  },
+  {
+    "model_id": "stepfun/step-3.5-flash:free",
+    "status": "validated",
+    "output_dir": "artifacts/schema-calibration-recommended-free-2026-03-20/stepfun-step-3-5-flash-free",
+    "validation_error": null,
+    "summary": "The paper introduces a compact training strategy for schema calibration, evaluated on a synthetic benchmark with reported modest improvements, but acknowledges a deliberately simple evaluation setup that may limit generalizability."
+  },
+  {
+    "model_id": "nvidia/nemotron-3-nano-30b-a3b:free",
+    "status": "validated",
+    "output_dir": "artifacts/schema-calibration-recommended-free-2026-03-20/nvidia-nemotron-3-nano-30b-a3b-free",
+    "validation_error": null,
+    "summary": "The paper reports modest efficiency gains on a synthetic schema\u2011calibration benchmark, but evidence is limited and the experimental setup is simplified."
+  },
+  {
+    "model_id": "nvidia/nemotron-nano-9b-v2:free",
+    "status": "runtime_failed",
+    "error_type": "RemoteProtocolError",
+    "error_message": "peer closed connection without sending complete message body (incomplete chunked read)",
+    "output_dir": "artifacts/schema-calibration-recommended-free-2026-03-20/nvidia-nemotron-nano-9b-v2-free"
+  },
+  {
+    "model_id": "arcee-ai/trinity-large-preview:free",
+    "status": "validated",
+    "output_dir": "artifacts/schema-calibration-recommended-free-2026-03-20/arcee-ai-trinity-large-preview-free",
+    "validation_error": null,
+    "summary": "The paper presents a compact training strategy evaluated on a synthetic benchmark, showing modest improvements over a small baseline. The evaluation setup is intentionally simple for schema-calibration testing."
+  }
+]

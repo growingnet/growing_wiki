@@ -1,0 +1,97 @@
+{
+  "claims": [
+    {
+      "claim": "The method detects expressivity bottlenecks from backpropagation signals.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "The method adds neurons where the current architecture cannot follow the functional gradient.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "CIFAR results match larger models with less manual search.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    }
+  ],
+  "findings": [
+    {
+      "claim": "Method detects expressivity bottlenecks from backpropagation signals.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "This is the core mechanism enabling adaptive architecture growth.",
+      "recommendation": "Validate the bottleneck detection mechanism on additional datasets beyond CIFAR.",
+      "severity": "low"
+    }
+  ],
+  "open_questions": [
+    "How does the method scale to larger vision tasks such as ImageNet?"
+  ],
+  "raw_response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n \"role\": \"claim_extractor\",\n  \"summary\": \"The paper proposes a method to grow tiny networks during training by detecting expressivity bottlenecks via backpropagation signals and adding neurons accordingly, achieving CIFAR performance comparable to larger models with reduced manual search.\",\n  \"findings\": [\n    {\n      \"severity\": \"low\",\n      \"claim\": \"Method detects expressivity bottlenecks from backpropagation signals.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"rationale\": \"This is the core mechanism enabling adaptive architecture growth.\",\n      \"recommendation\": \"Validate the bottleneck detection mechanism on additional datasets beyond CIFAR.\"\n    }\n  ],\n  \"claims\": [\n    {\n      \"claim\": \"The method detects expressivity bottlenecks from backpropagation signals.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"The method adds neurons where the current architecture cannot follow the functional gradient.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"CIFAR results match larger models with less manual search.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    }\n  ],\n  \"open_questions\": [\n    \"How does the method scale to larger vision tasks such as ImageNet?\"\n  ]\n}",
+          "reasoning": "We need to output JSON only with required fields: role, summary, findings, claims, open_questions. Provide findings list maybe empty? We have to extract claims from the paper. The evidence is minimal: description of method: detecting expressivity bottlenecks from backpropagation signals, adding neurons where architecture cannot follow functional gradient. Reports CIFAR results that match larger models with less manual search.\n\nWe can extract a claim: \"The method detects expressivity bottlenecks from backpropagation signals.\" Evidence: full_text line. Another claim: \"The method adds neurons where the current architecture cannot follow the functional gradient.\" Another claim: \"CIFAR results match larger models with less manual search.\"\n\nWe need to assign confidence maybe medium because extraction_confidence medium. Provide evidence_refs: [\"section:full_text\"] (the only section). For findings, maybe we consider any strengths/weaknesses? Not required; could be empty list. But we can include findings like \"The paper claims comparable performance to larger models\" etc. However findings are supposed to be tied to evidence and have severity low/medium/high? It's optional but we can include maybe one finding about bottleneck detection being novel.\n\nWe need to follow schema exactly: fields: role (string), summary (string), findings (array of objects with severity, claim, evidence_refs, rationale, recommendation optional), claims (array of objects with claim, evidence_refs, confidence, notes optional), open_questions (array of strings).\n\nWe'll produce summary: \"The paper proposes a method to grow tiny networks during training by detecting expressivity bottlenecks via backpropagation signals and adding neurons accordingly, achieving CIFAR performance comparable to larger models with reduced manual search.\"\n\nFindings: maybe one finding: severity low, claim: \"Method detects expressivity bottlenecks from backpropagation signals.\" evidence_refs same. rationale: \"Core contribution enabling adaptive architecture.\" recommendation: maybe \"Further validate on other datasets.\"\n\nWe could have multiple findings but at least one.\n\nClaims: we can list the atomic claims as separate objects.\n\nLet's list three claims:\n\n1. \"The method detects expressivity bottlenecks from backpropagation signals.\"\n2. \"The method adds neurons where the current architecture cannot follow the functional gradient.\"\n3. \"CIFAR results match larger models with less manual search.\"\n\nConfidence: medium (matching extraction_confidence). notes maybe empty.\n\nOpen_questions: maybe \"How does the method scale to larger vision tasks like ImageNet?\" Provide as string.\n\nNow produce JSON.\n\nMake sure no markdown, just raw JSON.\n\nCheck that we have all required fields.\n\nLet's craft.\n\n",
+          "reasoning_details": [
+            {
+              "format": "unknown",
+              "index": 0,
+              "text": "We need to output JSON only with required fields: role, summary, findings, claims, open_questions. Provide findings list maybe empty? We have to extract claims from the paper. The evidence is minimal: description of method: detecting expressivity bottlenecks from backpropagation signals, adding neurons where architecture cannot follow functional gradient. Reports CIFAR results that match larger models with less manual search.\n\nWe can extract a claim: \"The method detects expressivity bottlenecks from backpropagation signals.\" Evidence: full_text line. Another claim: \"The method adds neurons where the current architecture cannot follow the functional gradient.\" Another claim: \"CIFAR results match larger models with less manual search.\"\n\nWe need to assign confidence maybe medium because extraction_confidence medium. Provide evidence_refs: [\"section:full_text\"] (the only section). For findings, maybe we consider any strengths/weaknesses? Not required; could be empty list. But we can include findings like \"The paper claims comparable performance to larger models\" etc. However findings are supposed to be tied to evidence and have severity low/medium/high? It's optional but we can include maybe one finding about bottleneck detection being novel.\n\nWe need to follow schema exactly: fields: role (string), summary (string), findings (array of objects with severity, claim, evidence_refs, rationale, recommendation optional), claims (array of objects with claim, evidence_refs, confidence, notes optional), open_questions (array of strings).\n\nWe'll produce summary: \"The paper proposes a method to grow tiny networks during training by detecting expressivity bottlenecks via backpropagation signals and adding neurons accordingly, achieving CIFAR performance comparable to larger models with reduced manual search.\"\n\nFindings: maybe one finding: severity low, claim: \"Method detects expressivity bottlenecks from backpropagation signals.\" evidence_refs same. rationale: \"Core contribution enabling adaptive architecture.\" recommendation: maybe \"Further validate on other datasets.\"\n\nWe could have multiple findings but at least one.\n\nClaims: we can list the atomic claims as separate objects.\n\nLet's list three claims:\n\n1. \"The method detects expressivity bottlenecks from backpropagation signals.\"\n2. \"The method adds neurons where the current architecture cannot follow the functional gradient.\"\n3. \"CIFAR results match larger models with less manual search.\"\n\nConfidence: medium (matching extraction_confidence). notes maybe empty.\n\nOpen_questions: maybe \"How does the method scale to larger vision tasks like ImageNet?\" Provide as string.\n\nNow produce JSON.\n\nMake sure no markdown, just raw JSON.\n\nCheck that we have all required fields.\n\nLet's craft.\n\n",
+              "type": "reasoning.text"
+            }
+          ],
+          "refusal": null,
+          "role": "assistant"
+        },
+        "native_finish_reason": "stop"
+      }
+    ],
+    "created": 1774101449,
+    "id": "gen-1774101449-mMi6hagZ1tLfTwl0IUns",
+    "model": "nvidia/nemotron-3-super-120b-a12b-20230311:free",
+    "object": "chat.completion",
+    "provider": "Nvidia",
+    "system_fingerprint": null,
+    "usage": {
+      "completion_tokens": 860,
+      "completion_tokens_details": {
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 718
+      },
+      "cost": 0,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0,
+        "upstream_inference_cost": 0,
+        "upstream_inference_prompt_cost": 0
+      },
+      "is_byok": false,
+      "prompt_tokens": 393,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "video_tokens": 0
+      },
+      "total_tokens": 1253
+    }
+  },
+  "role": "claim_extractor",
+  "summary": "The paper proposes a method to grow tiny networks during training by detecting expressivity bottlenecks via backpropagation signals and adding neurons accordingly, achieving CIFAR performance comparable to larger models with reduced manual search."
+}

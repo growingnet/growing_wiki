@@ -1,0 +1,44 @@
+{
+  "claims": [
+    {
+      "claim": "GradMax adds neurons during training to grow the network.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Core mechanism of the method."
+    },
+    {
+      "claim": "Newly added weights are initialized to maximize useful gradients using an SVD\u2011based procedure.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Describes the initialization strategy."
+    },
+    {
+      "claim": "GradMax improves training dynamics across several vision settings.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Empirical result reported in the paper."
+    }
+  ],
+  "findings": [
+    {
+      "claim": "GradMax grows a network without disturbing learned behavior.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "Shows that the method can expand model capacity while retaining previously acquired knowledge, which is crucial for continual learning and avoiding catastrophic forgetting.",
+      "recommendation": "Further evaluate on long\u2011sequence tasks to quantify retention of older knowledge.",
+      "severity": "low"
+    }
+  ],
+  "open_questions": [
+    "What is the computational overhead of the SVD\u2011based initialization as network size grows?"
+  ],
+  "role": "claim_extractor",
+  "summary": "GradMax introduces a method to grow neural networks during training by adding neurons and initializing their weights to maximize useful gradients via an SVD-based procedure, preserving learned behavior and improving training dynamics in vision tasks."
+}

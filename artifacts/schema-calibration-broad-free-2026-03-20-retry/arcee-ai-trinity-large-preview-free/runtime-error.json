@@ -1,0 +1,7 @@
+{
+  "model_id": "arcee-ai/trinity-large-preview:free",
+  "status": "runtime_failed",
+  "error_type": "ReadTimeout",
+  "error_message": "The read operation timed out",
+  "output_dir": "artifacts/schema-calibration-broad-free-2026-03-20-retry/arcee-ai-trinity-large-preview-free"
+}

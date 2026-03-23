@@ -1,0 +1,24 @@
+{
+  "claims": [
+    {
+      "claim": "The method detects expressivity bottlenecks from backpropagation signals and adds neurons where the current architecture cannot follow the functional gradient.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "The approach yields CIFAR results that match larger models while requiring less manual search for architecture.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    }
+  ],
+  "findings": [],
+  "open_questions": [],
+  "role": "claim_extractor",
+  "summary": "The paper proposes a method that detects expressivity bottlenecks in small networks using backpropagation signals and adds neurons where the architecture cannot follow the functional gradient, achieving CIFAR performance comparable to larger models with reduced manual architecture search."
+}

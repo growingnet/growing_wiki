@@ -1,0 +1,24 @@
+{
+  "claims": [
+    {
+      "claim": "AutoGrow begins with a shallow seed network and incrementally adds layers when doing so improves accuracy, stopping when additional depth no longer yields benefit under the learned policy.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "The proposed AutoGrow approach attains strong accuracy\u2011computation trade\u2011offs across several benchmark datasets.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    }
+  ],
+  "findings": [],
+  "open_questions": [],
+  "role": "claim_extractor",
+  "summary": "AutoGrow proposes a method to automatically grow layers in deep convolutional networks, starting from a shallow seed and expanding when accuracy improves, halting when further depth yields no benefit under a learned policy, demonstrating strong accuracy-computation trade-offs on multiple datasets."
+}

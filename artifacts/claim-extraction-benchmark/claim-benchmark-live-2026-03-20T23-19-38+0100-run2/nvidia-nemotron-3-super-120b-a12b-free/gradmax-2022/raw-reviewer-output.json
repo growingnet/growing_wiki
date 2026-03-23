@@ -1,0 +1,116 @@
+{
+  "claims": [
+    {
+      "claim": "GradMax grows a network during training.",
+      "confidence": "high",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Core contribution of the paper."
+    },
+    {
+      "claim": "GradMax does not disturb learned behavior when adding neurons.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Supported by experimental results showing preserved performance."
+    },
+    {
+      "claim": "New weights are initialized to maximize useful gradients via an SVD-based procedure.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Technical detail of the weight initialization strategy."
+    },
+    {
+      "claim": "GradMax improves training dynamics across several vision settings.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Empirical finding reported in the paper."
+    }
+  ],
+  "findings": [
+    {
+      "claim": "GradMax grows network without disturbing learned behavior.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "Shows that the method preserves prior knowledge while expanding model capacity.",
+      "recommendation": "Evaluate GradMax in continual learning or fine-tuning scenarios to test stability.",
+      "severity": "low"
+    },
+    {
+      "claim": "New weights are initialized via SVD to maximize useful gradients.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "SVD-based initialization aligns new weights with promising gradient directions for effective learning.",
+      "recommendation": "Compare this initialization with random or other gradient-based schemes.",
+      "severity": "low"
+    }
+  ],
+  "open_questions": [
+    "How does GradMax scale to very large models (e.g., billions of parameters)?",
+    "What are the theoretical guarantees or limitations of the SVD-based initialization?",
+    "Does GradMax provide similar benefits in non-vision domains such as NLP or reinforcement learning?"
+  ],
+  "raw_response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"GradMax introduces a method to grow neural networks during training by adding neurons without disrupting learned behavior, initializing new weights via an SVD-based procedure to maximize useful gradients, and reports improved training dynamics in vision tasks.\",\n  \"findings\": [\n    {\n      \"severity\": \"low\",\n      \"claim\": \"GradMax grows network without disturbing learned behavior.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"rationale\": \"Shows that the method preserves prior knowledge while expanding model capacity.\",\n      \"recommendation\": \"Evaluate GradMax in continual learning or fine-tuning scenarios to test stability.\"\n    },\n    {\n      \"severity\": \"low\",\n      \"claim\": \"New weights are initialized via SVD to maximize useful gradients.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"rationale\": \"SVD-based initialization aligns new weights with promising gradient directions for effective learning.\",\n      \"recommendation\": \"Compare this initialization with random or other gradient-based schemes.\"\n    }\n  ],\n  \"claims\": [\n    {\n      \"claim\": \"GradMax grows a network during training.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"high\",\n      \"notes\": \"Core contribution of the paper.\"\n    },\n    {\n      \"claim\": \"GradMax does not disturb learned behavior when adding neurons.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Supported by experimental results showing preserved performance.\"\n    },\n    {\n      \"claim\": \"New weights are initialized to maximize useful gradients via an SVD-based procedure.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Technical detail of the weight initialization strategy.\"\n    },\n    {\n      \"claim\": \"GradMax improves training dynamics across several vision settings.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"Empirical finding reported in the paper.\"\n    }\n  ],\n  \"open_questions\": [\n    \"How does GradMax scale to very large models (e.g., billions of parameters)?\",\n    \"What are the theoretical guarantees or limitations of the SVD-based initialization?\",\n    \"Does GradMax provide similar benefits in non-vision domains such as NLP or reinforcement learning?\"\n  ]\n}",
+          "reasoning": "We need to output JSON only with the fields: role, summary, findings, claims, open_questions. Must follow schema. Provide summary short. Extract claims and findings from the text. The paper: \"GradMax: Growing Neural Networks using Gradient Information\" by Evci et al. ICLR 2022. The text describes: GradMax grows a network without disturbing learned behavior and initializes new weights to maximize useful gradients through an SVD-based procedure. The paper reports improved training dynamics across several vision settings.\n\nWe need to find atomic claims. We can list a few claims.\n\nFindings: They can be similar to claims? The schema: findings have severity low, claim, evidence_refs, rationale, recommendation optional. Claims have claim, evidence_refs, confidence, notes optional. Probably we list findings about the method and its effect.\n\nWe need evidence_refs: Since we have only full_text, we can reference \"section:full_text\". Maybe we can include multiple but same.\n\nConfidence: we can set medium.\n\nWe need summary field mandatory.\n\nOpen_questions: could be about scalability, theoretical guarantees.\n\nLet's produce JSON.\n\nFindings list: maybe two findings.\n\nFinding 1: severity low, claim: \"GradMax grows network without disturbing learned behavior.\" evidence_refs: [\"section:full_text\"], rationale: \"Shows method preserves prior knowledge while expanding capacity.\", recommendation: \"Consider evaluating on continual learning scenarios.\"\n\nFinding 2: severity low, claim: \"Initializing new weights via SVD maximizes useful gradients.\" evidence_refs: [\"section:full_text\"], rationale: \"SVD-based initialization aims to align new weights with gradient directions for effective learning.\", recommendation: \"Explore alternative initialization strategies.\"\n\nClaims list: atomic claims.\n\nClaim 1: \"GradMax grows a network during training.\" evidence_refs: [\"section:full_text\"], confidence: \"high\", notes: \"Core contribution.\"\n\nClaim 2: \"GradMax does not disturb learned behavior when adding neurons.\" evidence_refs: [\"section:full_text\"], confidence: \"medium\", notes: \"Based on experimental results.\"\n\nClaim 3: \"New weights are initialized to maximize useful gradients via SVD.\" evidence_refs: [\"section:full_text\"], confidence: \"medium\", notes: \"Technical detail of initialization.\"\n\nClaim 4: \"GradMax improves training dynamics across several vision settings.\" evidence_refs: [\"section:full_text\"], confidence: \"medium\", notes: \"Empirical result.\"\n\nOpen_questions: list maybe: \"How does GradMax scale to very large models?\", \"What are the theoretical guarantees of the SVD-based initialization?\", \"Does GradMax benefit non-vision tasks like NLP?\"\n\nMake sure JSON is valid, no extra fields. Use double quotes.\n\nLet's craft.\n\nCheck that we don't include markdown.\n\nProceed.\n\n",
+          "reasoning_details": [
+            {
+              "format": "unknown",
+              "index": 0,
+              "text": "We need to output JSON only with the fields: role, summary, findings, claims, open_questions. Must follow schema. Provide summary short. Extract claims and findings from the text. The paper: \"GradMax: Growing Neural Networks using Gradient Information\" by Evci et al. ICLR 2022. The text describes: GradMax grows a network without disturbing learned behavior and initializes new weights to maximize useful gradients through an SVD-based procedure. The paper reports improved training dynamics across several vision settings.\n\nWe need to find atomic claims. We can list a few claims.\n\nFindings: They can be similar to claims? The schema: findings have severity low, claim, evidence_refs, rationale, recommendation optional. Claims have claim, evidence_refs, confidence, notes optional. Probably we list findings about the method and its effect.\n\nWe need evidence_refs: Since we have only full_text, we can reference \"section:full_text\". Maybe we can include multiple but same.\n\nConfidence: we can set medium.\n\nWe need summary field mandatory.\n\nOpen_questions: could be about scalability, theoretical guarantees.\n\nLet's produce JSON.\n\nFindings list: maybe two findings.\n\nFinding 1: severity low, claim: \"GradMax grows network without disturbing learned behavior.\" evidence_refs: [\"section:full_text\"], rationale: \"Shows method preserves prior knowledge while expanding capacity.\", recommendation: \"Consider evaluating on continual learning scenarios.\"\n\nFinding 2: severity low, claim: \"Initializing new weights via SVD maximizes useful gradients.\" evidence_refs: [\"section:full_text\"], rationale: \"SVD-based initialization aims to align new weights with gradient directions for effective learning.\", recommendation: \"Explore alternative initialization strategies.\"\n\nClaims list: atomic claims.\n\nClaim 1: \"GradMax grows a network during training.\" evidence_refs: [\"section:full_text\"], confidence: \"high\", notes: \"Core contribution.\"\n\nClaim 2: \"GradMax does not disturb learned behavior when adding neurons.\" evidence_refs: [\"section:full_text\"], confidence: \"medium\", notes: \"Based on experimental results.\"\n\nClaim 3: \"New weights are initialized to maximize useful gradients via SVD.\" evidence_refs: [\"section:full_text\"], confidence: \"medium\", notes: \"Technical detail of initialization.\"\n\nClaim 4: \"GradMax improves training dynamics across several vision settings.\" evidence_refs: [\"section:full_text\"], confidence: \"medium\", notes: \"Empirical result.\"\n\nOpen_questions: list maybe: \"How does GradMax scale to very large models?\", \"What are the theoretical guarantees of the SVD-based initialization?\", \"Does GradMax benefit non-vision tasks like NLP?\"\n\nMake sure JSON is valid, no extra fields. Use double quotes.\n\nLet's craft.\n\nCheck that we don't include markdown.\n\nProceed.\n\n",
+              "type": "reasoning.text"
+            }
+          ],
+          "refusal": null,
+          "role": "assistant"
+        },
+        "native_finish_reason": "stop"
+      }
+    ],
+    "created": 1774045187,
+    "id": "gen-1774045187-1b2TJ5SP4TuuzxLtDQGR",
+    "model": "nvidia/nemotron-3-super-120b-a12b-20230311:free",
+    "object": "chat.completion",
+    "provider": "Nvidia",
+    "system_fingerprint": null,
+    "usage": {
+      "completion_tokens": 1108,
+      "completion_tokens_details": {
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 727
+      },
+      "cost": 0,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0,
+        "upstream_inference_cost": 0,
+        "upstream_inference_prompt_cost": 0
+      },
+      "is_byok": false,
+      "prompt_tokens": 369,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "video_tokens": 0
+      },
+      "total_tokens": 1477
+    }
+  },
+  "role": "claim_extractor",
+  "summary": "GradMax introduces a method to grow neural networks during training by adding neurons without disrupting learned behavior, initializing new weights via an SVD-based procedure to maximize useful gradients, and reports improved training dynamics in vision tasks."
+}

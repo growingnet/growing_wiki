@@ -1,0 +1,97 @@
+{
+  "claims": [
+    {
+      "claim": "GradMax grows a network without disturbing learned behavior.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "GradMax initializes new weights to maximize useful gradients through an SVD-based procedure.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "The paper reports improved training dynamics across several vision settings.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    }
+  ],
+  "findings": [
+    {
+      "claim": "GradMax grows networks without disturbing learned behavior and improves training dynamics.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "Shows that network expansion can be done while preserving performance, suggesting a viable path for continual model growth.",
+      "recommendation": "Consider applying GradMax to other domains such as NLP or reinforcement learning to test generality.",
+      "severity": "low"
+    }
+  ],
+  "open_questions": [
+    "How does GradMax scale to very large models (e.g., hundreds of millions of parameters) in terms of memory and compute overhead?"
+  ],
+  "raw_response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"GradMax introduces a method to grow neural networks during training by adding neurons without disturbing learned behavior, initializing new weights via SVD to maximize useful gradients, and reports improved training dynamics on vision tasks.\",\n  \"findings\": [\n    {\n      \"severity\": \"low\",\n      \"claim\": \"GradMax grows networks without disturbing learned behavior and improves training dynamics.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"rationale\": \"Shows that network expansion can be done while preserving performance, suggesting a viable path for continual model growth.\",\n      \"recommendation\": \"Consider applying GradMax to other domains such as NLP or reinforcement learning to test generality.\"\n    }\n  ],\n  \"claims\": [\n    {\n      \"claim\": \"GradMax grows a network without disturbing learned behavior.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"GradMax initializes new weights to maximize useful gradients through an SVD-based procedure.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    },\n    {\n      \"claim\": \"The paper reports improved training dynamics across several vision settings.\",\n      \"evidence_refs\": [\"section:full_text\"],\n      \"confidence\": \"medium\",\n      \"notes\": \"\"\n    }\n  ],\n  \"open_questions\": [\n    \"How does GradMax scale to very large models (e.g., hundreds of millions of parameters) in terms of memory and compute overhead?\"\n  ]\n}",
+          "reasoning": "We need to produce JSON with role claim_extractor, summary, findings list, claims list, open_questions list.\n\nWe have to extract claims from the provided text. The text is minimal: \"GradMax: Growing Neural Networks using Gradient Information Evci et al. | ICLR 2022 This fixture summarizes a real paper about adding neurons during training. GradMax grows a network without disturbing learned behavior and initializes new weights to maximize useful gradients through an SVD-based procedure. The paper reports improved training dynamics across several vision settings.\"\n\nThus we can extract claims:\n\n- \"GradMax grows a network without disturbing learned behavior.\"\n- \"GradMax initializes new weights to maximize useful gradients through an SVD-based procedure.\"\n- \"The paper reports improved training dynamics across several vision settings.\"\n\nEvidence references: Since only one full_text, we can use \"section:full_text\". Confidence: maybe medium for all.\n\nFindings: Possibly same as claims? But findings can be similar but with severity, rationale, recommendation. Could also be same as claims but with severity low etc. The instructions: findings list of objects with severity, claim, evidence_refs, rationale, recommendation optional. We'll produce maybe one finding summarizing overall contribution.\n\nWe need to keep JSON only.\n\nLet's craft:\n\nsummary: \"GradMax introduces a method to grow neural networks during training by adding neurons without disturbing learned behavior, initializing new weights via SVD to maximize useful gradients, and reports improved training dynamics on vision tasks.\"\n\nFindings: maybe one finding: severity medium? but schema only allows low? Actually severity can be any string but examples show low. We'll set low.\n\nFindings claim: \"GradMax grows networks without disturbing learned behavior and improves training dynamics.\" Evidence refs: [\"section:full_text\"]; rationale: \"Shows that network expansion can be done while preserving performance.\" recommendation: \"Consider applying GradMax to other domains.\"\n\nClaims: list each atomic claim.\n\nOpen questions: maybe \"How does GradMax scale to larger models?\" or \"What is the computational overhead?\" We'll add one.\n\nNow produce JSON.\n\nMake sure no extra fields. Ensure arrays present even if empty.\n\nLet's craft.\n\n",
+          "reasoning_details": [
+            {
+              "format": "unknown",
+              "index": 0,
+              "text": "We need to produce JSON with role claim_extractor, summary, findings list, claims list, open_questions list.\n\nWe have to extract claims from the provided text. The text is minimal: \"GradMax: Growing Neural Networks using Gradient Information Evci et al. | ICLR 2022 This fixture summarizes a real paper about adding neurons during training. GradMax grows a network without disturbing learned behavior and initializes new weights to maximize useful gradients through an SVD-based procedure. The paper reports improved training dynamics across several vision settings.\"\n\nThus we can extract claims:\n\n- \"GradMax grows a network without disturbing learned behavior.\"\n- \"GradMax initializes new weights to maximize useful gradients through an SVD-based procedure.\"\n- \"The paper reports improved training dynamics across several vision settings.\"\n\nEvidence references: Since only one full_text, we can use \"section:full_text\". Confidence: maybe medium for all.\n\nFindings: Possibly same as claims? But findings can be similar but with severity, rationale, recommendation. Could also be same as claims but with severity low etc. The instructions: findings list of objects with severity, claim, evidence_refs, rationale, recommendation optional. We'll produce maybe one finding summarizing overall contribution.\n\nWe need to keep JSON only.\n\nLet's craft:\n\nsummary: \"GradMax introduces a method to grow neural networks during training by adding neurons without disturbing learned behavior, initializing new weights via SVD to maximize useful gradients, and reports improved training dynamics on vision tasks.\"\n\nFindings: maybe one finding: severity medium? but schema only allows low? Actually severity can be any string but examples show low. We'll set low.\n\nFindings claim: \"GradMax grows networks without disturbing learned behavior and improves training dynamics.\" Evidence refs: [\"section:full_text\"]; rationale: \"Shows that network expansion can be done while preserving performance.\" recommendation: \"Consider applying GradMax to other domains.\"\n\nClaims: list each atomic claim.\n\nOpen questions: maybe \"How does GradMax scale to larger models?\" or \"What is the computational overhead?\" We'll add one.\n\nNow produce JSON.\n\nMake sure no extra fields. Ensure arrays present even if empty.\n\nLet's craft.\n\n",
+              "type": "reasoning.text"
+            }
+          ],
+          "refusal": null,
+          "role": "assistant"
+        },
+        "native_finish_reason": "stop"
+      }
+    ],
+    "created": 1774045370,
+    "id": "gen-1774045370-75McyMbNF6npNIzGErU8",
+    "model": "nvidia/nemotron-3-super-120b-a12b-20230311:free",
+    "object": "chat.completion",
+    "provider": "Nvidia",
+    "system_fingerprint": null,
+    "usage": {
+      "completion_tokens": 799,
+      "completion_tokens_details": {
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 600
+      },
+      "cost": 0,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0,
+        "upstream_inference_cost": 0,
+        "upstream_inference_prompt_cost": 0
+      },
+      "is_byok": false,
+      "prompt_tokens": 369,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "video_tokens": 0
+      },
+      "total_tokens": 1168
+    }
+  },
+  "role": "claim_extractor",
+  "summary": "GradMax introduces a method to grow neural networks during training by adding neurons without disturbing learned behavior, initializing new weights via SVD to maximize useful gradients, and reports improved training dynamics on vision tasks."
+}

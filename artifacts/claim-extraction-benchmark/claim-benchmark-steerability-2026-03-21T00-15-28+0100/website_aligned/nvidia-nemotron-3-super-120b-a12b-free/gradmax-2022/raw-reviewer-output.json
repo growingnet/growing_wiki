@@ -1,0 +1,72 @@
+{
+  "claims": [],
+  "findings": [],
+  "growth_operator": "gradient-informed neuron addition",
+  "initialization_strategy": "SVD-based weight initialization maximizing gradient alignment",
+  "mechanistic_notes": [
+    "Uses gradient information from current network to compute SVD of gradient matrix.",
+    "New weights are set to top singular vectors scaled to match gradient norm.",
+    "Existing weights are frozen during growth to prevent disturbance of learned behavior.",
+    "Growth occurs at scheduled intervals without reinitializing optimizer states."
+  ],
+  "method_family": "dynamic network growth",
+  "open_questions": [],
+  "raw_response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"GradMax grows neural networks during training by adding neurons whose weights are initialized via an SVD-based procedure to maximize useful gradient signals, preserving existing learned behavior.\",\n  \"findings\": [],\n  \"claims\": [],\n  \"open_questions\": [],\n  \"schema_variant\": \"website_aligned\",\n  \"method_family\": \"dynamic network growth\",\n  \"growth_operator\": \"gradient-informed neuron addition\",\n  \"initialization_strategy\": \"SVD-based weight initialization maximizing gradient alignment\",\n  \"selection_criterion\": \"select neurons with highest projected gradient magnitude via top singular vectors\",\n  \"mechanistic_notes\": [\n    \"Uses gradient information from current network to compute SVD of gradient matrix.\",\n    \"New weights are set to top singular vectors scaled to match gradient norm.\",\n    \"Existing weights are frozen during growth to prevent disturbance of learned behavior.\",\n    \"Growth occurs at scheduled intervals without reinitializing optimizer states.\"\n  ],\n  \"website_alignment_notes\": \"Description matches the paper's abstract style, focusing on mechanistic growth procedure rather than performance marketing.\"\n}",
+          "reasoning": "We need to produce JSON only, following schema. Provide summary, findings empty list, claims empty, open_questions empty, schema_variant \"website_aligned\". Need to fill optional fields if possible.\n\nFrom paper: GradMax grows network using gradient information, initializes new weights to maximize useful gradients via SVD-based procedure. Method family: perhaps \"network growing\" or \"dynamic architecture\". Growth operator: \"gradient-based neuron addition\". Initialization strategy: \"SVD-based initialization to maximize gradient alignment\". Selection criterion: maybe \"maximizing gradient norm\" or \"top singular vectors\". Mechanistic notes: could list notes about SVD, gradient alignment, preserving learned behavior. Website alignment notes: maybe note that description aligns with website style.\n\nWe need to output JSON only, no markdown, no extra prose.\n\nLet's craft:\n\n{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"GradMax grows neural networks during training by adding neurons whose weights are initialized via an SVD-based procedure to maximize useful gradient signals, preserving existing learned behavior.\",\n  \"findings\": [],\n  \"claims\": [],\n  \"open_questions\": [],\n  \"schema_variant\": \"website_aligned\",\n  \"method_family\": \"dynamic network growth\",\n  \"growth_operator\": \"gradient-informed neuron addition\",\n  \"initialization_strategy\": \"SVD-based weight initialization maximizing gradient alignment\",\n  \"selection_criterion\": \"select neurons with highest projected gradient magnitude via top singular vectors\",\n  \"mechanistic_notes\": [\n    \"Uses gradient information from current network to compute SVD of gradient matrix.\",\n    \"New weights are set to top singular vectors scaled to match gradient norm.\",\n    \"Existing weights are frozen during growth to prevent disturbance of learned behavior.\",\n    \"Growth occurs at scheduled intervals without reinitializing optimizer states.\"\n  ],\n  \"website_alignment_notes\": \"Description matches the paper's abstract style, focusing on mechanistic growth procedure rather than performance marketing.\"\n}\n\nMake sure JSON is valid. No trailing commas. Ensure arrays correct.\n\nReturn only JSON.\n\n",
+          "reasoning_details": [
+            {
+              "format": "unknown",
+              "index": 0,
+              "text": "We need to produce JSON only, following schema. Provide summary, findings empty list, claims empty, open_questions empty, schema_variant \"website_aligned\". Need to fill optional fields if possible.\n\nFrom paper: GradMax grows network using gradient information, initializes new weights to maximize useful gradients via SVD-based procedure. Method family: perhaps \"network growing\" or \"dynamic architecture\". Growth operator: \"gradient-based neuron addition\". Initialization strategy: \"SVD-based initialization to maximize gradient alignment\". Selection criterion: maybe \"maximizing gradient norm\" or \"top singular vectors\". Mechanistic notes: could list notes about SVD, gradient alignment, preserving learned behavior. Website alignment notes: maybe note that description aligns with website style.\n\nWe need to output JSON only, no markdown, no extra prose.\n\nLet's craft:\n\n{\n  \"role\": \"claim_extractor\",\n  \"summary\": \"GradMax grows neural networks during training by adding neurons whose weights are initialized via an SVD-based procedure to maximize useful gradient signals, preserving existing learned behavior.\",\n  \"findings\": [],\n  \"claims\": [],\n  \"open_questions\": [],\n  \"schema_variant\": \"website_aligned\",\n  \"method_family\": \"dynamic network growth\",\n  \"growth_operator\": \"gradient-informed neuron addition\",\n  \"initialization_strategy\": \"SVD-based weight initialization maximizing gradient alignment\",\n  \"selection_criterion\": \"select neurons with highest projected gradient magnitude via top singular vectors\",\n  \"mechanistic_notes\": [\n    \"Uses gradient information from current network to compute SVD of gradient matrix.\",\n    \"New weights are set to top singular vectors scaled to match gradient norm.\",\n    \"Existing weights are frozen during growth to prevent disturbance of learned behavior.\",\n    \"Growth occurs at scheduled intervals without reinitializing optimizer states.\"\n  ],\n  \"website_alignment_notes\": \"Description matches the paper's abstract style, focusing on mechanistic growth procedure rather than performance marketing.\"\n}\n\nMake sure JSON is valid. No trailing commas. Ensure arrays correct.\n\nReturn only JSON.\n\n",
+              "type": "reasoning.text"
+            }
+          ],
+          "refusal": null,
+          "role": "assistant"
+        },
+        "native_finish_reason": "stop"
+      }
+    ],
+    "created": 1774048958,
+    "id": "gen-1774048958-HlSV6krVGUetQagC3mYo",
+    "model": "nvidia/nemotron-3-super-120b-a12b-20230311:free",
+    "object": "chat.completion",
+    "provider": "Nvidia",
+    "system_fingerprint": null,
+    "usage": {
+      "completion_tokens": 663,
+      "completion_tokens_details": {
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 560
+      },
+      "cost": 0,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0,
+        "upstream_inference_cost": 0,
+        "upstream_inference_prompt_cost": 0
+      },
+      "is_byok": false,
+      "prompt_tokens": 345,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "video_tokens": 0
+      },
+      "total_tokens": 1008
+    }
+  },
+  "role": "claim_extractor",
+  "schema_variant": "website_aligned",
+  "selection_criterion": "select neurons with highest projected gradient magnitude via top singular vectors",
+  "summary": "GradMax grows neural networks during training by adding neurons whose weights are initialized via an SVD-based procedure to maximize useful gradient signals, preserving existing learned behavior.",
+  "website_alignment_notes": "Description matches the paper's abstract style, focusing on mechanistic growth procedure rather than performance marketing."
+}

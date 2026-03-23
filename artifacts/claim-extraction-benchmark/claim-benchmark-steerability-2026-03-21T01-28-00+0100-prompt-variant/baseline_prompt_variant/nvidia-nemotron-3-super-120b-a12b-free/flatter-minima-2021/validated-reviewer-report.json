@@ -1,0 +1,24 @@
+{
+  "claims": [
+    {
+      "claim": "Grown neural networks converge to flatter minima compared to fixed-size models trained from scratch.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    },
+    {
+      "claim": "Grown neural networks achieve better generalization than fixed-size models trained from scratch.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": ""
+    }
+  ],
+  "findings": [],
+  "open_questions": [],
+  "role": "claim_extractor",
+  "summary": "The paper shows that neural networks grown by adding neurons during training reach flatter minima and generalize better than fixed-size networks trained from scratch."
+}

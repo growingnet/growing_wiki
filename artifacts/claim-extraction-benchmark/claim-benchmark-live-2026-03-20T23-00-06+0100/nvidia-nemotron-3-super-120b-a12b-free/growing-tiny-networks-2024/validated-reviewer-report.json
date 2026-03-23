@@ -1,0 +1,54 @@
+{
+  "claims": [
+    {
+      "claim": "The proposed method detects expressivity bottlenecks using backpropagation signals.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Core contribution of the paper."
+    },
+    {
+      "claim": "The method adds neurons to the network where the current architecture cannot follow the functional gradient.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Describes the growth mechanism."
+    },
+    {
+      "claim": "Experiments on CIFAR-10/100 show that the grown tiny networks achieve accuracy comparable to larger models while requiring less manual architectural search.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Empirical validation."
+    }
+  ],
+  "findings": [
+    {
+      "claim": "The method detects expressivity bottlenecks from backpropagation signals.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "Shows how the algorithm identifies where the network lacks capacity.",
+      "recommendation": "Consider evaluating on other datasets beyond CIFAR.",
+      "severity": "low"
+    },
+    {
+      "claim": "Adding neurons where the functional gradient cannot be followed improves model expressivity.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "Directly addresses bottlenecks, enabling small networks to match larger ones.",
+      "recommendation": "Investigate theoretical guarantees of neuron addition.",
+      "severity": "low"
+    }
+  ],
+  "open_questions": [
+    "How does the method scale to larger datasets like ImageNet?",
+    "What are the computational overheads of the bottleneck detection during training?"
+  ],
+  "role": "claim_extractor",
+  "summary": "The paper proposes a method to grow tiny networks by detecting expressivity bottlenecks via backpropagation signals and adding neurons accordingly, achieving CIFAR performance comparable to larger models with reduced manual search."
+}

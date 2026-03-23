@@ -25,3 +25,17 @@ def test_readme_documents_custom_prose_authoring_rules() -> None:
     assert "[[Label|path/to/docname]]" in writing_docs_section
     assert ":cite:p:`" in writing_docs_section
     assert "References" in writing_docs_section
+
+
+def test_readme_documents_claim_extraction_benchmark() -> None:
+    """Ensure contributors can find the benchmark's baseline and artifact layout."""
+    readme_text = (_get_repo_root() / "README.md").read_text(encoding="utf-8")
+
+    assert "### Claim Extraction Benchmark" in readme_text
+    assert "nvidia/nemotron-3-super-120b-a12b:free" in readme_text
+    assert "baseline_prompt_variant" in readme_text
+    assert "website_aligned" in readme_text
+    assert "<run_label>/<profile_label>/<model_slug>/<paper_id>/" in readme_text
+    assert "human-eval.template.json" in readme_text
+    assert "manifest.snapshot.json" in readme_text
+    assert "run-summary.json" in readme_text

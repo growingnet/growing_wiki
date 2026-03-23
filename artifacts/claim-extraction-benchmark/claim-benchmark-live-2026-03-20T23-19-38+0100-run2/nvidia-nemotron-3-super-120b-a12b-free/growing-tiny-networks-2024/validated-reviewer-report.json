@@ -1,0 +1,45 @@
+{
+  "claims": [
+    {
+      "claim": "The method detects expressivity bottlenecks from backpropagation signals.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Based on the description of bottleneck detection."
+    },
+    {
+      "claim": "Neurons are added where the current architecture cannot follow the functional gradient.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Describes the neuron addition mechanism."
+    },
+    {
+      "claim": "CIFAR results match larger models while requiring less manual search.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Summarizes the empirical results reported."
+    }
+  ],
+  "findings": [
+    {
+      "claim": "The proposed method reduces the need for manual architecture search while matching the performance of larger models on CIFAR.",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "rationale": "Highlights the practical benefit of the approach for efficient model design.",
+      "recommendation": "Further evaluate on broader datasets and ablation studies to confirm generality.",
+      "severity": "medium"
+    }
+  ],
+  "open_questions": [
+    "How does the method scale to larger datasets such as ImageNet?",
+    "What are the theoretical guarantees regarding convergence and expressivity?"
+  ],
+  "role": "claim_extractor",
+  "summary": "The paper introduces a method for growing tiny networks by detecting expressivity bottlenecks via backpropagation and adding neurons accordingly, achieving CIFAR performance comparable to larger models with reduced manual search."
+}

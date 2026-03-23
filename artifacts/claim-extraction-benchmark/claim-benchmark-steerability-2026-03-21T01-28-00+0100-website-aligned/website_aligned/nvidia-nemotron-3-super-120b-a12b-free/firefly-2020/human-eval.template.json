@@ -1,0 +1,12 @@
+{
+  "claim_faithfulness": 5,
+  "evidence_grounding": 5,
+  "hallucination_flags": [],
+  "model_id": "nvidia/nemotron-3-super-120b-a12b:free",
+  "omission_rate": 4,
+  "paper_id": "firefly-2020",
+  "review_status": "completed",
+  "reviewer_notes": "Mechanistic framing is grounded and valid, but the report is sparse and drops the optional continual-learning and resource-efficiency angle.",
+  "run_label": "claim-benchmark-steerability-2026-03-21T01-28-00+0100-website-aligned",
+  "scored_at": "2026-03-21T01:45:00+01:00"
+}

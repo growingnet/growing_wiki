@@ -1,0 +1,12 @@
+{
+  "claim_faithfulness": null,
+  "evidence_grounding": null,
+  "hallucination_flags": [],
+  "model_id": "nvidia/nemotron-3-super-120b-a12b:free",
+  "omission_rate": null,
+  "paper_id": "gradmax-2022",
+  "review_status": "not_started",
+  "reviewer_notes": null,
+  "run_label": "claim-benchmark-steerability-debug-2026-03-21T00-15-28+0100",
+  "scored_at": null
+}

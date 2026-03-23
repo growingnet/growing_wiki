@@ -1,0 +1,42 @@
+{
+  "claims": [
+    {
+      "claim": "The method detects expressivity bottlenecks from backpropagation signals.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Based on description of bottleneck detection using gradient information."
+    },
+    {
+      "claim": "Neurons are added to the network where the current architecture cannot follow the functional gradient.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Describes the growth mechanism triggered by bottleneck detection."
+    },
+    {
+      "claim": "The resulting tiny networks achieve CIFAR performance matching larger models while requiring less manual architecture search.",
+      "confidence": "medium",
+      "evidence_refs": [
+        "section:full_text"
+      ],
+      "notes": "Empirical result reported in the paper."
+    }
+  ],
+  "findings": [],
+  "growth_operator": "Neuron addition (e.g., splitting or duplication)",
+  "initialization_strategy": "Copy weights from parent neuron with small random perturbation",
+  "mechanistic_notes": [
+    "Bottleneck detection relies on misalignment between functional gradient and representable subspace of current network.",
+    "Adding neurons expands the representable subspace along the direction of the functional gradient."
+  ],
+  "method_family": "Progressive network growth",
+  "open_questions": [],
+  "role": "claim_extractor",
+  "schema_variant": "website_aligned",
+  "selection_criterion": "Expressivity bottleneck score exceeding a threshold derived from backpropagation signal magnitude",
+  "summary": "The paper proposes a method that detects expressivity bottlenecks in small networks using backpropagation signals and adds neurons to alleviate them, achieving CIFAR performance comparable to larger models with reduced manual search.",
+  "website_alignment_notes": "Matches the website\u2011aligned description of growing tiny networks that spot and fix expressivity bottlenecks optimally."
+}

@@ -1,0 +1,7 @@
+{
+  "model_id": "qwen/qwen3-next-80b-a3b-instruct:free",
+  "status": "runtime_failed",
+  "error_type": "HTTPStatusError",
+  "error_message": "Client error '429 Too Many Requests' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+  "output_dir": "artifacts/schema-calibration-free-followup-2026-03-20/qwen-qwen3-next-80b-a3b-instruct-free"
+}

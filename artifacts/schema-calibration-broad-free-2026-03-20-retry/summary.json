@@ -1,0 +1,72 @@
+[
+  {
+    "model_id": "nvidia/nemotron-3-super-120b-a12b:free",
+    "status": "validated",
+    "output_dir": "artifacts/schema-calibration-broad-free-2026-03-20-retry/nvidia-nemotron-3-super-120b-a12b-free",
+    "validation_error": null,
+    "summary": "The paper evaluates a compact training strategy on a synthetic benchmark, reporting modest improvements and improved efficiency, though the evaluation is deliberately simple."
+  },
+  {
+    "model_id": "stepfun/step-3.5-flash:free",
+    "status": "validated",
+    "output_dir": "artifacts/schema-calibration-broad-free-2026-03-20-retry/stepfun-step-3-5-flash-free",
+    "validation_error": null,
+    "summary": "The paper evaluates a compact training strategy on a synthetic benchmark, reporting modest improvements, but acknowledges the deliberate simplicity of the setup for schema-calibration testing."
+  },
+  {
+    "model_id": "nvidia/nemotron-3-nano-30b-a3b:free",
+    "status": "validated",
+    "output_dir": "artifacts/schema-calibration-broad-free-2026-03-20-retry/nvidia-nemotron-3-nano-30b-a3b-free",
+    "validation_error": null,
+    "summary": "The paper reports modest efficiency improvements on a synthetic benchmark using a compact training strategy, but its evaluation is limited to a simple schema-calibration setup."
+  },
+  {
+    "model_id": "nvidia/nemotron-nano-9b-v2:free",
+    "status": "runtime_failed",
+    "error_type": "JSONDecodeError",
+    "error_message": "Expecting ',' delimiter: line 16472 column 3 (char 50634)",
+    "output_dir": "artifacts/schema-calibration-broad-free-2026-03-20-retry/nvidia-nemotron-nano-9b-v2-free"
+  },
+  {
+    "model_id": "arcee-ai/trinity-large-preview:free",
+    "status": "runtime_failed",
+    "error_type": "ReadTimeout",
+    "error_message": "The read operation timed out",
+    "output_dir": "artifacts/schema-calibration-broad-free-2026-03-20-retry/arcee-ai-trinity-large-preview-free"
+  },
+  {
+    "model_id": "arcee-ai/trinity-mini:free",
+    "status": "validated",
+    "output_dir": "artifacts/schema-calibration-broad-free-2026-03-20-retry/arcee-ai-trinity-mini-free",
+    "validation_error": null,
+    "summary": "The paper evaluates a compact training strategy on a synthetic benchmark, reporting modest improvements over a small baseline."
+  },
+  {
+    "model_id": "meta-llama/llama-3.3-70b-instruct:free",
+    "status": "runtime_failed",
+    "error_type": "HTTPStatusError",
+    "error_message": "Client error '429 Too Many Requests' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+    "output_dir": "artifacts/schema-calibration-broad-free-2026-03-20-retry/meta-llama-llama-3-3-70b-instruct-free"
+  },
+  {
+    "model_id": "qwen/qwen3-next-80b-a3b-instruct:free",
+    "status": "runtime_failed",
+    "error_type": "HTTPStatusError",
+    "error_message": "Client error '429 Too Many Requests' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+    "output_dir": "artifacts/schema-calibration-broad-free-2026-03-20-retry/qwen-qwen3-next-80b-a3b-instruct-free"
+  },
+  {
+    "model_id": "openai/gpt-oss-120b:free",
+    "status": "runtime_failed",
+    "error_type": "HTTPStatusError",
+    "error_message": "Client error '404 Not Found' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
+    "output_dir": "artifacts/schema-calibration-broad-free-2026-03-20-retry/openai-gpt-oss-120b-free"
+  },
+  {
+    "model_id": "openai/gpt-oss-20b:free",
+    "status": "runtime_failed",
+    "error_type": "HTTPStatusError",
+    "error_message": "Client error '404 Not Found' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
+    "output_dir": "artifacts/schema-calibration-broad-free-2026-03-20-retry/openai-gpt-oss-20b-free"
+  }
+]

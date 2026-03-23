@@ -1,1 +1,9 @@
 docs/_build/
+
+# AI artifcacts
+.cursor/
+.vscode/
+.env
+.idea/
+.cursor/
+.vscode/

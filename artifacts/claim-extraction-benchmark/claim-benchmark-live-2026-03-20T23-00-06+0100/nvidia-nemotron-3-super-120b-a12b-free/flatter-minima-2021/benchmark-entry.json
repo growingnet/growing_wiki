@@ -1,0 +1,12 @@
+{
+  "notes": "ICANN 2021 paper fixture for benchmark smoke runs.",
+  "paper_id": "flatter-minima-2021",
+  "source": "tests/fixtures/pdfs/flatter-minima-2021.pdf",
+  "source_type": "pdf_path",
+  "tags": [
+    "growing-networks",
+    "generalization",
+    "icann-2021"
+  ],
+  "title": "Growing Neural Networks Achieve Flatter Minima"
+}

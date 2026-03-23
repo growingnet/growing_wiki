@@ -1,0 +1,12 @@
+{
+  "notes": "NeurIPS 2020 paper fixture for benchmark smoke runs.",
+  "paper_id": "firefly-2020",
+  "source": "tests/fixtures/pdfs/firefly-2020.pdf",
+  "source_type": "pdf_path",
+  "tags": [
+    "growing-networks",
+    "architecture-search",
+    "neurips-2020"
+  ],
+  "title": "Firefly Neural Architecture Descent: a General Approach for Growing Neural Networks"
+}
