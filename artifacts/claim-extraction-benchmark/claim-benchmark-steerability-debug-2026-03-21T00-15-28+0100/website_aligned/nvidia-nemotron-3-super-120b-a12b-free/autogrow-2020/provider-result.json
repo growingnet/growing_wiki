@@ -8,7 +8,7 @@
   "sections": [],
   "source_kind": "generic_pdf",
   "success": false,
-  "title": "autogrow-2020",
+  "title": "AutoGrow: Automatic Layer Growing in Deep Convolutional Networks",
   "warnings": [
     "Client error '429 Too Many Requests' for url 'https://openrouter.ai/api/v1/chat/completions'"
   ]

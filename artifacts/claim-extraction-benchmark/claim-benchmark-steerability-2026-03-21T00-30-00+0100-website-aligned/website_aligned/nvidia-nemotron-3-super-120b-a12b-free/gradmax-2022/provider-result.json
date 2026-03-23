@@ -8,7 +8,7 @@
   "sections": [],
   "source_kind": "generic_pdf",
   "success": false,
-  "title": "gradmax-2022",
+  "title": "GradMax: Growing Neural Networks using Gradient Information",
   "warnings": [
     "3 validation errors for WebsiteAlignedReviewerReport"
   ]

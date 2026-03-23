@@ -198,6 +198,8 @@ def _run_benchmark_entry(
         provider_result = loaded_provider_result.model_dump(mode="json")
         if not provider_result.get("paper_id"):
             provider_result["paper_id"] = entry.paper_id
+        if not provider_result.get("title") or provider_result.get("title") == entry.paper_id:
+            provider_result["title"] = entry.title or provider_result.get("title")
         if not loaded_provider_result.success:
             return BenchmarkPaperRun(
                 paper_id=entry.paper_id,
@@ -226,9 +228,14 @@ def _run_benchmark_entry(
         )
         evidence_bundle = loaded_evidence_bundle.model_dump(mode="json")
         raw_review_output = claim_extractor.run_raw(loaded_evidence_bundle)
-        validated_report = _reviewer_report_model_for_profile(
-            profile_id
-        ).model_validate(raw_review_output)
+        try:
+            validated_report = _reviewer_report_model_for_profile(
+                profile_id
+            ).model_validate(raw_review_output)
+        except Exception as validation_exc:
+            if provider_result:
+                provider_result["warnings"] = provider_result.get("warnings", []) + [str(validation_exc)]
+            raise validation_exc
         return BenchmarkPaperRun(
             paper_id=entry.paper_id,
             run_label=run_label,
