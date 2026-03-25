@@ -40,6 +40,10 @@ Built files will be in:
 docs/_build/html
 ```
 
+To rebuild automatically while editing locally after installing the
+requirements, run `make -C docs livehtml`. Rendered html is served locally at
+`http://127.0.0.1:8000`.
+
 ## Writing Docs
 
 This wiki uses custom prose preprocessing in [`docs/conf.py`](docs/conf.py), so
