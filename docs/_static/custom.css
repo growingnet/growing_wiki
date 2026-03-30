@@ -37,3 +37,35 @@
 footer {
   display: none !important;
 }
+
+/* Shared caption styling for multi-image figure containers. */
+article .figure > .caption {
+  font-size: var(--font-size--small);
+  text-align: center;
+  color: var(--color-foreground-secondary);
+  margin-top: 0.5rem;
+}
+
+/* Render table captions below tables by default. */
+article table.docutils caption {
+  caption-side: bottom;
+  font-size: var(--font-size--small);
+  color: var(--color-foreground-secondary);
+  margin-top: 0.5rem;
+}
+
+/* When JS relocates captions outside the table, keep the same visual treatment. */
+article .table-wrapper > table.docutils {
+  margin-bottom: 0;
+}
+
+article .table-wrapper > .table-caption {
+  font-size: var(--font-size--small);
+  text-align: center;
+  color: var(--color-foreground-secondary);
+  margin-top: 0.5rem;
+}
+
+article .table-wrapper > .table-caption:hover > a.headerlink {
+  visibility: visible;
+}
