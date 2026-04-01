@@ -16,7 +16,7 @@ Where to grow?
    * - [[NeST|nest]]
      - Strongest activation-gradient correlations.
    * - [[Net2Net|net2net]]
-     - Any chosen layer.
+     - Any chosen layer, everywhere at the same time.
    * - [[Network Morphism|network_morphism]]
      - Any chosen layer.
    * - [[NORTH|north]]

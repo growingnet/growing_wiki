@@ -49,7 +49,7 @@ The current algorithms in this survey can be summarized as follows:
    * - [[NeST|nest]]
      - Predefined schedule.
    * - [[Net2Net|net2net]]
-     - Predefined schedule.
+     - Only once, on converged networks.
    * - [[Network Morphism|network_morphism]]
      - Predefined schedule.
    * - [[NORTH|north]]

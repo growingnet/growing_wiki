@@ -1,2 +1,10 @@
 .auctex-auto
+# Common
+.venv
+.idea
+.vscode
+.claude
+.codex
+
+# Project
 docs/_build/
