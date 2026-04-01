@@ -14,7 +14,7 @@ desirable statistical properties that benefit future optimization of the network
 1. Maximal update parameterization (:math:`\mu P`)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In general, the optimal choice of hyperparameters such as the learning rate and weight initialisation variance are not the same for networks of different sizes. How do should these hyperparameters depend on the layer size?
+In general, the optimal choice of hyperparameters such as the learning rate and weight initialisation variance are not the same for networks of different sizes. How should these hyperparameters depend on the layer size?
 
 For layers of the form :math:`y_l = W_l x_l + b_l`. Assuming that each element of :math:`x_l` and :math:`W_l` are independently distributed, and with zero bias. The variance of the preactivations :math:`y_l` is given by
 
@@ -26,14 +26,14 @@ For layers of the form :math:`y_l = W_l x_l + b_l`. Assuming that each element o
     &= n_l \textrm{Var}[w_l] \mathbb{E}[x_l^2].
     \end{aligned}
 
-In the final line we assume that the weights have zero mean, although the inputs :math:`x_l` may not. The latter is true for linearised activation functions, for ReLU activations :math:`\mathbb{E}[x_l^2] = \tfrac{1}{2} \textrm{Var}[y_{l-1}]` and thus
+In the final line we assume that the weights have zero mean, although the inputs :math:`x_l` may not. The latter is true for linearised activation functions, but for ReLU activations :math:`\mathbb{E}[x_l^2] = \tfrac{1}{2} \textrm{Var}[y_{l-1}]` and thus
 
 .. math::
    \textrm{Var}[y_l] = \frac{1}{2} \textrm{Var}[w_l] \textrm{Var}[y_{l-1}]
 
 In order to preserve the magnitude of the pre-activations from layer to layer, Kaiming Initialization proposes to set :math:`\tfrac{1}{2} n_l \textrm{Var}[w_l] = 1`, thus initializing each layer weights with a zero-mean Gaussian with variance :math:`\propto 1 / fan\_in`.
 
-This choice of parameterisation is not unique. By studing the inifinite-width limit, Maximal Update Parameterisation (:math:`\mu P`, :cite:p:`yang_tensor_2021`) proposes an alternative parameterisation:
+This choice of parameterisation is not unique. By studying the infinite-width limit, Maximal Update Parameterisation (:math:`\mu P`, :cite:p:`yang_tensor_2021`) proposes an alternative parameterisation:
 
 .. table:: Maximal Update Parameterization (:math:`\mu P`) vs the Standard Parameterisation in brackets (if different). See Table 3 in :cite:p:`yang_tensor_2021` for more details.
     :align: center
@@ -47,7 +47,7 @@ This choice of parameterisation is not unique. By studing the inifinite-width li
     | SGD LR     | :math:`\mathrm{fan\_out}` (1)            | :math:`\frac{1}{\mathrm{fan\_in}}` (1)               | :math:`\frac{1}{\mathrm{fan\_in}}`       |
     +------------+------------------------------------------+------------------------------------------------------+------------------------------------------+
 
-Later, it was observed empirically that using :math:`\mu P` for finite-width, the optimal choice of e.g. learning rate remains constant, roughly independent of layer size. This motivates it's use for both hyperparameter transfer between networks :cite:p:`yang_tensor_2021`, and more generally for growing neural networks.
+Later, it was observed empirically that using :math:`\mu P` for finite-width, the optimal choice of e.g. learning rate remains constant, roughly independent of layer size. This motivates its use for both hyperparameter transfer between networks :cite:p:`yang_tensor_2021`, and more generally for growing neural networks.
 
 
 2. Function-preserving splitting
@@ -90,7 +90,7 @@ ensures that the contributions of the new weights cancel, preserving the network
     V \sim \mathcal{N}(0, 1/C_{l-2}^2), \qquad Z \sim \mathcal{N}(0, 1/(C_{l-1}+k)^2).
 
 To preserve variance, the old weights are rescaled by
-:math:`\boldsymbol{W}_{t+1}=\boldsymbol{W}_t \cdot \frac{C_t}{C_{t+1}}`. This is an approximation that assumes that only strictly holds at initialization. More carefully, as described in App A of :cite:p:`yuan_accelerated_2023`, one can explicitly enforce unit variance of the preactivations :math:`\textrm{Var}[y_l] = 1` after growth, which rescaling based on the empirical weight variance and not just the old :math:`fan\_in`. However, in practice this does not outperform the :math:`fan\_in` approximation.
+:math:`\boldsymbol{W}_{t+1}=\boldsymbol{W}_t \cdot \frac{C_t}{C_{t+1}}`. This is an approximation that only strictly holds at initialization. More carefully, as described in App A of :cite:p:`yuan_accelerated_2023`, one can explicitly enforce unit variance of the preactivations :math:`\textrm{Var}[y_l] = 1` after growth, rescaling based on the empirical weight variance rather than simply the :math:`fan\_in`. However, in practice this does not outperform the :math:`fan\_in` approximation.
 
 The running mean :math:`\mu` and variance :math:`\sigma^2` of Batch Normalization layers are also rescaled. For a scale factor :math:`c`, the mean and variance are scaled by :math:`c \mu` and :math:`c^2 \sigma^2` respectively.
 
@@ -98,7 +98,7 @@ The running mean :math:`\mu` and variance :math:`\sigma^2` of Batch Normalizatio
 3. Learning-rate adaptation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Rather than using a learning rate that is constant across all layers in the network, the learning rate :math:`\propto 1/\textrm{fan\_in}` based on :math:`\mu P`.
+Typically, the learning rate is global, the same for all layers in the network. Following :math:`\mu P`, Variance Transfer assigns a layer-dependant learning rate proportional to the :math:`\textrm{fan\_in}` of that layer.
 
 Furthermore, the learning rate is adapted to the growth cycle of each
 sub-network. Partitioning the weights :math:`\mathbf{W}_T` of the entire
