@@ -1,7 +1,7 @@
 Variance Transfer
 =================
 
-    **TLDR:** Function-preserving growth with i) good weight initialisation and ii) layer-wise learning rates goes a long way.
+    **TLDR:** Function-preserving growth with i) good weight initialisation and ii) growth-aware learning rates goes a long way.
 
 Many growing methods frame growth as the solution of a local optimization problem for the new weights at each growth step. Instead, Variance Transfer :cite:p:`yuan_accelerated_2023` uses an (approximately) function-preserving initialization and focuses on training dynamics, preserving
 desirable statistical properties that benefit future optimization of the network. Variance Transfer has four main components:
@@ -121,3 +121,38 @@ subnetworks are trained for a different number of epochs.
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 One of the motivations for growing neural networks is accelerated training, however a reduction in parameters does not generally translate to significant walltime speedups. A variant of Variance Transfer is proposed which also scales the batch size, to maximise GPU utilisation throughout growth.
+
+Results
+~~~~~~~
+
+The following table ablates the various components of Variance Transfer for ResNets on CIFAR-10/100. They ablate their function-preserving morphism (vs [[Net2Net]]), variance rescaling (VRS) of the old weights, and learning rate adaptation (LRA), as well as the implementation all both components (Full). They perform similarly to the non-grown baseline.
+
+.. table:: Ablation study on variance rescaling (VRS) of the weights and learning rate adaptation (LRA). Mean :math:`\pm` std over 3 runs.
+    :align: center
+
+    +----------------------+---------------------------+-----------------------------+
+    | Variant              | Res-20 on C-10 (%)        | Res-18 on C-100 (%)         |
+    +======================+===========================+=============================+
+    | Net2Net              | :math:`91.60 \pm 0.21`    | :math:`76.48 \pm 0.20`      |
+    |                      | (+0.00)                   | (+0.00)                     |
+    +----------------------+---------------------------+-----------------------------+
+    | Growing              | :math:`91.62 \pm 0.12`    | :math:`76.82 \pm 0.17`      |
+    |                      | (+0.02)                   | (+0.34)                     |
+    +----------------------+---------------------------+-----------------------------+
+    | Growing+VRS          | :math:`92.00 \pm 0.10`    | :math:`77.27 \pm 0.14`      |
+    |                      | (+0.40)                   | (+0.79)                     |
+    +----------------------+---------------------------+-----------------------------+
+    | Growing+LRA          | :math:`92.24 \pm 0.11`    | :math:`77.74 \pm 0.16`      |
+    |                      | (+0.64)                   | (+1.26)                     |
+    +----------------------+---------------------------+-----------------------------+
+    | Full                 | :math:`92.53 \pm 0.11`    | :math:`78.12 \pm 0.15`      |
+    |                      | (+0.93)                   | (+1.64)                     |
+    +----------------------+---------------------------+-----------------------------+
+    | Non-growing baseline | :math:`92.62 \pm 0.15`    | :math:`78.36 \pm 0.12`      |
+    +----------------------+---------------------------+-----------------------------+
+
+Open Questions
+~~~~~~~~~~~~~~
+
+1. Variance Transfer's growing method improves performance over [[Net2Net]] for CIFAR-100 but not CIFAR-10. As the use of random weight initialisation may provide add additional form of regularisation compared to neuron splitting, this may be due to the increased overfitting in CIFAR-100.
+2. In general, scaling the batch size requires simultaneously scaling the learning rate in order to preserve training dynamics, see e.g. :cite:p:`goyalAccurateLargeMinibatch2017`. However, their Batch Rate Adaptation method does not do this.
