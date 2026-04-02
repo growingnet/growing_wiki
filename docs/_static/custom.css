@@ -54,6 +54,13 @@ article table.docutils caption {
   margin-top: 0.5rem;
 }
 
+/* Furo applies .align-center { display: block; text-align: center; } globally.
+   Restore table layout for centered tables while keeping auto margins. */
+article table.align-center {
+  display: table;
+  text-align: initial;
+}
+
 /* When JS relocates captions outside the table, keep the same visual treatment. */
 article .table-wrapper > table.docutils {
   margin-bottom: 0;
