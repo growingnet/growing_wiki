@@ -5,6 +5,7 @@
 .vscode
 .claude
 .codex
+.paper_sources
 
 # Project
 docs/_build/
