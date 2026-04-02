@@ -52,8 +52,8 @@ This "PyTorch" parameterisation is not unique. In the large-width limit, gradien
 Later, it was observed empirically that, applying :math:`\mu P` to finite-width models, the optimal choice of e.g. learning rate remains constant, roughly independent of layer size. This motivates its use for both hyperparameter transfer between networks :cite:p:`yang_tensor_2021`, and more generally for growing neural networks.
 
 
-2. Function-preserving splitting
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2. Function-preserving growth
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. _fig-variance-transfer:
 
