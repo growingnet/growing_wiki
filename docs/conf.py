@@ -20,6 +20,7 @@ html_theme = "furo"
 html_static_path = ["_static"]
 html_css_files = ["custom.css"]
 html_js_files = ["sidebar-open.js"]
+numfig = True
 html_theme_options = {
     "light_logo": "logo.png",
     "dark_logo": "logo-dark.png",
