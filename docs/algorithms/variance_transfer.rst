@@ -98,7 +98,7 @@ The running mean :math:`\mu` and variance :math:`\sigma^2` of Batch Normalizatio
 3. Learning-rate adaptation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Typically, the learning rate is global, the same for all layers in the network. Following :math:`\mu P`, Variance Transfer assigns a layer-dependent learning rate proportional to the :math:`\textrm{fan\_in}` of that layer, as described in :numref:`Table %s <tab-mup>`.
+Typically, the learning rate is global, the same for all layers in the network. Following :math:`\mu P`, Variance Transfer assigns a layer-dependent learning rate proportional to the :math:`\textrm{fan_in}` of that layer, as described in :numref:`Table %s <tab-mup>`.
 
 Furthermore, the learning rate is adapted to the growth cycle of each
 sub-network. Partitioning the weights :math:`\mathbf{W}_T` of the entire
