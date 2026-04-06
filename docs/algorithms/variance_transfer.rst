@@ -31,7 +31,7 @@ In the final line we assume that the weights have zero mean, although the inputs
 .. math::
    \textrm{Var}[y_l] = \frac{1}{2} n_l \textrm{Var}[w_l] \textrm{Var}[y_{l-1}]
 
-In order to preserve the magnitude of the pre-activations from layer to layer, Kaiming Initialisation proposes to set :math:`\tfrac{1}{2} n_l \textrm{Var}[w_l] = 1`, thus initializing each layer weights with a zero-mean Gaussian with variance :math:`\propto 1 / \textrm{fan\_in}`.
+In order to preserve the magnitude of the pre-activations from layer to layer, Kaiming Initialisation proposes to set :math:`\tfrac{1}{2} n_l \textrm{Var}[w_l] = 1`, thus initialising each layer's weights with a zero-mean Gaussian with variance :math:`\propto 1 / \textrm{fan\_in}`.
 
 This "PyTorch" parameterisation is not unique. In the large-width limit, gradient updates cause the activations to blow up in PyTorch parameterisation. Maximal Update Parameterisation (:math:`\mu P`, :cite:p:`yang_tensor_2021`) therefore proposes the alternative requirement: the effect of a gradient step on the activations should be approximately width-independent in the large-width limit. This results in the following parameterisation (with the PyTorch parameterisation in parentheses):
 
@@ -148,7 +148,7 @@ With typical values of :math:`p_c = 0.2` which results in 8 growth steps.
 When to grow?
 ^^^^^^^^^^^^^^
 
-The paper proposes an exponential growth schedule, with:
+The paper proposes an exponential growth schedule. Each growth stage :math:`t` is assigned :math:`T_t` epochs, with:
 
 .. math::
     
@@ -160,7 +160,7 @@ The paper proposes an exponential growth schedule, with:
 
 with typical values of :math:`p_T = p_C`, :math:`T_0 \in [4,10]` and :math:`T_\textrm{final} \in [90, 200]` epochs.
 
-Comparison is made with a fixed intermediate epochs (:math:`p_T = 0`), which performs similarly to the exponential schedule. Note that according to the authors, the exponential schedule (i.e. :math:`p_T > 0`) is performing better but the experiments are not fully convincing.
+This was compared with a constant growth schedule (:math:`p_T = 0`), which performs similarly to the exponential schedule. The authors claim that the exponential schedule (i.e. :math:`p_T > 0`) performs better, but the experiments are not fully convincing.
 
 
 Results
