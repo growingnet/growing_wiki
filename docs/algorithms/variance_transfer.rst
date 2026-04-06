@@ -31,7 +31,7 @@ In the final line we assume that the weights have zero mean, although the inputs
 .. math::
    \textrm{Var}[y_l] = \frac{1}{2} n_l \textrm{Var}[w_l] \textrm{Var}[y_{l-1}]
 
-In order to preserve the magnitude of the pre-activations from layer to layer, Kaiming Initialisation proposes to set :math:`\tfrac{1}{2} n_l \textrm{Var}[w_l] = 1`, thus initializing each layer weights with a zero-mean Gaussian with variance :math:`\propto 1 / \textrm{fan\_in}`.
+In order to preserve the magnitude of the pre-activations from layer to layer, Kaiming Initialisation proposes to set :math:`\tfrac{1}{2} n_l \textrm{Var}[w_l] = 1`, thus initializing each layer weights with a zero-mean Gaussian with variance :math:`\propto 1 / \textrm{fan_in}`.
 
 This "PyTorch" parameterisation is not unique. In the large-width limit, gradient updates cause the activations to blow up in PyTorch parameterisation. Maximal Update Parameterisation (:math:`\mu P`, :cite:p:`yang_tensor_2021`) therefore proposes the alternative requirement: the effect of a gradient step on the activations should be approximately width-independent in the large-width limit. This results in the following parameterisation (with the PyTorch parameterisation in parentheses):
 
