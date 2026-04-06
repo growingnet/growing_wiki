@@ -90,7 +90,7 @@ ensures that the contributions of the new weights cancel, preserving the network
     V \sim \mathcal{N}(0, 1/C_{l-2}^2), \qquad Z \sim \mathcal{N}(0, 1/(C_{l-1}+k)^2).
 
 To preserve variance, the old weights are rescaled by
-:math:`\boldsymbol{W}_{t+1}=\boldsymbol{W}_t \cdot \frac{C_t}{C_{t+1}}`. This is an approximation that only strictly holds at initialisation. More carefully, as described in App A of :cite:p:`yuan_accelerated_2023`, one can explicitly enforce unit variance of the preactivations :math:`\textrm{Var}[y_l] = 1` after growth, rescaling based on the empirical weight variance rather than simply the :math:`\textrm{fan\_in}`. However, in practice this does not outperform the :math:`\textrm{fan\_in}` approximation.
+:math:`\boldsymbol{W}_{t+1}=\boldsymbol{W}_t \cdot \frac{C_t}{C_{t+1}}`. This is an approximation that only strictly holds at initialisation. More carefully, as described in App A of :cite:p:`yuan_accelerated_2023`, one can explicitly enforce unit variance of the preactivations :math:`\textrm{Var}[y_l] = 1` after growth, rescaling based on the empirical weight variance rather than simply the :math:`\textrm{fan_in}`. However, in practice this does not outperform the :math:`\textrm{fan_in}` approximation.
 
 The running mean :math:`\mu` and variance :math:`\sigma^2` of Batch Normalization layers are also rescaled. For a scale factor :math:`c`, the mean and variance are scaled by :math:`c \mu` and :math:`c^2 \sigma^2` respectively.
 
