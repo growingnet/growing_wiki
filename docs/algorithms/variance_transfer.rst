@@ -191,6 +191,11 @@ The following table ablates the various components of Variance Transfer for ResN
     +----------------------+---------------------------+-----------------------------+
     | Non-growing baseline | :math:`92.62 \pm 0.15`    | :math:`78.36 \pm 0.12`      |
     +----------------------+---------------------------+-----------------------------+
+**Hyperparameters**:
+
+- Growth schedule: :math:`p_T = p_C = 0.2`, :math:`T_0 = 8, 10` for C-10, C-100 respectively, :math:`T_\textrm{final} = 100, 200` for C-10, C-100 respectively.
+
+- Optimizer: SGD with momentum 0.9, weight decay :math:`5 \cdot 10^{-4}`, base learning rate :math:`\eta_0 = 0.1` with cosine decay.
 
 Open Questions
 ~~~~~~~~~~~~~~
