@@ -122,6 +122,47 @@ subnetworks are trained for a different number of epochs.
 
 One of the motivations for growing neural networks is accelerated training, however a reduction in parameters does not generally translate to significant walltime speedups. For example, for ResNet-20 on CIFAR-10, growing only results in 15% speedup. A variant of Variance Transfer is proposed which also scales the batch size, to maximise GPU utilisation throughout growth, resulting in a 70% speedup, in exchange for a small decrease in performance.
 
+
+5. When, how many, and where to grow?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Where to grow?
+^^^^^^^^^^^^^^^^
+
+Like :cite:p:`chen_net2net_2016`, the paper grows the width of all layers simultaneously.
+
+How many?
+^^^^^
+
+The paper proposes an exponential growth schedule, with :math:`C_t` the number of channels at growth stage :math:`t`:
+
+.. math::
+    
+    \begin{aligned}
+    C_0 &= \frac{1}{4} C_{\textrm{final}}\\
+    C_t  &= C_{t-1} + \lfloor p_c C_{t-1} \rceil_2
+    \end{aligned}
+
+With typical values of :math:`p_c = 0.2` which results in 8 growth steps.
+
+When to grow?
+^^^^^^^^^^^^^^
+
+The paper proposes an exponential growth schedule, with:
+
+.. math::
+    
+    \begin{aligned}
+    T_0 &\in \mathbb{N} \\
+    T_t &= T_{t-1} + \lfloor p_T T_{t-1} \rceil \\
+    T_\textrm{end}  &= T_{\textrm{final}} - \sum_{t=0}^{N-1} T_i
+    \end{aligned}
+
+with typical values of :math:`p_T = p_C`, :math:`T_0 \in [4,10]` and :math:`T_\textrm{final} \in [90, 200]` epochs.
+
+Comparison is made with a fixed intermediate epochs (:math:`p_T = 0`), which performs similarly to the exponential schedule. Note that according to the authors, the exponential schedule (i.e. :math:`p_T > 0`) is performing better but the experiments are not fully convincing.
+
+
 Results
 ~~~~~~~
 
