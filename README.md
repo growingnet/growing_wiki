@@ -16,15 +16,11 @@ The Growing Wiki documents algorithms for growing neural networks during trainin
 
 ## Build Locally
 
-### Prerequisites
-
-- Python 3.10+ (3.11 used in CI)
-- `pip`
-
 ### Install dependencies
 
+With python 3.11, install
+
 ```bash
-python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
@@ -64,3 +60,11 @@ contributors should not treat the `.rst` files as plain reStructuredText.
 
 If a prose change introduces broken or ambiguous wiki links, the Sphinx build
 will emit warnings from the custom link resolver in `docs/conf.py`.
+
+The CI requires that Sphinx build results in no errors or warnings. To run this check manually run
+
+```bash
+pre-commit run --all-files
+```
+
+To enforce the check automatically on every local commit, run `pre-commit install`.
