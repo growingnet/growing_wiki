@@ -61,7 +61,7 @@ contributors should not treat the `.rst` files as plain reStructuredText.
 If a prose change introduces broken or ambiguous wiki links, the Sphinx build
 will emit warnings from the custom link resolver in `docs/conf.py`.
 
-The CI requires that the Sphinx build produces no errors or warnings. To run this check manually run
+The CI requires that the Sphinx build produces no errors or warnings. To run this check manually, run:
 
 ```bash
 pre-commit run --all-files
