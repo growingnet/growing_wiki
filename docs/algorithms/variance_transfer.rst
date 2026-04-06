@@ -31,7 +31,7 @@ In the final line we assume that the weights have zero mean, although the inputs
 .. math::
    \textrm{Var}[y_l] = \frac{1}{2} n_l \textrm{Var}[w_l] \textrm{Var}[y_{l-1}]
 
-In order to preserve the magnitude of the pre-activations from layer to layer, Kaiming Initialisation proposes to set :math:`\tfrac{1}{2} n_l \textrm{Var}[w_l] = 1`, thus initializing each layer weights with a zero-mean Gaussian with variance :math:`\propto 1 / \textrm{fan_in}`.
+In order to preserve the magnitude of the pre-activations from layer to layer, Kaiming Initialisation proposes to set :math:`\tfrac{1}{2} n_l \textrm{Var}[w_l] = 1`, thus initializing each layer weights with a zero-mean Gaussian with variance :math:`\propto 1 / \textrm{fan\_in}`.
 
 This "PyTorch" parameterisation is not unique. In the large-width limit, gradient updates cause the activations to blow up in PyTorch parameterisation. Maximal Update Parameterisation (:math:`\mu P`, :cite:p:`yang_tensor_2021`) therefore proposes the alternative requirement: the effect of a gradient step on the activations should be approximately width-independent in the large-width limit. This results in the following parameterisation (with the PyTorch parameterisation in parentheses):
 
@@ -90,7 +90,7 @@ ensures that the contributions of the new weights cancel, preserving the network
     V \sim \mathcal{N}(0, 1/C_{l-2}^2), \qquad Z \sim \mathcal{N}(0, 1/(C_{l-1}+k)^2).
 
 To preserve variance, the old weights are rescaled by
-:math:`\boldsymbol{W}_{t+1}=\boldsymbol{W}_t \cdot \frac{C_t}{C_{t+1}}`. This is an approximation that only strictly holds at initialisation. More carefully, as described in App A of :cite:p:`yuan_accelerated_2023`, one can explicitly enforce unit variance of the preactivations :math:`\textrm{Var}[y_l] = 1` after growth, rescaling based on the empirical weight variance rather than simply the :math:`\textrm{fan_in}`. However, in practice this does not outperform the :math:`\textrm{fan_in}` approximation.
+:math:`\boldsymbol{W}_{t+1}=\boldsymbol{W}_t \cdot \frac{C_t}{C_{t+1}}`. This is an approximation that only strictly holds at initialisation. More carefully, as described in App A of :cite:p:`yuan_accelerated_2023`, one can explicitly enforce unit variance of the preactivations :math:`\textrm{Var}[y_l] = 1` after growth, rescaling based on the empirical weight variance rather than simply the :math:`\textrm{fan\_in}`. However, in practice this does not outperform the :math:`\textrm{fan\_in}` approximation.
 
 The running mean :math:`\mu` and variance :math:`\sigma^2` of Batch Normalization layers are also rescaled. For a scale factor :math:`c`, the mean and variance are scaled by :math:`c \mu` and :math:`c^2 \sigma^2` respectively.
 
@@ -98,7 +98,7 @@ The running mean :math:`\mu` and variance :math:`\sigma^2` of Batch Normalizatio
 3. Learning-rate adaptation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Typically, the learning rate is global, the same for all layers in the network. Following :math:`\mu P`, Variance Transfer assigns a layer-dependent learning rate proportional to the :math:`\textrm{fan_in}` of that layer, as described in :numref:`Table %s <tab-mup>`.
+Typically, the learning rate is global, the same for all layers in the network. Following :math:`\mu P`, Variance Transfer assigns a layer-dependent learning rate proportional to the :math:`\textrm{fan\_in}` of that layer, as described in :numref:`Table %s <tab-mup>`.
 
 Furthermore, the learning rate is adapted to the growth cycle of each
 sub-network. Partitioning the weights :math:`\mathbf{W}_T` of the entire
@@ -129,10 +129,10 @@ One of the motivations for growing neural networks is accelerated training, howe
 Where to grow?
 ^^^^^^^^^^^^^^^^
 
-Like :cite:p:`chen_net2net_2016`, the paper grows the width of all layers simultaneously.
+Like [[Net2Net]], the paper grows the width of all layers simultaneously.
 
 How many?
-^^^^^
+^^^^^^^^^
 
 The paper proposes an exponential growth schedule, with :math:`C_t` the number of channels at growth stage :math:`t`:
 
@@ -191,6 +191,7 @@ The following table ablates the various components of Variance Transfer for ResN
     +----------------------+---------------------------+-----------------------------+
     | Non-growing baseline | :math:`92.62 \pm 0.15`    | :math:`78.36 \pm 0.12`      |
     +----------------------+---------------------------+-----------------------------+
+
 **Hyperparameters**:
 
 - Growth schedule: :math:`p_T = p_C = 0.2`, :math:`T_0 = 8, 10` for C-10, C-100 respectively, :math:`T_\textrm{final} = 100, 200` for C-10, C-100 respectively.
