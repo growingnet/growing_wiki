@@ -3,7 +3,7 @@ Variance Transfer
 
     **TLDR:** Function-preserving growth with i) good weight initialisation and ii) growth-aware learning rates goes a long way.
 
-Many growing methods frame growth as the solution of a local optimisation problem for the new weights at each growth step. Instead, Variance Transfer :cite:p:`yuan_accelerated_2023` uses an (approximately) function-preserving initialisation and focuses on training dynamics, preserving
+Many growing methods frame growth as the solution of a local optimisation problem for the new weights at each growth step. Instead, Variance Transfer :cite:p:`yuan_accelerated_2023` uses an (approximately) function-preserving initialisation and focuses on training dynamics, preserving
 desirable statistical properties that benefit future optimisation of the network. Variance Transfer has four main components:
 
 1. Maximal Update Parameterisation :cite:p:`yang_tensor_2021` for the learning rate and weight initialisation.
