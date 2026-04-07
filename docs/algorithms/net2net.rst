@@ -1,6 +1,8 @@
 Net2Net
 =======
 
+    **TLDR:** A seminal work that grows by preserving the network function output.
+
 How can we transfer knowledge from one network to a new, larger network?
 Net2Net :cite:p:`chen_net2net_2016` is one of the first papers to propose
 function-preserving morphisms to transfer knowledge across networks.
