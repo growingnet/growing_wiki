@@ -260,7 +260,7 @@ def setup(app):
         text = _prefix_citation_roles(text, keyprefix)
         source[0] = (
             text.rstrip()
-            + "\n\nReferences\n~~~~~~~~~~\n\n.. bibliography::\n"
+            + "\n\nReferences\n----------\n\n.. bibliography::\n"
             + "   :filter: docname in docnames\n"
             + f"   :keyprefix: {keyprefix}\n"
         )
