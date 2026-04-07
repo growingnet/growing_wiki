@@ -1,3 +1,12 @@
 .auctex-auto
+# Common
+.venv
+.idea
+.vscode
+.claude
+.codex
+.paper_sources
+
+# Project
 docs/_build/
 __pycache__/

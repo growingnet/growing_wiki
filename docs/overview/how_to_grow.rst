@@ -15,8 +15,10 @@ How to grow?
      - :math:`\boldsymbol{\Psi}=0`; maximize gradient norm.
    * - [[NeST|nest]]
      - Sparse neuron or edge addition.
-   * - [[Net2Net|net2net]]
-     - Function-preserving widening or deepening.
+   * - [[Net2WiderNet|net2net]]
+     - Function-preserving neuron splitting.
+   * - [[Net2DeeperNet|net2net]]
+     - Function-preserving identity layer insertion.
    * - [[Network Morphism|network_morphism]]
      - Function-preserving morphism.
    * - [[NORTH|north]]
