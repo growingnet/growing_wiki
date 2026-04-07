@@ -36,7 +36,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run contributor guidance tests
+      - name: Run documentation and agent guidance tests
         run: pytest
 
       - name: Build HTML docs

@@ -64,3 +64,11 @@ contributors should not treat the `.rst` files as plain reStructuredText.
 
 If a prose change introduces broken or ambiguous wiki links, the Sphinx build
 will emit warnings from the custom link resolver in `docs/conf.py`.
+
+## Working With Coding Agents
+
+Shared agent instructions live in [`AGENTS.md`](AGENTS.md).
+
+For screening papers before adding them to the wiki, use the project-local
+skill in [`agents/skills/review-growth-papers`](agents/skills/review-growth-papers)
+and save intake notes under `notes/paper-reviews/`.
