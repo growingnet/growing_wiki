@@ -12,7 +12,7 @@ desirable statistical properties that benefit future optimisation of the network
 4. (Optionally) Adapting the batch size to maximize GPU throughput and reduce training time.
 
 1. Maximal update parameterisation (:math:`\mu P`)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------------------------
 
 In general, the optimal choice of hyperparameters such as the learning rate and weight initialisation variance are not the same for networks of different sizes. How should these hyperparameters depend on the layer size?
 
@@ -53,7 +53,7 @@ Later, it was observed empirically that, applying :math:`\mu P` to finite-width 
 
 
 2. Function-preserving growth
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------
 
 .. _fig-variance-transfer:
 
@@ -96,7 +96,7 @@ The running mean :math:`\mu` and variance :math:`\sigma^2` of Batch Normalizatio
 
 
 3. Learning-rate adaptation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------
 
 Typically, the learning rate is global, the same for all layers in the network. Following :math:`\mu P`, Variance Transfer assigns a layer-dependent learning rate proportional to the :math:`\textrm{fan\_in}` of that layer, as described in :numref:`Table %s <tab-mup>`.
 
@@ -118,13 +118,13 @@ is the Frobenius norm. This compensates for the fact that different
 subnetworks are trained for a different number of epochs.
 
 4. Batch size adaptation
-~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------
 
 One of the motivations for growing neural networks is accelerated training, however a reduction in parameters does not generally translate to significant walltime speedups. For example, for ResNet-20 on CIFAR-10, growing only results in 15% speedup. A variant of Variance Transfer is proposed which also scales the batch size, to maximise GPU utilisation throughout growth, resulting in a 70% speedup, in exchange for a small decrease in performance.
 
 
 5. When, how many, and where to grow?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------
 
 Where to grow?
 ^^^^^^^^^^^^^^^^
@@ -164,7 +164,7 @@ This was compared with a constant growth schedule (:math:`p_T = 0`), which perfo
 
 
 Results
-~~~~~~~
+-------
 
 The following table ablates the various components of Variance Transfer for ResNets on CIFAR-10/100. They ablate their function-preserving morphism (vs [[Net2Net]]), variance rescaling (VRS) of the old weights, and learning rate adaptation (LRA), as well as the implementation of all components (Full). They perform similarly to the non-grown baseline.
 
@@ -199,7 +199,7 @@ The following table ablates the various components of Variance Transfer for ResN
 - Optimizer: SGD with momentum 0.9, weight decay :math:`5 \cdot 10^{-4}`, base learning rate :math:`\eta_0 = 0.1` with cosine decay.
 
 Open Questions
-~~~~~~~~~~~~~~
+--------------
 
 1. Variance Transfer's growing method improves performance over [[Net2Net]] for CIFAR-100 but not CIFAR-10. This difference may be due to the increased propensity to overfit in CIFAR-100, since the use of random weight initialisation can provide additional regularisation compared to neuron splitting.
 2. In general, scaling the batch size requires simultaneously scaling the learning rate in order to preserve training dynamics, see e.g. :cite:p:`goyalAccurateLargeMinibatch2017`. However, their Batch Rate Adaptation method does not do this.
