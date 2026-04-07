@@ -1,0 +1,9 @@
+repos:
+  - repo: local
+    hooks:
+      - id: docs-strict-build
+        name: docs strict build
+        entry: make -C docs stricthtml
+        language: system
+        pass_filenames: false
+        always_run: true

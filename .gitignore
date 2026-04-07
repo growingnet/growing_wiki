@@ -1,2 +1,3 @@
 .auctex-auto
 docs/_build/
+__pycache__/
