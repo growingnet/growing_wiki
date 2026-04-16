@@ -132,13 +132,11 @@ Adding connections (Policy 1)
 
    Connection growth (Policy 1): score dormant edges by :math:`|B^{(l-1)}_{i,j}|` and activate high-magnitude edges.
 
-.. figure:: /_static/nest_connection_growth-dark.svg
+.. image:: /_static/nest_connection_growth-dark.svg
    :class: only-dark
    :align: center
    :width: 80%
    :alt: Bipartite layer sketch with one dormant edge activated by largest B score
-
-   Connection growth (Policy 1): score dormant edges by :math:`|B^{(l-1)}_{i,j}|` and activate high-magnitude edges.
 
 To turn a **dormant** weight in :math:`\boldsymbol{W}^{(l)}` into an active
 connection, NeST scores each candidate pair :math:`(i,j)` by the magnitude of
@@ -197,13 +195,11 @@ random sign), optionally accumulating several such pairs before a global
 
    Neuron growth (Policy 2): bridge a high :math:`|B^{(l-2)}_{i,j}|` pair and apply the square-root initialization to :math:`\psi_{i^*}`, :math:`\omega_{j^*}`.
 
-.. figure:: /_static/nest_neuron_growth-dark.svg
+.. image:: /_static/nest_neuron_growth-dark.svg
    :class: only-dark
    :align: center
    :width: 80%
    :alt: Three-node chain with a new middle neuron and psi omega initialization chip
-
-   Neuron growth (Policy 2): bridge a high :math:`|B^{(l-2)}_{i,j}|` pair and apply the square-root initialization to :math:`\psi_{i^*}`, :math:`\omega_{j^*}`.
 
 Pedagogical one-sparse view
 """""""""""""""""""""""""""
@@ -312,13 +308,11 @@ Growth in convolutional layers (Policy 3)
 
    Feature-map growth (Policy 3): compare random kernel candidates :math:`\mathcal{K}_1,\ldots,\mathcal{K}_r` by forward loss.
 
-.. figure:: /_static/nest_feature_map_growth-dark.svg
+.. image:: /_static/nest_feature_map_growth-dark.svg
    :class: only-dark
    :align: center
    :width: 80%
    :alt: Three candidate kernel tiles with the middle one highlighted as best
-
-   Feature-map growth (Policy 3): compare random kernel candidates :math:`\mathcal{K}_1,\ldots,\mathcal{K}_r` by forward loss.
 
 For convolutional layers, connection growth follows Policy 1 on dormant kernel
 entries, using the same :math:`|\partial\mathcal{L}/\partial W|` criterion as in
