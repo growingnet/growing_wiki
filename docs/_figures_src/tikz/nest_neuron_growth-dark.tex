@@ -1,0 +1,38 @@
+% NeST Policy 2 (dark theme): one-sparse neuron bridging.
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{amsmath,amssymb,bm}
+\usetikzlibrary{positioning,calc}
+\begin{document}
+\definecolor{nestcardbg}{HTML}{1E1E2E}
+\definecolor{nestnodefill}{HTML}{252538}
+\begin{tikzpicture}[font=\sffamily]
+\tikzset{
+  card/.style={draw=white!35, rounded corners=8pt, fill=nestcardbg, line width=0.8pt},
+  nodec/.style={circle, draw=white!50, fill=nestnodefill, minimum size=7.5mm, inner sep=0pt},
+  newn/.style={circle, draw=blue!45!white, fill=blue!25!black, minimum size=8mm, inner sep=0pt},
+  sel/.style={draw=red!55!white, line width=1.4pt},
+  chip/.style={draw=blue!50!white, rounded corners=3pt, fill=blue!15!black, inner sep=3pt},
+  stepnode/.style={circle, fill=blue!50!white, text=black!85, minimum size=6.5mm, inner sep=0pt, font=\bfseries\small}
+}
+\node[card, minimum width=12.8cm, minimum height=5.4cm, anchor=north west] (c) at (0,0) {};
+\node[stepnode] at ($(c.north west)+(0.55,-0.55)$) {2};
+\node[anchor=west, font=\bfseries\large, text=white!92] at ($(c.north west)+(1.0,-0.52)$) {Adding neurons (Policy~2)};
+\node[anchor=west, font=\normalsize, text=white!75] at ($(c.north west)+(0.65,-1.35)$)
+  {Pick a high bridging score, then initialize a one-sparse $(\bm{\psi},\bm{\omega})$ pair.};
+\node[anchor=west, font=\large, text=white!90] at ($(c.north west)+(0.65,-2.25)$)
+  {$(i^\ast,j^\ast)=\arg\max_{i,j}\left\lvert B^{(l-2)}_{i,j}\right\rvert$};
+\coordinate (u) at ($(c.south west)+(2.0,1.0)$);
+\coordinate (v) at ($(c.south west)+(4.5,1.0)$);
+\coordinate (w) at ($(c.south west)+(7.0,1.0)$);
+\node[nodec] at (u) {};
+\node[newn] at (v) {};
+\node[nodec] at (w) {};
+\draw[sel] (u)--(v);
+\draw[sel] (v)--(w);
+\node[chip, anchor=west, font=\small, inner sep=4pt, text=white!88] at ($(c.south west)+(0.55,0.15)$)
+{$\begin{aligned}
+  \psi_{i^\ast} &= \epsilon\,\operatorname{sgn}\!\left(B^{(l-2)}_{i^\ast,j^\ast}\right)\sqrt{\left\lvert B^{(l-2)}_{i^\ast,j^\ast}\right\rvert},\\
+  \omega_{j^\ast} &= \epsilon\sqrt{\left\lvert B^{(l-2)}_{i^\ast,j^\ast}\right\rvert}
+\end{aligned}$};
+\end{tikzpicture}
+\end{document}

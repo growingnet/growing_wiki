@@ -1,0 +1,27 @@
+% NeST Policy 3 (dark theme): convolutional feature-map growth.
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{amsmath,amssymb,bm}
+\usetikzlibrary{positioning,calc}
+\begin{document}
+\definecolor{nestcardbg}{HTML}{1E1E2E}
+\begin{tikzpicture}[font=\sffamily]
+\tikzset{
+  card/.style={draw=white!35, rounded corners=8pt, fill=nestcardbg, line width=0.8pt},
+  chip/.style={draw=blue!50!white, rounded corners=3pt, fill=blue!15!black, inner sep=3pt},
+  stepnode/.style={circle, fill=blue!50!white, text=black!85, minimum size=6.5mm, inner sep=0pt, font=\bfseries\small}
+}
+\node[card, minimum width=12.8cm, minimum height=4.9cm, anchor=north west] (c) at (0,0) {};
+\node[stepnode] at ($(c.north west)+(0.55,-0.55)$) {3};
+\node[anchor=west, font=\bfseries\large, text=white!92] at ($(c.north west)+(1.0,-0.52)$) {Adding feature maps (Policy~3)};
+\node[anchor=west, font=\normalsize, text=white!75] at ($(c.north west)+(0.65,-1.35)$)
+  {Sample random kernel tensors, forward-evaluate $\mathcal{L}$, keep the candidate with largest immediate loss drop.};
+\node[draw=white!50, minimum width=1.0cm, minimum height=1.0cm] (k1) at ($(c.south west)+(2.0,2.05)$) {};
+\node[draw=blue!45!white, fill=blue!25!black, line width=0.9pt, minimum width=1.0cm, minimum height=1.0cm] (k2) at ($(c.south west)+(4.3,2.05)$) {};
+\node[draw=white!50, minimum width=1.0cm, minimum height=1.0cm] (k3) at ($(c.south west)+(6.6,2.05)$) {};
+\node[font=\normalsize, text=white!75] at ($(k1)+(0,-0.92)$) {$\mathcal{K}_1$};
+\node[font=\normalsize, text=white!75] at ($(k2)+(0,-0.92)$) {$\mathcal{K}^\ast$};
+\node[font=\normalsize, text=white!75] at ($(k3)+(0,-0.92)$) {$\mathcal{K}_r$};
+\node[chip, anchor=west, font=\large, text=white!90] at ($(c.south west)+(0.65,0.38)$)
+{$\mathcal{K}^\ast=\arg\min_{\mathcal{K}_s}\mathcal{L}\!\left(f_{\mathcal{K}_s}\right)$};
+\end{tikzpicture}
+\end{document}
