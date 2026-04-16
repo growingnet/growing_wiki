@@ -357,13 +357,12 @@ fractions and schedules are **paper-dependent** on the architecture and dataset
 Partial-area convolution
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-After the growth phase, NeST prunes small-magnitude weights and neurons
-(**Policy 4**) :cite:p:`daiNeSTNeuralNetwork2019`. One convolution-focused
-variant is **partial-area convolution** (Sec. 3.3.2): standard convolutions
-slide kernels over the **entire** spatial input, but many locations contribute
-little to a given feature map. Rather than dropping whole feature maps, NeST
-prunes **connections from spatial positions that are not of interest** for a
-kernel, keeping an **area-of-interest** over which the kernel still convolves
+**Partial-area convolution** (Sec. 3.3.2) is a convolution-focused pruning
+variant: standard convolutions slide kernels over the **entire** spatial
+input, but many locations contribute little to a given feature map. Rather
+than dropping whole feature maps, NeST prunes **connections from spatial
+positions that are not of interest** for a kernel, keeping an
+**area-of-interest** over which the kernel still convolves
 :cite:p:`daiNeSTNeuralNetwork2019`.
 
 Algorithm 2 in the paper makes this **iterative**: after forming the feature-map
