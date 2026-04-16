@@ -115,8 +115,11 @@ The two cross-covariance matrices used below are
 We write :math:`B^{(\cdot)}_{i,j}` for the :math:`(i,j)` entry of the
 corresponding matrix.
 
-Adding connections (Policy 1)
--------------------------------
+Growth phase (Policies 1–3)
+---------------------------
+
+Adding connections (Policy 1)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. _fig-nest-connection:
 
@@ -175,8 +178,8 @@ criterion on a large batch or the full data rather than a single argmax
 :cite:p:`daiNeSTNeuralNetwork2019`. Newly unmasked weights are not given a
 closed-form initializer beyond ordinary training after unmasking.
 
-Adding neurons (Policy 2)
--------------------------
+Adding neurons (Policy 2)
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 **Idea (plain language).** Neuron growth inserts a new unit at layer :math:`l-1`
 with fan-in :math:`\boldsymbol{\psi}` and fan-out :math:`\boldsymbol{\omega}`.
@@ -207,7 +210,7 @@ random sign), optionally accumulating several such pairs before a global
       Neuron growth (Policy 2): bridge a high :math:`|B^{(l-2)}_{i,j}|` pair and apply the square-root initialization to :math:`\psi_{i^*}`, :math:`\omega_{j^*}`.
 
 Pedagogical one-sparse view
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"""""""""""""""""""""""""""
 
 The following **one-sparse** case sets
 :math:`\|\boldsymbol{\psi}\|_0 = \|\boldsymbol{\omega}\|_0 = 1` to make the
@@ -236,7 +239,7 @@ with all other entries of :math:`\boldsymbol{\psi}` and :math:`\boldsymbol{\omeg
 zero. A global sign flip does not change the neuron’s contribution.
 
 Linearization and rank-one form
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"""""""""""""""""""""""""""""""
 
 Suppose a new neuron is inserted at widened layer :math:`l-1`, with fan-in
 :math:`\boldsymbol{\psi} \in \mathbb{R}^{C_{l-2}}` and fan-out
@@ -257,7 +260,7 @@ pre-activations feeding the new unit are near zero—an approximation for ReLU
 networks that is useful for intuition but not exact during training.
 
 Published dense rule
-^^^^^^^^^^^^^^^^^^^^
+""""""""""""""""""""
 
 The published **Algorithm 1** :cite:p:`daiNeSTNeuralNetwork2019` uses a denser
 single-neuron update than the one-sparse picture above. Let :math:`\tau_\beta`
@@ -287,7 +290,7 @@ setting, as they help new synapses remain significant under later pruning
 :cite:p:`daiNeSTNeuralNetwork2019`.
 
 Algorithm 1 at a glance
-^^^^^^^^^^^^^^^^^^^^^^^
+"""""""""""""""""""""""
 
 For quick orientation, **Algorithm 1** in :cite:p:`daiNeSTNeuralNetwork2019` can
 be read as:
@@ -301,8 +304,8 @@ be read as:
    :eq:`eq-nest-one-sparse-init` for the one-sparse case).
 4. Apply the birth-strength rescaling in :eq:`eq-nest-alpha-rescale`.
 
-Growth in convolutional layers (Policy 3)
--------------------------------------------
+Growth in convolutional layers (Policy 3)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. _fig-nest-feature-map:
 
@@ -346,8 +349,11 @@ relative to naive random kernels in their experiments
 rule, there is **no** closed-form analogue emphasized for choosing new
 convolutional feature maps—**Policy 3** is explicitly search-driven.
 
-Pruning (Policy 4) and partial-area convolution
--------------------------------------------------
+Pruning phase (Policy 4)
+------------------------
+
+Partial-area convolution
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 After the growth phase, NeST prunes small-magnitude weights and neurons
 (**Policy 4**) :cite:p:`daiNeSTNeuralNetwork2019`. One convolution-focused
