@@ -11,7 +11,7 @@ growth, neuron growth, convolutional feature-map growth, and magnitude pruning
 optimization practice, reported **experimental** compression, and **limitations**
 versus function-preserving methods such as [[Net2Net|net2net]] and
 [[Variance Transfer|variance_transfer]]. See :numref:`Table %s <tab-nest-policies>`
-for a compact map; the figures under Policies 1–3 below illustrate connection,
+for a compact map; :numref:`Figure %s <fig-nest-connection>`, :numref:`Figure %s <fig-nest-neuron>`, and :numref:`Figure %s <fig-nest-feature-map>` illustrate connection,
 neuron, and feature-map growth.
 
 **NeST** :cite:p:`daiNeSTNeuralNetwork2019` is a
@@ -53,13 +53,13 @@ For alignment with Dai et al.\ :cite:p:`daiNeSTNeuralNetwork2019` (Sec. III):
    * - **Policy 1**
      - Connection growth: activate dormant edges with largest
        :math:`|\partial\mathcal{L}/\partial w|` (equivalently
-       :math:`|B^{(l-1)}_{i,j}|` in the FC derivation).
+       :math:`|B^{(l-1)}_{i,j}|` in the FC derivation; see :eq:`eq-nest-dldw` and :eq:`eq-policy1-score`).
    * - **Policy 2**
      - Neuron growth (fully-connected): bridge high-correlation pairs and
        initialize from bridging gradients (Algorithm 1 / Eq. (7)).
    * - **Policy 3**
      - Convolutional **feature-map** growth: sample random kernel candidates and
-       keep the set that most reduces :math:`\mathcal{L}`.
+       keep the set that most reduces :math:`\mathcal{L}` (:eq:`eq-policy3-search`).
    * - **Policy 4**
      - Magnitude pruning of weights/neurons; **partial-area convolution** is a
        convolution-specific pruning variant (Sec. 3.3.2).
@@ -115,25 +115,22 @@ corresponding matrix.
 Adding connections (Policy 1)
 -------------------------------
 
-.. _fig-nest-connection:
+.. figure:: /_static/nest_connection_growth.svg
+   :class: only-light
+   :name: fig-nest-connection
+   :align: center
+   :width: 80%
+   :alt: Bipartite layer sketch with one dormant edge activated by largest B score
 
-.. container:: figure
+   Connection growth (Policy 1): score dormant edges by :math:`|B^{(l-1)}_{i,j}|` and activate high-magnitude edges.
 
-   .. image:: /_static/nest_connection_growth.svg
-      :class: only-light
-      :alt: Bipartite layer sketch with one dormant edge activated by largest B score
-      :width: 80%
-      :align: center
+.. figure:: /_static/nest_connection_growth-dark.svg
+   :class: only-dark
+   :align: center
+   :width: 80%
+   :alt: Bipartite layer sketch with one dormant edge activated by largest B score
 
-   .. image:: /_static/nest_connection_growth-dark.svg
-      :class: only-dark
-      :alt: Bipartite layer sketch with one dormant edge activated by largest B score
-      :width: 80%
-      :align: center
-
-   .. container:: caption
-
-      Connection growth (Policy 1): score dormant edges by :math:`|B^{(l-1)}_{i,j}|` and activate high-magnitude edges.
+   Connection growth (Policy 1): score dormant edges by :math:`|B^{(l-1)}_{i,j}|` and activate high-magnitude edges.
 
 To turn a **dormant** weight in :math:`\boldsymbol{W}^{(l)}` into an active
 connection, NeST scores each candidate pair :math:`(i,j)` by the magnitude of
@@ -147,7 +144,7 @@ connection, NeST scores each candidate pair :math:`(i,j)` by the magnitude of
    = \frac{1}{N}\left(\boldsymbol{H}^{(l-1)}\right)^\top
    \left(-\boldsymbol{G}^{(l)}\right),
 
-so each entry matches the chain rule. By the chain rule on entries,
+so each entry matches the chain rule. The minus in :eq:`eq-nest-dldw` comes from defining :math:`\boldsymbol{G}^{(l)}` as the **negative** gradient w.r.t.\ pre-activations; :eq:`eq-policy1-score` takes entrywise magnitudes, so that minus does not appear explicitly under :math:`|·|`. By the chain rule on entries,
 
 .. math::
    :label: eq-policy1-score
@@ -183,25 +180,22 @@ NeST first identifies a **bridging** input–output pair :math:`(i,j)` with larg
 random sign), optionally accumulating several such pairs before a global
 **birth-strength** rescaling (Algorithm 1 / Eq. (7)) :cite:p:`daiNeSTNeuralNetwork2019`.
 
-.. _fig-nest-neuron:
+.. figure:: /_static/nest_neuron_growth.svg
+   :class: only-light
+   :name: fig-nest-neuron
+   :align: center
+   :width: 80%
+   :alt: Three-node chain with a new middle neuron and psi omega initialization chip
 
-.. container:: figure
+   Neuron growth (Policy 2): bridge a high :math:`|B^{(l-2)}_{i,j}|` pair and apply the square-root initialization to :math:`\psi_{i^*}`, :math:`\omega_{j^*}`.
 
-   .. image:: /_static/nest_neuron_growth.svg
-      :class: only-light
-      :alt: Three-node chain with a new middle neuron and psi omega initialization chip
-      :width: 80%
-      :align: center
+.. figure:: /_static/nest_neuron_growth-dark.svg
+   :class: only-dark
+   :align: center
+   :width: 80%
+   :alt: Three-node chain with a new middle neuron and psi omega initialization chip
 
-   .. image:: /_static/nest_neuron_growth-dark.svg
-      :class: only-dark
-      :alt: Three-node chain with a new middle neuron and psi omega initialization chip
-      :width: 80%
-      :align: center
-
-   .. container:: caption
-
-      Neuron growth (Policy 2): bridge a high :math:`|B^{(l-2)}_{i,j}|` pair and apply the square-root initialization to :math:`\psi_{i^*}`, :math:`\omega_{j^*}`.
+   Neuron growth (Policy 2): bridge a high :math:`|B^{(l-2)}_{i,j}|` pair and apply the square-root initialization to :math:`\psi_{i^*}`, :math:`\omega_{j^*}`.
 
 Pedagogical one-sparse view
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -301,25 +295,22 @@ be read as:
 Growth in convolutional layers (Policy 3)
 -------------------------------------------
 
-.. _fig-nest-feature-map:
+.. figure:: /_static/nest_feature_map_growth.svg
+   :class: only-light
+   :name: fig-nest-feature-map
+   :align: center
+   :width: 80%
+   :alt: Three candidate kernel tiles with the middle one highlighted as best
 
-.. container:: figure
+   Feature-map growth (Policy 3): compare random kernel candidates :math:`\mathcal{K}_1,\ldots,\mathcal{K}_r` by forward loss.
 
-   .. image:: /_static/nest_feature_map_growth.svg
-      :class: only-light
-      :alt: Three candidate kernel tiles with the middle one highlighted as best
-      :width: 80%
-      :align: center
+.. figure:: /_static/nest_feature_map_growth-dark.svg
+   :class: only-dark
+   :align: center
+   :width: 80%
+   :alt: Three candidate kernel tiles with the middle one highlighted as best
 
-   .. image:: /_static/nest_feature_map_growth-dark.svg
-      :class: only-dark
-      :alt: Three candidate kernel tiles with the middle one highlighted as best
-      :width: 80%
-      :align: center
-
-   .. container:: caption
-
-      Feature-map growth (Policy 3): compare random kernel candidates :math:`\mathcal{K}_1,\ldots,\mathcal{K}_r` by forward loss.
+   Feature-map growth (Policy 3): compare random kernel candidates :math:`\mathcal{K}_1,\ldots,\mathcal{K}_r` by forward loss.
 
 For convolutional layers, connection growth follows Policy 1 on dormant kernel
 entries, using the same :math:`|\partial\mathcal{L}/\partial W|` criterion as in
@@ -355,12 +346,18 @@ prunes **connections from spatial positions that are not of interest** for a
 kernel, keeping an **area-of-interest** over which the kernel still convolves
 :cite:p:`daiNeSTNeuralNetwork2019`.
 
-Algorithm 2 in the paper makes this **iterative**: build feature maps
-:math:`\mathbf{C}` from the current kernels, set a threshold at the
-:math:`(100\gamma)`-th percentile of :math:`|\mathbf{C}|` (typically small
-:math:`\gamma`, e.g.\ 1%), prune input connections to locations below that
-threshold, and **retrain the whole DNN** after each pruning iteration; a mask
-can implement the pruned regions :cite:p:`daiNeSTNeuralNetwork2019`. This targets
+Algorithm 2 in the paper makes this **iterative**: after forming the feature-map
+tensor :math:`\mathbf{C}` from the current kernels, the pruning threshold
+:math:`\mathrm{thres}` is set to the :math:`(100\gamma)`-th **percentile** of all
+entries in :math:`|\mathbf{C}|`, where :math:`\gamma` is the **pruning ratio**
+(e.g.\ :math:`\gamma=1\%` in the authors’ experiments); activations **below**
+:math:`\mathrm{thres}` are treated as insignificant and their **input
+connections** are pruned, then the **whole DNN** is retrained before the next
+iteration; a mask can implement the pruned regions :cite:p:`daiNeSTNeuralNetwork2019`.
+**Algorithm 2** implements the mask update by setting :math:`\mathrm{thres}` to the
+:math:`(\gamma M N P Q)`-th largest entry of :math:`|\mathbf{C}|` (with
+:math:`\mathbf{C}\in\mathbb{R}^{M\times N\times P\times Q}`) and zeroing positions
+where :math:`|C_{m,n,p,q}|<\mathrm{thres}` :cite:p:`daiNeSTNeuralNetwork2019`. This targets
 FLOPs-dominated conv layers while aiming to avoid the accuracy hit from pruning
 entire input images at once.
 
@@ -403,22 +400,29 @@ layers, if present, follow ordinary updates during retraining like other paramet
 Experimental results
 --------------------
 
-.. _tab-nest-results:
+:numref:`Table %s <tab-nest-results>` summarizes reported compression relative to dense baselines (illustrative; see :cite:p:`daiNeSTNeuralNetwork2019` for exact numbers and accuracies).
 
-.. table:: Reported compression vs.\ dense baselines (illustrative; see :cite:p:`daiNeSTNeuralNetwork2019` for exact numbers and accuracies).
+.. list-table:: Reported compression vs.\ dense baselines (illustrative; see :cite:p:`daiNeSTNeuralNetwork2019` for exact numbers and accuracies).
+   :name: tab-nest-results
    :align: center
+   :header-rows: 1
+   :widths: 22 39 39
 
-   +-------------+----------------------+----------------------+
-   | Model       | Parameters           | FLOPs                |
-   +=============+======================+======================+
-   | LeNet-300-100 | ~70× fewer         | ~79× fewer           |
-   +-------------+----------------------+----------------------+
-   | LeNet-5     | ~74× fewer           | ~44× fewer           |
-   +-------------+----------------------+----------------------+
-   | AlexNet     | ~16× fewer           | ~4.6× fewer          |
-   +-------------+----------------------+----------------------+
-   | VGG-16      | ~30× fewer           | ~8.6× fewer          |
-   +-------------+----------------------+----------------------+
+   * - Model
+     - Parameters
+     - FLOPs
+   * - LeNet-300-100
+     - ~70× fewer
+     - ~79× fewer
+   * - LeNet-5
+     - ~74× fewer
+     - ~44× fewer
+   * - AlexNet
+     - ~16× fewer
+     - ~4.6× fewer
+   * - VGG-16
+     - ~30× fewer
+     - ~8.6× fewer
 
 The largest **parameter** reductions appear on smaller fully connected models;
 **FLOPs** savings are also large on conv-heavy stacks, with partial-area pruning
@@ -437,8 +441,10 @@ see the original paper for accuracy targets and training details.
   :math:`(i,j)` pairs survive in :math:`S_\beta` via the
   :math:`\lceil \beta C_{l-2} C_l\rceil`-th order statistic of
   :math:`|\boldsymbol{B}^{(l-2)}|`.
-- **Partial-area** :math:`\gamma`: small (e.g.\ 1%) percentile threshold on
-  :math:`|\mathbf{C}|` for spatial pruning (Algorithm 2).
+- **Partial-area** :math:`\gamma`: pruning ratio in Algorithm 2; the paper sets
+  :math:`\mathrm{thres}` to the :math:`(100\gamma)`-th percentile of :math:`|\mathbf{C}|`
+  (e.g.\ :math:`\gamma=1\%`) and prunes **below** that threshold
+  :cite:p:`daiNeSTNeuralNetwork2019`.
 - **Random conv candidates** :math:`r`: number of kernel tensors sampled in Policy 3
   (implementation choice).
 - **Training**: mini-batch optimization with schedules and data augmentation as in

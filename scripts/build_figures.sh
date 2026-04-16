@@ -108,15 +108,20 @@ fi
 py_files=("${PY_SRC_DIR}"/*.py)
 if [ ${#py_files[@]} -gt 0 ]; then
   had_work=1
-  if ! command -v python >/dev/null 2>&1; then
-    echo "Missing dependency for Python figure build: python" >&2
+  python_cmd=""
+  if command -v python3 >/dev/null 2>&1; then
+    python_cmd="python3"
+  elif command -v python >/dev/null 2>&1; then
+    python_cmd="python"
+  else
+    echo "Missing dependency for Python figure build: python3 or python" >&2
     exit 1
   fi
 
   for py_file in "${py_files[@]}"; do
     base_name="$(basename "${py_file}")"
     echo "Building Python figure(s): ${base_name}"
-    FIGURE_OUT_DIR="${OUT_DIR}" python "${py_file}" --out-dir "${OUT_DIR}"
+    FIGURE_OUT_DIR="${OUT_DIR}" "${python_cmd}" "${py_file}" --out-dir "${OUT_DIR}"
   done
 fi
 
