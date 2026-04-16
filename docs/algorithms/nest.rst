@@ -85,6 +85,13 @@ corresponding matrix.
 Adding connections (Policy 1)
 -------------------------------
 
+.. figure:: /_static/nest_connection_growth.svg
+   :alt: Bipartite layer sketch with one dormant edge activated by largest B score
+   :align: center
+   :width: 100%
+
+   Connection growth (Policy 1): score dormant edges by :math:`|B^{(l-1)}_{i,j}|` and activate high-magnitude edges.
+
 To turn a **dormant** weight in :math:`\boldsymbol{W}^{(l)}` into an active
 connection, NeST scores each candidate pair :math:`(i,j)` by the magnitude of
 :math:`\partial \mathcal{L}/\partial W^{(l)}_{ij}`. By the chain rule,
@@ -113,6 +120,13 @@ closed-form initializer beyond ordinary training after unmasking.
 
 Adding neurons (Policy 2)
 -------------------------
+
+.. figure:: /_static/nest_neuron_growth.svg
+   :alt: Three-node chain with a new middle neuron and psi omega initialization chip
+   :align: center
+   :width: 100%
+
+   Neuron growth (Policy 2): bridge a high :math:`|B^{(l-2)}_{i,j}|` pair and apply the square-root initialization to :math:`\psi_{i^*}`, :math:`\omega_{j^*}`.
 
 Suppose a new neuron is inserted at widened layer :math:`l-1`, with fan-in
 :math:`\boldsymbol{\psi} \in \mathbb{R}^{C_{l-2}}` and fan-out
@@ -189,6 +203,13 @@ setting, as they help new synapses remain significant under later pruning
 
 Growth in convolutional layers (Policy 3)
 -------------------------------------------
+
+.. figure:: /_static/nest_feature_map_growth.svg
+   :alt: Three candidate kernel tiles with the middle one highlighted as best
+   :align: center
+   :width: 100%
+
+   Feature-map growth (Policy 3): compare random kernel candidates :math:`\mathcal{K}_1,\ldots,\mathcal{K}_r` by forward loss.
 
 For convolutional layers, connection growth follows Policy 1 on dormant kernel
 entries, using the same :math:`|\partial\mathcal{L}/\partial W|` criterion as in

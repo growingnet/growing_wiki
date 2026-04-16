@@ -3,15 +3,18 @@ SPHINXAUTOBUILD ?= sphinx-autobuild
 SOURCEDIR = .
 BUILDDIR = _build
 
-.PHONY: html stricthtml livehtml clean
+.PHONY: figures html stricthtml livehtml clean
 
-html:
+figures:
+	../scripts/build_figures.sh
+
+html: figures
 	$(SPHINXBUILD) -b html $(SOURCEDIR) $(BUILDDIR)/html
 
-stricthtml:
+stricthtml: figures
 	$(SPHINXBUILD) -W --keep-going -E -a -b html $(SOURCEDIR) $(BUILDDIR)/html
 
-livehtml:
+livehtml: figures
 	$(SPHINXAUTOBUILD) $(SOURCEDIR) $(BUILDDIR)/html
 
 clean:
