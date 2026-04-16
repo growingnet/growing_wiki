@@ -352,6 +352,22 @@ convolutional feature maps—**Policy 3** is explicitly search-driven.
 Pruning phase (Policy 4)
 ------------------------
 
+Magnitude-based weight and neuron pruning
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Under **Policy 4**, NeST prunes weights by **magnitude**, using a global or
+per-layer rule that removes the smallest entries of :math:`|W|`—for example by
+thresholding against a percentile of magnitudes—so the same pruning criterion
+applies **uniformly to fully-connected and convolutional layers**
+:cite:p:`daiNeSTNeuralNetwork2019`. After weights are zeroed, any neuron whose
+**fan-in or fan-out collapses to zero** is treated as dead and removed
+:cite:p:`daiNeSTNeuralNetwork2019`. The paper describes pruning as **iterative**:
+remove a fraction of parameters, **retrain the full DNN** to recover accuracy,
+and repeat until a **stopping criterion** is met (for example targeting a desired
+level of accuracy or sparsity rather than a fixed step count); the exact
+fractions and schedules are **paper-dependent** on the architecture and dataset
+:cite:p:`daiNeSTNeuralNetwork2019`.
+
 Partial-area convolution
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
