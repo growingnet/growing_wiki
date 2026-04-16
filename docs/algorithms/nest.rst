@@ -11,10 +11,9 @@ growth, neuron growth, convolutional feature-map growth, and magnitude pruning
 optimization practice, reported **experimental** compression, and **limitations**
 versus function-preserving methods such as [[Net2Net|net2net]] and
 [[Variance Transfer|variance_transfer]]. See :numref:`Table %s <tab-nest-policies>`
-for a compact map.
-:numref:`Fig. %s <fig-nest-connection>`,
-:numref:`Fig. %s <fig-nest-neuron>`, and
-:numref:`Fig. %s <fig-nest-feature-map>` below illustrate connection,
+for a compact map; :numref:`Fig. %s <fig-nest-connection>`,
+then :numref:`Fig. %s <fig-nest-neuron>`, and
+finally :numref:`Fig. %s <fig-nest-feature-map>` below illustrate connection,
 neuron, and feature-map growth.
 
 **NeST** :cite:p:`daiNeSTNeuralNetwork2019` is a
