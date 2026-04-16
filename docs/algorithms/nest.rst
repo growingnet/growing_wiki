@@ -5,9 +5,9 @@ NeST
     correlations to score new connections and neurons, while using a separate
     loss-based search to add convolutional feature maps.
 
-This page walks through NeST’s four growth/pruning policies in order—connection
+The sections below walk through NeST’s four growth/pruning policies in order—connection
 growth, neuron growth, convolutional feature-map growth, and magnitude pruning
-(including partial-area convolution)—then summarizes the **grow–prune loop**,
+(including partial-area convolution)—then summarize the **grow–prune loop**,
 optimization practice, reported **experimental** compression, and **limitations**
 versus function-preserving methods such as [[Net2Net|net2net]] and
 [[Variance Transfer|variance_transfer]]. See :numref:`Table %s <tab-nest-policies>`
@@ -29,8 +29,10 @@ neurons, and feature maps), then a **magnitude-based pruning** phase; the full
 tool may apply these phases repeatedly until a compact network is obtained
 :cite:p:`daiNeSTNeuralNetwork2019`.
 
-This page focuses on selection and initialization during growth and on pruning
-mechanisms that matter for convolutional layers; [[Sparse growth and grow-prune methods|sparse_grow_prune]]
+**Scope:** The discussion covers selection and initialization for all four policies—connection
+and neuron growth, convolutional feature-map growth, and magnitude pruning (including
+where the paper stresses convolution-specific partial-area pruning)—alongside the shared
+grow–prune loop. [[Sparse growth and grow-prune methods|sparse_grow_prune]]
 covers the broader grow-prune viewpoint. Formulas follow Dai, Yin & Jha
 :cite:p:`daiNeSTNeuralNetwork2019` (Sec. III, Algorithm 1, Eq. (7)).
 
