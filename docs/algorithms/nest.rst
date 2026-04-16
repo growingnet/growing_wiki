@@ -11,7 +11,8 @@ growth, neuron growth, convolutional feature-map growth, and magnitude pruning
 optimization practice, reported **experimental** compression, and **limitations**
 versus function-preserving methods such as [[Net2Net|net2net]] and
 [[Variance Transfer|variance_transfer]]. See :numref:`Table %s <tab-nest-policies>`
-for a compact map; :numref:`Figure %s <fig-nest-connection>`, :numref:`Figure %s <fig-nest-neuron>`, and :numref:`Figure %s <fig-nest-feature-map>` illustrate connection,
+for a compact map; the :ref:`connection-growth illustration <fig-nest-connection>`,
+:ref:`neuron-growth illustration <fig-nest-neuron>`, and :ref:`feature-map illustration <fig-nest-feature-map>` below illustrate connection,
 neuron, and feature-map growth.
 
 **NeST** :cite:p:`daiNeSTNeuralNetwork2019` is a
@@ -115,22 +116,25 @@ corresponding matrix.
 Adding connections (Policy 1)
 -------------------------------
 
-.. figure:: /_static/nest_connection_growth.svg
-   :class: only-light
-   :name: fig-nest-connection
-   :align: center
-   :width: 80%
-   :alt: Bipartite layer sketch with one dormant edge activated by largest B score
+.. _fig-nest-connection:
 
-   Connection growth (Policy 1): score dormant edges by :math:`|B^{(l-1)}_{i,j}|` and activate high-magnitude edges.
+.. container:: figure
 
-.. figure:: /_static/nest_connection_growth-dark.svg
-   :class: only-dark
-   :align: center
-   :width: 80%
-   :alt: Bipartite layer sketch with one dormant edge activated by largest B score
+   .. image:: /_static/nest_connection_growth.svg
+      :class: only-light
+      :alt: Bipartite layer sketch with one dormant edge activated by largest B score
+      :width: 80%
+      :align: center
 
-   Connection growth (Policy 1): score dormant edges by :math:`|B^{(l-1)}_{i,j}|` and activate high-magnitude edges.
+   .. image:: /_static/nest_connection_growth-dark.svg
+      :class: only-dark
+      :alt: Bipartite layer sketch with one dormant edge activated by largest B score
+      :width: 80%
+      :align: center
+
+   .. container:: caption
+
+      Connection growth (Policy 1): score dormant edges by :math:`|B^{(l-1)}_{i,j}|` and activate high-magnitude edges.
 
 To turn a **dormant** weight in :math:`\boldsymbol{W}^{(l)}` into an active
 connection, NeST scores each candidate pair :math:`(i,j)` by the magnitude of
@@ -180,22 +184,25 @@ NeST first identifies a **bridging** input–output pair :math:`(i,j)` with larg
 random sign), optionally accumulating several such pairs before a global
 **birth-strength** rescaling (Algorithm 1 / Eq. (7)) :cite:p:`daiNeSTNeuralNetwork2019`.
 
-.. figure:: /_static/nest_neuron_growth.svg
-   :class: only-light
-   :name: fig-nest-neuron
-   :align: center
-   :width: 80%
-   :alt: Three-node chain with a new middle neuron and psi omega initialization chip
+.. _fig-nest-neuron:
 
-   Neuron growth (Policy 2): bridge a high :math:`|B^{(l-2)}_{i,j}|` pair and apply the square-root initialization to :math:`\psi_{i^*}`, :math:`\omega_{j^*}`.
+.. container:: figure
 
-.. figure:: /_static/nest_neuron_growth-dark.svg
-   :class: only-dark
-   :align: center
-   :width: 80%
-   :alt: Three-node chain with a new middle neuron and psi omega initialization chip
+   .. image:: /_static/nest_neuron_growth.svg
+      :class: only-light
+      :alt: Three-node chain with a new middle neuron and psi omega initialization chip
+      :width: 80%
+      :align: center
 
-   Neuron growth (Policy 2): bridge a high :math:`|B^{(l-2)}_{i,j}|` pair and apply the square-root initialization to :math:`\psi_{i^*}`, :math:`\omega_{j^*}`.
+   .. image:: /_static/nest_neuron_growth-dark.svg
+      :class: only-dark
+      :alt: Three-node chain with a new middle neuron and psi omega initialization chip
+      :width: 80%
+      :align: center
+
+   .. container:: caption
+
+      Neuron growth (Policy 2): bridge a high :math:`|B^{(l-2)}_{i,j}|` pair and apply the square-root initialization to :math:`\psi_{i^*}`, :math:`\omega_{j^*}`.
 
 Pedagogical one-sparse view
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -295,22 +302,25 @@ be read as:
 Growth in convolutional layers (Policy 3)
 -------------------------------------------
 
-.. figure:: /_static/nest_feature_map_growth.svg
-   :class: only-light
-   :name: fig-nest-feature-map
-   :align: center
-   :width: 80%
-   :alt: Three candidate kernel tiles with the middle one highlighted as best
+.. _fig-nest-feature-map:
 
-   Feature-map growth (Policy 3): compare random kernel candidates :math:`\mathcal{K}_1,\ldots,\mathcal{K}_r` by forward loss.
+.. container:: figure
 
-.. figure:: /_static/nest_feature_map_growth-dark.svg
-   :class: only-dark
-   :align: center
-   :width: 80%
-   :alt: Three candidate kernel tiles with the middle one highlighted as best
+   .. image:: /_static/nest_feature_map_growth.svg
+      :class: only-light
+      :alt: Three candidate kernel tiles with the middle one highlighted as best
+      :width: 80%
+      :align: center
 
-   Feature-map growth (Policy 3): compare random kernel candidates :math:`\mathcal{K}_1,\ldots,\mathcal{K}_r` by forward loss.
+   .. image:: /_static/nest_feature_map_growth-dark.svg
+      :class: only-dark
+      :alt: Three candidate kernel tiles with the middle one highlighted as best
+      :width: 80%
+      :align: center
+
+   .. container:: caption
+
+      Feature-map growth (Policy 3): compare random kernel candidates :math:`\mathcal{K}_1,\ldots,\mathcal{K}_r` by forward loss.
 
 For convolutional layers, connection growth follows Policy 1 on dormant kernel
 entries, using the same :math:`|\partial\mathcal{L}/\partial W|` criterion as in
