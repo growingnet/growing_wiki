@@ -1,9 +1,9 @@
 NeST
 ====
 
-    **TLDR:** NeST is a sparse grow-prune method that uses activation-gradient
-    correlations to score new connections and neurons, while using a separate
-    loss-based search to add convolutional feature maps.
+**TLDR:** NeST is a sparse grow-prune method that uses activation-gradient
+correlations to score new connections and neurons, while using a separate
+loss-based search to add convolutional feature maps.
 
 **NeST** :cite:p:`daiNeSTNeuralNetwork2019` is a
 function-improving method in the sense of [[Exploiting function geometry|exploiting_function_geometry]]:
@@ -11,11 +11,48 @@ it does not aim to preserve the network function at growth steps, unlike
 [[Net2Net|net2net]] or [[Variance Transfer|variance_transfer]]. Its core idea is
 to use batched activations :math:`\boldsymbol{H}` and the **negative** gradient
 :math:`\boldsymbol{G}` with respect to pre-activations to score sparse growth
-operations. The full pipeline alternates these growth rules with magnitude-based pruning;
-this page focuses on selection and initialization, while
-[[Sparse growth and grow-prune methods|sparse_grow_prune]] covers the broader
-grow-prune viewpoint. Formulas follow Dai, Yin & Jha
+operations. The paper describes synthesis as **two sequential phases**: first a
+**gradient-based growth** phase (new connections, neurons, and feature maps),
+then a **magnitude-based pruning** phase; the full tool may apply these phases
+repeatedly until a compact network is obtained
+:cite:p:`daiNeSTNeuralNetwork2019`. This page focuses on selection and
+initialization during growth and on pruning mechanisms that matter for
+convolutional layers; [[Sparse growth and grow-prune methods|sparse_grow_prune]]
+covers the broader grow-prune viewpoint. Formulas follow Dai, Yin & Jha
 :cite:p:`daiNeSTNeuralNetwork2019` (Sec. III, Algorithm 1, Eq. (7)).
+
+**Training versus growth rules:** The closed-form scoring and weight initialization
+rules below use gradients (e.g.\ :math:`\partial\mathcal{L}/\partial W`,
+bridging matrices) to *propose* structure. After each structural change, the
+network is trained with standard gradient-based optimization on the weights; the
+paper also **retrains the whole DNN** after pruning steps to recover accuracy
+:cite:p:`daiNeSTNeuralNetwork2019`. NeST is not “gradient-free end-to-end”; it
+combines analytic growth/pruning decisions with supervised learning of weights.
+
+Policies at a glance
+--------------------
+
+For alignment with Dai et al.\ :cite:p:`daiNeSTNeuralNetwork2019` (Sec. III):
+
+.. list-table::
+   :widths: 12 88
+   :header-rows: 1
+
+   * - Policy
+     - Role
+   * - **Policy 1**
+     - Connection growth: activate dormant edges with largest
+       :math:`|\partial\mathcal{L}/\partial w|` (equivalently
+       :math:`|B^{(l-1)}_{i,j}|` in the FC derivation).
+   * - **Policy 2**
+     - Neuron growth (fully-connected): bridge high-correlation pairs and
+       initialize from bridging gradients (Algorithm 1 / Eq. (7)).
+   * - **Policy 3**
+     - Convolutional **feature-map** growth: sample random kernel candidates and
+       keep the set that most reduces :math:`\mathcal{L}`.
+   * - **Policy 4**
+     - Magnitude pruning of weights/neurons; **partial-area convolution** is a
+       convolution-specific pruning variant (Sec. 3.3.2).
 
 Setup and notation
 ------------------
@@ -45,8 +82,8 @@ The two cross-covariance matrices used below are
 We write :math:`B^{(\cdot)}_{i,j}` for the :math:`(i,j)` entry of the
 corresponding matrix.
 
-Adding connections
-------------------
+Adding connections (Policy 1)
+-------------------------------
 
 To turn a **dormant** weight in :math:`\boldsymbol{W}^{(l)}` into an active
 connection, NeST scores each candidate pair :math:`(i,j)` by the magnitude of
@@ -74,8 +111,8 @@ criterion on a large batch or the full data rather than a single argmax
 :cite:p:`daiNeSTNeuralNetwork2019`. Newly unmasked weights are not given a
 closed-form initializer beyond ordinary training after unmasking.
 
-Adding neurons
---------------
+Adding neurons (Policy 2)
+-------------------------
 
 Suppose a new neuron is inserted at widened layer :math:`l-1`, with fan-in
 :math:`\boldsymbol{\psi} \in \mathbb{R}^{C_{l-2}}` and fan-out
@@ -112,9 +149,11 @@ a shared random sign :math:`\epsilon`:
 
 .. math::
 
+   \begin{aligned}
    \epsilon &\sim \mathrm{Uniform}(\{-1, 1\}),\\
    \psi_{i^*} &= \epsilon \, \operatorname{sgn}\!\left(B^{(l-2)}_{i^*,j^*}\right)\sqrt{\left|B^{(l-2)}_{i^*,j^*}\right|},\\
-   \omega_{j^*} &= \epsilon \sqrt{\left|B^{(l-2)}_{i^*,j^*}\right|},
+   \omega_{j^*} &= \epsilon \sqrt{\left|B^{(l-2)}_{i^*,j^*}\right|}
+   \end{aligned}
 
 with all other entries of :math:`\boldsymbol{\psi}` and :math:`\boldsymbol{\omega}`
 zero. A global sign flip does not change the neuron’s contribution.
@@ -139,15 +178,17 @@ the resulting weights by the **birth-strength** :math:`\alpha`:
 
 .. math::
 
+   \begin{aligned}
    \boldsymbol{\psi} &\leftarrow \alpha \, \boldsymbol{\psi} \, \frac{\bar{a}(\boldsymbol{W}^{(l-1)})}{\bar{a}(\boldsymbol{\psi})},\\
-   \boldsymbol{\omega} &\leftarrow \alpha \, \boldsymbol{\omega} \, \frac{\bar{a}(\boldsymbol{W}^{(l)})}{\bar{a}(\boldsymbol{\omega})}.
+   \boldsymbol{\omega} &\leftarrow \alpha \, \boldsymbol{\omega} \, \frac{\bar{a}(\boldsymbol{W}^{(l)})}{\bar{a}(\boldsymbol{\omega})}
+   \end{aligned}
 
 The authors report that values around :math:`\alpha > 0.3` are useful in this
 setting, as they help new synapses remain significant under later pruning
 :cite:p:`daiNeSTNeuralNetwork2019`.
 
-Adding feature-maps
--------------------
+Growth in convolutional layers (Policy 3)
+-------------------------------------------
 
 For convolutional layers, connection growth follows Policy 1 on dormant kernel
 entries, using the same :math:`|\partial\mathcal{L}/\partial W|` criterion as in
@@ -164,43 +205,63 @@ candidate that most reduces :math:`\mathcal{L}`:
 This step is a forward-pass comparison, not a pure first-order score. The
 authors report that this search roughly **doubles** the immediate loss reduction
 relative to naive random kernels in their experiments
+:cite:p:`daiNeSTNeuralNetwork2019`. In contrast to the fully-connected neuron
+rule, there is **no** closed-form analogue emphasized for choosing new
+convolutional feature maps—**Policy 3** is explicitly search-driven.
+
+Pruning (Policy 4) and partial-area convolution
+-------------------------------------------------
+
+After the growth phase, NeST prunes small-magnitude weights and neurons
+(**Policy 4**) :cite:p:`daiNeSTNeuralNetwork2019`. One convolution-focused
+variant is **partial-area convolution** (Sec. 3.3.2): standard convolutions
+slide kernels over the **entire** spatial input, but many locations contribute
+little to a given feature map. Rather than dropping whole feature maps, NeST
+prunes **connections from spatial positions that are not of interest** for a
+kernel, keeping an **area-of-interest** over which the kernel still convolves
 :cite:p:`daiNeSTNeuralNetwork2019`.
 
-Training loop and pruning
--------------------------
+Algorithm 2 in the paper makes this **iterative**: build feature maps
+:math:`\mathbf{C}` from the current kernels, set a threshold at the
+:math:`(100\gamma)`-th percentile of :math:`|\mathbf{C}|` (typically small
+:math:`\gamma`, e.g.\ 1%), prune input connections to locations below that
+threshold, and **retrain the whole DNN** after each pruning iteration; a mask
+can implement the pruned regions :cite:p:`daiNeSTNeuralNetwork2019`. This targets
+FLOPs-dominated conv layers while aiming to avoid the accuracy hit from pruning
+entire input images at once.
 
-The full NeST method alternates the growth rules above with magnitude-based
-removal of weak connections and weak neurons. Effective
-(batch-normalized) weights may be used when judging magnitudes
-:cite:p:`daiNeSTNeuralNetwork2019`. As part of the broader
-grow-prune viewpoint, NeST starts from a sparse seed network and targets compact
-architectures with large parameter and FLOP savings; see
-[[Sparse growth and grow-prune methods|sparse_grow_prune]] for that perspective.
+Experimental results
+--------------------
 
-Empirical snapshot
-------------------
+Reported **parameter and FLOPs reductions** relative to dense baselines include
+:cite:p:`daiNeSTNeuralNetwork2019`:
 
-Within this page's scope, the paper contributes three practically relevant
-messages. First, sparse growth can be organized around activation-gradient
-correlations :math:`\boldsymbol{B}` rather than function-preserving morphisms.
-Second, the one-sparse bridging rule is mainly pedagogical: the published
-algorithm aggregates over a top-:math:`\beta` set and then rescales by
-:math:`\alpha`. Third, feature-map growth is treated separately from the
-fully connected score, with an explicit candidate search over forward losses
-:cite:p:`daiNeSTNeuralNetwork2019`.
+- **LeNet-300-100:** ~70× fewer parameters and ~79× fewer FLOPs.
+- **LeNet-5:** ~74× fewer parameters and ~44× fewer FLOPs.
+- **AlexNet:** ~16× fewer parameters and ~4.6× fewer FLOPs.
+- **VGG-16:** ~30× fewer parameters and ~8.6× fewer FLOPs.
+
+The authors also highlight that the **grow-and-prune** pipeline yields **additional**
+compression beyond **pruning-only** training at similar accuracy
+:cite:p:`daiNeSTNeuralNetwork2019`. Datasets and architectures in the paper are
+predominantly image-classification settings used to demonstrate these trade-offs;
+see the original paper for accuracy targets and training details.
 
 Limitations and open questions
 ------------------------------
 
-- NeST mixes two different types of growth rules: activation-gradient scoring
-  for connections and neurons, but a forward loss comparison for feature maps.
-  This makes the method less uniform than purely function-preserving approaches.
-- The one-sparse neuron rule is useful for explanation, but the paper's
-  practical algorithm is denser and therefore somewhat less transparent.
+- NeST mixes **analytic / gradient-scored** growth (Policies 1–2) with a
+  **search-based** rule for convolutional feature maps (Policy 3), and
+  **magnitude / spatial** pruning (Policy 4 including partial-area convolution).
+  This heterogeneity is powerful but less uniform than purely
+  function-preserving growth.
+- **Fully-connected neuron growth** has a compact closed-form story (bridging
+  matrix, square-root init, :math:`\alpha` rescaling); **convolutional**
+  feature-map growth is **not** given the same closed-form treatment and relies
+  on candidate evaluation.
 - The score matrix :math:`\boldsymbol{B}` is estimated from finite batches, so
   its quality depends on the available data and the stage of training.
-- The broader grow-prune loop raises the same scheduling questions discussed in
-  [[When to grow?|when_to_grow]] and [[Where to grow?|where_to_grow]]:
-  how often should growth be triggered, and where should sparse capacity be
-  added?
-
+- The broader scheduling questions (how often to grow or prune, where to add
+  capacity) overlap with [[When to grow?|when_to_grow]] and
+  [[Where to grow?|where_to_grow]]; see [[Sparse growth and grow-prune methods|sparse_grow_prune]]
+  for pipeline-level discussion.
