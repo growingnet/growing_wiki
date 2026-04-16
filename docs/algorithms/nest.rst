@@ -152,7 +152,7 @@ connection, NeST scores each candidate pair :math:`(i,j)` by the magnitude of
    = \frac{1}{N}\left(\boldsymbol{H}^{(l-1)}\right)^\top
    \left(-\boldsymbol{G}^{(l)}\right),
 
-so each entry matches the chain rule. The minus in :eq:`eq-nest-dldw` comes from defining :math:`\boldsymbol{G}^{(l)}` as the **negative** gradient w.r.t.\ pre-activations; :eq:`eq-policy1-score` takes entrywise magnitudes, so that minus does not appear explicitly under :math:`|·|`. By the chain rule on entries,
+so each entry matches the chain rule. The minus in :eq:`eq-nest-dldw` comes from defining :math:`\boldsymbol{G}^{(l)}` as the **negative** gradient w.r.t.\ pre-activations; :eq:`eq-policy1-score` takes entrywise magnitudes, so that minus does not appear explicitly under :math:`|\cdot|`. By the chain rule on entries,
 
 .. math::
    :label: eq-policy1-score
@@ -395,7 +395,9 @@ At a high level, NeST **alternates** a **growth** phase (Policies 1–3—conne
 neurons, and/or feature maps depending on layer type) with a **pruning** phase
 (Policy 4, including partial-area convolution where applicable). The tool can
 **repeat** this cycle until a target level of compactness or accuracy is reached
-:cite:p:`daiNeSTNeuralNetwork2019`. Fully connected layers use Policies 1–2
+:cite:p:`daiNeSTNeuralNetwork2019`; the paper frames this as **stopping** once
+**target accuracy** or **target sparsity** / compression goals are met (rather
+than a fixed number of outer iterations alone). Fully connected layers use Policies 1–2
 for growth; convolutional layers use Policy 1 on kernel entries and Policy 3 for
 new feature maps; pruning applies across layer types with conv-specific variants
 as above.
@@ -490,8 +492,9 @@ Limitations
   matrix, square-root init, :math:`\alpha` rescaling); **convolutional**
   feature-map growth is **not** given the same closed-form treatment and relies
   on candidate evaluation.
-- The score matrix :math:`\boldsymbol{B}` is estimated from finite batches, so
-  its quality depends on the available data and the stage of training.
+- The score matrix :math:`\boldsymbol{B}` is estimated from activation–gradient
+  products on sampled data, so its quality depends on the available data and the
+  stage of training.
 
 Open questions
 --------------
