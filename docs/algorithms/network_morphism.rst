@@ -16,7 +16,7 @@ Growth operations
 Deepening
 ^^^^^^^^^^
 
-Deepening is achieved by factorizing a weight matrix :math:`\boldsymbol{W} = \boldsymbol{A}\boldsymbol{B}` and inserting a parameterized activation function initialized to the identity mapping.
+Deepening is achieved by factorizing a weight matrix :math:`\boldsymbol{W} = \boldsymbol{A}\boldsymbol{B}` (for example a random :math:`\boldsymbol{A}` and :math:`\boldsymbol{B} = \boldsymbol{A}^{-1}\boldsymbol{W}`) and inserting a parameterized activation function initialized to the identity mapping.
 
 
 Layer widening
