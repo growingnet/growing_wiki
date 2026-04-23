@@ -22,7 +22,7 @@ Deepening is achieved by factorizing a weight matrix :math:`\boldsymbol{W} = \bo
 Layer widening
 ^^^^^^^^^^^^^^^^
 
-Expand with zeros and random values. Place zeros on the side (either input or output wiegths) with fewer parameters to minimize the number of zero-valued parameters.
+Expand with zeros and random values. Place zeros on the side (either input or output weights) with fewer parameters to minimize the number of zero-valued parameters.
 
 
 Kernel morphing
