@@ -19,7 +19,7 @@ AutoGrow contests the [[Net2Net]] notion that function-preserving
 morphisms are the best way to initialise new layer weights, and
 instead prefers random initialisation. In addition, AutoGrow shows
 that growing *before* convergence leads to better results than
-waiting for convergence before growing, a finding corroborated by
+waiting for convergence before growing, a finding contested by
 later layer-growing studies like [[FRAGrow|fra_grow]].
 
 Vocabulary
@@ -113,7 +113,7 @@ last :math:`J` epochs. Because *p-AutoGrow* grows much faster than
 it converges, :math:`J` must be substantially larger than :math:`K`;
 the authors recommend :math:`J=T`, where :math:`T` is the number of
 epochs used at the largest learning rate when training a non-growing
-baseline (e.g. :math:`J=200` on CIFAR, :math:`J=30` on ImageNet).
+baseline (e.g. :math:`J=100` on CIFAR, :math:`J=30` on ImageNet).
 
 
 Experimental results
