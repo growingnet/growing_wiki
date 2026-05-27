@@ -18,16 +18,16 @@ The Growing Wiki documents algorithms for growing neural networks during trainin
 
 ### Install dependencies
 
-With python 3.11, install the requirements
+With [uv](https://docs.astral.sh/uv/) installed, sync the project:
 
 ```bash
-pip install -r requirements.txt
+uv sync
 ```
 
 ### Build HTML documentation
 
 ```bash
-make -C docs html
+uv run make -C docs html
 ```
 
 Built files will be in:
@@ -36,9 +36,9 @@ Built files will be in:
 docs/_build/html
 ```
 
-To rebuild automatically while editing locally after installing the
-requirements, run `make -C docs livehtml`. Rendered html is served locally at
-`http://127.0.0.1:8000`.
+To rebuild automatically while editing locally after syncing the
+dependencies, run `uv run make -C docs livehtml`. Rendered html is served
+locally at `http://127.0.0.1:8000`.
 
 ## Writing Docs
 
@@ -64,7 +64,7 @@ will emit warnings from the custom link resolver in `docs/conf.py`.
 The CI requires that the Sphinx build produces no errors or warnings. To run this check manually, run:
 
 ```bash
-pre-commit run --all-files
+uv run pre-commit run --all-files
 ```
 
-To enforce the check automatically on every local commit, run `pre-commit install`.
+To enforce the check automatically on every local commit, run `uv run pre-commit install`.
