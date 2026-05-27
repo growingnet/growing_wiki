@@ -46,8 +46,6 @@ Consider fully connected layers denoted with indices :math:`\ell-1`, :math:`\ell
 
    h_\ell = f(z_\ell),
 
-Let :math:`M_\ell` denote the number of units in layer :math:`\ell`.
-
 When growing :math:`k` neurons at layer :math:`\ell`, new neurons are appended to the existing weight matrices :math:`W_\ell` and :math:`W_{\ell+1}` as follows:
 
 .. math::
@@ -130,14 +128,30 @@ The solution to this maximization problem is found in closed-form by setting the
 and scaling them by :math:`\frac{c}{\|(\sigma_1,\ldots,\sigma_k)\|}` (where :math:`\sigma_i` is the :math:`i`-th largest singular value). In order to make a fair comparison between
 different methods each initialization is scaled such that their norm is equal to the same value, i.e., the mean norm of the existing neurons.
 
+.. note::
+
+   This closed-form solution holds under the additional hypothesis that the columns of :math:`W_{\ell+1}^{\mathrm{new}}` are mutually orthonormal,
+   i.e. :math:`W_{\ell+1}^{\mathrm{new},\top} W_{\ell+1}^{\mathrm{new}} = I_{M_{\ell}}`. This hypothesis is not explicitly stated in the paper.
+
 
 3. A few comments
 -----------------
 
-Using an iterative method such as projected gradient descent to solve directly :eq:`eq-gradmax-general` (GradMaxOpt) does not work as well as using the SVD, highlighting the benefit of having a closed-form solution.
-However, if the outgoing weights are set to zero (:math:`W_{\ell+1}^{\mathrm{new}} = 0`) instead of the incoming weights, then the solution can no longer be found using SVD, and direct
-optimization of :eq:`eq-gradmax-fc` could provide a solution. This could be preferable in some situations since it removes the constraints on the activation function. Moreover, it can avoid
-the unstable behavior of functions such as batch normalization.
+- Using an iterative method such as projected gradient descent to solve directly :eq:`eq-gradmax-general` (GradMaxOpt) does not work as well as using the SVD, highlighting the benefit of having a closed-form solution.
+  However, if the outgoing weights are set to zero (:math:`W_{\ell+1}^{\mathrm{new}} = 0`) instead of the incoming weights, then the solution can no longer be found using SVD, and direct
+  optimization of :eq:`eq-gradmax-fc` could provide a solution. This could be preferable in some situations since it removes the constraints on the activation function. Moreover, it can avoid
+  the unstable behavior of functions such as batch normalization.
+
+- Note that it is feasible to also use the singular values to guide ``where`` and ``when`` to grow, since the singular values are equal to the value of the maximized optimization problem above.
+  For example, neurons could be added when the singular values meet a certain threshold, and layers to grow could be chosen depending on which have the largest singular values.
+  In their implementation, the authors handle these questions as follows:
+
+  - *When*: neurons are added at fixed intervals during training, independently of the network's performance. For example every 5 epochs, starting after 20 warmup epochs.
+  - *Where*: the retained singular vectors are those associated with the largest singular values. These are the directions along which adding a neuron would maximally increase the gradient norm.
+
+- The "Random" baseline used in the experiments sets the incoming weights of each new neuron to zero. Its outgoing weights are sampled from a uniform distribution :math:`\mathcal{U}([0, 1))`,
+  then each weight vector is divided by its :math:`\ell_2`-norm to project it onto the unit sphere. The result is then rescaled by :math:`0.5 \times` the mean :math:`\ell_2`-norm of the existing neurons,
+  so the new neuron is initialized at half the average magnitude of the neurons already present in the layer.
 
 4. Experiments results
 ----------------------
@@ -162,7 +176,7 @@ to obtain the seed architecture.
 
 **Hyperparameters**:
 
-- Optimizer: SGD with momentum 0.9, weight decay :math:`0.2`, base learning rate :math:`\eta_0 = 0.1` for Wide-ResNet an  with cosine decay and :math:`\eta_0 = 0.05` for VGG
+- Optimizer: SGD with momentum 0.9, weight decay :math:`2 \times 10^{-4}`, base learning rate :math:`\eta_0 = 0.1` for Wide-ResNet an  with cosine decay and :math:`\eta_0 = 0.05` for VGG
 
 Table 2 shows the effect of using batch normalization or setting outgoing weights to zero, when growing residual networks on CIFAR-10. Batch normalization has limited effect on results.
 However, setting the outgoing weights to zero yields consistent improvements: in this setting the SVD closed-form solution no longer applies, so GradMaxOpt (iterative optimization of :eq:`eq-gradmax-general`)
