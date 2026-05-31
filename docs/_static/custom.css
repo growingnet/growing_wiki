@@ -10,6 +10,8 @@
 
 body {
   --home-card-background: #fbfcff;
+  --home-pill-background: #fff;
+  --home-pill-background-hover: #fbfbfd;
   --home-card-shadow: 0 1px 2px rgb(0 0 0 / 6%), 0 4px 12px rgb(0 0 0 / 4%);
   --home-card-shadow-hover: 0 1px 3px rgb(0 0 0 / 7%), 0 5px 14px rgb(0 0 0 / 5%);
   --home-card-header-background: rgb(234 241 255 / 72%);
@@ -19,31 +21,83 @@ body {
 @media not print {
   body[data-theme="dark"] {
     --home-card-background: #17191c;
+    --home-pill-background: #22262c;
+    --home-pill-background-hover: #2a3037;
     --home-card-header-background: rgb(31 44 68 / 72%);
     --home-card-header-text: var(--color-foreground-primary);
     --home-card-shadow:
-      0 1px 2px rgb(0 0 0 / 32%),
-      0 6px 16px rgb(0 0 0 / 28%),
-      0 0 0 1px rgb(255 255 255 / 4%);
+      0 1px 2px rgb(255 255 255 / 1%),
+      0 4px 10px rgb(255 255 255 / 1.5%),
+      0 0 0 1px rgb(255 255 255 / 2%);
     --home-card-shadow-hover:
-      0 1px 3px rgb(0 0 0 / 34%),
-      0 7px 18px rgb(0 0 0 / 30%),
-      0 0 0 1px rgb(255 255 255 / 5%);
+      0 1px 3px rgb(255 255 255 / 1.5%),
+      0 5px 12px rgb(255 255 255 / 2%),
+      0 0 0 1px rgb(255 255 255 / 2.5%);
+  }
+
+  body[data-theme="dark"] article .project-logo-footer img.logo-inria {
+    content: url("logos/inria-inverted.png");
+  }
+
+  body[data-theme="dark"] article .project-logo-footer img.logo-lisn {
+    content: url("logos/logo_lisn-inverted.png");
+  }
+
+  body[data-theme="dark"] article .project-logo-footer img.logo-paris-saclay {
+    content: url("logos/Logo_Universite_Paris-Saclay-inverted.png");
+  }
+
+  body[data-theme="dark"] article .project-logo-footer img.logo-tau {
+    content: url("logos/tau-inverted.png");
+  }
+
+  body[data-theme="dark"] article .project-logo-footer img.logo-manolo {
+    content: url("logos/logo_manolo-inverted.png");
+  }
+
+  body[data-theme="dark"] article .project-logo-footer img.logo-gromo {
+    content: url("logos/logo_frugal_bg_white-inverted.png");
   }
 
   @media (prefers-color-scheme: dark) {
     body:not([data-theme="light"]) {
       --home-card-background: #17191c;
+      --home-pill-background: #22262c;
+      --home-pill-background-hover: #2a3037;
       --home-card-header-background: rgb(31 44 68 / 72%);
       --home-card-header-text: var(--color-foreground-primary);
       --home-card-shadow:
-        0 1px 2px rgb(0 0 0 / 32%),
-        0 6px 16px rgb(0 0 0 / 28%),
-        0 0 0 1px rgb(255 255 255 / 4%);
+        0 1px 2px rgb(255 255 255 / 1%),
+        0 4px 10px rgb(255 255 255 / 1.5%),
+        0 0 0 1px rgb(255 255 255 / 2%);
       --home-card-shadow-hover:
-        0 1px 3px rgb(0 0 0 / 34%),
-        0 7px 18px rgb(0 0 0 / 30%),
-        0 0 0 1px rgb(255 255 255 / 5%);
+        0 1px 3px rgb(255 255 255 / 1.5%),
+        0 5px 12px rgb(255 255 255 / 2%),
+        0 0 0 1px rgb(255 255 255 / 2.5%);
+    }
+
+    body:not([data-theme="light"]) article .project-logo-footer img.logo-inria {
+      content: url("logos/inria-inverted.png");
+    }
+
+    body:not([data-theme="light"]) article .project-logo-footer img.logo-lisn {
+      content: url("logos/logo_lisn-inverted.png");
+    }
+
+    body:not([data-theme="light"]) article .project-logo-footer img.logo-paris-saclay {
+      content: url("logos/Logo_Universite_Paris-Saclay-inverted.png");
+    }
+
+    body:not([data-theme="light"]) article .project-logo-footer img.logo-tau {
+      content: url("logos/tau-inverted.png");
+    }
+
+    body:not([data-theme="light"]) article .project-logo-footer img.logo-manolo {
+      content: url("logos/logo_manolo-inverted.png");
+    }
+
+    body:not([data-theme="light"]) article .project-logo-footer img.logo-gromo {
+      content: url("logos/logo_frugal_bg_white-inverted.png");
     }
   }
 }
@@ -189,7 +243,7 @@ article .home-grid-pills > .home-card > ul {
 }
 
 article .home-grid-pills > .home-card li a {
-  background: #fff;
+  background: var(--home-pill-background);
   border: 1px solid var(--color-background-border);
   border-radius: 999px;
   color: var(--color-link);
@@ -201,7 +255,7 @@ article .home-grid-pills > .home-card li a {
 }
 
 article .home-grid-pills > .home-card li a:hover {
-  background: #fbfbfd;
+  background: var(--home-pill-background-hover);
   text-decoration: none;
 }
 
@@ -247,6 +301,19 @@ article .project-logo-footer img {
   max-width: 100%;
   object-fit: contain;
   width: auto;
+}
+
+article .project-logo-footer img.tau-logo {
+  height: clamp(2.24rem, 4vw, 2.88rem);
+}
+
+article .project-logo-footer img.logo-inria,
+article .project-logo-footer img.logo-paris-saclay {
+  transform: translateY(-5px);
+}
+
+article .project-logo-footer img.logo-gromo {
+  transform: translateY(-2.5px);
 }
 
 article .project-logo-footer a.image-reference:hover img {

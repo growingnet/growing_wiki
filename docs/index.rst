@@ -44,7 +44,7 @@ The Growing Wiki is primarily maintained by the `Inria Tau team <https://www.inr
 
    .. container:: home-card
 
-      **Learn the background**
+      **Introduction to growing NNs**
 
       Start here for an introduction and the mathematical background behind growing methods.
 
@@ -139,24 +139,30 @@ Growing algorithms can be classified across multiple axes: the type of growth, w
 
    .. image:: /_static/logos/inria.png
       :alt: Inria
+      :class: logo-inria
       :target: https://www.inria.fr/fr
 
    .. image:: /_static/logos/logo_lisn.png
       :alt: LISN
+      :class: logo-lisn
       :target: https://www.lisn.upsaclay.fr/
 
    .. image:: /_static/logos/Logo_Universite_Paris-Saclay.png
       :alt: Universite Paris-Saclay
+      :class: logo-paris-saclay
       :target: https://www.universite-paris-saclay.fr/
 
    .. image:: /_static/logos/tau.png
       :alt: Tau team
+      :class: logo-tau tau-logo
       :target: https://www.inria.fr/en/tau
 
-   .. image:: /_static/logos/logo_manolo.jpeg
+   .. image:: /_static/logos/logo_manolo.png
       :alt: Manolo project
+      :class: logo-manolo
       :target: https://manolo-project.eu/
 
    .. image:: /_static/logos/logo_frugal_bg_white.png
       :alt: Gromo
+      :class: logo-gromo
       :target: https://github.com/growingnet/gromo
