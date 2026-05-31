@@ -8,6 +8,46 @@
   --sidebar-logo-height: 83px;
 }
 
+body {
+  --home-card-background: #fbfcff;
+  --home-card-shadow: 0 1px 2px rgb(0 0 0 / 6%), 0 4px 12px rgb(0 0 0 / 4%);
+  --home-card-shadow-hover: 0 1px 3px rgb(0 0 0 / 7%), 0 5px 14px rgb(0 0 0 / 5%);
+  --home-card-header-background: rgb(234 241 255 / 72%);
+  --home-card-header-text: var(--color-foreground-primary);
+}
+
+@media not print {
+  body[data-theme="dark"] {
+    --home-card-background: #17191c;
+    --home-card-header-background: rgb(31 44 68 / 72%);
+    --home-card-header-text: var(--color-foreground-primary);
+    --home-card-shadow:
+      0 1px 2px rgb(0 0 0 / 32%),
+      0 6px 16px rgb(0 0 0 / 28%),
+      0 0 0 1px rgb(255 255 255 / 4%);
+    --home-card-shadow-hover:
+      0 1px 3px rgb(0 0 0 / 34%),
+      0 7px 18px rgb(0 0 0 / 30%),
+      0 0 0 1px rgb(255 255 255 / 5%);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body:not([data-theme="light"]) {
+      --home-card-background: #17191c;
+      --home-card-header-background: rgb(31 44 68 / 72%);
+      --home-card-header-text: var(--color-foreground-primary);
+      --home-card-shadow:
+        0 1px 2px rgb(0 0 0 / 32%),
+        0 6px 16px rgb(0 0 0 / 28%),
+        0 0 0 1px rgb(255 255 255 / 4%);
+      --home-card-shadow-hover:
+        0 1px 3px rgb(0 0 0 / 34%),
+        0 7px 18px rgb(0 0 0 / 30%),
+        0 0 0 1px rgb(255 255 255 / 5%);
+    }
+  }
+}
+
 .sidebar-logo-container {
   width: var(--sidebar-logo-width);
   height: var(--sidebar-logo-height);
@@ -75,4 +115,140 @@ article .table-wrapper > .table-caption {
 
 article .table-wrapper > .table-caption:hover > a.headerlink {
   visibility: visible;
+}
+
+/* Compact homepage navigation cards. */
+article .home-grid {
+  clear: both;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 0.9rem;
+  margin: 1.25rem 0 1.75rem;
+}
+
+article .home-grid-wide {
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+
+article .home-grid > .home-card {
+  box-sizing: border-box;
+  border: 1px solid var(--color-background-border);
+  border-radius: 8px;
+  padding: 1.45rem 2.4rem !important;
+  background: var(--home-card-background);
+  box-shadow: var(--home-card-shadow);
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+article .home-grid > .home-card:hover {
+  border-color: color-mix(in srgb, var(--color-background-border) 96%, var(--color-foreground-border));
+  box-shadow: var(--home-card-shadow-hover);
+}
+
+article .home-grid > .home-card > p:first-child {
+  background: var(--home-card-header-background);
+  border-radius: 7px 7px 0 0;
+  color: var(--home-card-header-text);
+  margin: -1.45rem -2.4rem 0.9rem;
+  padding: 0.72rem 2.4rem;
+  font-size: 1rem;
+  line-height: 1.25;
+  text-align: center;
+}
+
+article .home-grid > .home-card > p:first-child strong {
+  color: var(--home-card-header-text);
+}
+
+article .home-grid > .home-card > p {
+  margin-bottom: 0.65rem;
+}
+
+article .home-grid > .home-card > ul {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+article .home-grid > .home-card li {
+  margin: 0;
+}
+
+article .home-grid > .home-card li > p {
+  margin: 0;
+}
+
+article .home-grid-rows > .home-card li {
+  margin: 0.24rem 0;
+}
+
+article .home-grid-pills > .home-card > ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+article .home-grid-pills > .home-card li a {
+  background: #fff;
+  border: 1px solid var(--color-background-border);
+  border-radius: 999px;
+  color: var(--color-link);
+  display: inline-flex;
+  font-size: 0.92rem;
+  line-height: 1.25;
+  padding: 0.28rem 0.62rem;
+  text-decoration: none;
+}
+
+article .home-grid-pills > .home-card li a:hover {
+  background: #fbfbfd;
+  text-decoration: none;
+}
+
+article section#the-growing-wiki a,
+article section#the-growing-wiki a:visited {
+  color: var(--color-link);
+}
+
+article section#the-growing-wiki a:hover,
+article section#the-growing-wiki a:visited:hover {
+  color: var(--color-link--hover);
+}
+
+article figure.home-neuron-figure figcaption .caption-number {
+  display: none;
+}
+
+article .project-logo-footer {
+  align-items: center;
+  display: grid;
+  gap: clamp(0.35rem, 1.2vw, 1rem);
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+  padding-top: 1.25rem;
+  padding-bottom: 0.25rem;
+}
+
+article .project-logo-footer a.image-reference {
+  align-items: center;
+  align-self: center;
+  display: inline-flex;
+  height: clamp(2.8rem, 5vw, 3.6rem);
+  justify-content: center;
+  justify-self: center;
+  min-width: 0;
+  padding: 0.15rem;
+}
+
+article .project-logo-footer img {
+  display: block;
+  height: clamp(2.8rem, 5vw, 3.6rem);
+  max-width: 100%;
+  object-fit: contain;
+  width: auto;
+}
+
+article .project-logo-footer a.image-reference:hover img {
+  opacity: 0.82;
 }
