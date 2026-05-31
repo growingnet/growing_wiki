@@ -14,7 +14,7 @@ The Growing Wiki
 
 Growing Neural Networks start small and grow over the course of training, by e.g. adding neurons or layers. By only growing as large as necessary, and no larger, such methods offer the potential of improved efficiency and remove the need to select architectures by hand.
 
-The Growing Wiki is primarily maintained by the `Inria Tau team <https://www.inria.fr/en/tau>`__, but outside contributors are always welcome on `GitHub <https://github.com/growingnet/growing_wiki>`__. We also manage the `Gromo <https://github.com/growingnet/gromo>`__ PyTorch package for growing neural networks. 
+The Growing Wiki is primarily maintained by the `Inria Tau team <https://www.inria.fr/en/tau>`__, but outside contributors are always welcome on `GitHub <https://github.com/growingnet/growing_wiki>`__. We also manage the `Gromo <https://github.com/growingnet/gromo>`__ PyTorch package for growing neural networks.
 
 ..
     Note: This hidden toctree determines which items appear in the sidebar, and must be updated when a new page is added.
@@ -137,32 +137,98 @@ Growing algorithms can be classified across multiple axes: the type of growth, w
 
 .. container:: project-logo-footer
 
-   .. image:: /_static/logos/inria.png
-      :alt: Inria
-      :class: logo-inria
-      :target: https://www.inria.fr/fr
+   .. container:: project-logo-item
 
-   .. image:: /_static/logos/logo_lisn.png
-      :alt: LISN
-      :class: logo-lisn
-      :target: https://www.lisn.upsaclay.fr/
+      .. container:: project-logo-variant only-light
 
-   .. image:: /_static/logos/Logo_Universite_Paris-Saclay.png
-      :alt: Universite Paris-Saclay
-      :class: logo-paris-saclay
-      :target: https://www.universite-paris-saclay.fr/
+         .. image:: /_static/logos/inria.png
+            :alt: Inria
+            :class: logo-inria
+            :target: https://www.inria.fr/fr
 
-   .. image:: /_static/logos/tau.png
-      :alt: Tau team
-      :class: logo-tau tau-logo
-      :target: https://www.inria.fr/en/tau
+      .. container:: project-logo-variant only-dark
 
-   .. image:: /_static/logos/logo_manolo.png
-      :alt: Manolo project
-      :class: logo-manolo
-      :target: https://manolo-project.eu/
+         .. image:: /_static/logos/inria-inverted.png
+            :alt: Inria
+            :class: logo-inria
+            :target: https://www.inria.fr/fr
 
-   .. image:: /_static/logos/logo_frugal_bg_white.png
-      :alt: Gromo
-      :class: logo-gromo
-      :target: https://github.com/growingnet/gromo
+   .. container:: project-logo-item
+
+      .. container:: project-logo-variant only-light
+
+         .. image:: /_static/logos/logo_lisn.png
+            :alt: LISN
+            :class: logo-lisn
+            :target: https://www.lisn.upsaclay.fr/
+
+      .. container:: project-logo-variant only-dark
+
+         .. image:: /_static/logos/logo_lisn-inverted.png
+            :alt: LISN
+            :class: logo-lisn
+            :target: https://www.lisn.upsaclay.fr/
+
+   .. container:: project-logo-item
+
+      .. container:: project-logo-variant only-light
+
+         .. image:: /_static/logos/Logo_Universite_Paris-Saclay.png
+            :alt: Universite Paris-Saclay
+            :class: logo-paris-saclay
+            :target: https://www.universite-paris-saclay.fr/
+
+      .. container:: project-logo-variant only-dark
+
+         .. image:: /_static/logos/Logo_Universite_Paris-Saclay-inverted.png
+            :alt: Universite Paris-Saclay
+            :class: logo-paris-saclay
+            :target: https://www.universite-paris-saclay.fr/
+
+   .. container:: project-logo-item
+
+      .. container:: project-logo-variant only-light
+
+         .. image:: /_static/logos/tau.png
+            :alt: Tau team
+            :class: logo-tau tau-logo
+            :target: https://www.inria.fr/en/tau
+
+      .. container:: project-logo-variant only-dark
+
+         .. image:: /_static/logos/tau-inverted.png
+            :alt: Tau team
+            :class: logo-tau tau-logo
+            :target: https://www.inria.fr/en/tau
+
+   .. container:: project-logo-item
+
+      .. container:: project-logo-variant only-light
+
+         .. image:: /_static/logos/logo_manolo.png
+            :alt: Manolo project
+            :class: logo-manolo
+            :target: https://manolo-project.eu/
+
+      .. container:: project-logo-variant only-dark
+
+         .. image:: /_static/logos/logo_manolo-inverted.png
+            :alt: Manolo project
+            :class: logo-manolo
+            :target: https://manolo-project.eu/
+
+   .. container:: project-logo-item
+
+      .. container:: project-logo-variant only-light
+
+         .. image:: /_static/logos/logo_frugal_bg_white.png
+            :alt: Gromo
+            :class: logo-gromo
+            :target: https://github.com/growingnet/gromo
+
+      .. container:: project-logo-variant only-dark
+
+         .. image:: /_static/logos/logo_frugal_bg_white-inverted.png
+            :alt: Gromo
+            :class: logo-gromo
+            :target: https://github.com/growingnet/gromo

@@ -35,30 +35,6 @@ body {
       0 0 0 1px rgb(255 255 255 / 2.5%);
   }
 
-  body[data-theme="dark"] article .project-logo-footer img.logo-inria {
-    content: url("logos/inria-inverted.png");
-  }
-
-  body[data-theme="dark"] article .project-logo-footer img.logo-lisn {
-    content: url("logos/logo_lisn-inverted.png");
-  }
-
-  body[data-theme="dark"] article .project-logo-footer img.logo-paris-saclay {
-    content: url("logos/Logo_Universite_Paris-Saclay-inverted.png");
-  }
-
-  body[data-theme="dark"] article .project-logo-footer img.logo-tau {
-    content: url("logos/tau-inverted.png");
-  }
-
-  body[data-theme="dark"] article .project-logo-footer img.logo-manolo {
-    content: url("logos/logo_manolo-inverted.png");
-  }
-
-  body[data-theme="dark"] article .project-logo-footer img.logo-gromo {
-    content: url("logos/logo_frugal_bg_white-inverted.png");
-  }
-
   @media (prefers-color-scheme: dark) {
     body:not([data-theme="light"]) {
       --home-card-background: #17191c;
@@ -74,30 +50,6 @@ body {
         0 1px 3px rgb(255 255 255 / 1.5%),
         0 5px 12px rgb(255 255 255 / 2%),
         0 0 0 1px rgb(255 255 255 / 2.5%);
-    }
-
-    body:not([data-theme="light"]) article .project-logo-footer img.logo-inria {
-      content: url("logos/inria-inverted.png");
-    }
-
-    body:not([data-theme="light"]) article .project-logo-footer img.logo-lisn {
-      content: url("logos/logo_lisn-inverted.png");
-    }
-
-    body:not([data-theme="light"]) article .project-logo-footer img.logo-paris-saclay {
-      content: url("logos/Logo_Universite_Paris-Saclay-inverted.png");
-    }
-
-    body:not([data-theme="light"]) article .project-logo-footer img.logo-tau {
-      content: url("logos/tau-inverted.png");
-    }
-
-    body:not([data-theme="light"]) article .project-logo-footer img.logo-manolo {
-      content: url("logos/logo_manolo-inverted.png");
-    }
-
-    body:not([data-theme="light"]) article .project-logo-footer img.logo-gromo {
-      content: url("logos/logo_frugal_bg_white-inverted.png");
     }
   }
 }
@@ -284,13 +236,24 @@ article .project-logo-footer {
   padding-bottom: 0.25rem;
 }
 
-article .project-logo-footer a.image-reference {
+article .project-logo-footer > .project-logo-item {
   align-items: center;
   align-self: center;
-  display: inline-flex;
+  display: flex;
   height: clamp(2.8rem, 5vw, 3.6rem);
   justify-content: center;
   justify-self: center;
+  min-width: 0;
+}
+
+article .project-logo-footer .project-logo-variant {
+  min-width: 0;
+}
+
+article .project-logo-footer a.image-reference {
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
   min-width: 0;
   padding: 0.15rem;
 }
@@ -304,7 +267,7 @@ article .project-logo-footer img {
 }
 
 article .project-logo-footer img.tau-logo {
-  height: clamp(2.24rem, 4vw, 2.88rem);
+  height: clamp(1.96rem, 3.5vw, 2.52rem);
 }
 
 article .project-logo-footer img.logo-inria,
