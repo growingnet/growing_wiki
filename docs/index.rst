@@ -39,6 +39,7 @@ The Growing Wiki is primarily maintained by the `Inria Tau team <https://www.inr
    algorithms/autogrow
    algorithms/nest
    algorithms/variance_transfer
+   algorithms/fra_grow
 
 .. container:: home-grid home-grid-rows
 
