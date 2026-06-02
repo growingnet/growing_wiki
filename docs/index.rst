@@ -121,7 +121,9 @@ Growing algorithms can be classified across multiple axes: the type of growth, w
       - :doc:`Network Morphism <algorithms/network_morphism>`
       - :doc:`Splitting <algorithms/splitting>`
       - :doc:`GradMax <algorithms/gradmax>`
+      - :doc:`NORTH <algorithms/north>`
       - :doc:`Variance Transfer <algorithms/variance_transfer>`
+      - :doc:`SENN <algorithms/senn>`
 
    .. container:: home-card
 
@@ -130,8 +132,6 @@ Growing algorithms can be classified across multiple axes: the type of growth, w
       Methods which aim to improve rather than preserve the function output during growth.
 
       - :doc:`Tiny <algorithms/tiny>`
-      - :doc:`SENN <algorithms/senn>`
-      - :doc:`NORTH <algorithms/north>`
       - :doc:`Firefly <algorithms/firefly>`
       - :doc:`NeST <algorithms/nest>`
 
