@@ -76,3 +76,12 @@ article .table-wrapper > .table-caption {
 article .table-wrapper > .table-caption:hover > a.headerlink {
   visibility: visible;
 }
+
+article table.taxonomy-table {
+  font-size: var(--font-size--small);
+}
+
+article table.taxonomy-table th,
+article table.taxonomy-table td {
+  vertical-align: top;
+}

@@ -12,6 +12,7 @@ Introduction
    where_to_grow
    when_to_grow
    how_to_grow
+   taxonomy
    future
 
 Neural Networks (NNs) are typically trained by first fixing the
