@@ -59,7 +59,7 @@ allowed to grow. Every :math:`K` epochs the algorithm:
    most recently grown sub-network from the list.
 
 When the list is empty, AutoGrow fine-tunes the discovered network
-for :math:`N` additional epochs with a standard staircase learning
+for :math:`N_{\text{fine-tune}}` additional epochs with a standard staircase learning
 rate schedule.
 
 
@@ -122,11 +122,13 @@ Experimental results
 Experiments use SGD with momentum :math:`0.9`. Baselines use a
 staircase learning rate (initial :math:`0.1` for ResNets,
 :math:`0.01` for plain networks). On CIFAR/SVHN/MNIST, baselines are
-trained for :math:`200` epochs with decays at epoch :math:`100` and
-:math:`150`; on ImageNet, :math:`90` epochs with decays at
+trained for :math:`N_{\text{fine-tune}}=200` epochs with decays at epoch :math:`100` and
+:math:`150`; on ImageNet, :math:`N_{\text{fine-tune}}=90` epochs with decays at
 :math:`30` and :math:`60`. Except for one ablation study, the
 experiments use a fixed initial learning rate during growth and use
 the staircase schedule only for the final fine-tuning.
+For growing networks, the training time is dependent of the stopping criterion
+described above.
 
 Non function-preserving initialisation is better
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -135,7 +137,11 @@ Across both the convergent and periodic regimes, random
 initialisation of the last batch normalisation (``UniInit``,
 ``GauInit``) outperforms its function-preserving counterparts
 (``ZeroInit``, ``AdamInit``), with ``GauInit`` winning in every
-setting.
+setting. It is important to note that the function-preservation is obtained
+throught tuning of only the BN scale, which is a very small subset of the parameters of the new
+sub-module. It is possible that this conclusion does not hold
+for function-preservation obtained by constraining a larger subset of the parameters
+(e.g. a full layer).
 
 In the **convergent regime** (*c-AutoGrow* with a constant learning
 rate), ``GauInit`` reaches the best accuracy on both CIFAR-10 and
@@ -241,6 +247,8 @@ finds a sensible depth but reaches *significantly higher* accuracy
 than the from-scratch baseline at the same depth: at those depths
 the from-scratch baseline fails to train even with batch
 normalisation, while gradual growth makes deep plain nets trainable.
+Note that grown networks are trained for more epochs than the from-scratch baselines, which may
+contribute to the improved accuracy.
 
 AutoGrow only partially adapts to the dataset
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -324,11 +332,7 @@ Other observations
 - **Connection with other methods**. The conclusion that random
   (non function-preserving) initialisation outperforms
   function-preserving morphism contradicts [[Net2Net]] and
-  [[Network Morphism]], and is later partially reconciled
-  by [[Variance Transfer|variance_transfer]], which shows that
-  function-preserving morphisms *can* match from-scratch training
-  provided the initialisation respects :math:`\mu P` and the
-  learning rate is adapted to the growth stage.
+  [[Network Morphism]].
 
 
 Limitations

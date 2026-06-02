@@ -198,7 +198,7 @@ results on ImageNet are not reported in the paper.
 baselines — only the *FRAGrow* test error and normalised time are
 given (Table 5). The corresponding cells are left blank.
 
-Two findings stand out:
+Three findings stand out:
 
 1. **Convergent growth is not clearly inferior to periodic growth.**
    The two policies trade places several times across (model,
