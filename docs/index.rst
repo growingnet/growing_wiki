@@ -53,3 +53,4 @@ future work needed to close this gap.
    algorithms/autogrow
    algorithms/nest
    algorithms/variance_transfer
+   algorithms/fra_grow
