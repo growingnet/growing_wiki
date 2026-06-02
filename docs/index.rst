@@ -109,6 +109,7 @@ Growing algorithms can be classified across multiple axes: the type of growth, w
       - :doc:`Net2Net <algorithms/net2net>`
       - :doc:`Network Morphism <algorithms/network_morphism>`
       - :doc:`AutoGrow <algorithms/autogrow>`
+      - :doc:`FRAGrow <algorithms/fra_grow>`
       - :doc:`Firefly <algorithms/firefly>`
       - :doc:`SENN <algorithms/senn>`
 
@@ -128,13 +129,15 @@ Growing algorithms can be classified across multiple axes: the type of growth, w
 
    .. container:: home-card
 
-      **Function-improving morphisms**
+      **Function-changing/improving morphisms**
 
-      Methods which aim to improve rather than preserve the function output during growth.
+      Methods which change or try to improve the function output during growth.
 
       - :doc:`Tiny <algorithms/tiny>`
       - :doc:`Firefly <algorithms/firefly>`
       - :doc:`NeST <algorithms/nest>`
+      - :doc:`FRAGrow <algorithms/fra_grow>`
+      - :doc:`AutoGrow <algorithms/autogrow>`
 
 .. container:: project-logo-footer
 
