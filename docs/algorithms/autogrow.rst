@@ -127,7 +127,7 @@ trained for :math:`N_{\text{fine-tune}}=200` epochs with decays at epoch :math:`
 :math:`30` and :math:`60`. Except for one ablation study, the
 experiments use a fixed initial learning rate during growth and use
 the staircase schedule only for the final fine-tuning.
-For growing networks, the training time is dependent of the stopping criterion
+For growing networks, the training time is dependent on the stopping criterion
 described above.
 
 Non function-preserving initialisation is better
@@ -138,7 +138,7 @@ initialisation of the last batch normalisation (``UniInit``,
 ``GauInit``) outperforms its function-preserving counterparts
 (``ZeroInit``, ``AdamInit``), with ``GauInit`` winning in every
 setting. It is important to note that the function-preservation is obtained
-throught tuning of only the BN scale, which is a very small subset of the parameters of the new
+through tuning of only the BN scale, which is a very small subset of the parameters of the new
 sub-module. It is possible that this conclusion does not hold
 for function-preservation obtained by constraining a larger subset of the parameters
 (e.g. a full layer).

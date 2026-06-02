@@ -220,7 +220,7 @@ Three findings stand out:
    underfitting via the ORL and grows faster — recovers most of the
    gap.
 
-3. **Results don't align with the "slow growth overfit less" narrative.** On ImageNet, the fastest growth schedule is beating slower ones but on 
+3. **Results don't align with the "slow growth overfit less" narrative.** On ImageNet, the fastest growth schedule is beating slower ones but on
    CIFAR the conclusions are more mixed. For example, on CIFAR-100 and VGG, faster growth (*Fast growth* and *Periodic*) outperforms slower growth (*Convergent* and *Slow growth*), which is the opposite of what the regularisation narrative would predict.
 
 Effect of the growth-phase learning rate
