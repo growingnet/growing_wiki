@@ -8,7 +8,7 @@ NORTH
 Notation and framework
 ----------------------
 
-Consider an MLP with hidden layer :math:`l`, current width :math:`C_l`, preactivations :math:`\boldsymbol{Z}_l`, post-activations :math:`\boldsymbol{H}_l`, and fan-in weight matrix :math:`\boldsymbol{W}_l`. For :math:`n` buffered samples, the dense activation matrix is treated as
+Consider an MLP with hidden layer :math:`l`, current width :math:`C_l`, preactivations :math:`\boldsymbol{Z}_l`, activations :math:`\boldsymbol{H}_l`, and fan-in weight matrix :math:`\boldsymbol{W}_l`. For :math:`n` buffered samples, the dense activation matrix is treated as
 :math:`\boldsymbol{H}_l \in \mathbb{R}^{n \times C_l}`.
 
 NORTH follows a simple dynamic growth loop:
@@ -71,7 +71,7 @@ The baseline :math:`\phi_a(f_0,l)` matters because orthogonality usually deterio
 2. Weight orthogonality trigger
 -------------------------------
 
-NORTH-Weight uses the same idea, but measures orthogonality of the fan-in weight matrix rather than the post-activation matrix:
+NORTH-Weight uses the same idea, but measures orthogonality of the fan-in weight matrix rather than the activation matrix:
 
 .. math::
 
@@ -144,30 +144,32 @@ NORTH* methods differ primarily in how they choose the fan-in weights of new neu
 
 such that they are function-preserving. The initialization strategies considered are:
 
-.. table:: NORTH strategy variants. Activation-based methods use :math:`T_{act}`; weight-based methods use :math:`T_{weight}`.
+.. list-table:: NORTH strategy variants. Activation-based methods use :math:`T_{act}`; weight-based methods use :math:`T_{weight}`.
    :align: center
+   :header-rows: 1
 
-   +----------------+----------------------+--------------------------------------------------------------+
-   | Strategy       | Trigger              | New fan-in initialization                                    |
-   +================+======================+==============================================================+
-   | NORTH-Select   | :math:`T_{act}`      | Generate random candidates and select those maximizing       |
-   |                |                      | post-activation orthogonality.                               |
-   +----------------+----------------------+--------------------------------------------------------------+
-   | NORTH-Pre      | :math:`T_{act}`      | Generate candidates whose preactivations lie in directions   |
-   |                |                      | orthogonal to the current preactivations.                    |
-   +----------------+----------------------+--------------------------------------------------------------+
-   | NORTH-Random   | :math:`T_{act}`      | Use the random fan-in initialization.                        |
-   +----------------+----------------------+--------------------------------------------------------------+
-   | NORTH-Weight   | :math:`T_{weight}`   | Project random fan-in weights onto the kernel of             |
-   |                |                      | :math:`\boldsymbol{W}_l`.                                    |
-   +----------------+----------------------+--------------------------------------------------------------+
+   * - Strategy
+     - Trigger
+     - New fan-in initialization
+   * - NORTH-Select
+     - :math:`T_{act}`
+     - Generate random candidates and select those maximizing activation orthogonality.
+   * - NORTH-Pre
+     - :math:`T_{act}`
+     - Generate candidates whose preactivations lie in directions orthogonal to the current pre-activations and select those maximizing activation orthogonality.
+   * - NORTH-Random
+     - :math:`T_{act}`
+     - Use the random fan-in initialization.
+   * - NORTH-Weight
+     - :math:`T_{weight}`
+     - Project random fan-in weights onto the kernel of :math:`\boldsymbol{W}_l`.
 
 
 NORTH-Select and NORTH-Pre are both approximations to the ideal selection
 strategy that maximizes activation orthogonality: NORTH-Select samples
 random candidates, while NORTH-Pre samples candidates whose preactivations
 are orthogonal to the current preactivations. In both cases, the generated
-candidates are selected according to post-activation orthogonality. An
+candidates are selected according to activation orthogonality. An
 optimization approach was tested that directly optimizes the activation
 orthogonality, but this was found to be too computationally expensive.
 
