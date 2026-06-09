@@ -36,7 +36,7 @@ The main NORTH trigger measures the orthogonality of one layer's activations acr
         \;\middle|\;
         \sigma > \epsilon
         \right\}
-        \right|
+        \right| \approx \frac{\operatorname{rank}(\boldsymbol{H}_l)}{M_l}.
    \end{aligned}
 
 where :math:`\epsilon > 0` is some small threshold. Note that
