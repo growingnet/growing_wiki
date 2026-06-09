@@ -8,8 +8,8 @@ NORTH
 Notation and framework
 ----------------------
 
-Consider an MLP with hidden layer :math:`l`, current width :math:`M_l`, preactivations :math:`\boldsymbol{Z}_l`, post-activations :math:`\boldsymbol{H}_l`, and fan-in weight matrix :math:`\boldsymbol{W}_l`. For :math:`n` buffered samples, the dense activation matrix is treated as
-:math:`\boldsymbol{H}_l \in \mathbb{R}^{M_l \times n}`.
+Consider an MLP with hidden layer :math:`l`, current width :math:`C_l`, preactivations :math:`\boldsymbol{Z}_l`, post-activations :math:`\boldsymbol{H}_l`, and fan-in weight matrix :math:`\boldsymbol{W}_l`. For :math:`n` buffered samples, the dense activation matrix is treated as
+:math:`\boldsymbol{H}_l \in \mathbb{R}^{n \times C_l}`.
 
 NORTH follows a simple dynamic growth loop:
 
@@ -28,7 +28,7 @@ The main NORTH trigger measures the orthogonality of one layer's activations acr
 
    \begin{aligned}
    \phi_a^{ED}(f,l)
-      = \frac{1}{M_l}
+      = \frac{1}{C_l}
         \left|
         \left\{
         \sigma \in \operatorname{SVD}
@@ -36,13 +36,13 @@ The main NORTH trigger measures the orthogonality of one layer's activations acr
         \;\middle|\;
         \sigma > \epsilon
         \right\}
-        \right| \approx \frac{\operatorname{rank}(\boldsymbol{H}_l)}{M_l}.
+        \right| \approx \frac{\operatorname{rank}(\boldsymbol{H}_l)}{C_l}.
    \end{aligned}
 
 where :math:`\epsilon > 0` is some small threshold. Note that
 :math:`0 \le \phi_a^{ED} \le 1`. Because the metric is based on the
-singular values of the :math:`M_l \times n` activation matrix, the paper
-requires :math:`n > M_l`. When :math:`\phi_a^{ED}` is high, the layer's
+singular values of the :math:`n \times C_l` activation matrix, the paper
+requires :math:`n > C_l`. When :math:`\phi_a^{ED}` is high, the layer's
 activations are mostly orthogonal; when it is low, the layer has
 redundant or collapsed activation directions.
 
@@ -55,7 +55,7 @@ NORTH compares the current metric to its value at initialization:[#f1]_
       = \max \left(
         0,
         \left\lfloor
-        M_l
+        C_l
         \left(
         \phi_a(f,l) - \gamma_a \phi_a(f_0,l)
         \right)
@@ -63,7 +63,7 @@ NORTH compares the current metric to its value at initialization:[#f1]_
         \right),
    \end{aligned}
 
-where :math:`f_0` is the initial network and :math:`\gamma_a` is a threshold hyperparameter close to :math:`1`. Multiplying by :math:`M_l` converts the normalized excess orthogonality back into a number of neurons.
+where :math:`f_0` is the initial network and :math:`\gamma_a` is a threshold hyperparameter close to :math:`1`. Multiplying by :math:`C_l` converts the normalized excess orthogonality back into a number of neurons.
 
 The baseline :math:`\phi_a(f_0,l)` matters because orthogonality usually deteriorates as activations pass through deeper nonlinear layers. NORTH therefore asks the layer to maintain roughly its initial relative activation diversity as it grows. If adding neurons does not increase the effective rank, the normalized metric falls and the trigger stops firing until training creates new independent directions.
 
@@ -78,7 +78,7 @@ NORTH-Weight uses the same idea, but measures orthogonality of the fan-in weight
    \begin{aligned}
    \phi_w^{ED}(f,l)
       &=
-      \frac{1}{M_l}
+      \frac{1}{C_l}
       \left|
       \left\{
       \sigma \in \operatorname{SVD}
@@ -86,13 +86,13 @@ NORTH-Weight uses the same idea, but measures orthogonality of the fan-in weight
       \;\middle|\;
       \sigma > \epsilon
       \right\}
-      \right| \approx \frac{\operatorname{rank}(\boldsymbol{W}_l)}{M_l}, \\
+      \right| \approx \frac{\operatorname{rank}(\boldsymbol{W}_l)}{C_l}, \\
    T_{weight}(f,\phi_w,l)
       &=
       \max \left(
       0,
       \left\lfloor
-      M_l
+      C_l
       \left(
       \phi_w(f,l) - \gamma_w \phi_w(f_0,l)
       \right)
@@ -105,7 +105,7 @@ This is generally cheaper to compute, however weight orthogonality does not guar
 3. Gradient trigger as a comparison
 -----------------------------------
 
-The paper also introduces a gradient-based trigger to put prior gradient-based initializations. Following [[GradMax]], the maximum contribution to the gradient of :math:`k` added neurons :math:`\frac{\partial L}{\partial \boldsymbol{w}_\textrm{new}^{in}}` is given by the top-k singular values of :math:`\frac{\partial L}{\partial \boldsymbol{Z}_{l+1}} \boldsymbol{H}_{l-1}^{\top}`.
+The paper also introduces a gradient-based trigger to put prior gradient-based initializations. Following [[GradMax]], the maximum contribution to the gradient of :math:`k` added neurons :math:`\frac{\partial L}{\partial \boldsymbol{w}_\textrm{new}^{in}}` is given by the top-k singular values of :math:`\left(\frac{\partial L}{\partial \boldsymbol{Z}_{l+1}}\right)^{\top} \boldsymbol{H}_{l-1}`.
 
 The proposed trigger counts singular values of :math:`\boldsymbol{A}_l` that are larger than the total gradient norm of the existing neurons in the layer:
 
@@ -116,11 +116,11 @@ The proposed trigger counts singular values of :math:`\boldsymbol{A}_l` that are
       =
       \left|
       \left\{
-      \sigma \in \operatorname{SVD}\left(\frac{\partial L}{\partial \boldsymbol{Z}_{l+1}}
-      \boldsymbol{H}_{l-1}^{\top}\right)
+      \sigma \in \operatorname{SVD}\left(\left(\frac{\partial L}{\partial \boldsymbol{Z}_{l+1}}\right)^{\top}
+      \boldsymbol{H}_{l-1}\right)
       \;\middle|\;
       \sigma >
-      \sum_{m=1}^{M_l}
+      \sum_{m=1}^{C_l}
       \left\|
       \frac{\partial L}{\partial \boldsymbol{w}_{m}^{in}}
       \right\|_F
@@ -183,7 +183,7 @@ orthogonality, but this was found to be too computationally expensive.
    \begin{aligned}
    k =
    \max\left(0, \left\lfloor
-   M_l
+   C_l
    \left(
    \phi_a(f,l) - \gamma_a \phi_a(f_0,l)
    \right)
