@@ -86,7 +86,7 @@ NORTH-Weight uses the same idea, but measures orthogonality of the fan-in weight
       \;\middle|\;
       \sigma > \epsilon
       \right\}
-      \right|, \\
+      \right| \approx \frac{\operatorname{rank}(\boldsymbol{W}_l)}{M_l}, \\
    T_{weight}(f,\phi_w,l)
       &=
       \max \left(
