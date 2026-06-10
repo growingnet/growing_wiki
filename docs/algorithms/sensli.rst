@@ -97,7 +97,11 @@ Results
 - CNN (VGG) 3 layers with 64-128-256 channels (Cifar10 clustering)
 
 
-| Layer insertion perf (**Only graphs of specific experiments, no results table**)
-- Adding 1 layer give better performance than base architecture but lower results than training final architecture from the start
-- Adding 3 layers (separetly) give better performances than final architecture trained from the start
+| Layer insertion perf in Loss (test error not really readable) (**Only graphs of specific experiments, no results table**)
+- Adding 1 layer give lower loss at the end of training than base architecture but higher loss than training final architecture from the start
+- Adding 3 layers (separetly) give lower loss than final architecture trained from the start
 - Slower FLOPs than base but faster than final architecture
+
+
+| Where comparison
+- Final test accuracy similar between SensLI, random and lowest merit
