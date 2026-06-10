@@ -107,7 +107,7 @@ This is generally cheaper to compute, however weight orthogonality does not guar
 
 The paper also introduces a gradient-based trigger to put prior gradient-based initializations. Following [[GradMax]], the maximum contribution to the gradient of :math:`k` added neurons :math:`\frac{\partial L}{\partial \boldsymbol{w}_\textrm{new}^{in}}` is given by the top-k singular values of :math:`\left(\frac{\partial L}{\partial \boldsymbol{Z}_{l+1}}\right)^{\top} \boldsymbol{H}_{l-1}`.
 
-The proposed trigger counts singular values of :math:`\boldsymbol{A}_l` that are larger than the total gradient norm of the existing neurons in the layer:
+The proposed trigger counts singular values of :math:`\left(\frac{\partial L}{\partial \boldsymbol{Z}_{l+1}}\right)^{\top} \boldsymbol{H}_{l-1}` that are larger than the total gradient norm of the existing neurons in the layer:
 
 .. math::
 
@@ -264,6 +264,33 @@ not use data augmentation or dropout.
 - For MLPs on MNIST, the dynamic NORTH* methods sit on the Pareto front of test accuracy versus network size. NORTH-Select, NORTH-Weight and NORTH-Random reach competitive accuracy, while NORTH-Pre does not grow sufficiently large (but still sits on the pareto front).
 
 - For VGG-11 on CIFAR-10 and CIFAR-100, NORTH-Select can outperform larger static baselines with fewer parameters. For WideResNet-28, NORTH* methods often grow to or near the maximum allowed size. The paper attributes this partly to the constraints introduced by residual connections.
+
+Are we really maximizing activation orthogonality?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _fig-north-ed-training-time:
+
+.. container:: figure
+
+    .. image:: /_static/north_effective_dimension_training_time_light.png
+       :class: only-light
+       :alt: Top row of Figure 6b comparing Effective Dimension training time versus network size
+       :width: 100%
+       :align: center
+
+    .. image:: /_static/north_effective_dimension_training_time_dark.png
+       :class: only-dark
+       :alt: Top row of Figure 6b comparing Effective Dimension training time versus network size
+       :width: 100%
+       :align: center
+
+    .. container:: caption
+
+       Effective dimension :math:`\phi_a^{ED}` vs parameter count for MLPs on MNIST.
+
+The fact that NORTH-Select outperforms NORTH-Pre is surprising, since NORTH-Pre generates candidates which already maximise pre-activation orthogonality and therefore should maximise activation orthogonality better than random candidates.
+
+Indeed, in MLP experiments on MNIST, NORTH-Pre (middel panel) appears to maximise activation-orthogonality :math:`\phi_a^{ED}` (a.k.a. Effective Dimension) more aggressively than NORTH-Select (left panel), but performs worse, at least on the larger convolutional networks. This suggests that activation orthogonality, as measured by :math:`\phi_a^{ED}`, is a useful heuristic but not the optimal criterion to optimize directly.
 
 Footnotes
 ---------
