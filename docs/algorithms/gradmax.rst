@@ -15,130 +15,62 @@ To achieve this objective, the gradient of the loss is maximized with respect to
    :width: 80%
    :align: center
 
-   Schematic view of the GradMax algorithm. Growing new neurons requires initializing incoming (:math:`W_{\ell}^{\text{new}}`)
-   and outgoing (:math:`W_{\ell+1}^{\text{new}}`) weights for the new neuron. GradMax sets incoming weights to zero (dashed lines)
+   Schematic view of the GradMax algorithm. Growing new neurons requires initializing incoming (:math:`W_{\ell}^{\text{new}} = \Psi`)
+   and outgoing (:math:`W_{\ell+1}^{\text{new}} = \Omega`) weights for the new neuron. GradMax sets incoming weights to zero (dashed lines)
    in order to keep the output unchanged, and initializes outgoing weights using SVD. This maximizes the gradients on the
    incoming weights with the aim of accelerating training. :cite:p:`evci_gradmax_2022`
 
-The network must preserve the information it has already learned when adding new neurons, therefore one of the two weights, incoming or outgoing must be initialized to zero.
+With :math:`\Psi = 0` and :math:`\sigma(0) = 0`, we have :math:`a_{-1}^{\text{ext}} = 0`, so :math:`\nabla_{\Omega} \mathcal{L}(f) = 0`. The loss decrease after one gradient step on :math:`(\Psi, \Omega)` is:
+
+.. math::
+
+   \mathcal{L}(f_{\Psi + \text{d}\Psi}) \approx \mathcal{L}(f) - \|\nabla_{\Psi} \mathcal{L}(f)\|_2^2 - \|\nabla_{\Omega} \mathcal{L}(f)\|_2^2
+
+As :math:`\nabla_{\Psi} \mathcal{L}(f) = 0` at initialization, GradMax maximizes :math:`\|\nabla_{\Omega} \mathcal{L}(f)\|_2`.
+
+GradMax solves:
 
 .. math::
    :label: eq-gradmax-general
 
-   \mathop{\mathrm{\arg\!\max}}_{\boldsymbol{W}_\ell^{\text{new}},\, \boldsymbol{W}_{\ell+1}^{\text{new}}}
-   \left\| \mathbb{E}_D \left[ \frac{\partial L}{\partial \boldsymbol{W}_\ell^{\text{new}}} \right] \right\|_F^2
-   + \left\| \mathbb{E}_D \left[ \frac{\partial L}{\partial \boldsymbol{W}_{\ell+1}^{\text{new}}} \right] \right\|_F^2
-   \quad \text{s.t.} \quad
-   \begin{cases}
-   \|\boldsymbol{W}_\ell^{\text{new}}\|_F,\, \|\boldsymbol{W}_{\ell+1}^{\text{new}}\|_F \leq c \\
-   \boldsymbol{W}_{\ell+1}^{\text{new}} \boldsymbol{h}_\ell^{\text{new}} = 0
-   \end{cases}
+   \Omega^* = \operatorname*{argmax}_{\|\Omega\|_2 \le 1} \|\nabla_{\Psi} \mathcal{L}(f)\|_2
+
+such that :math:`\Omega \Omega^{\top} = I_{C_{\text{ext}}}`.
 
 
 2. Non-linearities and normalization hypotheses in the case of FC layers
 ------------------------------------------------------------------------
 
-Consider fully connected layers denoted with indices :math:`\ell-1`, :math:`\ell`, and :math:`\ell+1` and the following recursive definition:
+Consider fully connected layers with :math:`\Psi = 0` and :math:`\sigma'(0) = 1`:
 
 .. math::
 
-   z_\ell = W_\ell h_{\ell-1}
+   \nabla_{\Psi} \mathcal{L}(f) = \Omega^{\top} \times_C \mathbb{E}_{(x,y) \sim \mathcal{D}} \left[ \nabla_s \mathcal{L}(f)(x) \times_1 a_{-2}(x)^{\top} \right] = \Omega^{\top} \times_C B_{-2}^{\top}
 
-   h_\ell = f(z_\ell),
-
-When growing :math:`k` neurons at layer :math:`\ell`, new neurons are appended to the existing weight matrices :math:`W_\ell` and :math:`W_{\ell+1}` as follows:
-
-.. math::
-
-   W_\ell^+ =
-   \begin{bmatrix} W_\ell \\ W_{\ell}^{\mathrm{new}} \end{bmatrix}
-   \qquad
-   W_{\ell+1}^+ =
-   \begin{bmatrix} W_{\ell+1} & W_{\ell+1}^{\mathrm{new}} \end{bmatrix}
-
-The pre-activations and activations of the new neurons are respectively :math:`z_{\mathrm{new}}` and :math:`h_{\mathrm{new}}`.
-The gradients of the new weights can be derived:
-
-.. math::
-
-   \frac{\partial L}{\partial W_{\ell}^{\mathrm{new}}}
-   =
-   (f'(z_{\mathrm{new}})
-   \, W_{\ell+1}^{\mathrm{new}, \top}
-   \frac{\partial L}{\partial z_{\ell+1}})
-   h_{\ell-1}^{\top}
-
-.. math::
-
-   \frac{\partial L}{\partial W_{\ell+1}^{\mathrm{new}}}
-   =
-   \frac{\partial L}{\partial z_{\ell+1}}
-   h_{\ell}^{\mathrm{new},\top}.
-
-The simplifying assumptions are :math:`W_{\ell}^{\mathrm{new}} = 0` and that :math:`f(0)=0` with gradient :math:`f'(0)=1`. This guarantees that
-
-.. math::
-
-   W_{\ell+1}^{\mathrm{new}} h_{\ell}^{\mathrm{new}} = 0,
-
-independent of the training data. Moreover, it simplifies the gradients to
-
-.. math::
-
-   \frac{\partial L}{\partial W_{\ell}^{\mathrm{new}}}
-   =
-   W_{\ell+1}^{\mathrm{new}, \top}
-   \frac{\partial L}{\partial z_{\ell+1}}
-   h_{\ell-1}^{\top}
-
-.. math::
-
-   \frac{\partial L}{\partial W_{\ell+1}^{\mathrm{new}}}
-   =
-   0,
-
-which reduces our problem to
+The GradMax optimization reduces to:
 
 .. math::
    :label: eq-gradmax-fc
 
-   \mathop{\mathrm{argmax}}_{W_{\ell+1}^{\mathrm{new}}}
-   \left\|
-   W_{\ell+1}^{\mathrm{new}, \top}
-   \mathbb{E}_D
-   \left[
-   \frac{\partial L}{\partial z_{\ell+1}}
-   h_{\ell-1}^{\top}
-   \right]
-   \right\|_F^2,
-   \quad
-   \text{s.t. }
-   \|W_{\ell+1}^{\mathrm{new}}\|_F \le c.
+   \mathcal{J}_{\text{GradMax}}(\Omega) := \|B_{-2} \times_C \Omega\|_2^2
 
-The solution to this maximization problem is found in closed-form by setting the columns of :math:`W_{\ell+1}^{\mathrm{new}}` as the top-:math:`k` left-singular vectors of the matrix
+such that :math:`\Omega \Omega^{\top} = I_{C_{\text{ext}}}`.
 
-.. math::
-
-   \mathbb{E}_D
-   \left[
-   \frac{\partial L}{\partial z_{\ell+1}}
-   h_{\ell-1}^{\top}
-   \right]
-
-and scaling them by :math:`\frac{c}{\|(\sigma_1,\ldots,\sigma_k)\|}` (where :math:`\sigma_i` is the :math:`i`-th largest singular value). In order to make a fair comparison between
+The optimal :math:`\Omega^*` are the leading left-singular vectors of :math:`B_{-2}` and scaling them by :math:`\frac{c}{\|(\sigma_1,\ldots,\sigma_k)\|}` (where :math:`\sigma_i` is the :math:`i`-th largest singular value). In order to make a fair comparison between
 different methods each initialization is scaled such that their norm is equal to the same value, i.e., the mean norm of the existing neurons.
+
 
 .. note::
 
-   This closed-form solution holds under the additional hypothesis that the columns of :math:`W_{\ell+1}^{\mathrm{new}}` are mutually orthonormal,
-   i.e. :math:`W_{\ell+1}^{\mathrm{new},\top} W_{\ell+1}^{\mathrm{new}} = I_{M_{\ell}}`. This hypothesis is not explicitly stated in the paper.
+   This closed-form solution holds under the hypothesis that the columns of :math:`\Omega` are mutually orthonormal,
+   i.e. :math:`\Omega \Omega^{\top} = I_{C_{\text{ext}}}`. This hypothesis is not explicitly stated in the paper.
 
 
 3. A few comments
 -----------------
 
 - Using an iterative method such as projected gradient descent to solve directly :eq:`eq-gradmax-general` (GradMaxOpt) does not work as well as using the SVD, highlighting the benefit of having a closed-form solution.
-  However, if the outgoing weights are set to zero (:math:`W_{\ell+1}^{\mathrm{new}} = 0`) instead of the incoming weights, then the solution can no longer be found using SVD, and direct
+  However, if the outgoing weights are set to zero (:math:`\Omega = 0`) instead of the incoming weights, then the solution can no longer be found using SVD, and direct
   optimization of :eq:`eq-gradmax-fc` could provide a solution. This could be preferable in some situations since it removes the constraints on the activation function. Moreover, it can avoid
   the unstable behavior of functions such as batch normalization.
 
