@@ -72,6 +72,7 @@ SensLI introduces a "merit" metric of inserting the layer with parameters :math:
     \| \nabla_{\theta_\text{new}} \mathcal{L} (f_\text{ext}(\theta_\text{ext})) \|
 
 | **What is done in practice**
+
 1. SensLI copies the current network and inserts layers between every possible layers with initialization described in section "How"
 2. Compute the "merit" of every new layer by a fordward/backward pass with 0 learning rate **over the whole dataset**
 3. Add to the real network the **one** new layer with the highest *merit* **only if**
@@ -92,16 +93,17 @@ After inserting (or not) a layer, SensLI train for a fixed number of epoch befor
 Results
 -------
 | Base architecture
+
 - FNN : 1/2 hidden layers of width 4/5/10 (2d points clustering)
 - ResNet with 2/3 fully-connected blocks of width 3 (2d points clustering)
 - CNN (VGG) 3 layers with 64-128-256 channels (Cifar10 clustering)
 
-
 | Layer insertion perf in Loss (test error not really readable) (**Only graphs of specific experiments, no results table**)
+
 - Adding 1 layer give lower loss at the end of training than base architecture but higher loss than training final architecture from the start
 - Adding 3 layers (separetly) give lower loss than final architecture trained from the start
 - Slower FLOPs than base but faster than final architecture
 
-
 | Where comparison
+
 - Final test accuracy similar between SensLI, random and lowest merit
