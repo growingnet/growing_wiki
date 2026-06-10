@@ -95,7 +95,7 @@ Limitations
 - Rademacher bounds are often loose; how much minimising :math:`F` actually
   improves generalisation over simpler ensembles is unclear.
 - The two-candidate scheme is not justified beyond simplicity.
-- Training multiples candidates per round is expensive
+- Training multiple candidates per round is expensive
 
 External links
 --------------
