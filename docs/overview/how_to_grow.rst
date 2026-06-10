@@ -7,6 +7,8 @@ How to grow?
 
    * - Algorithm
      - How to grow
+   * - [[AdaNet|adanet]]
+     - Train new subnetwork + its ensemble weight to minimise objective; prior subnetworks frozen. Add candidate with best improvement to the network.
    * - [[AutoGrow|autogrow]]
      - Add blocks with random initialization.
    * - [[Firefly|firefly]]

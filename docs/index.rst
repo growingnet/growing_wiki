@@ -90,6 +90,7 @@ Growing algorithms can be classified across multiple axes: the type of growth, w
 
       Expanding existing layers by adding neurons, or sparse connections.
 
+      - :doc:`AdaNet <algorithms/adanet>`
       - :doc:`Net2Net <algorithms/net2net>`
       - :doc:`Network Morphism <algorithms/network_morphism>`
       - :doc:`NORTH <algorithms/north>`

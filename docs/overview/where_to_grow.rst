@@ -7,6 +7,8 @@ Where to grow?
 
    * - Algorithm
      - Where to grow
+   * - [[AdaNet|adanet]]
+     - New parallel subnetwork, of current depth or one layer deeper; existing subnetworks untouched and frozen.
    * - [[AutoGrow|autogrow]]
      - Predefined stages.
    * - [[Firefly|firefly]]
