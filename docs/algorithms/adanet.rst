@@ -132,7 +132,7 @@ Limitations
   ensembling baselines.
 - Each round requires training multiple candidate subnetworks, making AdaNet
   substantially more expensive per round than single-network growing methods
-  such as [[GradMax]]or [[Tiny]].
+  such as [[GradMax]] or [[Tiny]].
 - The choice of candidate subnetworks to train is arbitrary and may not be optimal for the task; the paper does not explore
   alternatives to the fixed two-candidate scheme. 
 
