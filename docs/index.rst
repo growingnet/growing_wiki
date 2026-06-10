@@ -113,6 +113,7 @@ Growing algorithms can be classified across multiple axes: the type of growth, w
       - :doc:`FRAGrow <algorithms/fra_grow>`
       - :doc:`Firefly <algorithms/firefly>`
       - :doc:`SENN <algorithms/senn>`
+      - :doc:`AdaNet <algorithms/adanet>`
 
    .. container:: home-card
 
@@ -139,6 +140,7 @@ Growing algorithms can be classified across multiple axes: the type of growth, w
       - :doc:`NeST <algorithms/nest>`
       - :doc:`FRAGrow <algorithms/fra_grow>`
       - :doc:`AutoGrow <algorithms/autogrow>`
+      - :doc:`AdaNet <algorithms/adanet>`
 
 .. container:: project-logo-footer
 
