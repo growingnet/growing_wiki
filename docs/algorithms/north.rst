@@ -290,7 +290,7 @@ Are we really maximizing activation orthogonality?
 
 The fact that NORTH-Select outperforms NORTH-Pre is surprising, since NORTH-Pre generates candidates which already maximise pre-activation orthogonality and therefore should maximise activation orthogonality better than random candidates.
 
-Indeed, in MLP experiments on MNIST, NORTH-Pre (middel panel) appears to maximise activation-orthogonality :math:`\phi_a^{ED}` (a.k.a. Effective Dimension) more aggressively than NORTH-Select (left panel), but performs worse, at least on the larger convolutional networks. This suggests that activation orthogonality, as measured by :math:`\phi_a^{ED}`, is a useful heuristic but not the optimal criterion to optimize directly.
+Indeed, in MLP experiments on MNIST, NORTH-Pre (middle panel) appears to maximise activation-orthogonality :math:`\phi_a^{ED}` (a.k.a. Effective Dimension) more aggressively than NORTH-Select (left panel), but performs worse, at least on the larger convolutional networks. This suggests that activation orthogonality, as measured by :math:`\phi_a^{ED}`, is a useful heuristic but not the optimal criterion to optimize directly.
 
 Footnotes
 ---------
