@@ -24,8 +24,10 @@ it does not aim to preserve the network function at growth steps, unlike
 :math:`|B_{i,j}|`, alongside a pruning stage based on magnitude criteria
 (Policy 4). See
 :numref:`Table %s <tab-nest-policies>` for a compact policy map and
-:numref:`Fig. %s <fig-nest-connection>`, :numref:`Fig. %s <fig-nest-neuron>`,
-:numref:`Fig. %s <fig-nest-feature-map>` for the three growth operations. Formulas follow Dai, Yin & Jha
+:ref:`connection growth <fig-nest-connection>`,
+:ref:`neuron growth <fig-nest-neuron>`, and
+:ref:`feature-map growth <fig-nest-feature-map>` for the three growth operations.
+Formulas follow Dai, Yin & Jha
 :cite:p:`daiNeSTNeuralNetwork2019` (Sec. III, Algorithm 1, Eq. (7)).
 
 **Prerequisites:** [[Sparse growth and grow-prune methods|sparse_grow_prune]],
@@ -120,20 +122,25 @@ Growth phase (Policies 1–3)
 Adding connections (Policy 1)
 """""""""""""""""""""""""""""
 
-.. .. figure:: /_static/nest_connection_growth.svg
-..    :class: only-light
-..    :name: fig-nest-connection
-..    :align: center
-..    :width: 80%
-..    :alt: Bipartite layer sketch with one dormant edge activated by largest B score
+.. _fig-nest-connection:
 
-..    Connection growth (Policy 1): score dormant edges by :math:`|B^{(l-1)}_{i,j}|` and activate high-magnitude edges.
+.. container:: figure
 
-.. .. image:: /_static/nest_connection_growth-dark.svg
-..    :class: only-dark
-..    :align: center
-..    :width: 80%
-..    :alt: Bipartite layer sketch with one dormant edge activated by largest B score
+   .. image:: /_static/nest_connection_growth.svg
+      :class: only-light
+      :alt: Bipartite layer sketch with one dormant edge activated by largest B score
+      :width: 80%
+      :align: center
+
+   .. image:: /_static/nest_connection_growth-dark.svg
+      :class: only-dark
+      :alt: Bipartite layer sketch with one dormant edge activated by largest B score
+      :width: 80%
+      :align: center
+
+   .. container:: caption
+
+      Connection growth (Policy 1): score dormant edges by :math:`|B^{(l-1)}_{i,j}|` and activate high-magnitude edges.
 
 To activate a **dormant** edge in :math:`\boldsymbol{W}^{(l)}`, **Policy 1**
 ranks candidate pairs :math:`(i,j)` by :math:`|B^{(l-1)}_{i,j}|` from
@@ -158,20 +165,25 @@ connections and gives no Algorithm-1-style initializer for newly unmasked weight
 Adding neurons (Policy 2)
 """""""""""""""""""""""""
 
-.. .. figure:: /_static/nest_neuron_growth.svg
-..    :class: only-light
-..    :name: fig-nest-neuron
-..    :align: center
-..    :width: 80%
-..    :alt: Three-node chain with a new middle neuron and psi omega initialization chip
+.. _fig-nest-neuron:
 
-..    Neuron growth (Policy 2): one-sparse idealization (:math:`|S_\beta|=1`); Algorithm 1 accumulates square-root inits over :math:`S_\beta`.
+.. container:: figure
 
-.. .. image:: /_static/nest_neuron_growth-dark.svg
-..    :class: only-dark
-..    :align: center
-..    :width: 80%
-..    :alt: Three-node chain with a new middle neuron and psi omega initialization chip
+   .. image:: /_static/nest_neuron_growth.svg
+      :class: only-light
+      :alt: Three-node chain with a new middle neuron and psi omega initialization chip
+      :width: 80%
+      :align: center
+
+   .. image:: /_static/nest_neuron_growth-dark.svg
+      :class: only-dark
+      :alt: Three-node chain with a new middle neuron and psi omega initialization chip
+      :width: 80%
+      :align: center
+
+   .. container:: caption
+
+      Neuron growth (Policy 2): one-sparse idealization (:math:`|S_\beta|=1`); Algorithm 1 accumulates square-root inits over :math:`S_\beta`.
 
 **Policy 2** inserts a new unit at layer :math:`l-1` with fan-in
 :math:`\boldsymbol{\psi}` and fan-out :math:`\boldsymbol{\omega}`. Unlike
@@ -201,7 +213,7 @@ C_l\rceil`-th largest entry of :math:`|\boldsymbol{B}^{(l-2)}|` and keep
 
    S_\beta = \{(i,j) : |B^{(l-2)}_{i,j}| \ge \tau_\beta\}.
 
-**Assign (one pair).** :numref:`Fig. %s <fig-nest-neuron>` and
+**Assign (one pair).** :ref:`Neuron growth (Policy 2) <fig-nest-neuron>` and
 :eq:`eq-nest-one-sparse-init` show the :math:`|S_\beta|=1` case—a single
 one-sparse :math:`(\boldsymbol{\psi},\boldsymbol{\omega})` pair. The paper
 motivates the square-root split as imitating one backprop step on a hypothetical
@@ -265,20 +277,25 @@ range in practice only.
 Growth in convolutional layers (Policy 3)
 """""""""""""""""""""""""""""""""""""""""
 
-.. .. figure:: /_static/nest_feature_map_growth.svg
-..    :class: only-light
-..    :name: fig-nest-feature-map
-..    :align: center
-..    :width: 80%
-..    :alt: Three candidate kernel tiles with the middle one highlighted as best
+.. _fig-nest-feature-map:
 
-..    Feature-map growth (Policy 3): compare random kernel candidates :math:`\mathcal{K}_1,\ldots,\mathcal{K}_r` by forward loss.
+.. container:: figure
 
-.. .. image:: /_static/nest_feature_map_growth-dark.svg
-..    :class: only-dark
-..    :align: center
-..    :width: 80%
-..    :alt: Three candidate kernel tiles with the middle one highlighted as best
+   .. image:: /_static/nest_feature_map_growth.svg
+      :class: only-light
+      :alt: Three candidate kernel tiles with the middle one highlighted as best
+      :width: 80%
+      :align: center
+
+   .. image:: /_static/nest_feature_map_growth-dark.svg
+      :class: only-dark
+      :alt: Three candidate kernel tiles with the middle one highlighted as best
+      :width: 80%
+      :align: center
+
+   .. container:: caption
+
+      Feature-map growth (Policy 3): compare random kernel candidates :math:`\mathcal{K}_1,\ldots,\mathcal{K}_r` by forward loss.
 
 For convolutional layers, connection growth follows Policy 1 on dormant kernel
 entries, using the same bridging-matrix magnitude criterion as in the fully
