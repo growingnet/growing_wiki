@@ -1,6 +1,0 @@
-sphinx>=7.2,<8
-sphinx-autobuild
-furo
-sphinxcontrib-bibtex
-pytest
-pre-commit
