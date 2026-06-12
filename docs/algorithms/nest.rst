@@ -6,7 +6,7 @@ NeST
    arXiv preprint `1711.02017v3 <https://arxiv.org/abs/1711.02017>`__ (open
    access). The bibliography key :cite:p:`daiNeSTNeuralNetwork2019` points to
    the IEEE *Transactions on Computers* (2019) publication, which may extend or
-   revise the preprint (e.g.\ extra models or headline compression figures); we
+   revise the preprint (e.g. extra models or headline compression figures); we
    do not document that version here because it is not openly available to verify.
 
 **TLDR:** NeST is a sparse grow-prune method that uses **bridging matrices**
@@ -24,9 +24,7 @@ it does not aim to preserve the network function at growth steps, unlike
 :math:`|B_{i,j}|`, alongside a pruning stage based on magnitude criteria
 (Policy 4). See
 :numref:`Table %s <tab-nest-policies>` for a compact policy map and
-:ref:`connection growth <fig-nest-connection>`,
-:ref:`neuron growth <fig-nest-neuron>`, and
-:ref:`feature-map growth <fig-nest-feature-map>` for the three growth operations.
+:ref:`Grow-and-prune pipeline <fig-nest-pipeline>` for the synthesis flow.
 Formulas follow Dai, Yin & Jha
 :cite:p:`daiNeSTNeuralNetwork2019` (Sec. III, Algorithm 1, Eq. (7)).
 
@@ -38,7 +36,7 @@ Formulas follow Dai, Yin & Jha
 Policies at a glance
 --------------------
 
-For alignment with Dai et al.\ :cite:p:`daiNeSTNeuralNetwork2019` (Sec. III):
+For alignment with Dai et al. :cite:p:`daiNeSTNeuralNetwork2019` (Sec. III):
 
 .. list-table:: NeST policies at a glance
    :name: tab-nest-policies
@@ -114,33 +112,35 @@ Grow-and-prune pipeline
 NeST's reported synthesis flow is **grow, then prune**: a **growth phase**
 (Policies 1–3) followed by a **pruning phase** (Policy 4)
 :cite:p:`daiNeSTNeuralNetwork2019`. The paper does not pin down a canonical
-**alternating** outer loop (e.g.\ repeated grow–prune rounds); see `Limitations`_.
+**alternating** outer loop (e.g. repeated grow–prune rounds); see `Limitations`_.
+
+.. _fig-nest-pipeline:
+
+.. container:: figure
+
+   .. image:: /_static/grow-and-prune-pipeline.svg
+      :class: only-light
+      :alt: Flowchart from sparse seed through growth policies to magnitude pruning
+      :width: 100%
+      :align: center
+
+   .. image:: /_static/grow-and-prune-pipeline-dark.svg
+      :class: only-dark
+      :alt: Flowchart from sparse seed through growth policies to magnitude pruning
+      :width: 100%
+      :align: center
+
+   .. container:: caption
+
+      Grow-and-prune pipeline overview: Policies 1–3 (growth), then Policy 4
+      (magnitude pruning). **Partial-area convolution** is a separate Policy 4
+      variant (see :ref:`Partial-area convolution <partial-area-convolution>`).
 
 Growth phase (Policies 1–3)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Adding connections (Policy 1)
 """""""""""""""""""""""""""""
-
-.. _fig-nest-connection:
-
-.. container:: figure
-
-   .. image:: /_static/nest_connection_growth.svg
-      :class: only-light
-      :alt: Bipartite layer sketch with one dormant edge activated by largest B score
-      :width: 80%
-      :align: center
-
-   .. image:: /_static/nest_connection_growth-dark.svg
-      :class: only-dark
-      :alt: Bipartite layer sketch with one dormant edge activated by largest B score
-      :width: 80%
-      :align: center
-
-   .. container:: caption
-
-      Connection growth (Policy 1): score dormant edges by :math:`|B^{(l-1)}_{i,j}|` and activate high-magnitude edges.
 
 To activate a **dormant** edge in :math:`\boldsymbol{W}^{(l)}`, **Policy 1**
 ranks candidate pairs :math:`(i,j)` by :math:`|B^{(l-1)}_{i,j}|` from
@@ -159,31 +159,11 @@ so the score is also a batch-averaged Hebbian product of presynaptic activity
 :math:`H^{(l-1)}_{n,i}` and backprop signal :math:`G^{(l)}_{n,j}`. Each growth
 phase turns on dormant edges with the **largest** scores. Unlike **Policy 2**,
 the paper names no growth-ratio hyperparameter (such as :math:`\beta`) for
-connections and gives no Algorithm-1-style initializer for newly unmasked weights
-(see `Limitations`_).
+connections and does not **explicitly** state how to initialize newly unmasked
+weights (see `Limitations`_).
 
 Adding neurons (Policy 2)
 """""""""""""""""""""""""
-
-.. _fig-nest-neuron:
-
-.. container:: figure
-
-   .. image:: /_static/nest_neuron_growth.svg
-      :class: only-light
-      :alt: Three-node chain with a new middle neuron and psi omega initialization chip
-      :width: 80%
-      :align: center
-
-   .. image:: /_static/nest_neuron_growth-dark.svg
-      :class: only-dark
-      :alt: Three-node chain with a new middle neuron and psi omega initialization chip
-      :width: 80%
-      :align: center
-
-   .. container:: caption
-
-      Neuron growth (Policy 2): one-sparse idealization (:math:`|S_\beta|=1`); Algorithm 1 accumulates square-root inits over :math:`S_\beta`.
 
 **Policy 2** inserts a new unit at layer :math:`l-1` with fan-in
 :math:`\boldsymbol{\psi}` and fan-out :math:`\boldsymbol{\omega}`. Unlike
@@ -191,7 +171,7 @@ Adding neurons (Policy 2)
 neuron growth **widens** the network. Candidate bridges between layers
 :math:`l-2` and :math:`l` are scored by :math:`|B^{(l-2)}_{i,j}|` from
 :eq:`eq-nest-b-def`—batch-averaged correlation of :math:`H^{(l-2)}` with
-:math:`G^{(l)}`, i.e.\ the magnitude of a **bridging gradient** for a
+:math:`G^{(l)}`, i.e. the magnitude of a **bridging gradient** for a
 hypothetical edge that skips the layer where the neuron is inserted
 :cite:p:`daiNeSTNeuralNetwork2019`. The paper keeps the top
 :math:`\beta \times 100\%` of pairs (**growth ratio** :math:`\beta`), initializes
@@ -213,8 +193,7 @@ C_l\rceil`-th largest entry of :math:`|\boldsymbol{B}^{(l-2)}|` and keep
 
    S_\beta = \{(i,j) : |B^{(l-2)}_{i,j}| \ge \tau_\beta\}.
 
-**Assign (one pair).** :ref:`Neuron growth (Policy 2) <fig-nest-neuron>` and
-:eq:`eq-nest-one-sparse-init` show the :math:`|S_\beta|=1` case—a single
+**Assign (one pair).** :eq:`eq-nest-one-sparse-init` gives the :math:`|S_\beta|=1` case—a single
 one-sparse :math:`(\boldsymbol{\psi},\boldsymbol{\omega})` pair. The paper
 motivates the square-root split as imitating one backprop step on a hypothetical
 skip edge between layers :math:`l-2` and :math:`l`. In the notation of
@@ -277,26 +256,6 @@ range in practice only.
 Growth in convolutional layers (Policy 3)
 """""""""""""""""""""""""""""""""""""""""
 
-.. _fig-nest-feature-map:
-
-.. container:: figure
-
-   .. image:: /_static/nest_feature_map_growth.svg
-      :class: only-light
-      :alt: Three candidate kernel tiles with the middle one highlighted as best
-      :width: 80%
-      :align: center
-
-   .. image:: /_static/nest_feature_map_growth-dark.svg
-      :class: only-dark
-      :alt: Three candidate kernel tiles with the middle one highlighted as best
-      :width: 80%
-      :align: center
-
-   .. container:: caption
-
-      Feature-map growth (Policy 3): compare random kernel candidates :math:`\mathcal{K}_1,\ldots,\mathcal{K}_r` by forward loss.
-
 For convolutional layers, connection growth follows Policy 1 on dormant kernel
 entries, using the same bridging-matrix magnitude criterion as in the fully
 connected case. **Policy 3** :cite:p:`daiNeSTNeuralNetwork2019` then
@@ -325,14 +284,35 @@ Magnitude pruning (Policy 4)
 **Policy 4** removes connections (and neurons) whose weight (or output)
 magnitudes fall below a threshold :cite:p:`daiNeSTNeuralNetwork2019`. In
 practice the paper **prunes insignificant weights** iteratively: each step
-drops only the smallest magnitudes in a layer (e.g.\ top **1%** per layer),
+drops only the smallest magnitudes in a layer (e.g. top **1%** per layer),
 then **retrains the whole DNN** before the next prune pass. With batch
 normalization, pruning uses **effective weights** after folding BN scale into
 :math:`\boldsymbol{W}` :cite:p:`daiNeSTNeuralNetwork2019`. Neurons with zero
 fan-in or fan-out after masking are removed.
 
+.. _partial-area-convolution:
+
 Partial-area convolution
 """"""""""""""""""""""""
+
+.. container:: figure
+
+   .. image:: /_static/partial-area-convolution.svg
+      :class: only-light
+      :alt: Partial-area convolution masks preset areas-of-interest on a feature map
+      :width: 30%
+      :align: center
+
+   .. image:: /_static/partial-area-convolution-dark.svg
+      :class: only-dark
+      :alt: Partial-area convolution masks preset areas-of-interest on a feature map
+      :width: 30%
+      :align: center
+
+   .. container:: caption
+
+      Partial-area convolution (Policy 4 variant): a fixed spatial mask selects
+      **areas-of-interest** on the input feature map before convolution.
 
 A **convolution-specific** variant of Policy 4 (Algorithm 2). The authors want
 a **fixed spatial mask**—learned or set during synthesis, not chosen per input
@@ -341,7 +321,7 @@ input feature map (their implementation applies a mask to the feature map
 **before** convolution). That is meant to cut FLOPs while keeping a standard
 conv stack, unlike schemes where the compute path itself changes with the
 input. Each iteration prunes a small fraction of low-magnitude activations in
-calibration feature maps (pruning ratio :math:`\gamma`, e.g.\ 1%), then
+calibration feature maps (pruning ratio :math:`\gamma`, e.g. 1%), then
 retrains; see `Limitations`_ for underspecified mask rules. It also matters
 for how to read their compression claims (`Experimental results`_).
 
@@ -370,10 +350,10 @@ Headline compression
 ^^^^^^^^^^^^^^^^^^^^
 
 :numref:`Table %s <tab-nest-results>` gives arXiv-abstract parameter and FLOP
-reductions vs. \ dense Caffe/PyTorch baselines on each dataset
+reductions vs. dense Caffe/PyTorch baselines on each dataset
 :cite:p:`daiNeSTNeuralNetwork2019`.
 
-.. csv-table:: Headline compression vs. \ dense baselines (arXiv abstract).
+.. csv-table:: Headline compression vs. dense baselines (arXiv abstract).
    :name: tab-nest-results
    :align: center
    :header: "Dataset", "Model", "Parameters", "FLOPs"
@@ -392,7 +372,7 @@ shorthand for the paper's **Method** column:
 
 - **Caffe** / **baseline** — dense reference models (Caffe LeNets; Caffe AlexNet /
   PyTorch VGG-16 on ImageNet) :cite:p:`daiNeSTNeuralNetwork2019`.
-- **Net prune** — **pruning-only** baseline (Han et al.\ in the paper's tables):
+- **Net prune** — **pruning-only** baseline (Han et al. in the paper's tables):
   start from a trained dense network and prune by weight magnitude, with **no**
   NeST growth step :cite:p:`daiNeSTNeuralNetwork2019`.
 - **NeST** — a network produced by the full grow-and-prune pipeline (paper label
@@ -433,7 +413,7 @@ ImageNet accuracy trade-offs
 
 Baselines are AlexNet Caffe (**42.78%** top-1) and VGG-16 PyTorch (**28.41%**
 top-1) :cite:p:`daiNeSTNeuralNetwork2019`. :numref:`Table %s <tab-nest-imagenet>`
-reports **Δ** accuracy vs. \ those baselines (method labels as above). NeST rows
+reports **Δ** accuracy vs. those baselines (method labels as above). NeST rows
 beat the listed **Net prune** references at similar or better accuracy in this
 table :cite:p:`daiNeSTNeuralNetwork2019`.
 
@@ -459,7 +439,7 @@ Seed sensitivity (LeNet)
 The arXiv paper's clearest **scheduling guidance** is a seed-width sweep on MNIST
 LeNets—a sensitivity study over the width ratio :math:`r`, not a component
 ablation :cite:p:`daiNeSTNeuralNetwork2019`. **Two knobs are separate:** :math:`r`
-scales **neuron counts** per layer (e.g.\ LeNet-300-100 becomes LeNet-120-40 at
+scales **neuron counts** per layer (e.g. LeNet-300-100 becomes LeNet-120-40 at
 :math:`r=0.4`); the **10%** rule is fixed across the sweep and only sets what
 fraction of **possible edges** in that already narrowed topology start active.
 Seeds differ in **size** because :math:`r` differs, not because the 10% fraction
@@ -481,8 +461,7 @@ changes. For grow-and-prune design, the reported takeaways are:
 Component-level claims
 ^^^^^^^^^^^^^^^^^^^^^^
 
-- **Policy 3:** roughly **2×** immediate :math:`\mathcal{L}` reduction vs. \
-  naive random feature-map initialization :cite:p:`daiNeSTNeuralNetwork2019`.
+- **Policy 3:** roughly **2×** immediate :math:`\mathcal{L}` reduction vs. naive random feature-map initialization :cite:p:`daiNeSTNeuralNetwork2019`.
 - **Partial-area convolution:** **2.09×** extra FLOP reduction on LeNet-5 (MNIST)
   with no reported accuracy loss :cite:p:`daiNeSTNeuralNetwork2019`. This is the
   only place the paper isolates its contribution; see the note below on headline
@@ -524,11 +503,10 @@ anyone reproducing results or extracting portable design rules.
 - **Reproducibility of headline compressions.** Local policies (Algorithms 1–2,
   Policies 1–4) and **final** appendix architectures are specified, but not how
   to run the outer grow-and-prune loop: interleaving grow and prune, per-step
-  edit counts, layer order, stopping rules, or weight updates during growth vs. \
-  at retrain points (see `Training and retraining`_). **Policy 1** names no
+  edit counts, layer order, stopping rules, or weight updates during growth vs. at retrain points (see `Training and retraining`_). **Policy 1** names no
   :math:`\beta`-style cap on how many dormant edges wake per step; knobs such as
   :math:`\alpha`, :math:`\beta`, :math:`\gamma`, and the Policy 3 candidate count
-  appear in the methods with only isolated hints (e.g.\ :math:`\alpha > 0.3`,
+  appear in the methods with only isolated hints (e.g. :math:`\alpha > 0.3`,
   :math:`\gamma \approx 1\%`). The LeNet **seed-width** sweep over :math:`r` is
   the clearest scheduling study, yet it still does not say how to steer
   post-growth size or final sparsity on a new benchmark. Fig. 8 in
@@ -549,13 +527,17 @@ anyone reproducing results or extracting portable design rules.
   → **Open question:** Should :math:`\boldsymbol{B}` be accumulated over multiple
   batches or a full pass before each Policies 1–2 decision?
 
-- **Policy 1 initialization.** Policy 2 gives a closed-form initializer;
-  Policy 1 only ranks **which** dormant edges to activate via
-  :math:`|\partial\mathcal{L}/\partial W|`. The text describes waking masked
-  connections; random init applies to the seed's already-active fraction only.
+- **Policy 1 initialization.** Policy 2 gives a closed-form initializer
+  (Algorithm 1); Policy 1 scores **which** dormant edges to wake via
+  :math:`|B^{(l-1)}_{i,j}|`, i.e. :math:`|\partial\mathcal{L}/\partial W^{(l)}_{i,j}|`
+  on the fixed layout (:eq:`eq-nest-dldw`). A natural reading is to initialize
+  each newly active weight from its bridging entry (equivalently a gradient step
+  :math:`\eta\,\partial\mathcal{L}/\partial W` up to learning rate), but the
+  paper never states this—it describes waking masked connections, with random
+  init reported only for the seed's already-active fraction.
 
-  → **Open question:** What value should each newly unmasked weight take—zero, a
-  gradient step :math:`\eta\,\partial\mathcal{L}/\partial W`, or something else?
+  → **Open question:** Should newly unmasked edges be set from
+  :math:`B^{(l-1)}_{i,j}`, held at zero until retraining, or something else?
 
 - **Linearized neuron-growth model.** The square-root split in Algorithm 1 is
   motivated with :math:`\sigma` linearized near zero (tanh in the paper; ReLU
@@ -564,9 +546,16 @@ anyone reproducing results or extracting portable design rules.
   → **Open question:** When does the fully nonlinear contribution of a new neuron
   diverge materially from the rank-one linearization used to justify the init?
 
-**Further questions** (not tied to a single reproducibility gap above):
+- **Policy 3 candidate search.** Feature-map growth picks :math:`\mathcal{K}^*` by
+  forward-loss comparison over **random** kernel candidates
+  (:eq:`eq-policy3-search`); the paper reports roughly **2×** immediate
+  :math:`\mathcal{L}` reduction vs. naive random init but does not fix how many
+  candidates :math:`r` to sample or when to re-run the search
+  :cite:p:`daiNeSTNeuralNetwork2019`. Unlike Policies 1–2, there is no
+  closed-form bridging score for a new map. Random candidate search and
+  first-order alternatives would likely need **separate** tuning, which makes a
+  unified comparison hard—especially once **training dynamics** during synthesis
+  are taken into account.
 
-- **Policy 3 search cost.** Feature-map growth has no closed-form score and
-  compares forward-loss candidates; the paper does not fix how many kernels to
-  sample. → Can a cheaper first-order surrogate match Policy 3's reported loss
-  drop :cite:p:`daiNeSTNeuralNetwork2019`?
+  → **Open question:** What rule should set :math:`r` per feature-map insertion
+  (and how sensitive are synthesis outcomes to it) on a new architecture?
