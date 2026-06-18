@@ -3,7 +3,6 @@ GradMax
 
 **[[GradMax]]** :cite:p:`evci_gradmax_2022` is a network growing method that focuses on the "how" to grow question, without addressing the "when" and "where" aspects.
 The objective of this method is to improve the training dynamics of neural networks by finding an interesting way (better than random) to initialize the weights of newly added neurons.
-Improving training dynamics has a more lasting long-term effect (on the loss) than greedy algorithms that focus immediately on decreasing the loss at each neuron addition step.
 To achieve this objective, the gradient of the loss is maximized with respect to the new neurons' weights, in order to determine how to initialize them.
 
 
@@ -83,7 +82,7 @@ different methods each initialization is scaled such that their norm is equal to
 
 - The "Random" baseline used in the experiments sets the incoming weights of each new neuron to zero. Its outgoing weights are sampled from a uniform distribution :math:`\mathcal{U}([0, 1))`,
   then each weight vector is divided by its :math:`\ell_2`-norm to project it onto the unit sphere. The result is then rescaled by :math:`0.5 \times` the mean :math:`\ell_2`-norm of the existing neurons,
-  so the new neuron is initialized at half the average magnitude of the neurons already present in the layer.
+  so the new neuron is initialized at half the average magnitude of the neurons already present in the layer.  **This is not a classical initialization method** (e.g., Xavier or Kaiming) since it only set positive weights.
 
 4. Experiments results
 ----------------------
@@ -130,8 +129,15 @@ is used instead, and it outperforms both random initialization and Firefly :cite
    +----+---------+----------------------+----------------------+----------------------+----------------------+----------------------+
 
 
+Conclusions
+^^^^^^^^^^^^
+
+- GradMax is systematically worse than the big baseline.
+- GradMax outperforms "Random" and "Firefly" in the experiments without batch normalization. However "Random" is a very awkward random initialization method, and in the inverse setting (outgoing weights set to zero) or with batch normalization, GradMax and "Random" perform similarly.
+- Setting the outgoing weights to zero is a better choice than setting the incoming weights to zero without batch normalization.
+
 Open Questions
 --------------
 
-1. GradMax studied fully connected layers and convolutional layers. Could we consider the combination of the two or other architectures such as transformers?
-2. Could the method also be a useful network morphism to be used as part of a more complex NAS method?
+1. How does GradMax compare to a more classical random?
+2. How well does the "when" and "where" strategy based on singular values perform?
