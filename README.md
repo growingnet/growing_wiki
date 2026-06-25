@@ -1,5 +1,9 @@
 <p align="center">
-  <img src="docs/_static/logo.png" alt="The Growing Wiki logo" width="260">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/_static/logo-dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="docs/_static/logo.png">
+    <img src="docs/_static/logo.png" alt="The Growing Wiki logo" width="260">
+  </picture>
 </p>
 <p align="center"><strong>The Growing Wiki</strong></p>
 <p align="center"><a href="https://growingnet.github.io/growing_wiki">https://growingnet.github.io/growing_wiki</a></p>
