@@ -90,20 +90,36 @@ When
 ----
 After inserting (or not) a layer, SensLI train for a fixed number of epoch before trying to insert a new layer
 
-Results
--------
-| Base architecture
-
-- FNN : 1/2 hidden layers of width 4/5/10 (2d points clustering)
-- ResNet with 2/3 fully-connected blocks of width 3 (2d points clustering)
+Experimental Results
+--------------------
+| **Base architecture**
+- FNN : 1/2 hidden layers of width 4/5/10 (2d points double moon clustering)
+- ResNet with 2/3 fully-connected blocks of width 3 (2d points double moon clustering)
 - CNN (VGG) 3 layers with 64-128-256 channels (Cifar10 clustering)
 
-| Layer insertion perf in Loss (test error not really readable) (**Only graphs of specific experiments, no results table**)
-
-- Adding 1 layer give lower loss at the end of training than base architecture but higher loss than training final architecture from the start
-- Adding 3 layers (separetly) give lower loss than final architecture trained from the start
+|
+| **Comparing SensLI with initial and final architecture (trained from the begining)**
+- Adding 1 layer gives lower loss than base architecture but higher loss than training final architecture from the start
+- Adding 3 layers (one at a time with fixed growing schedule) gives lower loss than final architecture trained from the start
 - Slower FLOPs than base but faster than final architecture
-
-| Where comparison
-
-- Final test accuracy similar between SensLI, random and lowest merit
+| Same results apply to the test accuracy of these architectures
+|
+| **Computational time save**
+- Inserting 1 layer with SensLI reduces the FLOPs of the training compared to the final architecture by between 10 to 20%
+- The FLOPs of the SenSLI evaluation are only 0.05% of the total FLOPs for FNN and 2.5% for CNN
+|
+| **Comparison with Firefly and SENN**
+| The article makes a theorical comparison for the evaluation time of the layer insertion between SensLI, Firefly :cite:p:`wu_firefly_2020` and SENN :cite:p:`mitchell_self-expanding_2024` 
+- SensLI only needs 1 full batch forward-backward pass on the fully extended network to chose the layer position to insert
+- Firefly needs M iterations of full batch forward-backward on the fully extended network for their optimization process
+- SENN needs the equivalent of iterations*matrix_size*batch_size/(number of data points) full batch forward-backward on the partially extended network
+|
+| **Comparison of where to insert a layer**
+| The article compares the position of the inserted layer between the highest merit layer, the lowest merit layer and random selection
+- For 1 added layer, the highest merit beats the two other for full batch GD but results are equivaluents for mini-batch GD (dominated by batch selection noise)
+- For 3 layers added at constant interval, highest merit beats the other two for both full-batch and mini-batch GD
+|
+| **Comparison of when to insert a layer**
+| They performed an ablation study about when to add 1 layer
+| Tried inserting the layer at different time separated by 50 epochs (epoch 50, 100...)
+| No clear insertion time is better **but inserting too late seems to make the effect of the insertion less effective**

@@ -113,6 +113,7 @@ Growing algorithms can be classified across multiple axes: the type of growth, w
       - :doc:`FRAGrow <algorithms/fra_grow>`
       - :doc:`Firefly <algorithms/firefly>`
       - :doc:`SENN <algorithms/senn>`
+      - :doc:`SensLI <algorithms/sensli>`
 
    .. container:: home-card
 
@@ -127,6 +128,8 @@ Growing algorithms can be classified across multiple axes: the type of growth, w
       - :doc:`NORTH <algorithms/north>`
       - :doc:`Variance Transfer <algorithms/variance_transfer>`
       - :doc:`SENN <algorithms/senn>`
+      - :doc:`SensLI <algorithms/sensli>`
+
 
    .. container:: home-card
 
