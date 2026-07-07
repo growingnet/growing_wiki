@@ -9,6 +9,8 @@ Where to grow?
      - Where to grow
    * - [[AutoGrow|autogrow]]
      - Predefined stages.
+   * - [[LipGrow]]
+     - Across residual stages using nearest-neighbor time-grid interpolation.
    * - [[Firefly|firefly]]
      - Best loss-improving split or addition.
    * - [[GradMax|gradmax]]

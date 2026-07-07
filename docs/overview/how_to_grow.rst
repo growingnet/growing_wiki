@@ -9,6 +9,8 @@ How to grow?
      - How to grow
    * - [[AutoGrow|autogrow]]
      - Add blocks with random initialization.
+   * - [[LipGrow]]
+     - Clone residual blocks and rescale the implicit step size.
    * - [[Firefly|firefly]]
      - Gradient-based splits and additions.
    * - [[GradMax|gradmax]]
