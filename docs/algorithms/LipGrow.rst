@@ -283,3 +283,17 @@ Tiny-ImageNet results
 
 On Tiny-ImageNet, LipGrow slightly improves the reported validation and test
 accuracy while reducing PPE from :math:`48.90` to :math:`25.54`.
+
+
+Limitations and open questions
+------------------------------
+
+- **Greedy scheduler.** The authors note that the Lipschitz trigger is local
+  and can get stuck in a suboptimal growth schedule.
+- **Missing global objective.** A future direction proposed in the paper is to
+  combine final performance and training cost in one objective under a fixed
+  budget.
+- **Fixed target architecture.** LipGrow is designed to reduce training cost
+  for a known target ResNet family and depth, not to search for the best final
+  architecture; an open question is whether the ODE analysis could be extended
+  into an architecture-search criterion.
