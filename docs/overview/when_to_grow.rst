@@ -42,6 +42,8 @@ The current algorithms in this survey can be summarized as follows:
      - When to grow
    * - [[AutoGrow|autogrow]]
      - Stage-wise schedule before convergence.
+   * - [[LipGrow]]
+     - Normalized Lipschitz threshold.
    * - [[Firefly|firefly]]
      - When a proposed edit improves the loss.
    * - [[GradMax|gradmax]]
