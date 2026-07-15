@@ -36,7 +36,7 @@ To initialize the new layer, it follows 3 rules:
 It leads to the following initializations:
 
 * Fully-connected layers: :math:`W = \text{Id}` and :math:`b=0`
-* Residual blocks: :math:`W_2=0` and :math:`W_1, b` arbitrary
+* Residual blocks: :math:`W_2=0` and :math:`W_1, b` arbitrary (in practice :math:`W_1 = 0.8 * \text{Id}` and :math:`b=0` )
 * Convolutional layers: :math:`b=0` and the kernel matrix :math:`K=\text{Id}`:
 
 
@@ -95,11 +95,12 @@ Experimental Results
 
 | **Comparing SensLI with initial and final architecture (trained from the begining)**
 
-- Adding 1 layer gives lower loss than base architecture but higher loss than training final architecture from the start
-- Adding 3 layers (one at a time with fixed growing schedule) gives lower loss than final architecture trained from the start
+- Adding 1 layer gives lower train loss than base architecture but higher train loss than training final architecture from the start
+- Adding 3 layers (one at a time with fixed growing schedule) gives lower train loss than final architecture trained from the start
 - Slower FLOPs than base but faster than final architecture
 
 | Same results apply to the test accuracy of these architectures
+| Test loss are not given.
 | 
 | **Computational time save**
 
@@ -119,6 +120,9 @@ Experimental Results
 - For 1 added layer, the highest merit beats the two other for full batch GD but results are equivaluents for mini-batch GD (dominated by batch selection noise)
 - For 3 layers added at constant interval, highest merit beats the other two for both full-batch and mini-batch GD
 
+
+| However, the difference is only showed on train loss. The test accuracy (between SensLI and random) is not that different.
+|
 | **Comparison of when to insert a layer**
 | They performed an ablation study about when to add 1 layer
 | Tried inserting the layer at different time separated by 50 epochs (epoch 50, 100...)
