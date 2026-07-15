@@ -99,7 +99,7 @@ Experimental Results
 - Adding 3 layers (one at a time with fixed growing schedule) gives lower train loss than final architecture trained from the start
 - Slower FLOPs than base but faster than final architecture
 
-| Same results apply to the test accuracy of these architectures
+| Same results apply to the test accuracy for CNN but test accuracy is not that different for ResNet.
 | Test loss is not given.
 | 
 | **Computational time save**
