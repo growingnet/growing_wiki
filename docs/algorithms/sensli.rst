@@ -100,7 +100,7 @@ Experimental Results
 - Slower FLOPs than base but faster than final architecture
 
 | Same results apply to the test accuracy of these architectures
-| Test loss are not given.
+| Test loss is not given.
 | 
 | **Computational time save**
 
@@ -121,7 +121,7 @@ Experimental Results
 - For 3 layers added at constant interval, highest merit beats the other two for both full-batch and mini-batch GD
 
 
-| However, the difference is only showed on train loss. The test accuracy (between SensLI and random) is not that different.
+| However, the difference is only showed on train loss. The test accuracy (between SensLI and random) is not that different and test loss is not given.
 |
 | **Comparison of when to insert a layer**
 | They performed an ablation study about when to add 1 layer
