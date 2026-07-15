@@ -40,6 +40,7 @@ The Growing Wiki is primarily maintained by the `Inria Tau team <https://www.inr
    algorithms/nest
    algorithms/variance_transfer
    algorithms/fra_grow
+   algorithms/sensli
 
 .. container:: home-grid home-grid-rows
 
@@ -112,6 +113,7 @@ Growing algorithms can be classified across multiple axes: the type of growth, w
       - :doc:`FRAGrow <algorithms/fra_grow>`
       - :doc:`Firefly <algorithms/firefly>`
       - :doc:`SENN <algorithms/senn>`
+      - :doc:`SensLI <algorithms/sensli>`
 
    .. container:: home-card
 
@@ -126,6 +128,8 @@ Growing algorithms can be classified across multiple axes: the type of growth, w
       - :doc:`NORTH <algorithms/north>`
       - :doc:`Variance Transfer <algorithms/variance_transfer>`
       - :doc:`SENN <algorithms/senn>`
+      - :doc:`SensLI <algorithms/sensli>`
+
 
    .. container:: home-card
 
