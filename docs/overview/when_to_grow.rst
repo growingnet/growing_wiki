@@ -40,6 +40,8 @@ The current algorithms in this survey can be summarized as follows:
 
    * - Algorithm
      - When to grow
+   * - [[AdaNet|adanet]]
+     - Once per boosting round; stops when no candidate improves objective.
    * - [[AutoGrow|autogrow]]
      - Stage-wise schedule before convergence.
    * - [[Firefly|firefly]]

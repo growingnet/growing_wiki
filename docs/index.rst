@@ -40,6 +40,7 @@ The Growing Wiki is primarily maintained by the `Inria Tau team <https://www.inr
    algorithms/nest
    algorithms/variance_transfer
    algorithms/fra_grow
+   algorithms/adanet
 
 .. container:: home-grid home-grid-rows
 
@@ -89,6 +90,7 @@ Growing algorithms can be classified across multiple axes: the type of growth, w
 
       Expanding existing layers by adding neurons, or sparse connections.
 
+      - :doc:`AdaNet <algorithms/adanet>`
       - :doc:`Net2Net <algorithms/net2net>`
       - :doc:`Network Morphism <algorithms/network_morphism>`
       - :doc:`NORTH <algorithms/north>`
@@ -112,6 +114,7 @@ Growing algorithms can be classified across multiple axes: the type of growth, w
       - :doc:`FRAGrow <algorithms/fra_grow>`
       - :doc:`Firefly <algorithms/firefly>`
       - :doc:`SENN <algorithms/senn>`
+      - :doc:`AdaNet <algorithms/adanet>`
 
    .. container:: home-card
 
@@ -138,6 +141,7 @@ Growing algorithms can be classified across multiple axes: the type of growth, w
       - :doc:`NeST <algorithms/nest>`
       - :doc:`FRAGrow <algorithms/fra_grow>`
       - :doc:`AutoGrow <algorithms/autogrow>`
+      - :doc:`AdaNet <algorithms/adanet>`
 
 .. container:: project-logo-footer
 
