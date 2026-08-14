@@ -72,7 +72,7 @@ Where
 -----
 
 A new subnetwork is always added in parallel to the existing ensemble, either
-at the same depth or one layer deeper. Existing subnetworks are never modified.
+with the same depth or one layer deeper. Existing subnetworks are never modified.
 Units in the new subnetwork can connect to both their own previous layer and to
 units from prior subnetworks, so the new subnetwork can reuse already-learned
 representations.
