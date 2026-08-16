@@ -11,6 +11,8 @@ Where to grow?
      - New parallel subnetwork, of current depth or one layer deeper; existing subnetworks untouched and frozen.
    * - [[AutoGrow|autogrow]]
      - Predefined stages.
+   * - [[LipGrow]]
+     - Across residual stages using nearest-neighbor time-grid interpolation.
    * - [[Firefly|firefly]]
      - Best loss-improving split or addition.
    * - [[GradMax|gradmax]]

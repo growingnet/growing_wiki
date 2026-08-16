@@ -37,6 +37,7 @@ The Growing Wiki is primarily maintained by the `Inria Tau team <https://www.inr
    algorithms/tiny
    algorithms/senn
    algorithms/autogrow
+   algorithms/LipGrow
    algorithms/nest
    algorithms/variance_transfer
    algorithms/fra_grow
@@ -111,6 +112,7 @@ Growing algorithms can be classified across multiple axes: the type of growth, w
       - :doc:`Net2Net <algorithms/net2net>`
       - :doc:`Network Morphism <algorithms/network_morphism>`
       - :doc:`AutoGrow <algorithms/autogrow>`
+      - :doc:`LipGrow <algorithms/LipGrow>`
       - :doc:`FRAGrow <algorithms/fra_grow>`
       - :doc:`Firefly <algorithms/firefly>`
       - :doc:`SENN <algorithms/senn>`
@@ -139,6 +141,7 @@ Growing algorithms can be classified across multiple axes: the type of growth, w
       - :doc:`Tiny <algorithms/tiny>`
       - :doc:`Firefly <algorithms/firefly>`
       - :doc:`NeST <algorithms/nest>`
+      - :doc:`LipGrow <algorithms/LipGrow>`
       - :doc:`FRAGrow <algorithms/fra_grow>`
       - :doc:`AutoGrow <algorithms/autogrow>`
       - :doc:`AdaNet <algorithms/adanet>`
