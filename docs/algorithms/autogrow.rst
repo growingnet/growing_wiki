@@ -185,6 +185,8 @@ before the stopping criterion triggers:
     | ``GauInit``    | 42-42-42     | **94.27**| 54-53-53     | **74.72**|
     +----------------+--------------+----------+--------------+----------+
 
+.. _autogrow-when-to-grow:
+
 Do not wait for convergence before growing
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -298,6 +300,49 @@ the dataset size:
     +----------------+----------------+----------+
     | 25 %           | 6-6-6-6        | 62.53    |
     +----------------+----------------+----------+
+
+Do not use a learning-rate schedule between growth steps
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The *c-AutoGrow* ablation also varies the learning rate *between*
+growth steps: a *staircase* schedule (reset to :math:`0.1` and
+decayed at :math:`K/2` and :math:`3K/4` within every :math:`K`-epoch
+interval) versus a *constant* large learning rate. Here :math:`\Delta`
+is the accuracy gap to training the discovered network from scratch,
+so it isolates the effect of growth from the effect of the found
+architecture.
+
+.. table:: *c-AutoGrow* on ``Basic3ResNet`` with a staircase vs. constant learning rate between growth steps (Table 3 of :cite:p:`wen_autogrow_2020`). :math:`\Delta` is the gap to training the found network from scratch.
+    :align: center
+
+    +-------------+--------------+--------------+----------+--------------------+--------------+----------+--------------------+
+    | initialiser | LR schedule  | CIFAR-10                                     | CIFAR-100                                    |
+    +             +              +--------------+----------+--------------------+--------------+----------+--------------------+
+    |             |              | found net    | accu (%) | :math:`\Delta` (%) | found net    | accu (%) | :math:`\Delta` (%) |
+    +=============+==============+==============+==========+====================+==============+==========+====================+
+    | ``ZeroInit``| staircase    | 2-3-6        | 91.77    | -1.06              | 4-3-4        | 70.04    | -0.65              |
+    +             +--------------+--------------+----------+--------------------+--------------+----------+--------------------+
+    |             | constant     | 2-2-4        | 92.23    | **+0.16**          | 3-2-4        | 70.22    | **+0.35**          |
+    +-------------+--------------+--------------+----------+--------------------+--------------+----------+--------------------+
+    | ``AdamInit``| staircase    | 3-4-3        | 92.21    | -0.59              | 3-3-3        | 69.85    | -0.65              |
+    +             +--------------+--------------+----------+--------------------+--------------+----------+--------------------+
+    |             | constant     | 3-4-4        | 92.60    | **-0.41**          | 3-3-3        | 70.00    | **-0.50**          |
+    +-------------+--------------+--------------+----------+--------------------+--------------+----------+--------------------+
+
+The found architectures are similar across the two schedules (for
+``AdamInit`` on CIFAR-100 they are even identical, ``3-3-3``), so the
+two settings discover comparable networks. The difference lies in
+:math:`\Delta`: with a staircase schedule between growth steps,
+:math:`\Delta` is strongly negative — growing then hurts relative to
+training the *same* architecture from scratch — whereas with a
+constant learning rate the gap shrinks markedly and even turns
+positive for ``ZeroInit``. Decaying the learning rate within each
+growth interval pushes the shallower net toward convergence, which
+gives a bad initialisation for the deeper net (the same mechanism as
+:ref:`growing before convergence <autogrow-when-to-grow>`). This
+correlates with [[FRAGrow|fra_grow]], which independently finds that
+a constant large learning rate during growth outperforms cosine
+annealing with restart.
 
 Other observations
 ^^^^^^^^^^^^^^^^^^
