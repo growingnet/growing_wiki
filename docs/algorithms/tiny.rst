@@ -23,4 +23,3 @@ matrix approximation:
    \end{aligned}
 
 solved in closed form using two SVDs.
-

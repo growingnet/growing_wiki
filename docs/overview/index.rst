@@ -61,7 +61,7 @@ operator :math:`\mathcal{T}` and the optimization step
    \label{eqn:grow_decomposition}
    \begin{aligned}
        &\theta_t' = \mathop{\mathrm{\text{Opt}}}_{\theta}(\mathcal{L}(f_{A_t, \theta}), \theta_t )\\
-       &A_{t+1}, \theta_{t+1} = \mathcal{T}(A_t, \theta_{t}') 
+       &A_{t+1}, \theta_{t+1} = \mathcal{T}(A_t, \theta_{t}')
    \end{aligned}
 
 in the hope that the final architecture :math:`A_T` and weights

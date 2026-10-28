@@ -137,7 +137,7 @@ How many?
 The paper proposes an exponential growth schedule, with :math:`C_t` the number of channels at growth stage :math:`t`:
 
 .. math::
-    
+
     \begin{aligned}
     C_0 &= \frac{1}{4} C_{\textrm{final}}\\
     C_t  &= C_{t-1} + \lfloor p_c C_{t-1} \rceil_2
@@ -151,7 +151,7 @@ When to grow?
 The paper proposes an exponential growth schedule. Each growth stage :math:`t` is assigned :math:`T_t` epochs, with:
 
 .. math::
-    
+
     \begin{aligned}
     T_0 &\in \mathbb{N} \\
     T_t &= T_{t-1} + \lfloor p_T T_{t-1} \rceil \\

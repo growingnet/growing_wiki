@@ -8,7 +8,7 @@ Net2Net :cite:p:`chen_net2net_2016` is one of the first papers to propose
 function-preserving morphisms to transfer knowledge across networks.
 A network morphism :math:`A', \theta' = \mathcal{T}(A, \theta)` is
 called *function-preserving* if the network output :math:`f` satisfies,
-  
+
 .. math::
 
    \begin{aligned}
@@ -23,7 +23,7 @@ Growth operations
 
 - *Net2WiderNet* increases the width of a layer by replicating existing neurons. Each new neuron copies the incoming weights of an existing neuron, and the outgoing weights of all copies (including the original) are divided by the replication count to preserve the function. In practice, to break symmetry, a small amount of random noise is added to the new neurons.
 
-- *Net2DeeperNet* increases the depth by inserting a layer initialized to represent  the identity mapping. In general, it is only applicable to activation functions  :math:`\sigma` that are idempotent :math:`\sigma \circ \sigma = \sigma`, such as ReLU activations, although this can be generalized to a wider class of activation functions using parametrized activation function (like in  [[Network Morphism]] or [[SENN]]). When using batch normalization, the inserted identity layer requires a forward pass on training data to estimate activation statistics and set the normalization parameters accordingly. For ResNets, the Net2DeeperNet operation is trivial as one can add a resididual block with zeroed weights.  
+- *Net2DeeperNet* increases the depth by inserting a layer initialized to represent  the identity mapping. In general, it is only applicable to activation functions  :math:`\sigma` that are idempotent :math:`\sigma \circ \sigma = \sigma`, such as ReLU activations, although this can be generalized to a wider class of activation functions using parametrized activation function (like in  [[Network Morphism]] or [[SENN]]). When using batch normalization, the inserted identity layer requires a forward pass on training data to estimate activation statistics and set the normalization parameters accordingly. For ResNets, the Net2DeeperNet operation is trivial as one can add a resididual block with zeroed weights.
 
 
 
@@ -61,7 +61,7 @@ Remarks
 
 The paper suggests that nearly all hyperparameters used to train from scratch can be reused for the target network. The only exception is the learning rate: they recommend starting the target with approximately :math:`\frac{1}{10}` of the small network's initial learning rate, as the small network's training has finished with a decayed learning rate.
 
-Open questions  
---------------  
+Open questions
+--------------
 
-- What is the reason behind the different conclusions on Net2Net-style initialization in the literature? It's unclear if this is due to differing architectures, datasets, or some other aspect of the experimental setup.  
+- What is the reason behind the different conclusions on Net2Net-style initialization in the literature? It's unclear if this is due to differing architectures, datasets, or some other aspect of the experimental setup.
