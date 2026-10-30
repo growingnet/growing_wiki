@@ -11,6 +11,8 @@ How to grow?
      - Train new subnetwork + its ensemble weight to minimise objective; prior subnetworks frozen. Add candidate with best improvement to the network.
    * - [[AutoGrow|autogrow]]
      - Add blocks with random initialization.
+   * - [[LipGrow]]
+     - Clone residual blocks and rescale the implicit step size.
    * - [[Firefly|firefly]]
      - Gradient-based splits and additions.
    * - [[GradMax|gradmax]]
