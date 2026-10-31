@@ -7,8 +7,31 @@
 </p>
 <p align="center"><strong>The Growing Wiki</strong></p>
 <p align="center"><a href="https://growingnet.github.io/growing_wiki">https://growingnet.github.io/growing_wiki</a></p>
+<p align="center"><a href="https://hal.science/hal-05842579">Companion survey (PDF)</a></p>
 
 The Growing Wiki documents algorithms for growing neural networks during training.
+It complements and continues the survey [The Neuron Addition Problem: A Survey on
+Growing Neural Networks](https://hal.science/hal-05842579), whose LaTeX sources are in
+[growingnet/GrowingSurvey](https://github.com/growingnet/GrowingSurvey).
+
+## Citation
+
+If you use the survey or the wiki in your work, please cite the survey. It has not
+been published yet; the entry below will be replaced by the published reference.
+
+<!-- TODO(citation): replace with the published reference of the survey. -->
+
+```bibtex
+@unpublished{daveyNeuronAdditionProblem2026,
+  TITLE = {{The Neuron Addition Problem: A Survey on Growing Neural Networks}},
+  AUTHOR = {Davey, Alex and Rudkiewicz, Théo and Rivaud, Stéphane and Douka, Stella and Houdouin, Félix and Mille, Julien and Shilova, Alena and Charpiat, Guillaume and Chevallier, Sylvain},
+  URL = {https://hal.science/hal-05842579},
+  YEAR = {2026},
+  MONTH = Oct,
+  PDF = {https://hal.science/hal-05842579v1/file/main.pdf},
+  HAL_ID = {hal-05842579},
+}
+```
 
 ## Repository Layout
 
